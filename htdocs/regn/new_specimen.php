@@ -11,6 +11,8 @@ $page_start = $load_time;
 
 include("redirect.php");
 include("includes/header.php");
+include("includes/scripts.php");
+require_once("includes/script_elems.php");
 LangUtil::setPageId("new_specimen");
 
 $script_elems->enableDatePicker();
@@ -66,7 +68,7 @@ $(document).ready(function(){
 
 function get_patient_info()
 {
-	var patient_id = <?php echo $_REQUEST['pid']; ?>;//$("#card_num").val();
+	var patient_id = <?php echo $_REQUEST['pid']; ?>;//$("#card_num").attr("value");
 	if(patient_id == "")
 	{
 		$('#specimen_patient').html("");
@@ -89,7 +91,7 @@ function get_patient_info()
 
 function check_specimen_id(specimen_div_id, err_div_id)
 {
-	var specimen_id = $('#'+specimen_div_id).val();
+	var specimen_id = $('#'+specimen_div_id).attr("value");
 	if(specimen_id == "")
 	{	
 		$('#'+err_div_id).html("");
@@ -120,7 +122,7 @@ function contains(a, obj){
 
 function set_compatible_tests()
 {
-	var specimen_type_id = $("#s_type").val();
+	var specimen_type_id = $("#s_type").attr("value");
 	if(specimen_type_id == "")
 	{	
 		$('#test_type_box').html("Select specimen type to view compatible tests");
@@ -144,10 +146,10 @@ function add_specimens()
 		if(	form_elem == undefined || 
 			form_elem == null )
 			continue;
-		if(	$("#"+form_id+" [name='stype']").val() == null || 
-			$("#"+form_id+" [name='stype']").val() == undefined )
+		if(	$("#"+form_id+" [name='stype']").attr("value") == null || 
+			$("#"+form_id+" [name='stype']").attr("value") == undefined )
 			continue;
-		var stype = $("#"+form_id+" [name='stype']").val();
+		var stype = $("#"+form_id+" [name='stype']").attr("value");
 		if(stype.trim() == "")
 		{
 			alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['MSG_STYPE_MISSING']; ?>");
@@ -157,8 +159,8 @@ function add_specimens()
 		var ttype_notselected = true;
 		for(var i = 0; i < ttype_list.length; i++)
 		{
-			if(ttype_list[i].checked)
-			{
+			//if(ttype_list[i].selected){
+			if (ttype_list[i].options.length>0){
 				ttype_notselected = false;
 				break;
 			}
@@ -168,7 +170,7 @@ function add_specimens()
 			alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['MSG_NOTESTS_SELECTED']; ?>");
 			return;
 		}
-		var sid = $("#"+form_id+" [name='specimen_id']").val();
+		var sid = $("#"+form_id+" [name='specimen_id']").attr("value");
 		if(sid.trim() == "")
 		{
 			alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['MSG_SID_MISSING']; ?>");
@@ -180,40 +182,44 @@ function add_specimens()
 			alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['MSG_SID_INVALID']; ?>");
 			return;
 		}
-		var ry = $("#"+form_id+" [name='receipt_yyyy']").val();
-		ry = ry.replace(/[^0-9]/gi,'');
-		var rm = $("#"+form_id+" [name='receipt_mm']").val();
-		rm = rm.replace(/[^0-9]/gi,'');
-		var rd = $("#"+form_id+" [name='receipt_dd']").val();
-		rd = rd.replace(/[^0-9]/gi,'');
-		var cy = $("#"+form_id+" [name='collect_yyyy']").val();
-		cy = cy.replace(/[^0-9]/gi,'');
-		var cm = $("#"+form_id+" [name='collect_mm']").val();
-		cm = cm.replace(/[^0-9]/gi,'');
-		var cd = $("#"+form_id+" [name='collect_dd']").val();
-		cd = cd.replace(/[^0-9]/gi,'');
-		var ch = $("#"+form_id+" [name='ctime_hh']").val();
-		ch = ch.replace(/[^0-9]/gi,'');
-		var cmm = $("#"+form_id+" [name='ctime_mm']").val();
-		cmm = cmm.replace(/[^0-9]/gi,'');
-		if(checkDate(ry, rm, rd) == false)
-		{
-			var answer = confirm("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['MSG_RDATE_INVALID']; ?> . Are you sure you want to continue?");
-			if (answer == false)
-				return;
+		var ry = $("#"+form_id+" [name='receipt_yyyy']").attr("value");
+		if (ry!=undefined) ry = ry.replace(/[^0-9]/gi,'');
+		var rm = $("#"+form_id+" [name='receipt_mm']").attr("value");
+		if (rm!=undefined) rm = rm.replace(/[^0-9]/gi,'');
+		var rd = $("#"+form_id+" [name='receipt_dd']").attr("value");
+		if (rd!=undefined) rd = rd.replace(/[^0-9]/gi,'');
+		var cy = $("#"+form_id+" [name='collect_yyyy']").attr("value");
+		if (cy!=undefined) cy = cy.replace(/[^0-9]/gi,'');
+		var cm = $("#"+form_id+" [name='collect_mm']").attr("value");
+		if (cm!=undefined) cm = cm.replace(/[^0-9]/gi,'');
+		var cd = $("#"+form_id+" [name='collect_dd']").attr("value");
+		if (cd!=undefined) cd = cd.replace(/[^0-9]/gi,'');
+		var ch = $("#"+form_id+" [name='ctime_hh']").attr("value");
+		if (ch!=undefined) ch = ch.replace(/[^0-9]/gi,'');
+		var cmm = $("#"+form_id+" [name='ctime_mm']").attr("value");
+		if (cmm!=undefined) cmm = cmm.replace(/[^0-9]/gi,'');
+		if ((ry!=undefined) && (rm!=undefined) && (rd!=undefined)){
+			if(checkDate(ry, rm, rd) == false)
+			{
+				var answer = confirm("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['MSG_RDATE_INVALID']; ?> . Are you sure you want to continue?");
+				if (answer == false)
+					return;
+			}
 		}
-		if(cy.trim() == ""  && cm.trim() == "" && cd.trim() == "")
+		if((cy!=undefined) && (cy.trim()=="")  && (cm!=undefined) && (cm.trim()=="") && (cd!=undefined) && (cd.trim()==""))
 		{
 			//Collection date not entered (optional field)
 			//Do nothing
 		}
 		else
 		{
-			//Collection date entered. Check date string
-			if(checkDate(cy, cm, cd) == false)
-			{
-				alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['MSG_CDATE_INVALID']; ?>");
-				return;
+			if ((cy!=undefined) && (cm!=undefined) && (cd!=undefined)){
+				//Collection date entered. Check date string
+				if(checkDate(cy, cm, cd) == false)
+				{
+					alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['MSG_CDATE_INVALID']; ?>");
+					return;
+				}
 			}
 		}
 		//All okay
@@ -224,11 +230,11 @@ function add_specimens()
 	{
 		// Submit each form
 		var form_id = 'specimenform_'+j;
-		
+
 		$('#'+form_id).ajaxSubmit({async: false});
 		//$('#'+form_id).submit();
 	}
-	var dnum_val = $('#dnum').val();
+	var dnum_val = $('#dnum').attr("value");
 	<?php
 	$today = date("Ymd");
 	switch($_SESSION['dnum_reset'])
@@ -264,8 +270,8 @@ function add_specimens()
 function add_specimenbox()
 {
 	specimen_count++;
-	var doc = $('#doc_row_1_input').val();
-	var title= $('#doc_row_1_title').val();
+	var doc = $('#doc_row_1_input').attr("value");
+	var title= $('#doc_row_1_title').attr("value");
 	var dnumInit = "<?php echo $dnum; ?>";
 	dnum = dnumInit.toString();
 	var url_string = "ajax/specimenbox_add.php?num="+specimen_count+"&pid=<?php echo $pid; ?>"+"&dnum="+dnum+"&doc="+doc+"&title="+title+"&session_num=<?php echo $session_num; ?>";
@@ -281,13 +287,12 @@ function add_specimenbox()
 
 function get_testbox(testbox_id, stype_id)
 {
-	var stype_val = $('#'+stype_id).val();
+	var stype_val = $('#'+stype_id).attr("value");
 	if(stype_val == "")
 	{
 		$('#'+testbox_id).html("-<?php echo LangUtil::$pageTerms['MSG_SELECT_STYPE']; ?>-");
 		return;
 	}
-	
 	$('#'+testbox_id).html("<?php $page_elems->getProgressSpinner(LangUtil::$generalTerms['CMD_FETCHING']); ?>");
 	$('#'+testbox_id).load(
 		"ajax/test_type_options.php", 

@@ -184,7 +184,7 @@ else {
 <small><a href='javascript:askandback();' class="btn red icn-only"><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></a></small>
 <hr />
 </div>
-<div class="span4">
+<div class="span4" style='position:relative;left:40px;'>
 <u><b>Patient details</b></u>
 <?php echo $page_elems->getPatientInfo($pid, 400, $is_external_patient); ?>
 </div>
