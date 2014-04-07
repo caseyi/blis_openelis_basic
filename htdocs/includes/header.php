@@ -3,6 +3,7 @@
 # (c) C4G, Santosh Vempala, Ruban Monu and Amol Shintre
 # (c) @iLabAfrica, Roy Rutto, Emaanuel Kitsao, Brian Kiprop
 #
+header('Content-Type: text/html; charset=UTF-8');
 $path = "../";
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
@@ -29,7 +30,9 @@ require_once("includes/perms_check.php");
 
 $script_elems = new ScriptElems();
 $page_elems = new PageElems();
-header('Content-Type: text/html; charset=UTF-8');
+
+$facilityname = get_facility_name($_SESSION['lab_config_id']);
+
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -37,7 +40,7 @@ header('Content-Type: text/html; charset=UTF-8');
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <!-- BEGIN HEAD --><head>
 	<meta charset="utf-8" />
-	<title>BLIS <?php echo $VERSION; ?> - Kenya</title>
+	<title>BLIS <?php echo $VERSION; ?> - Kenya<?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?></title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -81,7 +84,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 				<!-- BEGIN LOGO -->
 				<a class="brand" href="index.php">
 				<!--img src="assets/img/logo.png" alt="logo" /-->
-				BLIS v<?php echo $VERSION; ?> - Kenya
+				BLIS v<?php echo $VERSION; ?> - Kenya<?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?>
 				</a>
 				<!-- END LOGO -->
 				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -102,10 +105,10 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						    <?php 
 						      if($_SESSION['img'] == "" || $_SESSION['img'] == null ) {
-						          echo '<img alt="" src="images/avatar.png" height=30 width=30/>';
+						          echo '<img alt="" src="assets/img/avatar.png" height=30 width=30/>';
 						      }
                               else {
-                                  echo '<img alt="" src="images/'.$_SESSION['img'].'" height=28 width=28/>';
+                                  echo '<img alt="" src="img/'.$_SESSION['img'].'" height=28 width=28/>';
                               }
                             ?>
 						
