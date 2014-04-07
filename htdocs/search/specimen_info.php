@@ -8,16 +8,19 @@ if(isset($_REQUEST['modal']))$is_modal=true;
 if(!$is_modal){
 	include("redirect.php");
 	include("includes/header.php");
+	include("includes/scripts.php");
 }else if ($is_modal){
 	require_once("../includes/db_lib.php");
 	require_once("../includes/page_elems.php");
 	require_once("../includes/script_elems.php");
 	$script_elems = new ScriptElems();
 	$page_elems = new PageElems();
+	$script_elems->enableJQueryForm();
+	$script_elems->enableDatePicker();
+	include("../includes/scripts.php");
 }
 LangUtil::setPageId("specimen_info");
 $sid = $_REQUEST['sid'];
-include("../includes/scripts.php");
 ?>
 <?php if(!$is_modal){?>
 <!-- BEGIN PAGE TITLE & BREADCRUMB-->       
@@ -159,6 +162,13 @@ function fetch_specimen2(specimen_id)
         }
     );
 }
+
+function remove_modal(id){
+	var target_div = id;
+	$('#'+target_div).modal('hide'); 
+	
+}
+
 </script>
 
 <?php if(!$is_modal){
