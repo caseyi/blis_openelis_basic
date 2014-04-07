@@ -15,6 +15,8 @@ include("../users/accesslist.php");
 include("redirect.php");
 include("includes/header.php");
 include("includes/stats_lib.php");
+include("includes/scripts.php");
+require_once("includes/script_elems.php");
 LangUtil::setPageId("stocks");
 $script_elems->enableTableSorter();
 $script_elems->enableDatePicker();
@@ -30,7 +32,7 @@ $(document).ready(function() {
             $('#quant_error').hide();
 
 //$("#changeText").click(function() {
-    var url_string = "../inventory/get_reagent_unit.php?lid="+"<?php echo $lid; ?>"+"&id="+"<?php echo $sel_id; ?>";
+    var url_string = "inventory/get_reagent_unit.php?lid="+"<?php echo $lid; ?>"+"&id="+"<?php echo $sel_id; ?>";
 	$.ajax({ 
 		url: url_string, 
 		success: function(result){
@@ -104,7 +106,7 @@ function validateRow() {
 function display_unit()
 {
     val = $('select').val();
-    var url_string = "../inventory/get_reagent_unit.php?lid="+"<?php echo $lid?>"+"&id="+val;
+    var url_string = "inventory/get_reagent_unit.php?lid="+"<?php echo $lid?>"+"&id="+val;
 	$.ajax({ 
 		url: url_string, 
 		success: function(result){
@@ -117,10 +119,12 @@ function display_unit()
 <a href='view_stock.php'>&laquo; <?php echo LangUtil::$generalTerms['CMD_BACK']; ?></a>&nbsp;|&nbsp;<b><?php echo LangUtil::$pageTerms['Add_Stock']; ?></b>
 <br><br>
 
+<div class="span4" style="position: absolute;top: 100px;right: 30px;">
 <?php
 $tips_string = "Add new stocks (lots) for existing reagents by completing this form. Lot number, Expiry Date, Quantity and Date of Reception are compulsory fields.";
 $page_elems->getSideTip("Tips", $tips_string);
 ?>
+</div>
 
 <form name='new_test_form' id='new_test_form' action='inventory/add_new_stock.php' method='post'>
 		
@@ -180,11 +184,15 @@ $page_elems->getSideTip("Tips", $tips_string);
 					</td>
 					<td></td>
 					<td>
+					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
+					<input class="m-wrap m-ctrl-medium" size="16" name="expiry_date" id="expiry_date" type="text"><span class="add-on"><i class="icon-calendar"></i></span>
+					</div>
 						<!--<input type="date" name="txtRow13" id="txtRow13" class='uniform_width'/>-->
 						<?php
-                                                $name_list1 = array("yyyy_e", "mm_e", "dd_e");
+                                                /*$name_list1 = array("yyyy_e", "mm_e", "dd_e");
                                                 $id_list1 = $name_list1;
-                                                echo $page_elems->getDatePicker($name_list1, $id_list1, $value_list1); ?>
+												$value_list1 = array("", "", "");
+                                                echo $page_elems->getDatePicker($name_list1, $id_list1, $value_list1);*/ ?>
 					</td>
 				</tr>
 				<tr>
@@ -233,10 +241,13 @@ $page_elems->getSideTip("Tips", $tips_string);
 					</td>
 					<td></td>
 					<td>
+					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
+					<input class="m-wrap m-ctrl-medium" size="16" name="receive_date" id="receive_date" type="text"><span class="add-on"><i class="icon-calendar"></i></span>
+					</div>
 							<?php
-                                                         $name_list2 = array("yyyy_r", "mm_r", "dd_r");
+                                                         /*$name_list2 = array("yyyy_r", "mm_r", "dd_r");
                                                          $id_list2 = $name_list2;
-                                                        echo $page_elems->getDatePicker($name_list2, $id_list2, $value_list2); ?>
+                                                        echo $page_elems->getDatePicker($name_list2, $id_list2, $value_list2);*/ ?>
 					</td>
 				</tr>
                                 <tr>
