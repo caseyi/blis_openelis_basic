@@ -8,7 +8,7 @@
 # If reverting back to PHP redirection, un-comment the follwing line:
 # header("Location:home.php");
 ?>
-<script language="JavaScript">
+<script type="text/javascript" language="JavaScript">
 	window.location = 'home.php';
 </script>
 <p>
