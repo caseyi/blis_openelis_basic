@@ -15,6 +15,7 @@ $session_num = $_REQUEST['snum'];
 
 //$session_num = get_session_current_number();
 $specimen_list = get_specimens_by_session($session_num);
+//var_dump($specimen_list[0]);
 
 ?>
 <br />
@@ -75,7 +76,7 @@ $specimen_list = get_specimens_by_session($session_num);
             }
             ?>
              | <a href='session_print.php?snum=<?php echo $session_num; ?>' target='_blank'><?php echo LangUtil::$generalTerms['CMD_PRINT']; ?></a>
-             | <a href='find_patient.php'>&laquo; <?php echo LangUtil::$pageTerms['MSG_NEXTSPECIMEN']; ?></a>
+             | <a href='new_specimen.php?pid=<?php echo $specimen_list[0]->patientId;?>'><?php echo LangUtil::$pageTerms['MSG_NEXTSPECIMEN']; ?></a> <!--a href='find_patient.php?div=specimen_reg'>&laquo; <?php echo LangUtil::$pageTerms['MSG_NEXTSPECIMEN']; ?></a-->
             <br><br>
             <?php
             if(count($specimen_list) == 0)
