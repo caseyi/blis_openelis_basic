@@ -27,6 +27,7 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 				<div class="row-fluid">
 				<div class="span12 sortable">
 				
+<!-- BEGIN PATIENT SAMPLE REJECTION -->
 <div id="sample_collection" class='reg_subdiv' style='display:none;'>
 	<div class="portlet box blue">
 		<div class="portlet-title">
@@ -109,7 +110,7 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 </div>
 <!-- END LAB REQUEST -->
 
-<!-- BEGIN PATIENT REGISTATION -->
+<!-- BEGIN PATIENT REGISTRATION -->
 <div id="patient_registration" class='reg_subdiv' style='display:none;'>
 	<div class="portlet box blue">
 		<div class="portlet-title">
@@ -149,9 +150,9 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 		</div>
 	</div>
 </div>
-<!-- END PATIENT REGISTATION -->
+<!-- END PATIENT REGISTRATION -->
 
-<!-- BEGIN SPECIMEN REGISTATION -->
+<!-- BEGIN SPECIMEN REGISTRATION -->
 <div id="specimen_reg" class='reg_subdiv' style='display:none;'>
 	<div class="portlet box blue">
 		<div class="portlet-title">
@@ -191,7 +192,8 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 		</div>
 	</div>
 </div>
-<!-- END SPECIMEN REJECTION-->   
+<!-- END SPECIMEN REJECTION--> 
+  
 <!-- BEGIN SPECIMEN ACCEPTANCE-->	
 <div id="specimen_acceptance" class='reg_subdiv' style='display:none;'>
 	<div class="portlet box green">
@@ -209,7 +211,8 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 		</div>
 	</div>
 </div>
-<!-- END SPECIMEN ACCEPTANCE-->   
+<!-- END SPECIMEN ACCEPTANCE--> 
+  
 <div id="specimen_info" class="modal hide fade" tabindex="-1" data-backdrop="static" data-keyboard="true" style="width:900px;">
 	  <div class="modal-body">
 	   
