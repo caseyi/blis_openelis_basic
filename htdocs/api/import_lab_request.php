@@ -25,7 +25,7 @@ if (!$length >1 || !$_POST==null){
 		 	$value_string = '';
 		 	
 		 	$json_request = (string)$value;
-		 	error_log("\n".$time_stamp.": Lab Request Recieved: ======", 3, $error_log_path);
+		 	error_log("\n".$time_stamp.": Lab Request Received: ======", 3, $error_log_path);
 		 	$request_data = json_decode($json_request, true);
 		 	
 		 	$value_string.= '(';
