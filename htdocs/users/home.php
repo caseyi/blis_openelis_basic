@@ -1,10 +1,15 @@
 <?php 
 include("redirect.php");
 include("includes/header.php");
+//require_once("includes/db_mysql_lib.php");
+
 LangUtil::setPageId("home");
 $page_elems = new PageElems();
 
 $profile_tip = LangUtil::getPageTerm("TIPS_PWD");
+
+$facilityname = get_facility_name($_SESSION['lab_config_id']);
+
 ?>
 <!-- BEGIN PAGE TITLE & BREADCRUMB-->		
 						<h3>
@@ -12,7 +17,7 @@ $profile_tip = LangUtil::getPageTerm("TIPS_PWD");
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a href="index.php">Home</a> 
+								<a href="index.php">Home<?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?></a> 
 							</li>
 							<!--li><a href="#">Home</a></li-->
 							<li class="pull-right no-text-shadow">
@@ -26,10 +31,10 @@ $profile_tip = LangUtil::getPageTerm("TIPS_PWD");
 				
                 <div class="portlet box blue">
                     <div class="portlet-title">
-                        <h4><i class="icon-reorder"></i>Kapsabet District Hospital Laboratory</h4>
+                        <h4><i class="icon-reorder"></i>Basic Laboratory Information System</h4>
                         <div class="tools">
                         <a href="javascript:;" class="collapse"></a>
-                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="reload"></a>						
                         </div>
                     </div>
                     <div class="portlet-body form" style="height: auto;">
@@ -39,7 +44,7 @@ $profile_tip = LangUtil::getPageTerm("TIPS_PWD");
                     <div class="row-fluid">
 									<div class="span12">
 										<!--BEGIN TABS-->
-										<div class="tabbable tabbable-custom">
+										<!--div class="tabbable tabbable-custom">
 											<ul class="nav nav-tabs">
 												<li class="active"><a href="#tab_1_1" data-toggle="tab">BLIS Launch</a></li>
 												<li><a href="#tab_1_2" data-toggle="tab">Organizational Chart</a></li>
@@ -92,7 +97,7 @@ $profile_tip = LangUtil::getPageTerm("TIPS_PWD");
 													</p>
 												</div>
 											</div>
-										</div>
+										</div-->
 										<!--END TABS-->
 									</div>
 									
