@@ -7,7 +7,33 @@ include("redirect.php");
 include("includes/header.php");
 include("includes/stats_lib.php");
 LangUtil::setPageId("reports");
+include("includes/scripts.php");
+require_once("includes/script_elems.php");
+$script_elems->enableTableSorter();
+$script_elems->enableJQueryForm();
+$script_elems->enableDatePicker();
+
 ?>
+<script type="text/javascript" src="js/jquery.ui.js"></script>
+<script type="text/javascript" src="js/dialog/jquery.ui.core.js"></script>
+<script type="text/javascript" src="js/dialog/jquery.ui.dialog.js"></script>
+
+<script type="text/javascript">
+
+function toggle_stat_table()
+{ 
+    if( $('#showtablelink').text() == <?php echo '"'.LangUtil::$pageTerms['MSG_HIDEGRAPH'].'"'; ?> ) {
+        $('#showtablelink').text(<?php echo '"'.LangUtil::$pageTerms['MSG_SHOWGRAPH'].'"'; ?>);
+        $('#trendsDiv').hide();
+    }
+    else {
+        $('#showtablelink').text(<?php echo '"'.LangUtil::$pageTerms['MSG_HIDEGRAPH'].'"'; ?>);
+        $('#trendsDiv').show();
+    }
+}
+
+</script>
+
                     <!-- BEGIN PAGE TITLE & BREADCRUMB-->       
                         <h3>
                         </h3>
@@ -391,18 +417,6 @@ $(window).load(function(){
     viewTrends();
     $('#trendsDiv').hide();
 });
-
-function toggle_stat_table()
-{ 
-    if( $('#showtablelink').text() == <?php echo '"'.LangUtil::$pageTerms['MSG_HIDEGRAPH'].'"'; ?> ) {
-        $('#showtablelink').text(<?php echo '"'.LangUtil::$pageTerms['MSG_SHOWGRAPH'].'"'; ?>);
-        $('#trendsDiv').hide();
-    }
-    else {
-        $('#showtablelink').text(<?php echo '"'.LangUtil::$pageTerms['MSG_HIDEGRAPH'].'"'; ?>);
-        $('#trendsDiv').show();
-    }
-}
 
 /*
 function toggle_stat_graph()

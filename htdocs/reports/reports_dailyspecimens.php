@@ -115,6 +115,20 @@ function export_as_word(div_id)
 	$('#word_format_form').submit();
 }
 
+function export_as_pdf(div_id)
+{
+	var content = $('#'+div_id).html();
+	$('#pdf_data').attr("value", content);
+	$('#pdf_format_form').submit();
+}
+
+function export_as_txt(div_id)
+{
+	var content = $('#'+div_id).html();
+	$('#txt_data').attr("value", content);
+	$('#txt_format_form').submit();
+}
+
 function report_fetch()
 { 	var yt= <?php echo $_REQUEST['yt'];?>;
 	var yf=<?php echo $_REQUEST['yf'];?>;
@@ -157,6 +171,12 @@ $(document).ready(function(){
 <form name='word_format_form' id='word_format_form' action='export_word.php' method='post' target='_blank'>
 	<input type='hidden' name='data' value='' id='word_data' />
 </form>
+<form name='pdf_format_form' id='pdf_format_form' action='export_pdf.php' method='post' target='_blank'>
+	<input type='hidden' name='data' value='' id='pdf_data' />
+</form>
+<form name='txt_format_form' id='txt_format_form' action='export_txt.php' method='post' target='_blank'>
+	<input type='hidden' name='data' value='' id='txt_data' />
+</form>
 		<input type='radio' name='do_landscape' value='N'<?php
 		if($report_config->landscape == false) echo " checked ";
 		?>>Portrait</input>
@@ -165,9 +185,13 @@ $(document).ready(function(){
 		if($report_config->landscape == true) echo " checked ";
 		?>>Landscape</input>&nbsp;&nbsp;
 <input type='button' onclick="javascript:print_content('export_content');" value='<?php echo LangUtil::$generalTerms['CMD_PRINT']; ?>'></input>
-&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;
 <input type='button' onclick="javascript:export_as_word('export_content');" value='<?php echo LangUtil::$generalTerms['CMD_EXPORTWORD']; ?>'></input>
-&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;
+<input type='button' onclick="javascript:export_as_pdf('export_content');" value='<?php echo LangUtil::$generalTerms['CMD_EXPORTPDF']; ?>'></input>
+&nbsp;&nbsp;
+<input type='button' onclick="javascript:export_as_txt('export_content');" value='<?php echo LangUtil::$generalTerms['CMD_EXPORTTXT']; ?>'></input>
+&nbsp;&nbsp;
 <?php if($_REQUEST['ip']==1){?><input type='checkbox' name='ip' id='ip' checked ></input> <?php echo "All Tests"; ?>
 <?php } else{?><input type='checkbox' name='ip' id='ip'></input> <?php echo "All Tests"; }?>
 &nbsp;&nbsp;&nbsp;&nbsp;

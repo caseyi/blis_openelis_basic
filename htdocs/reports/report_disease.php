@@ -21,6 +21,20 @@ function export_as_word()
 	$('#word_format_form').submit();
 }
 
+function export_as_pdf(div_id)
+{
+	var content = $('#'+div_id).html();
+	$('#pdf_data').attr("value", content);
+	$('#pdf_format_form').submit();
+}
+
+function export_as_txt(div_id)
+{
+	var content = $('#'+div_id).html();
+	$('#txt_data').attr("value", content);
+	$('#txt_format_form').submit();
+}
+
 function print_content(div_id)
 {
 	var DocumentContainer = document.getElementById(div_id);
@@ -36,12 +50,22 @@ function print_content(div_id)
 <form name='word_format_form' id='word_format_form' action='export_word.php' method='post' target='_blank'>
 	<input type='hidden' name='data' value='' id='word_data' />
 	<input type='hidden' name='lab_id' value='<?php echo $lab_config_id; ?>' id='lab_id'>
-	<input type='button' onclick="javascript:print_content('report_content');" value='<?php echo LangUtil::$generalTerms['CMD_PRINT']; ?>'></input>
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type='button' onclick="javascript:export_as_word();" value='<?php echo LangUtil::$generalTerms['CMD_EXPORTWORD']; ?>'></input>
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type='button' onclick="javascript:window.close();" value='<?php echo LangUtil::$generalTerms['CMD_CLOSEPAGE']; ?>'></input>
 </form>
+<!--form name='pdf_format_form' id='pdf_format_form' action='export_pdf.php' method='post' target='_blank'>
+	<input type='hidden' name='data' value='' id='pdf_data' />
+</form-->
+<form name='txt_format_form' id='txt_format_form' action='export_txt.php' method='post' target='_blank'>
+	<input type='hidden' name='data' value='' id='txt_data' />
+</form>
+<input type='button' onclick="javascript:print_content('report_content');" value='<?php echo LangUtil::$generalTerms['CMD_PRINT']; ?>'></input>
+&nbsp;&nbsp;
+<input type='button' onclick="javascript:export_as_word();" value='<?php echo LangUtil::$generalTerms['CMD_EXPORTWORD']; ?>'></input>
+&nbsp;&nbsp;
+<!--input type='button' onclick="javascript:export_as_pdf('export_content');" value='<?php echo LangUtil::$generalTerms['CMD_EXPORTPDF']; ?>'></input-->
+&nbsp;&nbsp;
+<input type='button' onclick="javascript:export_as_txt('export_content');" value='<?php echo LangUtil::$generalTerms['CMD_EXPORTTXT']; ?>'></input>
+&nbsp;&nbsp;
+<input type='button' onclick="javascript:window.close();" value='<?php echo LangUtil::$generalTerms['CMD_CLOSEPAGE']; ?>'></input>
 <hr>
 <?php /*
 <form name='export_word_form' id='export_word_form' action='export_word.php' method='post' target='_blank'>
