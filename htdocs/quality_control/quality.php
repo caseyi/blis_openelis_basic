@@ -13,9 +13,9 @@ $script_elems->enableBootstrap();
 ?>
 <script type='text/javascript'>
 $(document).ready(function(){
-	$('div.content_div').hide();
-	$('#quality_controls_div').hide();
-	$('#quality_control_categories_div').hide();
+	//$('div.content_div').hide();
+	//$('#quality_controls_div').hide();
+	//$('#quality_control_categories_div').hide();
 	//$('#quality_control_field_groups_div').hide();
 	$('#<?php echo $dialog_id; ?>').show();
 	<?php
@@ -113,7 +113,7 @@ function delete_quality_data()
 									<!--<li><a href="#tabs1-pane3" data-toggle="tab"><?php echo LangUtil::$generalTerms['QUALITY_CONTROL_FIELD_GROUPS']; ?></a></li>-->
 								</ul>
 								<div class="tab-content">
-									<div class="tab-pane active" id="tabs1-pane1">
+									<div id="quality_controls_div" class="tab-pane active" id="tabs1-pane1">
 										<p style="text-align: right;"><a rel='facebox' href='#QualityControls_tc'>Page Help</a></p>
 		<h5><?php echo LangUtil::$generalTerms['QUALITY_CONTROLS']; ?>
 		| <a href='quality_control_new.php' title='Click to Add a New Quality Control'><?php echo LangUtil::$generalTerms['ADDNEW']; ?></h5></a>
@@ -130,7 +130,7 @@ function delete_quality_data()
 			<?php echo LangUtil::$generalTerms['MSG_DELETED']; ?>&nbsp;&nbsp;<a href="javascript:toggle('qccdel_msg');"><?php echo LangUtil::$generalTerms['CMD_HIDE']; ?></a>
 		</div>
 
-		<?php $page_elems->getQualityControlCategoriesTable($_SESSION['lab_config_id']); ?>
+		<?php //$page_elems->getQualityControlCategoriesTable($_SESSION['lab_config_id']); ?>
 									</div>
 									
 									</div><!-- /.tab-content -->
@@ -147,7 +147,7 @@ function delete_quality_data()
 		<div id='tdel_msg' class='clean-orange' style='display:none;'>
 			<?php echo LangUtil::$generalTerms['MSG_DELETED']; ?>&nbsp;&nbsp;<a href="javascript:toggle('qccdel_msg');"><?php echo LangUtil::$generalTerms['CMD_HIDE']; ?></a>
 		</div>
-		<?php //$page_elems->getQualityControlCategoriesTable($_SESSION['lab_config_id']); ?>
+		<?php $page_elems->getQualityControlCategoriesTable($_SESSION['lab_config_id']); ?>
 	</div>
     
 	<div id='QualityControls_tc' class='right_pane' style='display:none;margin-left:10px;'>

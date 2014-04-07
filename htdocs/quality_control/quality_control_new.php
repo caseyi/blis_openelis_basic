@@ -4,6 +4,8 @@
 #
 include("redirect.php");
 include("includes/header.php");
+require_once("includes/page_elems.php");
+require_once("includes/script_elems.php");
 LangUtil::setPageId("quality");
 ?>
 <br>
@@ -26,61 +28,22 @@ LangUtil::setPageId("quality");
                            <div class="control-group">
                               <label class="control-label"><?php echo "Quality Control Name"; ?></label>
                               <div class="controls">
-                                 <input type="text" class="span6 m-wrap" />
+                                 <input type="text" name="qc_name" id="qc_name" class="span6 m-wrap" />
                               </div>
                            </div>
                            <div class="control-group">
                               <label class="control-label"><?php echo "Instrument or Reagent or Lot"; ?></label>
                               <div class="controls">
-                                 <select data-placeholder="Your Favorite Football Team" class="chosen span6" tabindex="-1" id="selS0V">
+                                 <select name="qc_inst" id="qc_inst" data-placeholder="Instrument/Reagent/Lot" class="chosen span6" tabindex="-1"> <!-- id="selS0V"-->
                                     <option value="" />
-                                    <optgroup label="NFC EAST">
-                                       <option />Dallas Cowboys
-                                       <option />New York Giants
-                                       <option />Philadelphia Eagles
-                                       <option />Washington Redskins
+                                    <optgroup label="CYTOMETRY">
+                                       <option />BD FacsFlow
                                     </optgroup>
-                                    <optgroup label="NFC NORTH">
-                                       <option />Chicago Bears
-                                       <option />Detroit Lions
-                                       <option />Green Bay Packers
-                                       <option />Minnesota Vikings
+                                    <optgroup label="BIOCHEMISTRY">
+                                       <option />Udichem
                                     </optgroup>
-                                    <optgroup label="NFC SOUTH">
-                                       <option />Atlanta Falcons
-                                       <option />Carolina Panthers
-                                       <option />New Orleans Saints
-                                       <option />Tampa Bay Buccaneers
-                                    </optgroup>
-                                    <optgroup label="NFC WEST">
-                                       <option />Arizona Cardinals
-                                       <option />St. Louis Rams
-                                       <option />San Francisco 49ers
-                                       <option />Seattle Seahawks
-                                    </optgroup>
-                                    <optgroup label="AFC EAST">
-                                       <option />Buffalo Bills
-                                       <option />Miami Dolphins
-                                       <option />New England Patriots
-                                       <option />New York Jets
-                                    </optgroup>
-                                    <optgroup label="AFC NORTH">
-                                       <option />Baltimore Ravens
-                                       <option />Cincinnati Bengals
-                                       <option />Cleveland Browns
-                                       <option />Pittsburgh Steelers
-                                    </optgroup>
-                                    <optgroup label="AFC SOUTH">
-                                       <option />Houston Texans
-                                       <option />Indianapolis Colts
-                                       <option />Jacksonville Jaguars
-                                       <option />Tennessee Titans
-                                    </optgroup>
-                                    <optgroup label="AFC WEST">
-                                       <option />Denver Broncos
-                                       <option />Kansas City Chiefs
-                                       <option />Oakland Raiders
-                                       <option />San Diego Chargers
+                                    <optgroup label="HAEMATOLOGY">
+                                       <option />Celtac
                                     </optgroup>
                                  </select>
                               </div>
@@ -89,21 +52,21 @@ LangUtil::setPageId("quality");
                            <div class="control-group">
                               <label class="control-label"><?php echo "Quality Control Description"; ?></label>
                               <div class="controls">
-                                 <textarea class="span6 m-wrap" rows="3"></textarea>
+                                 <textarea name="qc_desc" id="qc_desc" class="span6 m-wrap" rows="3"></textarea>
                               </div>
                            </div>
-                           <!--<div class="form-actions">
-                              <button type="submit" class="btn blue">Submit</button>
+                           <div class="form-actions">
+                              <button type="submit" onclick="check_input()" class="btn blue">Submit</button>
                               <button type="button" class="btn">Cancel</button>
-                           </div>-->
+                           </div>
                            </fieldset>
                         </form>
                         <!-- END FORM-->  
                         <fieldset>
-    <legend>Quality Control Form Definition</legend>
+    <!--legend>Quality Control Form Definition</legend>
     <br />
 <div id="my_form_builder">
-</div>
+</div-->
 <div id='quality_control_help' style='display:none'>
 <small>
 Use Ctrl+F to search easily through the list. Ctrl+F will prompt a box where you can enter the test category you are looking for.
@@ -114,10 +77,16 @@ Use Ctrl+F to search easily through the list. Ctrl+F will prompt a box where you
 function check_input()
 {
 	// Validate
-	var category_name = $('#category_name').val();
-	if(category_name == "")
+	var qc_name = $('#qc_name').val();
+	if(qc_name == "")
 	{
-		alert("<?php echo "Error: Missing quality control category name"; ?>");
+		alert("<?php echo "Error: Missing quality control name"; ?>");
+		return;
+	}
+	var qc_inst = $('#qc_inst').val();
+	if(qc_inst == "")
+	{
+		alert("<?php echo "Error: Missing instrument/reagent/log"; ?>");
 		return;
 	}
 	// All OK
@@ -126,8 +95,8 @@ function check_input()
 
 </script>
 
-<?php 
+<?php
 $script_elems->enableFormBuilder();
-$script_elems->enableFacebox();
-$script_elems->enableBootstrap();
+//$script_elems->enableFacebox();
+//$script_elems->enableBootstrap();*/
 include("includes/footer.php"); ?>
