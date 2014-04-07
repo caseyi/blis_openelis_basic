@@ -208,7 +208,7 @@ else
                     		WHERE test_id ='$attrib_value'";
 	}
 }
-//RUN QUERY DEPENDING ON PARAMENTERS
+//RUN QUERY DEPENDING ON PARAMETERS
 if($attrib_type == 12||$attrib_type == 13)
 {
 	$resultset = query_update($query_string);
@@ -256,32 +256,30 @@ else{
 		<div class='sidetip_nopos'>
 		<?php 
 		if($num_records == 0 || $resultset == null)
-		{
-		
-		if($attrib_type == 0)
-			echo " ".LangUtil::$generalTerms['PATIENT_ID']." ";
-		else if($attrib_type == 1)
-			echo " ".LangUtil::$generalTerms['PATIENT_NAME']." ";
-		else if($attrib_type == 3)
-			echo " ".LangUtil::$generalTerms['PATIENT_DAILYNUM']." ";
-	   	if($attrib_type == 9)
-	    {
-	       echo LangUtil::$pageTerms['MSG_PENDINGNOTFOUND'];
-	       echo '<br>'.'Try searching by patient name';
+		{		
+			if($attrib_type == 0)
+				echo " ".LangUtil::$generalTerms['PATIENT_ID']." ";
+			else if($attrib_type == 1)
+				echo " ".LangUtil::$generalTerms['PATIENT_NAME']." ";
+			else if($attrib_type == 3)
+				echo " ".LangUtil::$generalTerms['PATIENT_DAILYNUM']." ";
+			if($attrib_type == 9)
+			{
+			   echo LangUtil::$pageTerms['MSG_PENDINGNOTFOUND'];
+			   echo '<br>'.'Try searching by patient name';
+			}
+			if($attrib_type == 12)
+			{
+				echo LangUtil::$pageTerms['MSG_PENDINGNOTFOUND'];
+				echo '<br>'.'Try searching by patient name';
+			}
+			
+			else
+			{
+				echo LangUtil::$pageTerms['MSG_PENDINGNOTFOUND'];
+			}	    
 	    }
-	    if($attrib_type == 12)
-	    {
-	    	echo LangUtil::$pageTerms['MSG_PENDINGNOTFOUND'];
-	    	echo '<br>'.'Try searching by patient name';
-	    }
-	    
-	    else
-	    {
-			echo LangUtil::$pageTerms['MSG_PENDINGNOTFOUND'];
-	    }
-	    
-	    }
-	    else echo $num_records." records found.";
+	    else echo $num_records." record(s) found.";
 		?> 
 		</div>
 	</div>
@@ -298,7 +296,7 @@ else{
 	
 	Search: <span id="search">
 	
-	<input type=text id="search_tests"></input>
+	<input type=text id="search_tests"></input>&nbsp;&nbsp;
 	
 	
 	</span> 
@@ -358,10 +356,10 @@ else{
 			<th style='width:100px;'><?php echo LangUtil::$generalTerms['SPECIMEN_TYPE']; ?></th>
 			<th style='width:100px;'><?php echo "Test"; ?></th>
 			<th style='width:100px;'><?php echo "Status";?></th>
-			<th style='width:100px;'></th>
+			<th style='width:300px;'>Action</th>
 			<?php if($attrib_type==10){
 			?>
-			<th style='width:100px;'></th>
+			<th style='width:100px;'>View</th>
 			<?php 
 			}?>
 		</tr>
@@ -369,204 +367,206 @@ else{
 	<tbody>
 <?php
 	$count = 1;
-	foreach($resultset as $record)
-	{
-		$specimen = Specimen::getObject($record);
-		$patient = Patient::getObject($record);
-		$specimen_type = SpecimenType::getObject($record);
-		$test = Test::getObject($record);
-		$test_type = TestType::getObject($record);
-		$test_category = TestCategory::getObject($record);
-		?>
-		
-		<tr <?php
-		if($attrib_type == 3 && $count != 1)
+	if ($resultset){
+		foreach($resultset as $record)
 		{
-			# Fetching by patient daily number. Hide all records except the latest one
-			echo " class='old_pnum_records' style='display:none' ";
-		}
-		?> id="<?php echo $test->testId; ?>">
-			<td style='width:100px;'><?php echo $test_category->getCategoryName(); ?></td>
-			<?php
-			if($_SESSION['sid'] != 0)
+			$specimen = Specimen::getObject($record);
+			$patient = Patient::getObject($record);
+			$specimen_type = SpecimenType::getObject($record);
+			$test = Test::getObject($record);
+			$test_type = TestType::getObject($record);
+			$test_category = TestCategory::getObject($record);
+			?>
+			
+			<tr <?php
+			if($attrib_type == 3 && $count != 1)
 			{
-			?>
-				<td style='width:75px;'><?php echo $test->getLabSectionByTest(); ?></td>
-			<?php
+				# Fetching by patient daily number. Hide all records except the latest one
+				echo " class='old_pnum_records' style='display:none' ";
 			}
-			?>
-				<td style='width:75px;'><?php echo $specimen->ts_collected; ?></td>
-			<?php
-			if($_SESSION['pid'] != 0)
-			{
-			?>
-				<td style='width:75px;'><?php echo $patient->getSurrogateId(); ?></td>
-			<?php
-			}
-			if(false) // Stopping displaying the Lab No
-			{
-			?>
-				<td style='width:80px;'><?php echo $specimen->getDailyNumFull(); ?></td>
-			<?php
-			}
-			if($_SESSION['p_addl'] != 0)
-			{
-			?>
-				<td style='width:75px;'><?php echo $patient->getAddlId(); ?></td>
-			<?php
-			}
-			if($_SESSION['s_addl'] != 0)
-			{
-			?>
-				<td style='width:75px;'><?php echo $specimen->getAuxId(); ?></td>
-			<?php
-			}
-			?>
-			<?php
-			//if($lab_config->hidePatientName == 0)
-			?>
-			<td style='width:200px;'><?php echo $patient->getPatientName()." (".$patient->sex." ".$patient->getAgeNumber().") "; ?></td>
-			<td style='width:100px;'><?php echo $specimen_type->getSpecimenName(); ?></td>
-			<td style='width:100px;'>
-			<?php
-			echo $test_type->getTestName();
-			?>
-			</td>
-			<?php 
-			$specimen_status = $specimen->statusCodeId;
-			$test_status = $test->getStatusCode();
+			?> id="<?php echo $test->testId; ?>">
+				<td style='width:100px;'><?php echo $test_category->getCategoryName(); ?></td>
+				<?php
+				if($_SESSION['sid'] != 0)
+				{
+				?>
+					<td style='width:75px;'><?php echo $test->getLabSectionByTest(); ?></td>
+				<?php
+				}
+				?>
+					<td style='width:75px;'><?php echo $specimen->ts_collected; ?></td>
+				<?php
+				if($_SESSION['pid'] != 0)
+				{
+				?>
+					<td style='width:75px;'><?php echo $patient->getSurrogateId(); ?></td>
+				<?php
+				}
+				if(false) // Stopping displaying the Lab No
+				{
+				?>
+					<td style='width:80px;'><?php echo $specimen->getDailyNumFull(); ?></td>
+				<?php
+				}
+				if($_SESSION['p_addl'] != 0)
+				{
+				?>
+					<td style='width:75px;'><?php echo $patient->getAddlId(); ?></td>
+				<?php
+				}
+				if($_SESSION['s_addl'] != 0)
+				{
+				?>
+					<td style='width:75px;'><?php echo $specimen->getAuxId(); ?></td>
+				<?php
+				}
+				?>
+				<?php
+				//if($lab_config->hidePatientName == 0)
+				?>
+				<td style='width:200px;'><?php echo $patient->getPatientName()." (".$patient->sex." ".$patient->getAgeNumber().") "; ?></td>
+				<td style='width:100px;'><?php echo $specimen_type->getSpecimenName(); ?></td>
+				<td style='width:100px;'>
+				<?php
+				echo $test_type->getTestName();
+				?>
+				</td>
+				<?php 
+				$specimen_status = $specimen->statusCodeId;
+				$test_status = $test->getStatusCode();
+					
 				
-			
-			echo '<td class="hidden-phone"><span id=span'.$test->testId.' class="label ';
-			
-			if($test_status == Specimen::$STATUS_PENDING){
-				if($specimen_status == Specimen::$STATUS_NOT_COLLECTED){
-					echo 'label">Not Collected';
+				echo '<td class="hidden-phone"><span id=span'.$test->testId.' class="label ';
+				
+				if($test_status == Specimen::$STATUS_PENDING){
+					if($specimen_status == Specimen::$STATUS_NOT_COLLECTED){
+						echo 'label">Not Collected';
+						echo '</span></td>';
+						echo '
+							<td id=actionA'.$test->testId.' style="width:130px;">
+								<a href="javascript:accept_specimen('.$quote.$specimen->specimenId.$quote.', '.$quote.$test->testId.$quote.');" class="btn mini green"><i class="icon-thumbs-up"></i> Accept</a>
+							</td>
+							<td id=actionB'.$test->testId.' style="width:220px;">
+							<a href="javascript:specimen_info('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn mini">
+								<i class="icon-search"></i> View Details
+							</a>
+							</td>';
+					}else{
+						
+							echo 'label-important">Pending';
+							echo '</span></td>';
+							echo '<div id=action'.$test->testId.'>
+						<td id=actionA'.$test->testId.' style="width:200px;"><a href="javascript:start_test('.$quote.$test->testId.$quote.');" title="Click to begin testing this Specimen" class="btn red mini">
+							<i class="icon-ok"></i> '.LangUtil::$generalTerms['START_TEST'].'</a>
+						</td>
+						<td id=actionB'.$test->testId.' style="width:220px;">
+							<a href="javascript:specimen_info('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn mini">
+								<i class="icon-search"></i> View Details
+							</a>
+						</td></div>';
+						}
+				}else
+				if($test_status == Specimen::$STATUS_DONE){
+					echo 'label-info">Completed';
 					echo '</span></td>';
 					echo '
-						<td id=actionA'.$test->testId.' style="width:130px;">
-							<a href="javascript:accept_specimen('.$quote.$specimen->specimenId.$quote.', '.$quote.$test->testId.$quote.');" class="btn mini green"><i class="icon-thumbs-up"></i> Accept</a>
-                        </td>
-						<td id=actionB'.$test->testId.' style="width:130px;">
-						<a href="javascript:specimen_info('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn mini">
-							<i class="icon-search"></i> View Details
-						</a>
-						</td>';
-				}else{
-					
-						echo 'label-important">Pending';
-						echo '</span></td>';
-						echo '<div id=action'.$test->testId.'>
-					<td id=actionA'.$test->testId.' style="width:130px;"><a href="javascript:start_test('.$quote.$test->testId.$quote.');" title="Click to begin testing this Specimen" class="btn red mini">
-						<i class="icon-ok"></i> '.LangUtil::$generalTerms['START_TEST'].'</a>
-					</td>
-					<td id=actionB'.$test->testId.' style="width:130px;">
-						<a href="javascript:specimen_info('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn mini">
-							<i class="icon-search"></i> View Details
-						</a>
-					</td></div>';
-					}
-			}else
-			if($test_status == Specimen::$STATUS_DONE){
-				echo 'label-info">Completed';
-				echo '</span></td>';
-				echo '
-			<td style="width:130px;"><a href="javascript:start_test('.$quote.$specimen->specimenId.$quote.');" title="Click to view results" class="btn blue-stripe mini">
-				<i class="icon-edit"></i> View Results</a>
-			</td>
-			<td style="width:130px;"><a href="javascript:fetch_specimen2('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn green-stripe mini">
-				<i class="icon-ok"></i> Verify</a>
-			</td>';
-			}else
-			if($test_status == Specimen::$STATUS_REFERRED){
-				echo 'label-warning">Referred';
-				echo '</span></td>';
-				echo '
-			<td style="width:100px;"><a href="javascript:start_test('.$quote.$specimen->specimenId.$quote.');" title="Click to begin testing this Specimen" class="btn red mini">
-				<i class="icon-ok"></i>'.LangUtil::$generalTerms['START_TEST'].'</a>
-			</td>
-			<td style="width:100px;"><a href="javascript:fetch_specimen2('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn blue mini">
-				<i class="icon-group"></i>'.LangUtil::$generalTerms['ASSIGN_TO'].'</a>
-			</td>';
-			}else
-			if($test_status == Specimen::$STATUS_TOVERIFY){
-				echo 'label-info">Tested';
-				echo '</span></td>';
-				echo '
-			<td style="width:130px;"><a href="javascript:view_test_result('.$quote.$test->testId.$quote.');" title="Click to view and verify results of this Specimen" class="btn blue mini">
-				<i class="icon-edit"></i> Verify Results</a>
-			</td>
-			<td style="width:130px;"><a href="javascript:specimen_info('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn mini">
-				<i class="icon-search"></i> View Details</a>
-			</td>';
-			}else
-			if($test_status == Specimen::$STATUS_REPORTED){
-				echo 'label-success">Reported';
-				echo '</span></td>';
-				echo '
-			<td style="width:100px;"><a href="javascript:start_test('.$quote.$specimen->specimenId.$quote.');" title="Click to begin testing this Specimen" class="btn red mini">
-				<i class="icon-ok"></i>'.LangUtil::$generalTerms['START_TEST'].'</a>
-			</td>
-			<td style="width:100px;"><a href="javascript:fetch_specimen2('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn blue mini">
-				<i class="icon-group"></i>'.LangUtil::$generalTerms['ASSIGN_TO'].'</a>
-			</td>';
-			}else
-			if($test_status == Specimen::$STATUS_RETURNED){
-				echo 'label-info warning">Returned';
-				echo '</span></td>';
-				echo '
-			<td style="width:100px;"><a href="javascript:start_test('.$quote.$specimen->specimenId.$quote.');" title="Click to begin testing this Specimen" class="btn red mini">
-				<i class="icon-ok"></i>'.LangUtil::$generalTerms['START_TEST'].'</a>
-			</td>
-			<td style="width:100px;"><a href="javascript:fetch_specimen2('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn blue mini">
-				<i class="icon-group"></i>'.LangUtil::$generalTerms['ASSIGN_TO'].'</a>
-			</td>';
-			}else
-			if($test_status == Specimen::$STATUS_REJECTED){
-				echo 'label-inverse">Rejected';
-				echo '</span></td>';
-				echo '
-			<td style="width:100px;"><a href="javascript:start_test('.$quote.$specimen->specimenId.$quote.');" title="Click to begin testing this Specimen" class="btn red mini">
-				<i class="icon-ok"></i>'.LangUtil::$generalTerms['START_TEST'].'</a>
-			</td>
-			<td style="width:100px;"><a href="javascript:fetch_specimen2('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn mini">
-				<i class="icon-group"></i>'.LangUtil::$generalTerms['ASSIGN_TO'].'</a>
-			</td>';
-			}else
-			if($test_status == Specimen::$STATUS_STARTED){
-				echo 'label-warning">Started';
-				echo '</span></td>';
-				echo '
-			<td id=action'.$test->testId.' style="width:130px;"><a href="javascript:fetch_test_result_form('.$quote.$test->testId.$quote.');" title="Click to Enter Results for this Specimen" class="btn yellow mini">
-				<i class="icon-pencil"></i> Enter Results</a>
-			</td>
-			<td style="width:130px;"><a href="javascript:specimen_info('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn mini">
-				<i class="icon-search"></i> View Details</a>
-			</td>';
-			}else
-			if($test_status == Specimen::$STATUS_VERIFIED){
-				echo 'label-success">Verified';
-				echo '</span></td>';
-				echo '
-			<td style="width:130px;"><a href="javascript:view_test_result('.$quote.$test->testId.$quote.','.Specimen::$STATUS_VERIFIED.');" title="Click to view results" class="btn green mini">
-				<i class="icon-edit"></i> View Results</a>
-			</td>
-			<td style="width:130px;"><a href="javascript:specimen_info('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn mini">
-				<i class="icon-search"></i> View Details</a>
-			</td>';
-			}else 
-			{
-				echo '';
-			}
+				<td style="width:300px;"><a href="javascript:start_test('.$quote.$specimen->specimenId.$quote.');" title="Click to view results" class="btn blue-stripe mini">
+					<i class="icon-edit"></i> View Results</a>
+				</td>
+				<td style="width:130px;"><a href="javascript:fetch_specimen2('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn green-stripe mini">
+					<i class="icon-ok"></i> Verify</a>
+				</td>';
+				}else
+				if($test_status == Specimen::$STATUS_REFERRED){
+					echo 'label-warning">Referred';
+					echo '</span></td>';
+					echo '
+				<td style="width:250px;"><a href="javascript:start_test('.$quote.$specimen->specimenId.$quote.');" title="Click to begin testing this Specimen" class="btn red mini">
+					<i class="icon-ok"></i>'.LangUtil::$generalTerms['START_TEST'].'</a>
+				</td>
+				<td style="width:200px;"><a href="javascript:fetch_specimen2('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn blue mini">
+					<i class="icon-group"></i>'.LangUtil::$generalTerms['ASSIGN_TO'].'</a>
+				</td>';
+				}else
+				if($test_status == Specimen::$STATUS_TOVERIFY){
+					echo 'label-info">Tested';
+					echo '</span></td>';
+					echo '
+				<td style="width:300px;"><a href="javascript:view_test_result('.$quote.$test->testId.$quote.');" title="Click to view and verify results of this Specimen" class="btn blue mini">
+					<i class="icon-edit"></i> Verify Results</a>
+				</td>
+				<td style="width:280px;"><a href="javascript:specimen_info('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn mini">
+					<i class="icon-search"></i> View Details</a>
+				</td>';
+				}else
+				if($test_status == Specimen::$STATUS_REPORTED){
+					echo 'label-success">Reported';
+					echo '</span></td>';
+					echo '
+				<td style="width:100px;"><a href="javascript:start_test('.$quote.$specimen->specimenId.$quote.');" title="Click to begin testing this Specimen" class="btn red mini">
+					<i class="icon-ok"></i>'.LangUtil::$generalTerms['START_TEST'].'</a>
+				</td>
+				<td style="width:280px;"><a href="javascript:fetch_specimen2('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn blue mini">
+					<i class="icon-group"></i>'.LangUtil::$generalTerms['ASSIGN_TO'].'</a>
+				</td>';
+				}else
+				if($test_status == Specimen::$STATUS_RETURNED){
+					echo 'label-info warning">Returned';
+					echo '</span></td>';
+					echo '
+				<td style="width:100px;"><a href="javascript:start_test('.$quote.$specimen->specimenId.$quote.');" title="Click to begin testing this Specimen" class="btn red mini">
+					<i class="icon-ok"></i>'.LangUtil::$generalTerms['START_TEST'].'</a>
+				</td>
+				<td style="width:280px;"><a href="javascript:fetch_specimen2('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn blue mini">
+					<i class="icon-group"></i>'.LangUtil::$generalTerms['ASSIGN_TO'].'</a>
+				</td>';
+				}else
+				if($test_status == Specimen::$STATUS_REJECTED){
+					echo 'label-inverse">Rejected';
+					echo '</span></td>';
+					echo '
+				<td style="width:100px;"><a href="javascript:start_test('.$quote.$specimen->specimenId.$quote.');" title="Click to begin testing this Specimen" class="btn red mini">
+					<i class="icon-ok"></i>'.LangUtil::$generalTerms['START_TEST'].'</a>
+				</td>
+				<td style="width:280px;"><a href="javascript:fetch_specimen2('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn mini">
+					<i class="icon-group"></i>'.LangUtil::$generalTerms['ASSIGN_TO'].'</a>
+				</td>';
+				}else
+				if($test_status == Specimen::$STATUS_STARTED){
+					echo 'label-warning">Started';
+					echo '</span></td>';
+					echo '
+				<td id=action'.$test->testId.' style="width:250px;"><a href="javascript:fetch_test_result_form('.$quote.$test->testId.$quote.');" title="Click to Enter Results for this Specimen" class="btn yellow mini">
+					<i class="icon-pencil"></i> Enter Results</a>
+				</td>
+				<td style="width:275px;"><a href="javascript:specimen_info('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn mini">
+					<i class="icon-search"></i> View Details</a>
+				</td>';
+				}else
+				if($test_status == Specimen::$STATUS_VERIFIED){
+					echo 'label-success">Verified';
+					echo '</span></td>';
+					echo '
+				<td style="width:250px;"><a href="javascript:view_test_result('.$quote.$test->testId.$quote.','.Specimen::$STATUS_VERIFIED.');" title="Click to view results" class="btn green mini">
+					<i class="icon-edit"></i> View Results</a>
+				</td>
+				<td style="width:250px;"><a href="javascript:specimen_info('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn mini">
+					<i class="icon-search"></i> View Details</a>
+				</td>';
+				}else 
+				{
+					echo '';
+				}
+				
+				?>
+			</tr>
 			
-			?>
-		</tr>
+			<div class='modal container hide fade' id='result_form_pane_<?php echo $test->testId; ?>' role="dialog" aria-hidden="true" data-backdrop="static">
 		
-		<div class='modal container hide fade' id='result_form_pane_<?php echo $test->testId; ?>' role="dialog" aria-hidden="true" data-backdrop="static">
-	
-		</div>
-		<?php
-		$count++;
+			</div>
+			<?php
+			$count++;
+		}
 	}
 	?>
 	</tbody>
