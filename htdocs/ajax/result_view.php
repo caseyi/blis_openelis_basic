@@ -52,24 +52,25 @@ Test TT
 Verified by
 </th>
 <th>
+Action
 </th>
 </thead>
 <tbody>
- <?php $page_elems->getTestInfoRow($test, true);
+ <?php $page_elems->getTestInfoRow($test, true, true);
  
  $child_tests = get_child_tests($test_type_id);
  if (count($child_tests)>0){
  	foreach($child_tests as $child_test)
  	{
- 		$chid_test_entry = get_test_entry($specimen_id, $child_test['test_type_id']);
+ 		$child_test_entry = get_test_entry($specimen_id, $child_test['test_type_id']);
  			
- 		$page_elems->getTestInfoRow($chid_test_entry, true);
+ 		$page_elems->getTestInfoRow($child_test_entry, true, true);
  		$child_tests = get_child_tests($child_test['test_type_id']);
  		if (count($child_tests)>0){
  			foreach($child_tests as $child_test)
  			{
- 				$chid_test_entry = get_test_entry($specimen_id, $child_test['test_type_id']);
- 				$page_elems->getTestInfoRow($chid_test_entry, true);
+ 				$child_test_entry = get_test_entry($specimen_id, $child_test['test_type_id']);
+ 				$page_elems->getTestInfoRow($child_test_entry, true, true);
  			}
  		}
  	}
