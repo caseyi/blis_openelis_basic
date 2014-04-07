@@ -60,6 +60,7 @@ $doctor = preg_replace("/[^a-zA-Z\s]/", "", $doctor);
 $title=$_REQUEST['title'];
 $tests_list = $_REQUEST['t_type_list'];
 $external_lab_no = $_REQUEST['external_lab_no'];
+//die('Nini hii?');
 
 
 begin_transaction();
@@ -98,14 +99,13 @@ if(isset($_REQUEST['ref_out']) && $_REQUEST['ref_out'] == "Y")
 $specimen->referredTo = 0;
 $specimen->reportTo = $report_to;
 
-		if($doctor!="")
-$specimen->doctor = $title.$doctor;
+if($doctor!="")
+	$specimen->doctor = $title.$doctor;
 else
-$specimen->doctor=$doctor;
+	$specimen->doctor=$doctor;
 # Add entry to 'specimen' table
 add_specimen($specimen);
 $patient = get_patient_by_id($patient_id);
-
 
 # Add entries to 'test' table
 foreach($tests_list as $test_type_id)
@@ -118,7 +118,7 @@ foreach($tests_list as $test_type_id)
 	$test->result = "";
 	
 	$ex = API::getExternalParentLabNo($patient->surrogateId,  get_test_name_by_id($test_type_id, $_SESSION['lab_config_id']));
-	if ($ex =='' || $ex==null) $ex = 0;
+	if (($ex =='') || ($ex==null)) $ex = 0;
 	$test->external_parent_lab_no= $ex;
 	add_test($test);
 	
