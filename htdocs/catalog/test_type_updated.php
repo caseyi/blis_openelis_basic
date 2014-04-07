@@ -3,7 +3,7 @@
 # Shows confirmation for test type updation
 #
 include("redirect.php");
-include("includes/header.php");
+@include("includes/header.php");
 //error_reporting(0);
 LangUtil::setPageId("catalog");
 ?>
@@ -14,5 +14,5 @@ LangUtil::setPageId("catalog");
 <?php 
 $test_type = get_test_type_by_id($_REQUEST['tid']);
 $page_elems->getTestTypeInfo($test_type->name); 
-include("includes/footer.php");
+//include("includes/footer.php");
 ?>

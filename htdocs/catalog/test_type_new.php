@@ -131,7 +131,7 @@ putUILog('test_type_new', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', '
 					echo "</td>";
 					echo "<td>";
 					?>
-					<select class='range_select' id='<?php echo $i; ?>' name='mtype[]'>
+					<select class='range_select' class='span10 m-wrap' id='<?php echo $i; ?>' name='mtype[]'>
 						<option value='<?php echo Measure::$RANGE_NUMERIC; ?>'><?php echo LangUtil::$generalTerms['RANGE_NUMERIC']; ?></option>
 						<option value='<?php echo Measure::$RANGE_OPTIONS; ?>'><?php echo LangUtil::$generalTerms['RANGE_ALPHANUM']; ?></option>
 						<option value='<?php echo Measure::$RANGE_AUTOCOMPLETE; ?>'><?php echo LangUtil::$generalTerms['RANGE_AUTOCOMPLETE']; ?></option>
@@ -145,14 +145,14 @@ putUILog('test_type_new', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', '
 					<span id='val_<?php echo $i; ?>' class='values_section_<?php echo $i; ?>'>
 						<span id='numeric_<?php echo $i; ?>'>
 							
-							<input type='text' class='range_field' name='range_l_<?php echo $i; ?>[]' value='' /> :
-							<input type='text' class='range_field' name='range_u_<?php echo $i; ?>[]' value=''/>
-							<input type='text' class='range_field' name='gender_<?php echo $i; ?>[]' value='B'/>
-							<input type='text' class='range_field'  name='agerange_l_<?php echo $i; ?>[]' id='agerange_l_<?php echo $i; ?>[]' value='0' /> :
-							<input type='text' class='range_field' name='agerange_u_<?php echo $i; ?>[]' id='agerange_u_<?php echo $i; ?>[]' value='100' />
+							<input type='text' class='range_field span2 m-wrap' name='range_l_<?php echo $i; ?>[]' value='' /> :
+							<input type='text' class='range_field span2 m-wrap' name='range_u_<?php echo $i; ?>[]' value=''/>
+							<input type='text' class='range_field span3 m-wrap' name='gender_<?php echo $i; ?>[]' value='B'/>
+							<input type='text' class='range_field span2 m-wrap'  name='agerange_l_<?php echo $i; ?>[]' id='agerange_l_<?php echo $i; ?>[]' value='0' /> :
+							<input type='text' class='range_field span4 m-wrap' name='agerange_u_<?php echo $i; ?>[]' id='agerange_u_<?php echo $i; ?>[]' value='100' />
 							<br>
 						</span>
-						&nbsp;&nbsp;&nbsp;&nbsp;<?php echo LangUtil::$generalTerms['RANGE']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gender &nbsp;&nbsp;Age_Range
+						&nbsp;&nbsp;&nbsp;&nbsp;<?php echo LangUtil::$generalTerms['RANGE']; ?>&nbsp;&nbsp;&nbsp; Gender &nbsp;&nbsp;Age_Range
 							<br>
 						<small><a href="javascript:add_range_field('<?php echo $i; ?>');"><?php echo LangUtil::$generalTerms['ADDANOTHER']; ?> &raquo;</a></small>
 						<br><br>
