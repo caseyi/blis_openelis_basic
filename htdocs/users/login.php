@@ -24,6 +24,8 @@ require_once("includes/script_elems.php");
 LangUtil::setPageId("login");
 require_once("includes/perms_check.php");
 
+$facilityname = get_facility_name($_SESSION['lab_config_id']);
+
 $script_elems = new ScriptElems();
 $page_elems = new PageElems();
 header('Content-Type: text/html; charset=UTF-8');
@@ -57,7 +59,7 @@ header('Content-Type: text/html; charset=UTF-8');
   <div class="content">
   <center>
    <img src="logos/logo_300.png" alt="" width="90" height="90" /> 
-   <h3> Kapsabet District Hospital Laboratory </h3>
+   <h3>Basic Laboratory Information System<?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?></h3>
    </center>
     <!-- BEGIN LOGIN FORM -->
     <form class="form-vertical login-form" method="POST" action="validate.php" />
