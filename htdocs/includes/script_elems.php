@@ -140,7 +140,7 @@ class ScriptElems
 			<script src="facebox/facebox.js" type="text/javascript"></script>
 			<script type='text/javascript'>
 			$(document).ready(function(){
-				$('a[rel*=facebox]').facebox();
+				$('a[rel*=facebox]').facebox()
 			});
 			</script>
 		<?php
@@ -249,7 +249,7 @@ class ScriptElems
         <link rel="stylesheet" href="nivo/themes/default/default.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="nivo/style.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="nivo/nivo-slider.css" type="text/css" media="screen" />
-        <script type="text/javascript" src="nivo/jquery-1.9.0.min.js"></script>
+        <!--script type="text/javascript" src="nivo/jquery-1.9.0.min.js"></script-->
     	<script type="text/javascript" src="nivo/jquery.nivo.slider.js"></script>
         <script type="text/javascript">
     $(window).load(function() {
