@@ -26,6 +26,43 @@ $script_elems->enableAutocomplete();
 			<input type='hidden' name='card_num' id='card_num' value="<?php echo get_max_patient_id()+1; ?>" ></input>
 			<table cellpadding="2" class='regn_form_table' >	
 
+			<tr<?php
+			if($_SESSION['pname'] == 0)
+				echo " style='display:none;' ";
+			?>>	
+				<td><?php echo LangUtil::$generalTerms['PATIENT_NAME']; ?><?php $page_elems->getAsterisk(); ?> </td>
+				<td><input type="text" name="name" id="name" value="" size="20" class='uniform_width m-wrap tooltips' data-trigger="hover" data-original-title="Please enter patient's full name." /></td>
+			</tr>
+
+			<tr <?php
+			if($_SESSION['p_addl'] == 0)
+				echo " style='display:none;' ";
+			?>>
+				<td>
+					<?php echo LangUtil::$generalTerms['ADDL_ID'];
+					if($_SESSION['p_addl'] == 2)
+						$page_elems->getAsterisk();
+					?>
+				</td>
+				<td><input type="text" name="addl_id" id="addl_id" value="" size="20" class='uniform_width' /></td>
+			</tr>
+			<tr>
+				<td>  Date of Registration </td>
+				<td>
+					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
+					<input class="m-wrap m-ctrl-medium" size="16" name="patient_reg_date" id="patient_regist_date" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+					</div>
+				</td>			
+			</tr>
+			<tr style='display:none;'> <!-- Hidden as we are doing away with this -->
+				<td><?php echo LangUtil::$generalTerms['PATIENT_DAILYNUM']; ?>
+				<?php
+					if($_SESSION['dnum'] == 2)
+						$page_elems->getAsterisk();
+					?>
+				</td>
+				<td><input type="text" name="dnum" id="dnum" value="<?php echo $daily_num; ?>" size="20" class='uniform_width m-wrap tooltips' /></td>
+			</tr>
 			<tr>	
 			<div class="control-group" <?php if($_SESSION['pid'] == 0) echo " style='display:none;' ";?> >
 			 <td width="200">
@@ -40,42 +77,6 @@ $script_elems->enableAutocomplete();
 					<input type="text" name="pid" id="pid" value="" size="20" class='uniform_width form-control' style='background-color:#FFC' disabled>
 				</td>
 			 </div>
-			</tr>
-			<tr>
-				<td>  Date of Registration </td>
-				<td>
-					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-					<input class="m-wrap m-ctrl-medium" size="16" name="patient_reg_date" id="patient_regist_date" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
-					</div>
-				</td>			
-			</tr>
-			<tr <?php
-			if($_SESSION['p_addl'] == 0)
-				echo " style='display:none;' ";
-			?>>
-				<td>
-					<?php echo LangUtil::$generalTerms['ADDL_ID'];
-					if($_SESSION['p_addl'] == 2)
-						$page_elems->getAsterisk();
-					?>
-				</td>
-				<td><input type="text" name="addl_id" id="addl_id" value="" size="20" class='uniform_width' /></td>
-			</tr>
-			<tr style='display:none;'> <!-- Hidden as we are doing away with this -->
-				<td><?php echo LangUtil::$generalTerms['PATIENT_DAILYNUM']; ?>
-				<?php
-					if($_SESSION['dnum'] == 2)
-						$page_elems->getAsterisk();
-					?>
-				</td>
-				<td><input type="text" name="dnum" id="dnum" value="<?php echo $daily_num; ?>" size="20" class='uniform_width m-wrap tooltips' /></td>
-			</tr>
-			<tr<?php
-			if($_SESSION['pname'] == 0)
-				echo " style='display:none;' ";
-			?>>	
-				<td><?php echo LangUtil::$generalTerms['PATIENT_NAME']; ?><?php $page_elems->getAsterisk(); ?> </td>
-				<td><input type="text" name="name" id="name" value="" size="20" class='uniform_width m-wrap tooltips' data-trigger="hover" data-original-title="Please enter patient's full name." /></td>
 			</tr>
 			
 			<tr<?php
