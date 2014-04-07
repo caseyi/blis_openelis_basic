@@ -27,6 +27,8 @@ function get_result_form($test_type, $test_id, $num_tests, $patient, $parent_tes
 	<?php
 	# Fetch all measures for this test
 	$measure_list = $test_type->getMeasures();
+	//var_dump($test_type); echo '<br><br>'; 
+	//var_dump($measure_list); die;
     
 	$submeasure_list = array();
     $comb_measure_list = array();
@@ -73,7 +75,8 @@ function get_result_form($test_type, $test_id, $num_tests, $patient, $parent_tes
 		<?php
 		$range = $measure->range;
 		$range_type = $measure->getRangeType();
-		$range_values = $measure->getRangeValues($patient);
+		$range_values = $measure->getRangeValues(); //($patient);
+		//die('Vals='.$range_values);
 		
 		if($range_type == Measure::$RANGE_OPTIONS)
 		{
@@ -192,7 +195,7 @@ function get_result_form($test_type, $test_id, $num_tests, $patient, $parent_tes
 			</label>
 		
 			<span id='<?php echo $curr_form_id; ?>_comments_span'>
-			<textarea name='comments' id='test_<?php echo $test_type->testTypeId ?>_comments'  class='uniform_width'  ></textarea>
+			<textarea name='comments' id='<?php echo $curr_form_id; ?>_comments'  class='uniform_width'  onfocus="javascript:update_remarks(<?php echo $test_type->testTypeId; ?>, <?php echo count($measure_list); ?>, <?php echo $patient->getAgeNumber(); ?>, '<?php echo $patient->sex;?>');" ></textarea>
 			</span>
 		</td>
 	</tr>
@@ -379,7 +382,7 @@ $test_type = get_test_type_by_id($test_type_id);
 	
 	function update_remarks1()
 	{
-		var result_elems = $("input[name='result[]']").val();
+		var result_elems = $("input[name='result[]']").attr("value");
 				if(isNaN(result_elems))
 		{	
 			alert("Value expected for result is numeric.");
