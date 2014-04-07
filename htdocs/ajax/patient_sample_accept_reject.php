@@ -145,7 +145,7 @@ $specimen_id_list_rj = array_values(array_unique($specimen_id_list_rj));
                         <th style='width:100px;'><?php echo LangUtil::$generalTerms['TESTS']; ?></th>
                         <th style='width:130px;'><?php echo "Status"; ?></th>
                         <th style='width:130px;'><?php echo "Accept/Reject"; ?></th>
-                        <th> </th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -225,7 +225,7 @@ $specimen_id_list_rj = array_values(array_unique($specimen_id_list_rj));
                         ?>
                         </td>
                         <td>
-                        <span class="label"> Not Collected</span>
+                        <span class="label"> Not Accepted</span>
                         </td>
                         
                         <?php if($attrib_type == 10)
@@ -233,7 +233,7 @@ $specimen_id_list_rj = array_values(array_unique($specimen_id_list_rj));
                         <td style='width:130px;'><a href="specimen_acceptance.php?sid=<?php echo $specimen->specimenId; ?>&pid=<?php echo $patient->patientId; ?>" class="btn mini green"><i class="icon-thumbs-up"></i> Accept</a>
                         <a href="javascript:load_specimen_rejection(<?php echo $specimen->specimenId; ?>)" class="btn mini yellow"><i class="icon-thumbs-down"></i> Reject</a>
                         </td>
-                        <td style="width:130px;"><a href="javascript:specimen_info(<?php echo $specimen->specimenId; ?>);" title="View test details" class="btn mini">
+                        <td style="width:250px;"><a href="javascript:specimen_info(<?php echo $specimen->specimenId; ?>);" title="View test details" class="btn mini">
 							<i class="icon-search"></i> View Details</a>
 						</td>
                         <?php }?>
@@ -414,7 +414,7 @@ $specimen_id_list_rj = array_values(array_unique($specimen_id_list_rj));
                         </td>
                         <?php if($attrib_type == 10)
                         {?>
-                        <td style='width:100px;'><a href="#" class="btn mini green"><i class="icon-thumbs-up"></i> View Report</a>
+                        <td style='width:100px;'><a href="report_onetesthistory.php?ppid=<?php echo $patient->getPatientID() ?>&spid=<?php echo $specimen->specimenId ?>" target="_blank" class="btn mini green"><i class="icon-thumbs-up"></i> View Report</a>
                         </td>
                         <?php }?>
                     </tr>
