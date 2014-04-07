@@ -15,6 +15,8 @@ include("../users/accesslist.php");
 include("redirect.php");
 include("includes/header.php");
 include("includes/stats_lib.php");
+include("includes/scripts.php");
+require_once("includes/script_elems.php");
 LangUtil::setPageId("stocks");
 $script_elems->enableTableSorter();
 $script_elems->enableDatePicker();
@@ -90,10 +92,12 @@ function prefetch_pname()
 <a href='view_stock.php'>&laquo; <?php echo LangUtil::$generalTerms['CMD_BACK']; ?></a>&nbsp;|&nbsp;<b><?php echo "Add New Reagent"; ?></b>
 <br><br>
 
+<div class="span4" style="position: absolute;top: 100px;right: 30px;">
 <?php
-$tips_string = "Add new Reagent by completeing this form. Stocks can then be added for these reagents. Reagent name is required. Entering units for the reagent is optional. As you type letters in reagent name field, reageants with similar names are dispayed below.";
+$tips_string = "Add new Reagent by completing this form. Stocks can then be added for these reagents. Reagent name is required. Entering units for the reagent is optional. As you type letters in reagent name field, reageants with similar names are dispayed below.";
 $page_elems->getSideTip("Tips", $tips_string);
 ?>
+</div>
 
 <form name='new_test_form' id='new_test_form' action='inventory/add_reagent.php'  method='post'>
     <div class="pretty_box" style="width:450px;">
