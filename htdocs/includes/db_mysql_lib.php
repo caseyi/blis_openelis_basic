@@ -14,13 +14,14 @@ if (!$con) {
 }
 $LOG_QUERIES = true;
 
-mysql_select_db( $DB_NAME, $con );
+if (!mysql_select_db( $DB_NAME, $con )) die('Unable to select db:'.mysql_error());
 
 function query_insert_one($query)
 {
 	# Single insert statement
 	global $con;
-	mysql_query( $query, $con ) or die(mysql_error());
+	//die($query);
+	mysql_query( $query, $con ) or die(mysql_error().'<br>'.$query);
 	if($LOG_QUERIES == true)
         {
 		DebugLib::logDBUpdates($query, db_get_current());
@@ -280,6 +281,7 @@ function query_blind( $query )
 {
     global $con;
     $result = mysql_query( $query, $con );
+	if (!$result) echo 'Error:'.mysql_error();
 	if($LOG_QUERIES == true)
         {
 		DebugLib::logQuery($query, db_get_current(), $_SESSION['username']);
@@ -336,6 +338,15 @@ function db_close()
 {
 	global $con;
 	mysql_close($con);
+}
+
+function get_facility_name($labconfigcode)
+{
+	global $con;
+	$query = 'SELECT Facility_Name FROM facility_list WHERE Facility_Code IN (SELECT Facility_Code FROM lab_config WHERE lab_config_id='.$labconfigcode.')';
+	$result = mysql_query($query, $con);
+	$row = mysql_fetch_assoc($result);
+	return $row['Facility_Name'];
 }
 
 ?>
