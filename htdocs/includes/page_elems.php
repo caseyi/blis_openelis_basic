@@ -3381,7 +3381,7 @@ class PageElems
 		<?php
 	}
 	
-	public function getTestInfoRow($test, $is_modal=false)
+	public function getTestInfoRow($test, $is_modal=false, $allowedit=false)
 	{
 		# Returns HTML table row containing specimen info
 		# Called by getSpecimenTestsTable() function
@@ -3398,11 +3398,13 @@ class PageElems
 				if($test->isPending())
 					echo LangUtil::$generalTerms['PENDING_RESULTS'];
 				else
-					echo $test->decodeResult();
+					echo ($allowedit ? '<input type="text" style="width:60px" name="'.get_test_name_by_id($test->testTypeId).'_Result" value="' : '').
+						($allowedit ? str_replace('<br>', '', $test->decodeResult()) : $test->decodeResult()).($allowedit ? '" />' : '');
 				?>
 			</td>
 			<td>
-				<?php echo $test->getComments(); ?>
+				<?php echo ($allowedit ? '<textarea style="width:100px" name="'.get_test_name_by_id($test->testTypeId).'_Comments">' : '').
+					$test->getComments().($allowedit ? '</textarea>' : ''); ?>
 			</td>
 			<td>
 				<?php echo get_username_by_id($test->userId); ?>
@@ -3418,13 +3420,16 @@ class PageElems
 				<?php echo $test->getVerifiedBy(); ?>
 				</span>
 			</td>
-			<td>
+			<td width="100px">
 				<?php if($is_modal &&  $user->canverify == 1 && $test->userId != $user->userId ){?> 
 				<a href="javascript:verify_result('<?php echo $test->testId; ?>');" 
 					title="Click to Verify" class="btn green mini" id='verifybtn<?php echo $test->testId;?>'>
 					<i class="icon-ok"></i>Verify result
 				</a>
-				<?php }?>
+				<?php } else {
+					echo $is_modal ? ($user->canverify!=1 ? 'You are not allowed to verify results.<br>Please contact your system administrator' : ($test->userId==$user->userId ? 'You cannot verify results that you have entered!' : '')) : '';
+				}
+				?>
 			</td>
 			<?php
 			$specimen_object=Specimen::getById($test->specimenId);
@@ -4187,7 +4192,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 	
 	}
 	
-	function getNewSpecimenForm($form_num, $pid, $dnum, $session_num, $external_requests)
+	function getNewSpecimenForm($form_num, $pid, $dnum, $session_num, $external_requests=null)
 	{
 		# Returns HTML for new specimen form
 		LangUtil::setPageId("new_specimen");
@@ -8640,7 +8645,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		$qc_list = get_quality_controls($lab_config_id);
 		if(count($qc_list) == 0)
 		{
-			echo "<div class='sidetip_nopos'>"."No Quality Control Categories Found."."</div>";
+			echo "<div class='sidetip_nopos'>"."No Quality Controls Found."."</div>";
 			return;
 		}
 		?>
