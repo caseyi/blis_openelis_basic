@@ -273,7 +273,7 @@ $specimen_id_list = array_values(array_unique($specimen_id_list));
 			?>
 			<th style='width:100px;'><?php echo LangUtil::$generalTerms['SPECIMEN_TYPE']; ?></th>
 			<th style='width:100px;'><?php echo LangUtil::$generalTerms['TESTS']; ?></th>
-			<th style='width:100px;'><?php echo "Accept/Reject"; ?></th>
+			<th style='width:130px;'><?php echo "Accept/Reject"; ?></th>
 		</tr>
 	</thead>
 	<tbody>
