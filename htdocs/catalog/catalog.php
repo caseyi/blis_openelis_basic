@@ -9,13 +9,22 @@ if( !(isAdmin(get_user_by_id($_SESSION['user_id'])) && in_array(basename($_SERVE
 
 include("redirect.php");
 include("includes/header.php");
+require_once("includes/scripts.php");
+require_once("includes/script_elems.php");
+$script_elems = new ScriptElems();
+$script_elems->enableTableSorter();
+$script_elems->enableJQueryForm();
+$script_elems->enableDatePicker();
+$script_elems->enableValidation();
 LangUtil::setPageId("catalog");
 
 putUILog('catalog', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', 'X', 'X');
 $dialog_id = "dialog_deletecatalog";
 ?>
 
-
+<script type="text/javascript" src="js/jquery.ui.js"></script>
+<script type="text/javascript" src="js/dialog/jquery.ui.core.js"></script>
+<script type="text/javascript" src="js/dialog/jquery.ui.dialog.js"></script>
 
 <?php
 $user = get_user_by_id($_SESSION['user_id']);
@@ -105,7 +114,7 @@ if(is_super_admin($user) || is_country_dir($user))
 		<div id='sdel_msg' class='clean-orange' style='display:none;'>
 			<?php echo LangUtil::$generalTerms['MSG_DELETED']; ?>&nbsp;&nbsp;<a href="javascript:toggle('tcdel_msg');"><?php echo LangUtil::$generalTerms['CMD_HIDE']; ?></a>
 		</div>
-		<?php $page_elems->getTestCategoryTable($_SESSION['lab_config_id']); ?>
+		<?php $page_elems->getTestCategorySelect($_SESSION['lab_config_id']); ?>
 		</div>
 	</div>
 	</div>
@@ -210,74 +219,15 @@ if(is_super_admin($user) || is_country_dir($user))
 	
 </div>
 <!-- END ROW-FLUID-->  
-<?php include("includes/scripts.php");
+<?php 
+/*include("includes/scripts.php");
 require_once("includes/script_elems.php");
 $script_elems = new ScriptElems();
+$script_elems->enableJQueryForm();
 $script_elems->enableDatePicker();
-$script_elems->enableValidation();
+$script_elems->enableValidation();*/
 ?>
 <script type='text/javascript'>
-$(document).ready(function(){
-	$('div.content_div').hide();
-	$('#test_types_div').hide();
-	$('#specimen_types_div').hide();
-	$('#test_categories_div').hide();
-	$('#specimen_rejection_div').hide();
-	$('#<?php echo $dialog_id; ?>').show();
-	<?php
-	if(isset($_REQUEST['show_t']))
-	{
-		?>
-		load_right_pane('test_types_div');
-		<?php
-	}
-	else if(isset($_REQUEST['show_s']))
-	{
-		?>
-		load_right_pane('specimen_types_div');
-		<?php
-	}
-	else if(isset($_REQUEST['show_tc']))
-	{
-		?>
-		load_right_pane('test_categories_div');
-		<?php
-	}
-	else if(isset($_REQUEST['show_sr']))
-	{
-		?>
-		load_right_pane('specimen_rejection_div');
-		<?php
-	}
-	else if(isset($_REQUEST['tdel']))
-	{
-		?>
-		$('#tdel_msg').show();
-		load_right_pane('test_types_div');
-		<?php
-	}
-	else if(isset($_REQUEST['sdel']))
-	{
-		?>
-		$('#sdel_msg').show();
-		load_right_pane('specimen_types_div');
-		<?php
-	}
-	else if(isset($_REQUEST['tcdel']))
-	{
-		?>
-		$('#sdel_msg').show();
-		load_right_pane('test_categories_div');
-		<?php
-	}
-	else if (isset($_REQUEST['rm']))
-	{
-		?>
-		$('#rm_msg').show();
-		<?php
-	}
-	?>
-});
 
 function load_right_pane(div_id)
 {
@@ -361,7 +311,69 @@ function add_reason(){
 }
 
 $(document).ready(function(){
+	$('div.content_div').hide();
+	$('#test_types_div').hide();
+	$('#specimen_types_div').hide();
+	$('#test_categories_div').hide();
+	$('#specimen_rejection_div').hide();
+	$('#<?php echo $dialog_id; ?>').show();
+	<?php
+	if(isset($_REQUEST['show_t']))
+	{
+		?>
+		load_right_pane('test_types_div');
+		<?php
+	}
+	else if(isset($_REQUEST['show_s']))
+	{
+		?>
+		load_right_pane('specimen_types_div');
+		<?php
+	}
+	else if(isset($_REQUEST['show_tc']))
+	{
+		?>
+		load_right_pane('test_categories_div');
+		<?php
+	}
+	else if(isset($_REQUEST['show_sr']))
+	{
+		?>
+		load_right_pane('specimen_rejection_div');
+		<?php
+	}
+	else if(isset($_REQUEST['tdel']))
+	{
+		?>
+		$('#tdel_msg').show();
+		load_right_pane('test_types_div');
+		<?php
+	}
+	else if(isset($_REQUEST['sdel']))
+	{
+		?>
+		$('#sdel_msg').show();
+		load_right_pane('specimen_types_div');
+		<?php
+	}
+	else if(isset($_REQUEST['tcdel']))
+	{
+		?>
+		$('#sdel_msg').show();
+		load_right_pane('test_categories_div');
+		<?php
+	}
+	else if (isset($_REQUEST['rm']))
+	{
+		?>
+		$('#rm_msg').show();
+		<?php
+	}
+	?>
 	load_right_pane('test_categories_div');
 });
+
+/*$(document).ready(function(){
+});*/
 </script>
 <?php include("includes/footer.php"); ?>
