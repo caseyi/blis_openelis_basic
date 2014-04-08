@@ -1820,6 +1820,7 @@ class Measure
 		# Returns range values in a list
 		
 		$range_type = $this->getRangeType();
+		//return $range_type;
 		$retval = array();
 		switch($range_type)
 		{
@@ -2022,7 +2023,7 @@ class Measure
 		# Updates an existing measure entry in DB
 		$saved_db = DbUtil::switchToLabConfigRevamp();
 		$query_string = 
-			"INSERT INTO measure (name, measure_range, unit) ".
+			"INSERT INTO measure (`name`, `measure_range`, `unit`) ".
 			"VALUES ('$this->name', '$this->range', '$this->unit')".
 		query_insert_one($query_string);
 		DbUtil::switchRestore($saved_db);
@@ -2767,17 +2768,25 @@ class Specimen
 			case Specimen::$STATUS_TOVERIFY:
 				return LangUtil::$generalTerms['PENDING_VER'];
 				break;
+			case Specimen::$STATUS_REPORTED:
+				break;
 			case Specimen::$STATUS_RETURNED:
 				return LangUtil::$generalTerms['REF_RETURNED'];
 				break;
-			case Specimen::$STATUS_NOT_COLLECTED:
-				return LangUtil::$generalTerms['NOT_COLLECTED'];
+			case Specimen::$STATUS_REJECTED:
+				return ('Specimen Rejected');
+				//return LangUtil::$generalTerms['REJECTED'];
 				break;
 			case Specimen::$STATUS_STARTED:
 				return LangUtil::$generalTerms['STARTED'];
 				break;
+			case Specimen::$STATUS_NOT_COLLECTED:
+				return LangUtil::$generalTerms['NOT_COLLECTED'];
+				break;
 			case Specimen::$STATUS_TOVERIFY:
 				return LangUtil::$generalTerms['TO_VERIFY'];
+				break;
+			case Specimen::$STATUS_VERIFIED:
 				break;
 		}
 	}
@@ -3160,7 +3169,7 @@ class Test
 	{
 		$specimen = get_specimen_by_id($this->specimenId);
 		$start_time = new DateTime($specimen->ts_collected);
-		//error_log("\n".$specimen->ts_collected, 3 , "../logs/blis.api.error.log");
+		error_log("\n".$specimen->ts_collected, 3 , "../logs/blis.api.error.log");
 		$end_time = new DateTime($this->ts_result_entered);
 		$interval = date_diff($start_time, $end_time);
 		return $interval->format('%d days, %H hrs, %I mins, %S secs');
@@ -6761,7 +6770,7 @@ function search_patients_by_name($q)
 	$q = mysql_real_escape_string($q, $con);
 	$query_string = 
 		"SELECT * FROM patient ".
-		"WHERE name LIKE '$q%' ORDER BY name ASC";
+		"WHERE name LIKE '%$q%' ORDER BY name ASC";
 	$resultset = query_associative_all($query_string, $row_count);
 	$patient_list = array();
 	if(count($resultset) > 0)
@@ -6782,7 +6791,7 @@ function search_patients_by_name_dyn($q, $cap, $counter)
 	$q = mysql_real_escape_string($q, $con);
 	$query_string = 
 		"SELECT * FROM patient ".
-		"WHERE name LIKE '$q%' ORDER BY name ASC LIMIT $offset,$cap";
+		"WHERE name LIKE '%$q%' ORDER BY name ASC LIMIT $offset,$cap";
 	$resultset = query_associative_all($query_string, $row_count);
 	$patient_list = array();
 	if(count($resultset) > 0)
@@ -6802,7 +6811,7 @@ function search_patients_by_name_count($q)
 	$q = mysql_real_escape_string($q, $con);
 	$query_string = 
 		"SELECT count(*) as val FROM patient ".
-		"WHERE name LIKE '$q%'";
+		"WHERE name LIKE '%$q%'";
 	$resultset = query_associative_one($query_string);
 	return $resultset['val'];
 }
@@ -7317,7 +7326,11 @@ function add_specimen($specimen)
 		"session_num, time_collected, report_to, doctor, referred_to_name, daily_num, external_lab_no ) VALUES ( $specimen->specimenId, $specimen->patientId, $specimen->specimenTypeId, ". 
 		"'$specimen->dateCollected', '$specimen->dateRecvd', $specimen->userId, $specimen->statusCodeId, $specimen->referredTo, '$specimen->comments', ".
 		"'$specimen->auxId', '$specimen->sessionNum', '$specimen->timeCollected', $specimen->reportTo, '$specimen->doctor', '$specimen->referredToName', '$specimen->dailyNum' , '$specimen->external_lab_no')";
-	//echo $query_string;
+	/*$query_string = 
+		"INSERT INTO `specimen` ( specimen_id, patient_id, specimen_type_id, date_collected, date_recvd, user_id, status_code_id, referred_to, comments, aux_id, ".
+		"session_num, time_collected, report_to, doctor, referred_to_name, daily_num) VALUES ( $specimen->specimenId, $specimen->patientId, $specimen->specimenTypeId, ". 
+		"'$specimen->dateCollected', '$specimen->dateRecvd', $specimen->userId, $specimen->statusCodeId, $specimen->referredTo, '$specimen->comments', ".
+		"'$specimen->auxId', '$specimen->sessionNum', '$specimen->timeCollected', $specimen->reportTo, '$specimen->doctor', '$specimen->referredToName', '$specimen->dailyNum')";*/
 	$result = query_insert_one($query_string);
 	
 	if($result) {
@@ -7354,6 +7367,7 @@ function add_test($test, $testId=null)
 	$query_string = 
 		"INSERT INTO `test` ( test_id, specimen_id, test_type_id, result, comments, verified_by, user_id, external_lab_no, external_parent_lab_no ) ".
 		"VALUES ( $testId, $test->specimenId, $test->testTypeId, '$test->result', '$test->comments', 0, $test->userId, '$test->external_lab_no', '$test->external_parent_lab_no' )";
+	//die($query_string);
 	$result = query_insert_one($query_string);
 	$last_insert_id = get_last_insert_id();
 	
@@ -8946,7 +8960,7 @@ function add_measure($measure, $range, $unit)
 	$unit = mysql_real_escape_string($unit, $con);
 	$saved_db = DbUtil::switchToLabConfigRevamp();
 	$query_string = 
-		"INSERT INTO measure(name, measure_range, unit) ".
+		"INSERT INTO measure(`name`, `measure_range`, unit) ".
 		"VALUES ('$measure', '$range', '$unit')";
 	query_insert_one($query_string);
 	# Return primary key of the record just inserted
@@ -10498,10 +10512,12 @@ function get_custom_fields_patient()
 		"SELECT * FROM patient_custom_field";
 	$resultset = query_associative_all($query_string, $row_count);
 	$retval = array();
-	foreach($resultset as $record)
-	{
-		$custom_field = CustomField::getObject($record);
-		$retval[] = $custom_field;
+	if ($resultset){
+		foreach($resultset as $record)
+		{
+			$custom_field = CustomField::getObject($record);
+			$retval[] = $custom_field;
+		}
 	}
 	return $retval;
 }
@@ -11916,7 +11932,7 @@ function addAggregateMeasure($measure, $range, $testId, $userId, $unit)
 	$record = query_associative_one($query_string);
 	$measureId = intval($record['measure_id']) + 1;
 	$query_string = 
-		"INSERT INTO global_measures (name, range, test_id, user_id, unit, measure_id ) ".
+		"INSERT INTO global_measures (`name`, `range`, `test_id`, `user_id`, `unit`, `measure_id` ) ".
 		"VALUES ('$measure', '$range', $testId, $userId, '$unit', $measureId)";
 	query_insert_one($query_string);
 	DbUtil::switchRestore($saved_db);
@@ -12531,7 +12547,7 @@ function setBaseConfig($from_id, $to_id)
     query_blind($query_string);
     $dbn = "blis_".$from_id.".measure";
     $dbnn = "blis_".$to_id.".measure";
-    $query_string = "INSERT INTO ".$dbnn." (measure_id, name, unit_id, range, description, unit) SELECT measure_id, name, unit_id, range, description, unit FROM ".$dbn;
+    $query_string = "INSERT INTO ".$dbnn." (`measure_id`, `name`, `unit_id`, `range`, `description`, `unit`) SELECT measure_id, name, unit_id, range, description, unit FROM ".$dbn;
     query_insert_one($query_string);
     
     $query_string = "DELETE FROM specimen_type WHERE specimen_type_id > 0";
@@ -12658,7 +12674,7 @@ function setBaseConfigSpecimens($from_id, $to_id)
     }*/
     $dbn = "blis_".$from_id.".measure";
     $dbnn = "blis_".$to_id.".measure";
-     $query_string = "INSERT INTO ".$dbnn." (measure_id, name, unit_id, range, description, unit) SELECT measure_id, name, unit_id, range, description, unit FROM ".$dbn;
+     $query_string = "INSERT INTO ".$dbnn." (`measure_id`, `name`, `unit_id`, `range`, `description`, `unit`) SELECT measure_id, name, unit_id, range, description, unit FROM ".$dbn;
      query_insert_one($query_string);
     DbUtil::switchRestore($saved_db);
     return;
