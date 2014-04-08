@@ -53,8 +53,8 @@ if(isset($_SESSION['username']))
 	if($_SESSION['db_name'] == "")
 		# Admin level user - keep global DB instance
 		$DB_NAME = $GLOBAL_DB_NAME;
-	else
+	/*else
 		# Technician user - Narrow down to local instance
-		$DB_NAME = $_SESSION['db_name'];
+		$DB_NAME = $_SESSION['db_name'];*/
 }
 ?>
