@@ -14,7 +14,35 @@ LangUtil::setPageId("lab_config_home");
 putUILog('lab_config_home', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', 'X', 'X');
 $imported_users = null
 ?>
+<?php 
+include("includes/scripts.php");
+require_once("includes/script_elems.php");
+$script_elems->enableTableSorter();
+$script_elems->enableJQueryForm();
+$script_elems->enableDatePicker();
+?>
+<script type="text/javascript" src="js/jquery.ui.js"></script>
+<script type="text/javascript" src="js/dialog/jquery.ui.core.js"></script>
+<script type="text/javascript" src="js/dialog/jquery.ui.dialog.js"></script>
 
+<script type="text/javascript">
+
+function load_right_pane(div_id)
+{
+	$('#rm_msg').hide();
+	$('div.content_div').hide();
+	$('#'+div_id).show();
+	$('.menu_option').removeClass('current_menu_option');
+	$('#'+div_id+'_menu').addClass('current_menu_option');
+}
+
+function hide_right_pane()
+{
+	$('div.content_div').hide();
+	$('.menu_option').removeClass('current_menu_option');
+}
+
+</script>
 
 <div id='Summary_config' class='right_pane' style='display:none;margin-left:10px;'>
 	<ul>
@@ -1706,16 +1734,7 @@ if($lab_config == null)
 </table>
 </div>
 </div>
-<?php 
-include("includes/scripts.php");
-require_once("includes/script_elems.php");
-$script_elems->enableTableSorter();
-$script_elems->enableJQueryForm();
-$script_elems->enableDatePicker();
-?>
-<script type="text/javascript" src="js/jquery.ui.js"></script>
-<script type="text/javascript" src="js/dialog/jquery.ui.core.js"></script>
-<script type="text/javascript" src="js/dialog/jquery.ui.dialog.js"></script>
+<!-- ***************************************************************************************** -->
 <script type='text/javascript'>
 
 <?php $page_elems->getCompatibilityJsArray("st_map", $lab_config_id); ?>
@@ -1894,6 +1913,7 @@ $(document).ready(function(){
 		$('#searchfield_msg').html("<?php echo LangUtil::$generalTerms['MSG_UPDATED']; ?>&nbsp;&nbsp;&nbsp;<a href=\"javascript:toggle('searchfield_msg');\"><?php echo LangUtil::$generalTerms['CMD_HIDE']; ?></a>");
 		$('#searchfield_msg').show();
 		right_load(21, 'search_div');
+		//load_right_pane("search_div");
 		<?php
 	}
         else if(isset($_REQUEST['brcupdate']))
@@ -2874,5 +2894,7 @@ function import_users(){
 }
 
 </script>
+
+<!-- ***************************************************************************************** -->
 
 <?php include("includes/footer.php"); ?>
