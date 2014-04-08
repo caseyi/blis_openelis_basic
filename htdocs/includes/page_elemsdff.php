@@ -2311,7 +2311,7 @@ class PageElems
                             {
                             ?>
                                 <td><a href="javascript:print_specimen_barcode(<?php echo $pid;?>,<?php echo $sid;?> )">Print Barcode</a> </td>
-                            <? 
+                            <?php
                             }
                                 
                         ?>
@@ -2405,7 +2405,7 @@ class PageElems
                             {
                             ?>
                                  <th></th>
-                            <? 
+                            <?php
                             }
                                 
                         ?>
