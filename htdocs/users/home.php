@@ -44,6 +44,19 @@ $facilityname = get_facility_name($_SESSION['lab_config_id']);
                     <div class="row-fluid">
 									<div class="span12">
 										<!--BEGIN TABS-->
+                                                <div class="tabbable tabbable-custom">
+													<ul class="nav nav-tabs">
+														<?php global $top_menu_options;
+															if(isset($top_menu_options))
+															{
+																foreach($top_menu_options as $key => $value)
+																{
+																	echo '<li class="active"><a href="'.$value.'">'.$key.'</a></li>';
+																}
+															}
+														?>
+													</ul>
+												</div>
 										<!--div class="tabbable tabbable-custom">
 											<ul class="nav nav-tabs">
 												<li class="active"><a href="#tab_1_1" data-toggle="tab">BLIS Launch</a></li>
