@@ -15,7 +15,7 @@ function get_records_to_print($lab_config, $test_type_id, $date_from, $date_to)
 	$retval = array();
 	
 	if(isset($_REQUEST['p']) && $_REQUEST['p'] ==1)
-		{
+	{
 	
 		$query_string =
 		"SELECT * FROM test WHERE test_type_id=$test_type_id ".
@@ -24,22 +24,9 @@ function get_records_to_print($lab_config, $test_type_id, $date_from, $date_to)
 			"SELECT specimen_id FROM specimen ".
 			"WHERE (date_collected BETWEEN '$date_from' AND '$date_to') ".
 		")";
-		}
-	 
-		else
-		if(isset($_REQUEST['ip']) && $_REQUEST['ip'] == 0)
+	}
+	else if(isset($_REQUEST['ip']) && $_REQUEST['ip'] == 0)
 	{
-	$query_string =
-		"SELECT * FROM test WHERE test_type_id=$test_type_id ".
-		"AND result <> '' ".
-		"AND specimen_id IN ( ".
-			"SELECT specimen_id FROM specimen ".
-			"WHERE (date_collected BETWEEN '$date_from' AND '$date_to') ".
-		")";
-		}
-		else
-		{
-		
 		$query_string =
 		"SELECT * FROM test WHERE test_type_id=$test_type_id ".
 		//"AND result <> '' ".
@@ -47,7 +34,18 @@ function get_records_to_print($lab_config, $test_type_id, $date_from, $date_to)
 			"SELECT specimen_id FROM specimen ".
 			"WHERE (date_collected BETWEEN '$date_from' AND '$date_to') ".
 		")";
-		}
+	}
+	else
+	{
+		$query_string =
+		"SELECT * FROM test WHERE test_type_id=$test_type_id ".
+		//"AND result <> '' ".
+		"AND specimen_id IN ( ".
+			"SELECT specimen_id FROM specimen ".
+			"WHERE (date_collected BETWEEN '$date_from' AND '$date_to') ".
+		")";
+	}
+	
 	$resultset = query_associative_all($query_string, $row_count);
 	
 	foreach($resultset as $record)
