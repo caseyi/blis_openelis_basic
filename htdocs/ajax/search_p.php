@@ -9,6 +9,7 @@ include("../includes/script_elems.php");
 LangUtil::setPageId("find_patient");
 
 $script_elems = new ScriptElems();
+//$script_elems->enableTableSorter();
 
 $saved_session = SessionUtil::save();
 $q = $_REQUEST['q'];
@@ -23,32 +24,35 @@ $a = $_REQUEST['a'];
 $saved_db = "";
 $lab_config = null;
 $uiinfo = "op=".$a."&qr=".$q;
+putUILog('search_p', $uiinfo, basename($_SERVER['REQUEST_URI'], ".php"), 'X', 'X', 'X');
+
 ?>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#patientListTable').tablesorter();
+	});
+</script>
+
 <?php
-$patient_list = array();
-if(isset($_REQUEST['search_all_external'])){
-    
-    # Fetch all patients with pending request from external system   
-    $patient_list = search_all_pending_external_requests();
-}
-else if(isset($_REQUEST['l']))
+if(isset($_REQUEST['l']))
 {
 	# Save context
 	$lab_config = LabConfig::getById($_REQUEST['l']);
 	$saved_db = DbUtil::switchToLabConfig($_REQUEST['l']);
 }
-else 
+else
 {
 	$lab_config = LabConfig::getById($_SESSION['lab_config_id']);
 }
+$patient_list = array();
 # Fetch list from DB
-if(isset($_REQUEST['a']) && $_REQUEST['a'] == 0)
+if($a == 0)
 {
 	# Fetch by patient ID
 	$patient_list = search_patients_by_id($q);
 }
-else if(isset($_REQUEST['a']) && $_REQUEST['a'] == 1)
+else if($a == 1)
 {
 	# Fetch by patient name
 	$patient_list = search_patients_by_name($q);
@@ -60,12 +64,12 @@ else if(isset($_REQUEST['a']) && $_REQUEST['a'] == 1)
 		autoImportPatientEntry($patient, $q);
 	}*/
 }
-else if(isset($_REQUEST['a']) && $_REQUEST['a'] == 2)
+else if($a == 2)
 {
 	# Fetch by additional ID
 	$patient_list = search_patients_by_addlid($q);
 }
-else if(isset($_REQUEST['a']) && $_REQUEST['a'] == 3)
+else if($a == 3)
 {
 	# Fetch by daily number
 	$patient_list = search_patients_by_dailynum("-".$q);
@@ -116,14 +120,14 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 }
 # Build HTML table
 ?>
-<table class='table tale-striped table-condensed' id='patientListTable' name='patientListTable'>
+<table class='hor-minimalist-c' id='patientListTable' name='patientListTable'>
 	<thead>
 		<tr valign='top'>
 			<?php
-			if(true /*$lab_config->pid != 0*/)
+			if($lab_config->pid != 0)
 			{
 				?>
-				<th><?php echo "Patient ID" ?></th>
+				<th><?php echo LangUtil::$generalTerms['PATIENT_ID']; ?></th>
 				<?php
 			}
 			if($lab_config->dailyNum >= 11)
@@ -141,15 +145,25 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 			?>
 			<?php  #TODO: Add check if user has patient name/private data access here ?>
                         
-			<th><?php echo "Patient Name"; ?> </th>
-           <?php
+			<th><?php echo LangUtil::$generalTerms['NAME']; ?></th>
+			<th><?php echo LangUtil::$generalTerms['GENDER']; ?></th>
+                        
+                        <?php
+			if($lab_config->age >= 11)
+			{
+				?>
+				<th><?php echo LangUtil::$generalTerms['AGE']; ?></th>
+				<?php
+			}?>
+			
+                        <?php
 			if(strpos($_SERVER["HTTP_REFERER"], "search.php") !== false)
 			{
 				# Show status of most recently registered specimens
 				echo "<th>".LangUtil::$generalTerms['SP_STATUS']."</th>";
 			}
 			?>
-			<th>Test(s) Requested</th>
+			<th></th>
 			<th></th>
 		</tr>
 	</thead>
@@ -160,11 +174,11 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 	?>
 		<tr valign='top'>
 			<?php
-			if(true /*$lab_config->pid != 0*/)
+			if($lab_config->pid != 0)
 			{
 				?>
 				<td>
-					<?php echo $patient->patientId; ?>
+					<?php echo $patient->getSurrogateId(); ?>
 				</td>
 				<?php
 			}
@@ -204,8 +218,21 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 			}
 			?>
 			<td>
-				<?php echo $patient->getName()." (".substr($patient->sex, 0, 1)." ".$patient->getAgeNumber().") "; ?>
+				<?php echo $patient->name; ?>
 			</td>
+			<td>
+				<?php echo $patient->sex; ?>
+			</td>
+			<?php
+                        if($lab_config->age >= 11)
+			{
+				?>
+				<td>
+					<?php echo $patient->getAge(); ?>
+				</td>
+				<?php
+			}?>
+                        
 			<?php
 			if(strpos($_SERVER["HTTP_REFERER"], "search.php") !== false)
 			{
@@ -231,25 +258,14 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 			}
 			?>
 			<td>
-			<?php 
-			if (isset($patient->tests_requested)){
-				$tests = $patient->tests_requested;
-			foreach($tests as $test){
-				echo "-> ".$test['investigation']." - (".$test['requestDate'].")<br>";
-					}
-			}
-			?>
-			
-			</td>
-			<td>
 				<?php 
 				if(strpos($_SERVER["HTTP_REFERER"], "find_patient.php") !== false)
 				{
 					# Called from find_patient.php. Show 'profile' and 'register specimen' link
 					?>
-					<a href='javascript:load_specimen_reg("<?php echo $patient->patientId; ?>", <?php echo (string)$patient->from_external_system; ?>)' class="btn mini red-stripe" title='Click to add lab request'><i class="icon-sign-up"></i> Receive lab request</a>
-					
-					<!--<a href='patient_profile.php?pid=<?php echo $patient->patientId; ?>' class="btn mini blue-stripe" title='Click to View Patient Profile'><i class="icon-search"></i> <?php echo LangUtil::$pageTerms['CMD_VIEWPROFILE']; ?></a> -->
+					<a href='new_specimen.php?pid=<?php echo $patient->patientId; ?>' title='Click to Register New Specimen for this Patient'><?php echo LangUtil::$pageTerms['CMD_REGISTERSPECIMEN']; ?></a>
+					</td><td>
+					<a href='patient_profile.php?pid=<?php echo $patient->patientId; ?>' title='Click to View Patient Profile'><?php echo LangUtil::$pageTerms['CMD_VIEWPROFILE']; ?></a>
 					<?php
 				}
 				else if(strpos($_SERVER["HTTP_REFERER"], "reports.php") !== false || strpos($_SERVER["HTTP_REFERER"], "reports2.php") !== false)
