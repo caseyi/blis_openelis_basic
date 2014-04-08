@@ -3226,12 +3226,12 @@ class Test
         return $retval;
     }
 	
-	public function getVerifiedBy()
+	public function getVerifiedBy($showextratext=false)
 	{
 		# Returns username of the technician who verified results
 		# Or, "Not verified" if results are pending verification
 		if($this->isVerified())
-			return get_username_by_id($this->verifiedBy);
+			return ($showextratext ? LangUtil::$generalTerms['VERIFIED_BY'] : '').get_username_by_id($this->verifiedBy);
 		return LangUtil::$generalTerms['PENDING_VER'];
 	}
 	

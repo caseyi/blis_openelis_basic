@@ -3417,11 +3417,11 @@ class PageElems
 			</td>
 			<td>
 				<span id="verifydby<?php echo $test->testId;?>" class="label label-info">
-				<?php echo $test->getVerifiedBy(); ?>
+				<?php echo $test->getVerifiedBy(true); ?>
 				</span>
 			</td>
 			<td width="100px">
-				<?php if($is_modal &&  $user->canverify == 1 && $test->userId != $user->userId ){?> 
+				<?php if($is_modal &&  $user->canverify == 1){ //&& $test->userId != $user->userId ){?> 
 				<a href="javascript:verify_result('<?php echo $test->testId; ?>');" 
 					title="Click to Verify" class="btn green mini" id='verifybtn<?php echo $test->testId;?>'>
 					<i class="icon-ok"></i>Verify result

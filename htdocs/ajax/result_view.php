@@ -49,7 +49,7 @@ Specimen TT
 Test TT
 </th>
 <th>
-Verified by
+Status
 </th>
 <th>
 Action
