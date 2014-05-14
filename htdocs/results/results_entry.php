@@ -595,6 +595,8 @@ function fetch_tests(status,page,search_term)
 				$('select', '#status')[0].selectedIndex = 3;
 			}else if (status==<?php echo Specimen::$STATUS_VERIFIED;?>){
 				$('select', '#status')[0].selectedIndex = 4;
+			} else {
+				$('select', '#status')[0].selectedIndex = 0;
 			}
 			$(".chosen").chosen();
 			$("#search_tests").val(search_term);
