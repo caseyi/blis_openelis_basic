@@ -114,7 +114,7 @@ if(is_super_admin($user) || is_country_dir($user))
 		<div id='sdel_msg' class='clean-orange' style='display:none;'>
 			<?php echo LangUtil::$generalTerms['MSG_DELETED']; ?>&nbsp;&nbsp;<a href="javascript:toggle('tcdel_msg');"><?php echo LangUtil::$generalTerms['CMD_HIDE']; ?></a>
 		</div>
-		<?php $page_elems->getTestCategorySelect($_SESSION['lab_config_id']); ?>
+		<?php $page_elems->getTestCategoryTable($_SESSION['lab_config_id']); //$page_elems->getTestCategorySelect($_SESSION['lab_config_id']); ?>
 		</div>
 	</div>
 	</div>

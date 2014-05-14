@@ -163,13 +163,13 @@ else
 						LEFT JOIN specimen_type st ON s.specimen_type_id = st.specimen_type_id
 						LEFT JOIN test_type tt ON t.test_type_id = tt.test_type_id
 						LEFT JOIN test_category tc ON tt.test_category_id = tc.test_category_id
-            		WHERE";
+            		WHERE s.status_code_id!=".Specimen::$STATUS_REJECTED." AND ";
             
-            if ($status!="all")
+            if (($status!="all") && ($status!=Specimen::$STATUS_ALL)){
             	$query_string.="
                     	 t.status_code_id=$status AND
             			 s.status_code_id NOT IN (".Specimen::$STATUS_NOT_COLLECTED.") AND ";
-            
+            }
             $query_string.="	
                     	(tt.parent_test_type_id = 0 or t.external_parent_lab_no = '0')
             			AND (p.surr_id = '$search_term' or p.name LIKE '%$search_term%' or tt.name LIKE '%$search_term%' or s.specimen_id = '$search_term')
