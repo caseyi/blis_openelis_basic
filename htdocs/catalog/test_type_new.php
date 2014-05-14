@@ -4,6 +4,7 @@
 #
 include("redirect.php");
 include("includes/header.php");
+
 LangUtil::setPageId("catalog");
 
 putUILog('test_type_new', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', 'X', 'X');
@@ -369,7 +370,7 @@ To represent data like 56^5-65^5 ml add the range as 56-65 and the unit as 5:ml.
 It is used for test which are alphanumeric and autocomplete. The default value for that measure can be recorded in this section.
 </small>
 </div>
-<?php include("includes/scripts.php");
+<?php require_once("includes/scripts.php");
 $script_elems->enableLatencyRecord();
 ?>
 <script type='text/javascript'>
@@ -615,8 +616,8 @@ function check_input()
 		return;
 	}
 	var checkbox_val = $('#ispanel').attr("checked");
-	if(checkbox_val == true)
-	{
+	//if(checkbox_val == 'checked') //true)
+	//{
 		var mtype_entries = $('.m_entry');
 		var mtype_selected = false;
 		for(var i = 0; i < mtype_entries.length; i++)
@@ -627,14 +628,14 @@ function check_input()
 				break;
 			}
 		}
-		if(mtype_selected == false)
+		/*if(mtype_selected == false)
 		{
 			alert("<?php echo LangUtil::$pageTerms['TIPS_MISSING_SELECTEDMEASURES']; ?>");
 			return;
-		}
-	}
-	else
-	{
+		}*/
+	//}
+	//else
+	//{
 		var measure_elems = $("input[name='measure[]']");
 		var range_type_elems = $("select[name='mtype[]']");
 		var measure_entered = false;
@@ -766,12 +767,12 @@ function check_input()
 				}
 			}			
 		}
-		if(measure_entered == false)
+		if ((measure_entered == false) && (mtype_selected == false))
 		{
 			alert("<?php echo LangUtil::$pageTerms['TIPS_MISSING_SELECTEDMEASURES']; ?>");
 			return;
 		}
-	}
+	//}
 	var stype_entries = $('.stype_entry');
 	var stype_selected = false;
 	for(var i = 0; i < stype_entries.length; i++)
