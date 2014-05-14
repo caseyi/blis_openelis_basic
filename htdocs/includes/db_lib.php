@@ -1606,16 +1606,16 @@ class TestCategory
 		$test_category_id = mysql_real_escape_string($test_category_id, $con);
 		$saved_db = DbUtil::switchToLabConfigRevamp();
 		$query_string = 
-			"DELETE FROM lab_config_test_category WHERE test_category_id=$test_category_id";
+			"DELETE FROM test_category WHERE test_category_id=$test_category_id";
 		query_blind($query_string);
 		# 2. Delete entries from specimen_test
 		$query_string =
 			"DELETE FROM specimen_test WHERE test_category_id=$test_category_id";
 		query_blind($query_string);
-		# 3. Set disabled flag in test_category entry
+		/*# 3. Set disabled flag in test_category entry
 		$query_string =
 			"UPDATE test_category SET disabled=1 WHERE test_category_id=$test_category_id";
-		query_blind($query_string);
+		query_blind($query_string);*/
 		DbUtil::switchRestore($saved_db);
 	}
 	
@@ -2644,6 +2644,7 @@ class Specimen
 	public static $STATUS_STARTED = 7;
 	public static $STATUS_NOT_COLLECTED = 8;
 	public static $STATUS_VERIFIED = 9;
+	public static $STATUS_ALL = 10;
 
 	public static function getObject($record)
 	{
@@ -8903,7 +8904,7 @@ function update_test_category($updated_entry)
 	$query_string =
 		"UPDATE test_category ".
 		"SET name='$updated_entry->name', ".
-		"description='$updated_entry->description', ".
+		"description='$updated_entry->description' ".
 		"WHERE test_category_id=$updated_entry->testCategoryId";
 	query_blind($query_string);
 	DbUtil::switchRestore($saved_db);
