@@ -213,7 +213,7 @@ function handleDataTable(table_id) {
 				fetch_tests(<?php echo Specimen::$STATUS_TOVERIFY?>);
 			}else if (val=="Tested & Verified"){
 				fetch_tests(<?php echo Specimen::$STATUS_VERIFIED?>);
-			}
+			} else fetch_tests(<?php echo Specimen::$STATUS_ALL?>);
 		} );
 	} );
 }
