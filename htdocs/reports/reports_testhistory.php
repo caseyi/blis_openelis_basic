@@ -778,8 +778,8 @@ $page_elems = new PageElems();
 
 
 
-<script type="text/javascript" src="../js/nicEdit.js"></script>
-<script type="text/javascript" src="../js/jquery-barcode-2.0.2.js"></script>  
+<script type="text/javascript" src="js/nicEdit.js"></script>
+<script type="text/javascript" src="js/jquery-barcode-2.0.2.js"></script>  
 
 <script type='text/javascript'>
 

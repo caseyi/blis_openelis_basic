@@ -117,7 +117,7 @@ $script_elems->enableEditInPlace();
 $page_elems = new PageElems();
 ?>
 
-<script type="text/javascript" src="../js/nicEdit.js"></script>
+<script type="text/javascript" src="js/nicEdit.js"></script>
 <script type='text/javascript'>
 
 var curr_orientation = 0;
