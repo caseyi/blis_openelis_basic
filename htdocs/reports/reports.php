@@ -2041,7 +2041,7 @@ function show_custom_report_form(report_id)
                                     <a data-toggle="modal" class="config"></a>
                                 </div>
         </div>
-    <div class="portlet-body" style="height: 400px">           
+    <div class="portlet-body" style="overflow:hidden;">           
         <div id='test_history'>
             <div class='reports_subdiv_help' id='test_history_div_help' style='display:none'>
                 
