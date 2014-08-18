@@ -106,7 +106,7 @@ class PageElems
 		}
 		$date_format_js_parts = explode("-", $date_format_js);
 		$picker_id = rand();
-		if(DebugLib::isOldIe() === true || strpos($_SERVER['PHP_SELF'], "reports_tat.php") !== false)
+		if((DebugLib::isOldIe() === true) || (strpos($_SERVER['PHP_SELF'], "reports_tat.php") !== false))
 		{
 			# Show only date fields and not datepicker
 			?>
@@ -182,44 +182,44 @@ class PageElems
 	public function getDatePickerPlain($name_list, $id_list, $value_list, $show_format=true, $lab_config=null)
 	{
 		# Date field without the Jquery based picker object
-		$date_format = "";
+		$date_format = "Y-m-d";
 		$date_format_js = "";
 		$start_date = "";
-		if($lab_config == null)
-		{
-			# Logged in as technician: Use session variable to fetch format
-			$date_format = $_SESSION['dformat'];
-		}
-		else
-		{
-			# Logged in as admin
-			$date_format = $lab_config->dateFormat;
-		}
+// 		if($lab_config == null)
+// 		{
+// 			# Logged in as technician: Use session variable to fetch format
+// 			$date_format = $_SESSION['dformat'];
+// 		}
+// 		else
+// 		{
+// 			# Logged in as admin
+// 			$date_format = $lab_config->dateFormat;
+// 		}
 		$order_list = array(0, 1, 2); # Y-m-d
-		switch($date_format)
-		{
-			case "d-m-Y":
-				$order_list[0] = 2;
-				$order_list[1] = 1;
-				$order_list[2] = 0;
-				$date_format_js = "dd-mm-yyyy";
-				$start_date = "01-01-1950";
-				break;
-			case "m-d-Y":
-				$order_list[0] = 1;
-				$order_list[1] = 2;
-				$order_list[2] = 0;
-				$date_format_js = "mm-dd-yyyy";
-				$start_date = "01-01-1950";
-				break;
-			case "Y-m-d":
-				$order_list[0] = 0;
-				$order_list[1] = 1;
-				$order_list[2] = 2;
-				$date_format_js = "yyyy-mm-dd";
-				$start_date = "1950-01-01";
-				break;			
-		}
+// 		switch($date_format)
+// 		{
+// 			case "d-m-Y":
+// 				$order_list[0] = 2;
+// 				$order_list[1] = 1;
+// 				$order_list[2] = 0;
+// 				$date_format_js = "dd-mm-yyyy";
+// 				$start_date = "01-01-1950";
+// 				break;
+// 			case "m-d-Y":
+// 				$order_list[0] = 1;
+// 				$order_list[1] = 2;
+// 				$order_list[2] = 0;
+// 				$date_format_js = "mm-dd-yyyy";
+// 				$start_date = "01-01-1950";
+// 				break;
+// 			case "Y-m-d":
+// 				$order_list[0] = 0;
+// 				$order_list[1] = 1;
+// 				$order_list[2] = 2;
+// 				$date_format_js = "yyyy-mm-dd";
+// 				$start_date = "1950-01-01";
+// 				break;			
+// 		}
 		$date_format_js_parts = explode("-", $date_format_js);
 		?>
 		<!-- Handling for non-numeric input -->
@@ -235,16 +235,47 @@ class PageElems
 			}
 			//-->
 		</SCRIPT>
-		<input type='text' name='<?php echo $name_list[$order_list[0]]; ?>' id='<?php echo $id_list[$order_list[0]]; ?>' onkeypress="return isNumberKey(event)" value="<?php echo $value_list[$order_list[0]]; ?>" size='2'  maxlength='2' />-
-		<input type='text' name='<?php echo $name_list[$order_list[1]]; ?>' id='<?php echo $id_list[$order_list[1]]; ?>' onkeypress="return isNumberKey(event)" value="<?php echo $value_list[$order_list[1]]; ?>" size='2'  maxlength='2' />-
-		<input type='text' name='<?php echo $name_list[$order_list[2]]; ?>' id='<?php echo $id_list[$order_list[2]]; ?>' onkeypress="return isNumberKey(event)" value="<?php echo $value_list[$order_list[2]]; ?>" size='4'  maxlength='4' />
+<select name='<?php echo $name_list[$order_list[0]]; ?>' id='<?php echo $id_list[$order_list[0]]; ?>' onkeypress="return isNumberKey(event)" value="<?php echo $value_list[$order_list[0]]; ?>">
+			<?php
+			$yearcount=date('Y');
+			while($yearcount>=1914)
+{
+echo "<option value='$yearcount'>$yearcount-</option>";
+$yearcount--;
+}
+			?>
+			</select>-
+			<select name='<?php echo $name_list[$order_list[1]]; ?>' id='<?php echo $id_list[$order_list[1]]; ?>' onkeypress="return isNumberKey(event)" value="<?php echo $value_list[$order_list[1]]; ?>">
+			<?php 
+			$monthcount=1;
+			while($monthcount<=12)
+{
+echo "<option value='$monthcount'";
+if($monthcount==date('m')){ echo "selected";}
+echo ">$monthcount-</option>";
+$monthcount++;
+}
+			?>
+			</select>-
+<select name='<?php echo $name_list[$order_list[2]]; ?>' id='<?php echo $id_list[$order_list[2]]; ?>' onkeypress="return isNumberKey(event)" value="<?php echo $value_list[$order_list[2]]; ?>">
+			<?php 
+			$daycount=1;
+			while($daycount<=31)
+{
+echo "<option value='$daycount'"; 
+if($daycount==date('d')){ echo "selected";}
+echo">$daycount</option>";
+$daycount++;
+}?>
+			</select>
+
 		<?php
 		if($show_format == true)
 		{
 		?>
 			<br>
 			<small><sup>
-			(<?php echo $date_format_js; ?>)
+			(<?php echo "yyyy - mm - dd";/*$date_format_js;*/ ?>)
 			</sup></small>
 		<?php
 		}
@@ -795,13 +826,13 @@ class PageElems
 			return 0;
 	}
 	
-	public function getRejectionPhasesSelect($lab_config_id=null)
+	public function getRejectionPhasesSelect($lab_config_id=null, $rejectionreasonid=null)
 	{
 		# Returns a set of drop down options for specimen rejection reasons in catalog
 		$phases_list = get_rejection_phases($lab_config_id);
 		if($phases_list) {
 			foreach($phases_list as $key => $value)
-				echo "<option value='$key'>$value</option>";
+				echo "<option value='$key'".(($rejectionreasonid!=null) && ($value==get_rejection_phase_name_by_reason_id($rejectionreasonid)) ? ' selected' : '').">$value</option>";
 			return 1;
 		}
 		else
@@ -1088,11 +1119,11 @@ class PageElems
 		<?php
 	}
 	
-	public function getRejectionReasonInfo($rejection_reason_name, $show_db_name=false)
+	public function getRejectionReasonInfo($rejection_reason_desc, $show_db_name=false)
 	{
 		# Returns HTML for displaying rejection reason information
 		# Fetch rejection reason record
-		$rejection_reason = get_rejection_reason_by_name($rejection_reason_name);
+		$rejection_reason = get_rejection_reason_by_desc($rejection_reason_desc);
 		?>
 		<table class='hor-minimalist-b'>
 			<tbody>
@@ -1107,8 +1138,8 @@ class PageElems
 						}
 						else
 						{
-							# Show name store din locale string
-							echo $rejection_reason->getName();
+							# Show name stored in locale string
+							echo $rejection_reason->description;
 						}
 						?>
 					</td>
@@ -2092,14 +2123,24 @@ class PageElems
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<a href='javascript:ask_to_delete_user(<?php echo $user->userId; ?>);' class="btn mini red-stripe" >
 							<i class='icon-remove'></i> 
-							<?php echo LangUtil::$generalTerms['CMD_DELETE']; ?></a>
+							<?php
+							$active_status=get_account_active_status($user->username);
+							if($active_status){
+							echo "Deactivate";
+							}
+							else{
+							echo "<span class='btn-danger'>Inactive a/c";
+							}
+							?></a>
 							<br>
 							<?php
 							$div_id = 'delete_confirm_'.$user->userId;
-							$message = "'$user->username' - ".LangUtil::$generalTerms['TIPS_ACC_CONFIRMDELETE'];
+							$message = "'$user->username' - ".LangUtil::$generalTerms['TIPS_ACC_CONFIRMDEACTIVATE'];
 							$ok_function_call = "javascript:delete_user($user->userId);";
 							$cancel_function_call = "javascript:toggle('$div_id');";
+							if($active_status){
 							$this->getConfirmDialog($div_id, $message, $ok_function_call, $cancel_function_call, $width=200);
+							}
 							?>
 						</td>
 						<?php
@@ -3102,8 +3143,19 @@ class PageElems
 		<table class='table table-hover' style="width: 380px">
 			<tbody>
 				<tr>
-					<td><u><?php echo LangUtil::$generalTerms['TYPE']; ?></u></td>
-					<td><?php echo get_specimen_name_by_id($specimen->specimenTypeId); ?></td>
+					<td><u><?php echo LangUtil::$generalTerms['PATIENT']; ?></u></td>
+					<td>
+						<?php
+						$patient = Patient::getById($specimen->patientId);
+						echo $patient->getName()." (".$patient->sex." ".$patient->getAge().")";
+						?>
+						&nbsp;&nbsp;
+						<a href='patient_profile.php?pid=<?php echo $specimen->patientId?>' title='Click to go to Patient Profile'>Profile</a>
+					</td>
+				</tr>
+				<tr valign='top'>
+					<td><u><?php echo "Visit No"; ?></u></td>
+					<td><?php echo $specimen->sessionNum; ?></td>
 				</tr>
 				<?php
 				if($_SESSION['sid'] != 0)
@@ -3129,26 +3181,21 @@ class PageElems
 				?>
 				<tr>
 					<td><u><?php echo LangUtil::$generalTerms['SPECIMEN_ID']; ?></u></td>
-					<td><div style="padding:5px; font-size:20px; font-weight:bold; color:#900;"><?php echo $specimen->getLabSection(); ?></div></td>
+					<td><div><?php echo $specimen->getLabSection(); ?></div></td>
 				</tr>
 				<?php
 				}
 				?>
-				<tr valign='top'>
-					<td><u><?php echo LangUtil::$generalTerms['ACCESSION_NUM']; ?></u></td>
-					<td><?php echo $specimen->sessionNum; ?></td>
-				</tr>
 				<tr>
-					<td><u><?php echo LangUtil::$generalTerms['PATIENT']; ?></u></td>
-					<td>
-						<?php
-						$patient = Patient::getById($specimen->patientId);
-						echo $patient->getName()." (".$patient->sex." ".$patient->getAge().")";
-						?>
-						&nbsp;&nbsp;
-						<a href='patient_profile.php?pid=<?php echo $specimen->patientId?>' title='Click to go to Patient Profile'>Profile</a>
-					</td>
+					<td><u><?php echo "Specimen ".LangUtil::$generalTerms['TYPE']; ?></u></td>
+					<td><?php echo get_specimen_name_by_id($specimen->specimenTypeId); ?></td>
 				</tr>
+				
+				<tr valign='top'>
+					<td><u><?php echo LangUtil::$generalTerms['TESTS']; ?></u></td>
+					<td><?php echo $specimen->getTestNames(); ?></td>
+				</tr>
+				
 				<tr>
 					<td><u><?php echo LangUtil::$generalTerms['R_DATE']; ?></u></td>
 					<td>
@@ -3170,10 +3217,7 @@ class PageElems
 				<?php
 				}
 				?>
-				<tr valign='top'>
-					<td><u><?php echo LangUtil::$generalTerms['TESTS']; ?></u></td>
-					<td><?php echo $specimen->getTestNames(); ?></td>
-				</tr>
+				
 				<?php
 				if($_SESSION['doctor'] != 0)
 				{
@@ -3262,8 +3306,6 @@ class PageElems
 		</table>
 		<?php
 	}
-	
-	
 	public function getSpecimenTaskList($specimen_id)
 	{
 		# Lists patient-profile related tasks in a tips box
@@ -3295,7 +3337,7 @@ class PageElems
 				else
 				{
 					?>
-					<p><a href='javascript:fetch_specimen2(<?php echo $specimen_id;  ?>);' title='Click to Enter result values for this Specimen'><?php echo LangUtil::$generalTerms['ENTER_RESULTS']; ?></a></p>
+					<!-- p><a href='javascript:fetch_specimen2(<?php echo $specimen_id;  ?>);' title='Click to Enter result values for this Specimen'><?php echo LangUtil::$generalTerms['ENTER_RESULTS']; ?></a></p -->
 					<?php
 				}
 			}
@@ -3356,16 +3398,19 @@ class PageElems
 		});
 		
 		</script>
-		<table class='table' id='specimen_tests_table'>
+		<table class='table table-hover table-bordered' id='specimen_tests_table'>
 			<thead>
 				<tr valign='top'>
-					<th><?php echo LangUtil::$generalTerms['TEST']; ?></th>
-					<th><?php echo LangUtil::$generalTerms['RESULTS']; ?></th>
-					<th><?php echo LangUtil::$generalTerms['RESULT_COMMENTS']; ?></th>
-					<th><?php echo LangUtil::$generalTerms['ENTERED_BY']; ?></th>
-					<th><?php echo LangUtil::$generalTerms['VERIFIED_BY']; ?></th>
-					<th><?php echo "Turnaround time"; ?></th>
+					<th style="font-size:12px"><?php echo "Specimen Id"; ?></th>
+					<th style="font-size:12px"><?php echo LangUtil::$generalTerms['TEST']; ?></th>
+					<th style="font-size:12px"><?php echo LangUtil::$generalTerms['RESULTS']; ?></th>
+					<th style="font-size:12px"><?php echo LangUtil::$generalTerms['RESULT_COMMENTS']; ?></th>
+					<th style="font-size:12px"><?php echo LangUtil::$generalTerms['ENTERED_BY']; ?></th>
+					<th style="font-size:12px"><?php echo "Specimen Turnaround time"; ?></th>
+					<th style="font-size:12px"><?php echo "Test Turnaround time"; ?></th>
+					<th style="font-size:12px"><?php echo LangUtil::$generalTerms['VERIFIED_BY']; ?></th>
 					
+					<th style="font-size:12px" colspan="2">Status</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -3390,43 +3435,50 @@ class PageElems
 		?>
 		
 		<tr valign='top'>
-			<td>
+			<td style="font-size:10px">
+				<?php echo $test->getLabSectionByTest(); ?>
+			</td>
+			<td style="font-size:10px">
 				<?php echo get_test_name_by_id($test->testTypeId); ?>
 			</td>
-			<td>
+			<td style="font-size:10px">
 				<?php
 				if($test->isPending())
 					echo LangUtil::$generalTerms['PENDING_RESULTS'];
 				else
-					echo ($allowedit ? '<input type="text" style="width:60px" name="'.get_test_name_by_id($test->testTypeId).'_Result" value="' : '').
-						($allowedit ? str_replace('<br>', '', $test->decodeResult()) : $test->decodeResult()).($allowedit ? '" />' : '');
+					echo ($allowedit && !$test->isVerified() ? '<input type="text" style="width:60px" id="test_result_'.$test->testId.'" name="'.get_test_name_by_id($test->testTypeId).'_Result" value="' : '').
+						($allowedit && !$test->isVerified() ? str_replace('<br>', '', $test->decodeResult()) : $test->decodeResult()).($allowedit && !$test->isVerified() ? '" />' : '');
 				?>
 			</td>
-			<td>
-				<?php echo ($allowedit ? '<textarea style="width:100px" name="'.get_test_name_by_id($test->testTypeId).'_Comments">' : '').
-					$test->getComments().($allowedit ? '</textarea>' : ''); ?>
+			<td style="font-size:10px">
+				<?php echo ($allowedit && !$test->isVerified() ? '<textarea style="width:100px" id="test_comments_'.$test->testId.'" name="'.get_test_name_by_id($test->testTypeId).'_Comments">' : '').
+					$test->getComments().($allowedit && !$test->isVerified() ? '</textarea>' : ''); ?>
 			</td>
-			<td>
+			<td style="font-size:10px">
 				<?php echo get_username_by_id($test->userId); ?>
 			</td>
-			<td>
+			<td style="font-size:10px">
 				<?php echo $test->getSpecimenTurnaroundTime(); ?>
 			</td>
-			<td>
+			<td style="font-size:10px">
 				<?php echo $test->getTestTurnaroundTime(); ?>
 			</td>
-			<td>
+			<td style="font-size:10px">
 				<span id="verifydby<?php echo $test->testId;?>" class="label label-info">
 				<?php echo $test->getVerifiedBy(true); ?>
 				</span>
 			</td>
-			<td width="100px">
-				<?php if($is_modal &&  $user->canverify == 1){ //&& $test->userId != $user->userId ){?> 
-				<a href="javascript:verify_result('<?php echo $test->testId; ?>');" 
+			<td style="font-size:10px" width="100px">
+				<?php if($is_modal && $user->canverify == 1){ //&& $test->userId != $user->userId ){?> 
+				<!--a href="javascript:verify_result('<?php echo $test->testId; ?>');" 
 					title="Click to Verify" class="btn green mini" id='verifybtn<?php echo $test->testId;?>'>
-					<i class="icon-ok"></i>Verify result
-				</a>
-				<?php } else {
+					<i class="icon-ok"></i>Verify Result
+				</a-->
+				<?php if (!$test->isVerified()){ ?>
+				<input type="button" id="Btn_Verify" value="Verify Result" onclick="javascript:verify_result('<?php echo $test->testId."','".
+					str_replace('&nbsp;', '', str_replace('<br>', '', $test->decodeResult()))."','".mysql_real_escape_string($test->getComments()); ?>');" />					
+				<?php }
+				} else {
 					echo $is_modal ? ($user->canverify!=1 ? 'You are not allowed to verify results.<br>Please contact your system administrator' : ($test->userId==$user->userId ? 'You cannot verify results that you have entered!' : '')) : '';
 				}
 				?>
@@ -3645,9 +3697,9 @@ public function getTestsDoneStatsTable($stat_list)
 			?>
 			<tr>
 				<td><form id='updateDoctorNameForm<?php echo $count; ?>' name='updateDoctorName<?php echo $count; ?>' action='ajax/UpdateDoctorNames.php?id=<?php echo $count; ?>' method='POST'>
-					<input type='hidden' id='dateFrom' name='dateFrom' value=<?php echo $dateFrom; ?>/>
-					<input type='hidden' id='dateTo' name='dateTo' value=<?php echo $dateTo; ?>/>
-					<input type='hidden' id='location' name='location' value=<?php echo $location; ?>/>
+					<input type='hidden' id='dateFrom' name='dateFrom' value='<?php echo $dateFrom; ?>' />
+					<input type='hidden' id='dateTo' name='dateTo' value='<?php echo $dateTo; ?>' />
+					<input type='hidden' id='location' name='location' value='<?php echo $location; ?>' />
 					<div id='originalDoctorNameDiv<?php echo $count; ?>' name='originalDoctorNameDiv<?php echo $count; ?>' >
 						<input type='text' id='originalDoctorName<?php echo $count; ?>' name='originalDoctorName<?php echo $count; ?>' value='<?php echo $doctor_name; ?>' readonly></input>
 					</div>
@@ -4202,6 +4254,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		$testbox_id = $form_id.'_testbox';
 		$stype_id = $form_id.'_stype';
 		$dnum_id = $form_id.'_dnum';
+		$date_id = $form_id.'_cdate';
 		$time_id = $form_id.'_ctime';
 		$div_id = 'specimen_form_container_'.$form_num;
 		$dialog_id = $div_id."_dialog";
@@ -4334,17 +4387,17 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				
 				<td>
 					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-					<input class="m-wrap m-ctrl-medium" size="16" name="spec_date" type="text" value="<?php echo date("Y-m-d"); ?>">
-					<span class="add-on"><i class="icon-calendar"></i></span>
+					<input class="m-wrap m-ctrl-medium" size="16" id="<?php echo $date_id; ?>" name="spec_date" type="text" value="<?php echo date("Y-m-d"); ?>">
+					<span class="add-on"><i class="icon-calendar"></i></span></div>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					Lab receipt time <?php $this->getAsterisk(); ?>
+					Lab Receipt Time <?php $this->getAsterisk(); ?>
 				</td>
 				<td>
 					<div class="input-append bootstrap-timepicker-component">
-                    <input class="m-wrap m-ctrl-small timepicker-24" name="spec_time" type="text" value="<?php echo date("H-i"); ?>" >
+                    <input class="m-wrap m-ctrl-small timepicker-24" id="<?php echo $time_id ?>" name="spec_time" type="text" value="<?php echo date("H:i"); ?>" >
                     <span class="add-on"><i class="icon-time"></i></span>
                      </div>
 				</td>
@@ -4381,14 +4434,14 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				echo " style='display:none;' ";
 			?>>
 				<td>
-					<label for='doctor' valign='top'><?php echo LangUtil::$generalTerms['DOCTOR']; ?><?php if($_SESSION['doctor'] == 2) $this->getAsterisk(); ?></label></label>
+					<label for='doctor' valign='top'><?php echo LangUtil::$generalTerms['DOCTOR']; ?><?php $this->getAsterisk(); ?></label></label>
 				</td>
 				<td>
 					<input type='text' name='doctor' id='<?php echo $doc_row_id."_input"; ?>'  value='<?php echo $clinician; ?>' ></input>
 				</td>
 			</tr>
 			<tr valign='top'<?php
-			if($_SESSION['refout'] == 0 || (is_array($external_requests) && $external_requests != null))
+			if(($_SESSION['refout'] == 0) || (is_array($external_requests) && ($external_requests != null)))
 				echo " style='display:none;' ";
 			?>>
 				<td>
@@ -4396,18 +4449,36 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				</td>
 				
 				<td>
-				    <div class="controls">
+				    <div class="controls" style="margin-left:50px;">
                                  <label class="radio">
-                                       <INPUT TYPE=RADIO NAME="<?php echo $radio_name ?>" id='<?php echo $ref_out_check_id; ?>' VALUE="Y" onchange="javascript:checkandtoggle_ref('<?php echo $ref_out_check_id; ?>', '<?php echo $custom_class?>');">
-                                           <?php echo LangUtil::$generalTerms['YES']; ?>                                       
-                                 </label>
+                                    <input id="rdb1_<?php echo $form_num; ?>" type="radio" name="toggler" value="1" onclick="javascript:ShowFacility(<?php echo $form_num;?>);" />No                                        
+                                 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                  <label class="radio">  
-                                        <INPUT TYPE=RADIO NAME="<?php echo $radio_name ?>" onchange="javascript:checkandtoggle_ref('<?php echo $ref_out_check_id; ?>', '<?php echo $custom_class ?>');" VALUE="N" checked>
-                                            <?php echo LangUtil::$generalTerms['NO']; ?>                                
+                                    <input id="rdb2_<?php echo $form_num; ?>" type="radio" name="toggler" value="2" onclick="javascript:ShowFacility(<?php echo $form_num;?>);" checked />Yes                                 
                                  </label>  
                       </div>
 				</td>
 			</tr>
+			
+			<tr id="blk-<?php echo $form_num; ?>" class="toHide"><td>Referral Facility:<?php if($_SESSION['refout'] == 1) $this->getAsterisk(); ?></td><td>
+					<select name="MFL_Code" id="MFL_Code">
+						<option id="empty_opt" value="" disabled selected>Select a facility</option>
+						<?php
+
+						$r = mysql_query("select Facility_Code,Facility_Name from facility_list");
+
+						while($row = mysql_fetch_assoc($r))
+						{
+						echo "<option value='{$row['Facility_Code']}'><span>{$row['Facility_Code']}:&nbsp;</span>{$row['Facility_Name']}</option>";
+						}
+
+						?>			
+					</select>
+					</td>
+					
+			</tr>		
+			
+			<!-->
 			<?php
             $custom_field_list = get_custom_fields_specimen();
             foreach($custom_field_list as $custom_field)
@@ -5543,7 +5614,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
                             <tr valign='top'>
 					<td><?php echo "Group By Lab Section"; ?></td>
 					<td>
-						<input type='radio' id='rsection' name='rsection' value='y' <?php
+						<select id='rsection' name='rsection'>
+							<option value='y'<?php echo $bySection==1 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['YES']; ?></option>
+							<option value='n'<?php echo $bySection==0 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['NO']; ?></option>
+						</select>
+						<!--input type='radio' id='rsection' name='rsection' value='y' <?php
 						if($bySection == 1)
 							echo " checked ";
 						?>><?php echo LangUtil::$generalTerms['YES']; ?></input>
@@ -5551,13 +5626,17 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 						<input type='radio' id='rsection' name='rsection' value='n' <?php
 						if($bySection == 0)
 							echo " checked ";
-						?>><?php echo LangUtil::$generalTerms['NO']; ?></input>
+						?>><?php echo LangUtil::$generalTerms['NO']; ?></input-->
 					</td>
 				</tr>
 				<tr valign='top'>
 					<td><?php echo LangUtil::$pageTerms['GROUP_BYGENDER']; ?></td>
 					<td>
-						<input type='radio' id='rgender' name='rgender' value='y' <?php
+						<select id='rgender' name='rgender'>
+							<option value='y'<?php echo $byGender==1 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['YES']; ?></option>
+							<option value='n'<?php echo $byGender==0 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['NO']; ?></option>
+						</select>
+						<!--input type='radio' id='rgender' name='rgender' value='y' <?php
 						if($byGender == 1)
 							echo " checked ";
 						?>><?php echo LangUtil::$generalTerms['YES']; ?></input>
@@ -5565,13 +5644,17 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 						<input type='radio' id='rgender' name='rgender' value='n' <?php
 						if($byGender == 0)
 							echo " checked ";
-						?>><?php echo LangUtil::$generalTerms['NO']; ?></input>
+						?>><?php echo LangUtil::$generalTerms['NO']; ?></input-->
 					</td>
 				</tr>
 				<tr valign='top'>
 					<td><?php echo LangUtil::$pageTerms['GROUP_BYAGE']; ?></td>
 					<td>
-						<input type='radio' id='rage' name='rage' value='y'<?php
+						<select id='rage' name='rage'>
+							<option value='y'<?php echo $byAge==1 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['YES']; ?></option>
+							<option value='n'<?php echo $byAge==0 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['NO']; ?></option>
+						</select>
+						<!--input type='radio' id='rage' name='rage' value='y'<?php
 						if($byAge == 1)
 							echo " checked ";
 						?>><?php echo LangUtil::$generalTerms['YES']; ?></input>
@@ -5579,7 +5662,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 						<input type='radio' id='rage' name='rage' value='n'<?php
 						if($byAge == 0)
 							echo " checked ";
-						?>><?php echo LangUtil::$generalTerms['NO']; ?></input>
+						?>><?php echo LangUtil::$generalTerms['NO']; ?></input-->
 					</td>
 				</tr>
 				<tr valign='top' id='agegrouprow' <?php
@@ -5614,7 +5697,12 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
                                 <tr valign='top'>
 					<td><?php echo "Counts to Display"; ?></td>
 					<td>
-						<input type='radio' id='rcombo' name='rcombo' value='1'<?php
+						<select id='rcombo' name='rcombo'>
+							<option value='1'<?php echo $combo==1 ? ' selected' : ''; ?>>All registered tests</option>
+							<option value='2'<?php echo $combo==2 ? ' selected' : ''; ?>>Only completed tests</option>
+							<option value='3'<?php echo $combo==1 ? ' selected' : ''; ?>>Both completed and pending tests (separated by a slash)</option>
+						</select>
+						<!--input type='radio' id='rcombo' name='rcombo' value='1'<?php
 						if($combo == 1)
 							echo " checked ";
 						?>><?php echo "All registered tests"; ?></input>
@@ -5627,7 +5715,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
                                                 <input type='radio' id='rcombo' name='rcombo' value='3'<?php
 						if($combo == 3)
 							echo " checked ";
-						?>><?php echo "Both completed and pending tests (separated by a slash)"; ?></input>
+						?>><?php echo "Both completed and pending tests (separated by a slash)"; ?></input-->
 					</td>
 				</tr>
                                 <tr>
@@ -5637,7 +5725,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
                                 <tr valign='top'>
 					<td><?php echo LangUtil::$pageTerms['GROUP_BYGENDER']; ?></td>
 					<td>
-						<input type='radio' id='sp_rgender' name='sp_rgender' value='y' <?php
+						<select id='sp_rgender' name='sp_rgender'>
+							<option value='y'<?php echo $sp_byGender==1 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['YES']; ?></option>
+							<option value='n'<?php echo $sp_byGender==0 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['NO']; ?></option>
+						</select>
+						<!--input type='radio' id='sp_rgender' name='sp_rgender' value='y' <?php
 						if($sp_byGender == 1)
 							echo " checked ";
 						?>><?php echo LangUtil::$generalTerms['YES']; ?></input>
@@ -5645,13 +5737,17 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 						<input type='radio' id='sp_rgender' name='sp_rgender' value='n' <?php
 						if($sp_byGender == 0)
 							echo " checked ";
-						?>><?php echo LangUtil::$generalTerms['NO']; ?></input>
+						?>><?php echo LangUtil::$generalTerms['NO']; ?></input-->
 					</td>
 				</tr>
 				<tr valign='top'>
 					<td><?php echo LangUtil::$pageTerms['GROUP_BYAGE']; ?></td>
 					<td>
-						<input type='radio' id='sp_rage' name='sp_rage' value='y'<?php
+						<select id='sp_rage' name='sp_rage'>
+							<option value='y'<?php echo $sp_byAge==1 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['YES']; ?></option>
+							<option value='n'<?php echo $sp_byAge==0 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['NO']; ?></option>
+						</select>
+						<!--input type='radio' id='sp_rage' name='sp_rage' value='y'<?php
 						if($sp_byAge == 1)
 							echo " checked ";
 						?>><?php echo LangUtil::$generalTerms['YES']; ?></input>
@@ -5659,7 +5755,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 						<input type='radio' id='sp_rage' name='sp_rage' value='n'<?php
 						if($sp_byAge == 0)
 							echo " checked ";
-						?>><?php echo LangUtil::$generalTerms['NO']; ?></input>
+						?>><?php echo LangUtil::$generalTerms['NO']; ?></input-->
 					</td>
 				</tr>
 				<tr valign='top' id='sp_agegrouprow' <?php
@@ -5878,7 +5974,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				<tr valign='top'>
 					<td><?php echo LangUtil::$pageTerms['GROUP_BYGENDER']; ?></td>
 					<td>
-						<input type='radio' id='rgender' name='rgender' value='y' <?php
+						<select id='rgender' name='rgender'>
+							<option value='y'<?php echo $site_settings->groupByGender==1 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['YES']; ?></option>
+							<option value='n'<?php echo $site_settings->groupByGender==0 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['NO']; ?></option>
+						</select>
+						<!--input type='radio' id='rgender' name='rgender' value='y' <?php
 						if($site_settings->groupByGender == 1)
 							echo " checked ";
 						?>><?php echo LangUtil::$generalTerms['YES']; ?></input>
@@ -5886,13 +5986,17 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 						<input type='radio' id='rgender' name='rgender' value='n' <?php
 						if($site_settings->groupByGender == 0)
 							echo " checked ";
-						?>><?php echo LangUtil::$generalTerms['NO']; ?></input>
+						?>><?php echo LangUtil::$generalTerms['NO']; ?></input-->
 					</td>
 				</tr>
 				<tr valign='top'>
 					<td><?php echo LangUtil::$pageTerms['GROUP_BYAGE']; ?></td>
 					<td>
-						<input type='radio' id='rage' name='rage' value='y'<?php
+						<select id='rage' name='rage'>
+							<option value='y'<?php echo $site_settings->groupByAge==1 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['YES']; ?></option>
+							<option value='n'<?php echo $site_settings->groupByAge==0 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['NO']; ?></option>
+						</select>
+						<!--input type='radio' id='rage' name='rage' value='y'<?php
 						if($site_settings->groupByAge == 1)
 							echo " checked ";
 						?>><?php echo LangUtil::$generalTerms['YES']; ?></input>
@@ -5900,7 +6004,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 						<input type='radio' id='rage' name='rage' value='n'<?php
 						if($site_settings->groupByAge == 0)
 							echo " checked ";
-						?>><?php echo LangUtil::$generalTerms['NO']; ?></input>
+						?>><?php echo LangUtil::$generalTerms['NO']; ?></input-->
 					</td>
 				</tr>
 				<tr valign='top' id='agegrouprow' <?php
@@ -6074,7 +6178,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				<tr valign='top'>
 					<td><?php echo "Group By Gender"; //LangUtil::$pageTerms['GROUP_BYGENDER']; ?></td>
 					<td>
-						<input type='radio' id='rgender' name='rgender' value='y' <?php
+						<select id='rgender' name='rgender'>
+							<option value='y'<?php echo $site_settings->groupByGender==1 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['YES']; ?></option>
+							<option value='n'<?php echo $site_settings->groupByGender==0 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['NO']; ?></option>
+						</select>
+						<!--input type='radio' id='rgender' name='rgender' value='y' <?php
 						if($site_settings->groupByGender == 1)
 							echo " checked ";
 						?>><?php echo LangUtil::$generalTerms['YES']; ?></input>
@@ -6082,13 +6190,17 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 						<input type='radio' id='rgender' name='rgender' value='n' <?php
 						if($site_settings->groupByGender == 0)
 							echo " checked ";
-						?>><?php echo LangUtil::$generalTerms['NO']; ?></input>
+						?>><?php echo LangUtil::$generalTerms['NO']; ?></input-->
 					</td>
 				</tr>
 				<tr valign='top'>
 					<td><?php echo "Group By Age"; //LangUtil::$pageTerms['GROUP_BYAGE']; ?></td>
 					<td>
-						<input type='radio' id='rage' name='rage' value='y'<?php
+						<select id='rage' name='rage'>
+							<option value='y'<?php echo $site_settings->groupByAge==1 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['YES']; ?></option>
+							<option value='n'<?php echo $site_settings->groupByAge==0 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['NO']; ?></option>
+						</select>
+						<!--input type='radio' id='rage' name='rage' value='y'<?php
 						if($site_settings->groupByAge == 1)
 							echo " checked ";
 						?>><?php echo LangUtil::$generalTerms['YES']; ?></input>
@@ -6096,7 +6208,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 						<input type='radio' id='rage' name='rage' value='n'<?php
 						if($site_settings->groupByAge == 0)
 							echo " checked ";
-						?>><?php echo LangUtil::$generalTerms['NO']; ?></input>
+						?>><?php echo LangUtil::$generalTerms['NO']; ?></input-->
 					</td>
 				</tr>
 				<tr valign='top' id='agegrouprow' <?php
@@ -6625,8 +6737,9 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 			</tr>
 			<?php if($report_config->reportId==1){?>
 			<tr><td><h4><?php $name="../logos/logo_".$lab_config_id.".jpg";
-			 if (file_exists("../logos/logo_".$report_config->labConfigId.".jpg")==true)
-			echo "LOGO being Used "; ?></h4></td></tr>
+			$logofilename = "logos/logo_".$report_config->labConfigId.".jpg";
+			if (file_exists(dirname(dirname(__FILE__)).'/'.$logofilename)==true)
+			echo "LOGO being Used</td><td><img src='".$logofilename."' width='100' height='100'>"; ?></h4></td></tr>
 	  		<tr><td><h3>File Upload:</h3></td><td><?php
 			
 	 if (file_exists("../logos/logo_".$report_config->labConfigId.".jpg")==false)

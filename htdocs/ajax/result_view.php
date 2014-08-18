@@ -31,6 +31,9 @@ $test_name = get_test_name_by_id($test_type_id);
 <table class="table table-striped table-bordered table-advance">
 <thead>
 <th>
+Specimen Id
+</th>
+<th>
 Test Name
 </th>
 <th>
@@ -90,20 +93,29 @@ Action
 <a href='javascript:hide_test_result_form_confirmed(<?php echo $test_id ?>);' class='btn success'>Close</a>
 </div>
 <script>
-function verify_result(test_id){
+function verify_result(test_id, result, comments){
 	var el = jQuery('.portlet .tools a.reload').parents(".portlet");
 	App.blockUI(el);
 	//Mark test as cancelled
 		var url = 'ajax/result_entry_tests.php';
 		$.post(url, 
-		{a: test_id, t: 13}, 
+		{a: test_id, t: 13, sid:<?php echo $specimen_id;?>, res: result, new_res: $('#test_result_'+test_id).val().trim(), comm: comments, new_comm: $('#test_comments_'+test_id).val().trim()}, 
 		function(result) 
 		{
 			$('#verifydby'+test_id).removeClass('label-warning');
 			$('#verifydby'+test_id).addClass('label-success');
 			$('#verifybtn'+test_id).addClass('disabled');
 			$('#verifydby'+test_id).html(result);
-			$("tr#"+test_id).remove();
+			alert('Results verified!');
+			$('#span'+test_id).removeClass('label-info');
+			$('#span'+test_id).text('Verified');
+			$('#span'+test_id).addClass('label-success');
+			$('#Link_'+test_id).removeClass('blue mini');
+			$('#Link_'+test_id).attr("href", "javascript:view_test_result(<?php echo $quote.$test->testId.$quote.','.Specimen::$STATUS_VERIFIED; ?>)");
+			$('#Link_'+test_id).html('<i class="icon-edit"></i> View Results');
+			$('#Link_'+test_id).addClass('green mini');
+			hide_test_result_form_confirmed(test_id);
+			//$("tr#"+test_id).remove();
 			App.unblockUI(el);
 		}
 		);

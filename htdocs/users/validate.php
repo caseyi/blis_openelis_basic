@@ -18,7 +18,8 @@ if(session_id() == "")
 $username = $_REQUEST['username'];
 $password = $_REQUEST['password'];
 $login_correct = check_user_password($username, $password);
-if($login_correct)
+$active_status=get_account_active_status($username);
+if($login_correct && $active_status)
 {
 	#Set session variables
 	$user = get_user_by_name($username);

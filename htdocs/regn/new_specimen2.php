@@ -36,7 +36,7 @@ $php_array= addslashes(implode("%", $doc_array));
 
 <p style="text-align: right;"><a rel='facebox' href='#NEW_SPECIMEN'>Page Help</a></p>
 <span class='page_title'><?php echo LangUtil::getTitle(); ?></span>
- | Lab No:<?php //echo LangUtil::$generalTerms['ACCESSION_NUM']; ?> <?php echo $session_num; ?>
+ | Visit No:<?php //echo LangUtil::$generalTerms['ACCESSION_NUM']; ?> <?php echo $session_num; ?>
  | <a href="find_patient.php?div=reception">Back</a>
 <br>
 <br>
@@ -541,10 +541,44 @@ function checkandtoggle(select_elem, div_id)
 }
 
 function checkandtoggle_ref(ref_check_id, ref_row_id)
-{    
-        $('.'+ref_row_id).toggle();   
+{
+	if($('#'+ref_check_id).attr("checked") == true)
+	{
+		$('#'+ref_row_id).show();
+	}
+	else
+	{
+		$('#'+ref_row_id).hide();
+	}
 }
 // And here is the end.
 
 // ]]> -->
+
+$(document).ready(function(){
+	if (document.getElementById("rdb2_1").checked="true"){
+		$('#blk-1').show(); //$('.toHide').show('slow');
+	} else {
+		$('#blk-1').hide(); //$('.toHide').hide();
+	}
+    /*$("[name=toggler]").click(function(){
+		var opt = $(this).val();
+		if (opt==="1"){
+            $('#blk-1').hide(); //$('.toHide').hide();
+        } else {
+            $('#blk-1').show(); //$('.toHide').show('fast');
+        }
+    });*/
+ });
+
+function ShowFacility(Element){
+	var opt = Element.value;
+	var formid = Element.id.substr(Element.id.lastIndexOf('_')+1);
+	if (opt==="1"){
+		$('#blk-'+formid).hide(); //$('.toHide').hide();
+	} else {
+		$('#blk-'+formid).show(); //$('.toHide').show('fast');
+	}
+}
+
 </script>

@@ -182,7 +182,7 @@ p.main {text-align:justify;}
 	Font
 	</td>
 	<td>
-	<table class='no border'>
+	<table class='no_border'>
 	<tr valign='top'><td>
 	<input  type='button' class="increaseFont" value='Increase' title="Increase Font-size"></input> <br>
 	</td>
@@ -196,11 +196,11 @@ p.main {text-align:justify;}
 	</td>
 	<td>
 	&nbsp;&nbsp;
-	<input type='button' onclick="javascript:export_as_word('report_word_content');" value='Export Word Document' title='<?php echo LangUtil::$generalTerms['CMD_EXPORTWORD']; ?>'></input>
+	<!-- <input type='button' onclick="javascript:export_as_word('report_word_content');" value='Export Word Document' title='<?php echo LangUtil::$generalTerms['CMD_EXPORTWORD']; ?>'></input> -->
 	</td>
 	<td>
 	&nbsp;&nbsp;
-	<input type='button' onclick="javascript:window.close();" value='Close' title='<?php echo LangUtil::$generalTerms['CMD_CLOSEPAGE']; ?>'></input>
+	<!-- <input type='button' onclick="javascript:window.close();" value='Close' title='<?php echo LangUtil::$generalTerms['CMD_CLOSEPAGE']; ?>'></input> -->
 	</td>
 	
 	</tr>
@@ -252,7 +252,7 @@ display:none;
 <div id='logo' >
 <?php
 # If hospital logo exists, include it
-$logo_path = "../logos/logo_".$lab_config_id.".jpg";
+$logo_path = "logos/logo_".$lab_config_id.".jpg";
 $logo_path2 = "../ajax/logo_".$lab_config_id.".jpg";
 $logo_path1="../../logo_".$lab_config_id.".jpg";
 
@@ -349,25 +349,19 @@ else
 		}
 	}
 	?>
-	
+	<center>
 	<table class='print_entry_border'>
 		<tbody>
+			
 			<?php
-			if($report_config->usePatientId == 1)
-			{
-			?>
-			<tr valign='top'>
-				<td><?php echo LangUtil::$generalTerms['PATIENT_ID']; ?></td>
-				<td><?php echo $patient->getSurrogateId(); ?></td>
-			</tr>
-			<?php
-			}
-			if($report_config->useDailyNum == 1 && $daily_number_same === true)
+			
+			if(($report_config->usePatientName == 1) && ($hidePatientName != 1) )
 			{
 				?>
 				<tr valign='top'>
-					<td><?php echo LangUtil::$generalTerms['PATIENT_DAILYNUM']; ?></td>
-					<td><?php echo $previous_daily_num; ?></td>
+					<td><?php echo LangUtil::$generalTerms['NAME']; ?></td>
+				<td><?php echo $patient->name; ?></td>
+					
 				</tr>
 				<?php 
 			}
@@ -380,40 +374,78 @@ else
 			</tr>
 			<?php
 			}
-			if( ($report_config->usePatientName == 1) && ($hidePatientName != 1) )
-			{
 			?>
+			
 			<tr valign='top'>
-				<td><?php echo LangUtil::$generalTerms['NAME']; ?></td>
-				<td><?php echo $patient->name; ?></td>
+				<td><?php echo LangUtil::$generalTerms['SPECIMEN_ID']; ?></td>
+				<td><?php echo $test->getLabSectionByTest(); ?></td>
 			</tr>
+			<tr valign='top'>
+					<td><?php echo "Test ". LangUtil::$generalTerms['TYPE']; ?></td>
+					<td><?php echo get_test_name_by_id($test->testTypeId); ?></td>
+				</tr>
+			<tr valign='top'>	
+				<td><?php echo "Visit Number"; ?></td>
+				<td><?php echo $previous_daily_num; ?></td>
+			</tr>
+			<tr valign='top'>	
+				<td><?php echo LangUtil::$generalTerms['R_DATE']; ?></td>
+				<td><?php echo DateLib::mysqlToString($specimen->dateRecvd); ?></td>
+			</tr>
+			<tr valign='top'>
+					<td><?php echo LangUtil::$generalTerms['DOCTOR']; ?></td>
+					<td><?php echo $previous_physician; ?></td>
+				</tr>
+				<?php if(get_specimen_status($specimen_id)==6)
+				{?>
+			<tr valign='top'>
+					<td><?php echo "Rejected By "; ?></td>
+					<td><?php echo get_specimen_rejector($specimen_id); ?></td>
+				</tr>
+			<tr valign='top'>
+					<td><?php echo "Rejection Reason "; ?></td>
+					<td><?php echo $specimen->getComments(); ?></td>
+				</tr>
+				
+				<tr valign='top'>
+					<td><?php echo "Rejection Date "; ?></td>
+					<td><?php echo get_specimen_accept_rejection_date($specimen_id);  ?></td>
+				</tr>
+				<?php }?>
 			<?php
-			}
-			if($report_config->useAge == 1)
+			if( $report_config->useAge == 1)
 			{
 			?>
-			<tr valign='top'>
+			<!--<tr valign='top'>
 				<td><?php echo LangUtil::$generalTerms['AGE']; ?></td>
 				<td><?php echo $patient->getAge(); ?></td>
-			</tr>
+				
+			</tr>-->
 			<?php
 			}
 			if($report_config->useGender == 1)
 			{
-			?>			
-			<tr valign='top'>	
+			?>
+			<!--<tr valign='top'>
 				<td><?php echo LangUtil::$generalTerms['GENDER']; ?></td>
 				<td><?php echo $patient->sex; ?></td>
-			</tr>
+				
+			</tr>-->
+			<?php
+			}
+			if( $report_config->useDailyNum == 1 && $daily_number_same === true)
+			{
+			?>			
+			
 			<?php
 			}
 			if($report_config->useDob == 1)
 			{
 			?>
-			<tr valign='top'>
+			<!--<tr valign='top'>
 				<td><?php echo LangUtil::$generalTerms['DOB']; ?></td>
 				<td><?php echo $patient->getDob(); ?></td>
-			</tr>
+			</tr>-->
 			<?php 
 			}
 			# Patient Custom fields here
@@ -449,16 +481,11 @@ else
 					<?php
 				}
 			}
-			if($report_config->useDoctor == 1 && $physician_same === true)
-			{
+			
 				?>
-				<tr valign='top'>
-					<td><?php echo LangUtil::$generalTerms['DOCTOR']; ?></td>
-					<td><?php echo $previous_physician; ?></td>
-				</tr>
-				<?php 
-			}
-			?>
+				
+				
+				
 		</tbody>
 	</table>
 	<br>
@@ -511,9 +538,9 @@ else
 				}
 				if($report_config->useSpecimenAddlId != 0)
 				{
-					echo LangUtil::$generalTerms['SPECIMEN_ID']."&nbsp;&#45;&nbsp;";
-					echo $specimen->getAuxId();
-					echo "<br>";
+// 					echo LangUtil::$generalTerms['SPECIMEN_ID']."&nbsp;&#45;&nbsp;";
+// 					echo $test->getLabSectionByTest();
+// 					echo "<br>";
 				}
 				if($clinical_data!='')
 				{
@@ -521,13 +548,13 @@ else
 				}
 				if($report_config->useDailyNum == 1 && $daily_number_same === false)
 				{
-					echo LangUtil::$generalTerms['PATIENT_DAILYNUM']."&nbsp;&#45;&nbsp;";
-					echo $specimen->getDailyNum()."<br>";
+// 					echo LangUtil::$generalTerms['PATIENT_DAILYNUM']."&nbsp;&#45;&nbsp;";
+// 					echo $specimen->getDailyNum()."<br>";
 				}
 				if($report_config->useDateRecvd == 1)
 				{
-					echo LangUtil::$generalTerms['R_DATE']."&nbsp;&#45;&nbsp;";
-					echo DateLib::mysqlToString($specimen->dateRecvd)."<br>";
+// 					echo LangUtil::$generalTerms['R_DATE']."&nbsp;&#45;&nbsp;";
+// 					echo DateLib::mysqlToString($specimen->dateRecvd)."<br>";
 				}
 				# Specimen Custom fields headers here
 				$custom_field_list = $lab_config->getSpecimenCustomFields();
@@ -564,26 +591,28 @@ else
 				}
 				if($report_config->useComments == 1)
 				{
-					echo LangUtil::$generalTerms['COMMENTS']."&nbsp;&#45;&nbsp;";
-					echo $specimen->getComments()."<br>";
+// 					echo "Rejection Reason"."&nbsp;&#45;&nbsp;";
+// 					echo $specimen->getComments()."<br>";
 				}
-				if($report_config->useReferredTo == 1)
+// 				echo "Rejected By :"."&nbsp;&#45;&nbsp;";
+// 				echo get_username_by_id($specimen->userId)."</br>";
+				if($report_config->useReferredTo == 1 && get_specimen_status($specimen_id)!=6)
 				{
-					echo LangUtil::$generalTerms['REF_TO']."&nbsp;&#45;&nbsp;";
-					echo $specimen->getReferredToName()."<br>";
+ 					echo LangUtil::$generalTerms['REF_TO']."&nbsp;&#45;&nbsp;";
+ 					echo $specimen->getReferredToName()."<br>";
 				}
 				if($report_config->useDoctor == 1 && $physician_same === false)
 				{
-					echo LangUtil::$generalTerms['DOCTOR']."&nbsp;&#45;&nbsp;";
-					$doc=$specimen->getDoctor();
-					echo $doc."<br>";
+// 					echo LangUtil::$generalTerms['DOCTOR']."&nbsp;&#45;&nbsp;";
+// 					$doc=$specimen->getDoctor();
+// 					echo $doc."<br>";
 				}
-				if($report_config->useResults == 1)
+				if($report_config->useResults == 1 && get_specimen_status($specimen_id)!=6)
 				{
-					echo LangUtil::$generalTerms['RESULTS']."<br><br>";
+ 					echo LangUtil::$generalTerms['RESULTS']."<br><br>";
 					if(trim($test->result) == "")
 					{
-						echo LangUtil::$generalTerms['PENDING_RESULTS'];
+ 						echo LangUtil::$generalTerms['PENDING_RESULTS'];
 					}
 					else
 					{
@@ -606,24 +635,24 @@ else
 				}
 				if($report_config->useRemarks == 1)
 				{
-					echo "<br>";
-					echo LangUtil::$generalTerms['RESULT_COMMENTS']."&nbsp;&#45;&nbsp;";
-					echo $test->getComments()."<br>";
+// 					echo "<br>";
+// 					echo LangUtil::$generalTerms['RESULT_COMMENTS']."&nbsp;&#45;&nbsp;";
+// 					echo $test->getComments()."<br>";
 				}
 				if($report_config->useEnteredBy == 1)
 				{
 					echo LangUtil::$generalTerms['ENTERED_BY']."&nbsp;&#45;&nbsp;";
 					echo $test->getEnteredBy()."<br>";
 				}
-				if($report_config->useVerifiedBy == 1)
+				if($report_config->useVerifiedBy == 1 && get_specimen_status($specimen_id)!=6)
 				{
 					echo LangUtil::$generalTerms['VERIFIED_BY']."&nbsp;&#45;&nbsp;";
-					echo $test->getVerifiedBy()."<br>";
+ 					echo $test->getVerifiedBy()."<br>";
 				}
-				if($report_config->useStatus == 1 && $all_tests_completed === false)
+				if($report_config->useStatus == 1 && $all_tests_completed === false && get_specimen_status($specimen_id)!=6)
 				{
 					echo LangUtil::$generalTerms['SP_STATUS']."&nbsp;&#45;&nbsp;";
-					echo $test->getStatus()."<br>";
+ 					echo $test->getStatus()."<br>";
 				}
 			
 			}
@@ -784,11 +813,7 @@ $(document).ready(function(){
 }
 }
 ?>
-<div class='editable' title='Click to Edit'>
-</div>
-<div class='editable' title='Click to Edit'>
-</div>
-<div class='editable' title='Click to Edit'>
+
 </div>
 <!--p class="main">
 ............................................-->

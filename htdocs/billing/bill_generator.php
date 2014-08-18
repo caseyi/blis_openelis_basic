@@ -34,14 +34,14 @@ $script_elems->enableJQueryForm();
 	</head>
 	<body>
 		<form name='bill_generator_form' id='bill_generator_form' action='create_new_bill.php'>
-		<input type='hidden' name='patient_id' value='<?php echo $_SESSION['pid']; ?>'><?php
-		$tests = get_all_tests_for_patient_and_date_range($_SESSION['pid'], "January 1, 1969", "today");
+		<input type='hidden' name='patient_id' value='<?php echo $_REQUEST['patient_id']; ?>'><?php
+		$tests = get_all_tests_for_patient_and_date_range($_REQUEST['patient_id'], "January 1, 1969", "today");
 		if (!empty($tests))
 		{
-		?><table class='tablesorter' id='billing_popup_table' style="border-collapse: separate; width: 700px;">
+		?><table class='tablesorter table-hover' id='billing_popup_table' style="border-collapse: separate; width: 700px;">
 			<thead>
 				<tr valign='top'>
-					<th id='billing_popup_date' style='width: 75px;'>Test Date</th>
+					<th id='billing_popup_date'>Test Date</th>
 					<th id='billing_popup_name'>Test Name</th>
 					<th id='billing_popup_specimen_type'>Specimen Type</th>
 					<th id='billing_popup_cost'>Test Cost</th>

@@ -34,7 +34,7 @@ function get_top_menu_options($user_role)
 	$page_list[LangUtil::getPageTitle("home")] = "home.php";
 	if($user_role == $LIS_CLERK)
 	{
-		$page_list["Reception"] = "find_patient.php";
+		$page_list["Reception"] = "find_patient.php?div=reception";
 		$page_list[LangUtil::getPageTitle("search")] = "search.php";
 	}
 	else if($user_role == $LIS_TECH_RW || $user_role == $LIS_TECH_SHOWPNAME)

@@ -45,11 +45,11 @@ $script_elems->enableTableSorter();
 			$patient = Patient::getById($bill->getPatientId());
 			$associations = $bill->getAllAssociationsForBill($lab_config_id);
 		?>
-		<div class='patient_bill_title'>
+		<div class='patient_bill_title' style="margin-top:50px;">
 			Bill <?php echo $bill->getId(); ?> for <?php echo $patient->getName(); ?>
 		</div>
 		<form id='payments_form' name='payments_form' action=''>
-			<table class='tablesorter' id='bill_table' style="border-collapse: separate;">
+			<table class='tablesorter table-hover' id='bill_table' style="border-collapse: separate;">
 				<tr valign='top'>
 					<th style="width: 75px;">Test Date</th>
 					<th>Test Name</th>
@@ -79,7 +79,7 @@ $script_elems->enableTableSorter();
 						</select>
 					</td>
 					<td>
-						<input type='text'  id="discount_amount_for_association_<?php echo $assoc->getId(); ?>" value="<?php echo $assoc->getDiscountAmount(); ?>"/>
+						<input type='text' style='height:30px;'  id="discount_amount_for_association_<?php echo $assoc->getId(); ?>" value="<?php echo $assoc->getDiscountAmount(); ?>"/>
 					</td>
 					<td><div style="color:blue; cursor:hand; cursor:pointer;" onclick="javascript:apply_discount(<?php echo $assoc->getId(); ?>)">Update Cost</div></td>
 				</tr>

@@ -54,7 +54,7 @@
 			<script src="assets/bootstrap/js/bootstrap-modalmanager.js"></script>
 			<script src="assets/bootstrap/js/bootstrap-modal.js"></script>
 			<script src="assets/bootstrap/js/bootstrap-fileupload.js"></script>
-			<script src="assets/js/app.js"></script>				
+			<script src="assets/js/app.js"></script>
 			<script>
 				jQuery(document).ready(function() {		
 					//App.setPage("index");  // set current page
@@ -195,7 +195,7 @@ function handleDataTable(table_id) {
 			oTable.fnFilter( $(this).val(), 5);
 		} );
 	} );
-	$("#status").each( function ( i ) {
+	/*$("#status").each( function ( i ) {
 		var test_status = new Array();
 		test_status[0] = "Pending";
 		test_status[1] = "Started";
@@ -215,7 +215,7 @@ function handleDataTable(table_id) {
 				fetch_tests(<?php echo Specimen::$STATUS_VERIFIED?>);
 			} else fetch_tests(<?php echo Specimen::$STATUS_ALL?>);
 		} );
-	} );
+	} );*/
 }
 
 /*

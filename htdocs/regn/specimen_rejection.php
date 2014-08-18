@@ -55,7 +55,7 @@ $uiinfo = "sid=".$_REQUEST['sid']."&dnum=".$_REQUEST['dnum'];
 ?>
 <p style="text-align: right;"><a rel='facebox' href='#NEW_SPECIMEN'>Page Help</a></p>
 <span class='page_title'><?php echo "Specimen Rejection"; ?></span>
- | <?php echo LangUtil::$generalTerms['ACCESSION_NUM']; ?> <?php echo $session_num; ?>
+<!-- | <?php echo "Visit Number"; ?> <?php echo $session_num; ?>-->
  | <a href='javascript:history.go(-1);'><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></a>
 <br>
 <br>
@@ -85,16 +85,16 @@ $patient = get_patient_by_id($main_rs['patient_number']);
 <form id="reject" method="post" action="accept_reject_specimen.php">
 <table width="95%" border="0" class="table table-striped table-bordered table-advance table-hover">
   <tr>
-    <td class="highlight"><strong>Patient ID</strong></td>
-    <td><?php echo $main_rs['patient_number']; ?></td>
+    <td><?php echo LangUtil::$generalTerms['ADDL_ID']; ?></td>
+<td><?php echo $patient->getAddlId(); ?></td>
   </tr>
   <tr>
-    <td class="highlight"><strong>Patient Number</strong></td>
+    <td class="highlight"><strong>Visit no.</strong></td>
     <td><?php echo $main_rs['daily_number']; ?></td>
   </tr>
   <tr>
     <td class="highlight"><strong>Patient Name</strong></td>
-    <td><?php echo $patient->getName()." (".$patient->sex." ".$patient->getAgeNumber().") "; ?></td>
+    <td><?php echo $patient->getName()." (".$patient->sex." ".$patient->getAge().") "; ?></td>
   </tr>
   <tr>
     <td class="highlight"><strong>Specimen Type</strong></td>
