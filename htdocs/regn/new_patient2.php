@@ -50,7 +50,7 @@ $script_elems->enableAutocomplete();
 				<td>  Date of Registration </td>
 				<td>
 					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-					<input class="m-wrap m-ctrl-medium" size="16" name="patient_reg_date" id="patient_regist_date" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+					<input class="m-wrap m-ctrl-medium" size="16" name="patient_reg_date" id="patient_regist_date" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
 					</div>
 				</td>			
 			</tr>
@@ -115,7 +115,7 @@ $script_elems->enableAutocomplete();
 				</td>
 				<td>				  
                   <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd"> 
-					<input class="m-wrap m-ctrl-medium" size="16" name="patient_birth_date" id="patient_b_day" type="text" value=""><span class="add-on" id="span_dob"><i class="icon-calendar"></i></span>
+					<input class="m-wrap m-ctrl-medium" size="16" name="patient_birth_date" id="patient_b_day" type="text" value="" readonly><span class="add-on" id="span_dob"><i class="icon-calendar"></i></span>
 					</div>
                 </td>
 			</tr>

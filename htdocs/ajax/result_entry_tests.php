@@ -7,7 +7,6 @@ include("../includes/db_lib.php");
 include("../includes/user_lib.php");
 LangUtil::setPageId("results_entry");
 
-$spec_id=$_REQUEST['sid'];
 $attrib_value = $_REQUEST['a'];
 $attrib_type = $_REQUEST['t'];
 $date_from = $_REQUEST['df'];
@@ -219,8 +218,6 @@ else
 							($new_res!=$res ? ",result='".mysql_real_escape_string(str_replace($res, $new_res, $record['result']))."'" : "").
 							
                     		" WHERE test_id ='$attrib_value'";
-                 update_specimen_status($spec_id);
-	}
 	}
 }
 //RUN QUERY DEPENDING ON PARAMETERS

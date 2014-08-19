@@ -99,7 +99,7 @@ function verify_result(test_id, result, comments){
 	//Mark test as cancelled
 		var url = 'ajax/result_entry_tests.php';
 		$.post(url, 
-		{a: test_id, t: 13, sid:<?php echo $specimen_id;?>, res: result, new_res: $('#test_result_'+test_id).val().trim(), comm: comments, new_comm: $('#test_comments_'+test_id).val().trim()}, 
+		{a: test_id, t: 13, res: result, new_res: $('#test_result_'+test_id).val().trim(), comm: comments, new_comm: $('#test_comments_'+test_id).val().trim()}, 
 		function(result) 
 		{
 			$('#verifydby'+test_id).removeClass('label-warning');

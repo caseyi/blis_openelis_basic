@@ -483,7 +483,6 @@ $(document).ready(function(){
  });
 
 function ShowFacility(form){
-
 var form_id = 'specimenform_'+form;
 	var opt = $("#"+form_id+" input[type='radio']:checked").val();
 	//var formid = Element.id.substr(Element.id.lastIndexOf('_')+1);

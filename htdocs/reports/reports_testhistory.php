@@ -2269,11 +2269,11 @@ else
 
 // 				}
 
-//				if($report_config->useStatus == 1 && $all_tests_completed === false) {
+				if($report_config->useStatus == 1 && $all_tests_completed === false) {
 
 					echo "<th>".LangUtil::$generalTerms['SP_STATUS']."</th>";
 
-//				}
+				}
 
 				
 
@@ -2616,7 +2616,7 @@ echo "<td>".$test->getLabSectionByTest()."</td>";
 
 				
 
-//				if($report_config->useStatus == 1 && $all_tests_completed === false) {
+				if($report_config->useStatus == 1 && $all_tests_completed === false) {
 				    
 					echo "<td>";
 					
@@ -2639,7 +2639,7 @@ echo "<td>".$test->getLabSectionByTest()."</td>";
 			
 					echo "</td>";
 
-//				}
+				}
 
 				
 
