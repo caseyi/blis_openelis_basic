@@ -609,8 +609,8 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 					# Default to today for date range
 					$today = date("Y-m-d");
 					$today_parts = explode("-", $today);    
-					$url_string = "reports_testhistory.php?patient_id=".$patient->patientId."&location=".$_REQUEST['l']."&yf=".$today_parts[0]."&mf=".$today_parts[1]."&df=".$today_parts[2]."&yt=".$today_parts[0]."&mt=".$today_parts[1]."&dt=".$today_parts[2]."&ip=0";
-					$billing_url_string = "reports_billing.php?patient_id=".$patient->patientId."&location=".$_REQUEST['l']."&yf=".$today_parts[0]."&mf=".$today_parts[1]."&df=".$today_parts[2]."&yt=".$today_parts[0]."&mt=".$today_parts[1]."&dt=".$today_parts[2]."&ip=0";
+					$url_string = "reports_testhistory.php?patient_id=".$patient->patientId."&location=".$_REQUEST['l']."&date_from=".$today."&date_to=".$today."&ip=0";
+					$billing_url_string = "reports_billing.php?patient_id=".$patient->patientId."&location=".$_REQUEST['l']."&date_from=".$today."&date_to=".$today."&ip=0";
 
                                         ?>
 					<a href='<?php echo $url_string; ?>' title='Click to View Report for this Patient'><?php echo LangUtil::$generalTerms['CMD_VIEW']; ?> Report</a>

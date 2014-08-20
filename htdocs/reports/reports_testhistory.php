@@ -3505,7 +3505,7 @@ if(count($record_list) != 0)
 
 	$earliest_collection_parts = explode("-", $earliest_specimen->dateCollected);
 
-	if(!isset($_REQUEST['yf'])) {
+	if(!isset($_REQUEST['date_from'])) {
 
 		?>
 
@@ -3513,17 +3513,9 @@ if(count($record_list) != 0)
 
 		$(document).ready(function(){
 
-			$('#dd_from').attr("value", "<?php echo $earliest_collection_parts[2]; ?>");
+			$('date_from').attr("value", "<?php echo DateLib::mysqlToString($earliest_specimen->dateCollected); ?>");
 
-			$('#mm_from').attr("value", "<?php echo $earliest_collection_parts[1]; ?>");
-
-			$('#yyyy_from').attr("value", "<?php echo $earliest_collection_parts[0]; ?>");
-
-			$('#dd_to').attr("value", "<?php echo $latest_collection_parts[2]; ?>");
-
-			$('#mm_to').attr("value", "<?php echo $latest_collection_parts[1]; ?>");
-
-			$('#yyyy_to').attr("value", "<?php echo $latest_collection_parts[0]; ?>");
+			$('date_to').attr("value", "<?php echo DateLib::mysqlToString($latest_specimen->dateCollected); ?>");
 
 			var date_from = "<?php echo DateLib::mysqlToString($earliest_specimen->dateCollected); ?>";
 
