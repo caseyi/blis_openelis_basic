@@ -119,7 +119,7 @@ if ($_REQUEST){
 					<tr><td>Database Name</td><td><input type="text" name="DB_Name" value="blis" /><br>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="DB_Overwrite" />&nbsp;Overwrite existing data</td></tr>
 					<tr><td>Facility</td><td>
 						<select name="MFL_Code">
-<option value='10001'>Abel Migwi Johana Laboratory</option>
+							<option value='10001'>Abel Migwi Johana Laboratory</option>
 <option value='10002'>Aberdare Medical & Surgical Clinic</option>
 <option value='10003'>Aberdare Health Services</option>
 <option value='10004'>Abrahams Clinic</option>

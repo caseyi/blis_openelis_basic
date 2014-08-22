@@ -4469,7 +4469,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 
 						while($row = mysql_fetch_assoc($r))
 						{
-						echo "<option value='{$row['Facility_Code']}'><span>{$row['Facility_Code']}:&nbsp;</span>{$row['Facility_Name']}</option>";
+						echo "<option value='{$row['Facility_Code']}'><span>{$row['Facility_Name']}:&nbsp;</span>{$row['Facility_Code']}</option>";
 						}
 
 						?>			
