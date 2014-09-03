@@ -13,7 +13,7 @@ LangUtil::setPageId("catalog");
 <?php 
 $rejection_phase = get_rejection_phase_by_id($_REQUEST['rp']);
 $page_elems->getRejectionPhaseInfo($rejection_phase->name); 
-echo $_REQUEST['rp'];
-echo $rejection_phase->name;
+/*echo $_REQUEST['rp'];
+echo $rejection_phase->name;*/
 include("includes/footer.php");
 ?>

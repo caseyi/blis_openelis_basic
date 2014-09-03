@@ -427,8 +427,8 @@ class LabConfig
 		## Adds a new entry for every update to have time-versioned goal TAT values
 		$saved_db = DbUtil::switchToLabConfig($this->id);
 		global $con;
-		$test_type_id = mysql_real_escape_string($tat_value, $con);
-		$tat_value = mysql_real_escape_string($test_type_id, $con);
+		$tat_value = mysql_real_escape_string($tat_value, $con);
+		$test_type_id = mysql_real_escape_string($test_type_id, $con);
 		# Create new entry
 		/*
 		$query_string = 
@@ -2633,6 +2633,7 @@ class Specimen
 	public $labSection;
 	public $external_lab_no;
 	public $ts_collected;
+	public $referral_fac_code;
 	
 	public static $STATUS_PENDING = 0;
 	public static $STATUS_DONE = 1;
@@ -3386,7 +3387,7 @@ class Test
                                                             }
                                             
                         
-			$retval .= "<br>".$decName."<br>";
+			$retval .=/* "<br>".*/$decName."<br>";
 		}
 		return $retval;
 	}	
@@ -4554,9 +4555,11 @@ class DiseaseReport
 			"WHERE lab_config_id=$lab_config_id ".
 			"AND test_type_id=$test_type_id ".
 			"AND measure_id=$measure_id LIMIT 1";
+		//echo $query_string.'<br>';
 		$saved_db = DbUtil::switchToLabConfig($lab_config_id);
 		$record = query_associative_one($query_string);
 		$retval = DiseaseReport::getObject($record);
+		//echo 'Ret Val: '; var_dump($retval);
 		DbUtil::switchRestore($saved_db);
 		return $retval;
 	}
@@ -6072,21 +6075,47 @@ function check_user_password($username, $password)
 	DbUtil::switchRestore($saved_db);
 	return $userobject;
 }
+function confirm_and_change_password($username, $password, $new_password)
+{
+	# confirms user input password when changing password
+	global $con;
+	$username = mysql_real_escape_string($username, $con);
+	$saved_db = DbUtil::switchToGlobal();
+	$password = encrypt_password($password);
+$url_append = "";
+	$query_string = 
+		"SELECT * FROM user WHERE username='$username' AND password='$password'";
+	$result=mysql_query($query_string);
+	$count=mysql_num_rows($result);
 
+	if($count==1){
+	change_user_password($username, $new_password);
+$url_append = "pupdate";
+	  header("location:edit_profile.php?".$url_append);
+
+      }
+      else{
+$url_append = "pmatcherr";
+      header("location:edit_profile.php?".$url_append);
+      }
+
+}
 //Function for Logging and logout and also failed attempts
 
 function log_access($userid , $accesstype, $username ){
 	
-	$saved_db = DbUtil::switchToGlobal();
-	$ip_address = $_SERVER['REMOTE_ADDR'];
-	$username = mysql_escape_string($username);
-	$sessionid = session_id();
-	
-	$query_string = 
-		"INSERT INTO access_log (user_id, access_type, ip_address, user_name, access_sessionid ) ".
-		"VALUES ($userid,  $accesstype, '$ip_address', '$username', '$sessionid')";
-	query_insert_one($query_string);
-	DbUtil::switchRestore($saved_db);
+	if ($userid!=''){
+		$saved_db = DbUtil::switchToGlobal();
+		$ip_address = $_SERVER['REMOTE_ADDR'];
+		$username = mysql_escape_string($username);
+		$sessionid = session_id();
+		
+		$query_string = 
+			"INSERT INTO access_log (user_id, access_type, ip_address, user_name, access_sessionid ) ".
+			"VALUES ($userid,  $accesstype, '$ip_address', '$username', '$sessionid')";
+		query_insert_one($query_string);
+		DbUtil::switchRestore($saved_db);
+	}
 }
 function change_user_password($username, $password)
 {
@@ -6228,6 +6257,21 @@ function delete_user_by_id($user_id)
 	DbUtil::switchRestore($saved_db);
 }
 
+function deactivate_user_by_id($user_id)
+{
+	# Deactivates user from accessing the system but keeps records of their past activities
+	global $con;
+	$user_id = mysql_real_escape_string($user_id, $con);
+	$saved_db = DbUtil::switchToGlobal();
+	
+	# Remove user record
+	$query_string =
+		"UPDATE user SET active_status=0 WHERE user_id=$user_id";
+	query_blind($query_string);
+	DbUtil::switchRestore($saved_db);
+}
+
+
 function get_user_by_id($user_id)
 {
 	global $con;
@@ -6277,6 +6321,17 @@ function get_user_by_name($username)
 	# Fetches user record by username
 	$saved_db = DbUtil::switchToGlobal();
 	$query_string = "SELECT * FROM user WHERE username='$username' LIMIT 1";
+	$record = query_associative_one($query_string);
+	DbUtil::switchRestore($saved_db);
+	return User::getObject($record);
+}
+function get_account_active_status($username)
+{
+	global $con;
+	$username = mysql_real_escape_string($username, $con);
+	# Fetches user record by username
+	$saved_db = DbUtil::switchToGlobal();
+	$query_string = "SELECT active_status FROM user WHERE username='$username' AND active_status=1 LIMIT 1";
 	$record = query_associative_one($query_string);
 	DbUtil::switchRestore($saved_db);
 	return User::getObject($record);
@@ -6739,7 +6794,8 @@ function search_patients_by_id_dyn($q, $cap, $counter)
 	$q = mysql_real_escape_string($q, $con);
 	$query_string = 
 		"SELECT * FROM patient ".
-		"WHERE surr_id='$q' ORDER BY ts DESC LIMIT $offset,$cap";
+		//"WHERE surr_id='$q' ORDER BY ts DESC LIMIT $offset,$cap";
+		"WHERE addl_id LIKE '%$q%' ORDER BY ts DESC LIMIT $offset,$cap";
 	$resultset = query_associative_all($query_string, $row_count);
 	$patient_list = array();
 	if(count($resultset) > 0)
@@ -7324,9 +7380,9 @@ function add_specimen($specimen)
 	# Adds a new specimen record in DB
 	$query_string = 
 		"INSERT INTO `specimen` ( specimen_id, patient_id, specimen_type_id, date_collected, date_recvd, user_id, status_code_id, referred_to, comments, aux_id, ".
-		"session_num, time_collected, report_to, doctor, referred_to_name, daily_num, external_lab_no ) VALUES ( $specimen->specimenId, $specimen->patientId, $specimen->specimenTypeId, ". 
+		"session_num, time_collected, report_to, doctor, referred_to_name, daily_num, external_lab_no,referral_facility_code ) VALUES ( $specimen->specimenId, $specimen->patientId, $specimen->specimenTypeId, ". 
 		"'$specimen->dateCollected', '$specimen->dateRecvd', $specimen->userId, $specimen->statusCodeId, $specimen->referredTo, '$specimen->comments', ".
-		"'$specimen->auxId', '$specimen->sessionNum', '$specimen->timeCollected', $specimen->reportTo, '$specimen->doctor', '$specimen->referredToName', '$specimen->dailyNum' , '$specimen->external_lab_no')";
+		"'$specimen->auxId', '$specimen->sessionNum', '$specimen->timeCollected', $specimen->reportTo, '$specimen->doctor', '$specimen->referredToName', '$specimen->dailyNum' , '$specimen->external_lab_no' ,'$specimen->referral_fac_code')";
 	/*$query_string = 
 		"INSERT INTO `specimen` ( specimen_id, patient_id, specimen_type_id, date_collected, date_recvd, user_id, status_code_id, referred_to, comments, aux_id, ".
 		"session_num, time_collected, report_to, doctor, referred_to_name, daily_num) VALUES ( $specimen->specimenId, $specimen->patientId, $specimen->specimenTypeId, ". 
@@ -7434,6 +7490,7 @@ function add_test_result($test_id, $result_entry, $comments="", $specimen_id="",
 	
 	# Append patient hash value to result field
 	$result_field = $result_entry.$hash_value;
+	$comments = mysql_real_escape_string($comments);
 	# Add entry to DB
 	$query_string = 
 		"UPDATE `test` SET result='$result_field', ".
@@ -7448,9 +7505,27 @@ function add_test_result($test_id, $result_entry, $comments="", $specimen_id="",
 	
 	# If specimen ID was passed, update its status
 	if($specimen_id != "")
-		update_specimen_status($specimen_id);
+		set_specimen_status_toverify($specimen_id);
 }
-
+function set_specimen_status_toverify($specimen_id)
+{
+	global $con;
+	$specimen_id = mysql_real_escape_string($specimen_id, $con);
+	# Checks if all test results for the specimen have been entered,
+	# and updates specimen status accordingly
+	$test_list = get_tests_by_specimen_id($specimen_id);
+	foreach($test_list as $test)
+	{
+		if($test->isPending() === true)
+		{
+			# This test result is pending
+			return;
+		}
+	}
+	# Update specimen status to complete
+	$status_code = Specimen::$STATUS_TOVERIFY;
+	set_specimen_status($specimen_id, $status_code);
+}
 function update_specimen_status($specimen_id)
 {
 	global $con;
@@ -7530,7 +7605,30 @@ function get_specimen_status($specimen_id)
 	$record = query_associative_one($query_string);
 	return $record['status_code_id'];
 }
-
+function get_specimen_accept_rejection_date($specimen_id)
+{
+	global $con;
+	$specimen_id = mysql_real_escape_string($specimen_id, $con);
+	# Returns status of the given specimen
+	# TODO: Link this to customized status codes in 'status_code' table
+	$query_string = 
+		"SELECT ts_accept_reject FROM specimen ".
+		"WHERE specimen_id=$specimen_id LIMIT 1";
+	$record = query_associative_one($query_string);
+	return $record['ts_accept_reject'];
+}
+function get_specimen_rejector($specimen_id)
+{
+	global $con;
+	$specimen_id = mysql_real_escape_string($specimen_id, $con);
+	# Returns date of acceptance or rejection of the given specimen
+	
+	$query_string = 
+		"SELECT accept_rejected_by FROM specimen ".
+		"WHERE specimen_id=$specimen_id LIMIT 1";
+	$record = query_associative_one($query_string);
+	return $record['accept_rejected_by'];
+}
 function get_specimen_by_id($specimen_id)
 {
 	global $con;
@@ -8874,6 +8972,36 @@ function add_rejection_reason($reason_name, $phase)
 	return get_max_reason_id();
 }
 
+function edit_rejection_reason($reason_name, $phase)
+{
+	global $con;
+	
+	$reason_name = mysql_real_escape_string($reason_name, $con);
+	$phase = mysql_real_escape_string($phase, $con);
+	# Adds a new test category to catalog
+	$saved_db = DbUtil::switchToLabConfigRevamp();
+	$query_string = 
+		"UPDATE rejection_reasons ".
+		"SET description=$reason_name WHERE rejection_phase=$phase";
+	mysql_query($query_string);
+	
+}
+
+/*function update_rejection_reason($reason_name, $reasonId, $phase)
+{
+	global $con;
+	
+	$reason_name = mysql_real_escape_string($reason_name, $con);
+	$reasonId = mysql_real_escape_string($reasonId, $con);
+	# Adds a new test category to catalog
+	$saved_db = DbUtil::switchToLabConfigRevamp();
+	$query_string = 
+		"UPDATE rejection_reasons ".
+		"SET description='$reason_name', rejection_phase=$phase WHERE rejection_reason_id=$reasonId";
+	mysql_query($query_string);
+	
+}*/
+
 function add_quality_control_category($qcc_description)
 {
 	global $con;
@@ -8925,9 +9053,33 @@ function update_rejection_phase($updated_entry)
 	$query_string =
 		"UPDATE rejection_phases ".
 		"SET name='$updated_entry->name', ".
-		"description='$updated_entry->description', ".
+		"description='$updated_entry->description' ".
 		"WHERE rejection_phase_id=$updated_entry->phaseId";
 	query_blind($query_string);
+	DbUtil::switchRestore($saved_db);
+}
+///////////////////////////////////////////////////////////////////////////
+////////////function to update rejection reason//////////////////
+function update_rejection_reason($updated_entry)
+{
+	# Updates rejection reason
+	$saved_db = DbUtil::switchToLabConfigRevamp();
+	$existing_entry = get_rejection_reason_by_id($updated_entry->reasonId);
+	if($existing_entry == null)
+	{
+		# No record found
+		DbUtil::switchRestore($saved_db);
+		return;
+	}
+	$query_string =
+		"UPDATE rejection_reasons ".
+		"SET description='$updated_entry->description', ".
+		"rejection_phase='$updated_entry->phase' ".
+		"WHERE rejection_reason_id=$updated_entry->reasonId";
+	query_blind($query_string);
+	
+	#$query_string ="UPDATE rejection_phases SET name='$updated_entry->name', description='$updated_entry->description' WHERE rejection_phase_id=$updated_entry->phaseId";
+	#query_blind($query_string);
 	DbUtil::switchRestore($saved_db);
 }
 ///////////////////////////////////////////////////////////////////////////
@@ -9552,16 +9704,16 @@ function get_rejection_phase_by_name($rejection_phase_name)
 }
 
 //get rejection reason by name
-function get_rejection_reason_by_name($rejection_reason_name)
+function get_rejection_reason_by_desc($rejection_reason_desc)
 {
 	global $con;
-	$rejection_reason_name = mysql_real_escape_string($rejection_reason_name, $con);
+	$rejection_reason_desc = mysql_real_escape_string($rejection_reason_desc, $con);
 	# Returns specimen type record in DB
 	$user = get_user_by_id($_SESSION['user_id']);
 	$lab_config_id = $user->labConfigId;
 	$saved_db = DbUtil::switchToLabConfigRevamp($lab_config_id);
 	$query_string = 
-		"SELECT * FROM rejection_reasons WHERE description='$rejection_reason_name' LIMIT 1";
+		"SELECT * FROM rejection_reasons WHERE description='$rejection_reason_desc' LIMIT 1";
 	$record = query_associative_one($query_string);
 	DbUtil::switchRestore($saved_db);
 	return SpecimenRejectionReasons::getObject($record);
@@ -16470,7 +16622,7 @@ class SpecimenRejectionReasons
 		return $rejection_reason;
 	}
 	
-	public function getName()
+	public function getDesc()
 	{
 		global $CATALOG_TRANSLATION;
 		if($CATALOG_TRANSLATION === true)
@@ -16631,6 +16783,7 @@ class SpecimenRejectionPhases
 		
 		return $retVal['name'];
 	}
+	
 	public static function getDescriptionById($id)
 	{
 		$query_string = "SELECT description FROM `rejection_phases` WHERE `rejection_phase_id` = $id";
@@ -16642,6 +16795,23 @@ class SpecimenRejectionPhases
 		DbUtil::switchRestore($saved_db);
 		
 		return $retVal['description'];
+	}
+	
+	public static function deleteById($rejection_phase_id)
+	{
+		global $con;
+		$rejection_phase_id = mysql_real_escape_string($rejection_phase_id, $con);
+		$saved_db = DbUtil::switchToLabConfigRevamp();
+		#Delete appropriate reasons
+		$query_string = 
+			"DELETE FROM rejection_reasons WHERE rejection_phase=$rejection_phase_id";
+		query_blind($query_string);
+		
+		#Delete phase
+		$query_string = 
+			"DELETE FROM rejection_phases WHERE rejection_phase_id=$rejection_phase_id";
+		query_blind($query_string);
+		DbUtil::switchRestore($saved_db);
 	}
 }
 #####################################End Class SpecimenRejectionPhases###############################################

@@ -35,8 +35,8 @@ $script_elems->enableAutocomplete();
 			</tr>
 
 			<tr <?php
-			if($_SESSION['p_addl'] == 0)
-				echo " style='display:none;' ";
+			//if($_SESSION['p_addl'] == 0)
+				//echo " style='display:none;' ";
 			?>>
 				<td>
 					<?php echo LangUtil::$generalTerms['ADDL_ID'];
@@ -50,7 +50,7 @@ $script_elems->enableAutocomplete();
 				<td>  Date of Registration </td>
 				<td>
 					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-					<input class="m-wrap m-ctrl-medium" size="16" name="patient_reg_date" id="patient_regist_date" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+					<input class="m-wrap m-ctrl-medium" size="16" name="patient_reg_date" id="patient_regist_date" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
 					</div>
 				</td>			
 			</tr>
@@ -63,7 +63,7 @@ $script_elems->enableAutocomplete();
 				</td>
 				<td><input type="text" name="dnum" id="dnum" value="<?php echo $daily_num; ?>" size="20" class='uniform_width m-wrap tooltips' /></td>
 			</tr>
-			<tr>	
+			<tr style='display:none;'>	
 			<div class="control-group" <?php if($_SESSION['pid'] == 0) echo " style='display:none;' ";?> >
 			 <td width="200">
 				   <?php echo "Registration Number"; ?>
@@ -87,7 +87,7 @@ $script_elems->enableAutocomplete();
 				<td>
 					<div class="controls">
 						<label class="radio">
-							<span><input type="radio"  name="sex" value="M" checked> <?php echo LangUtil::$generalTerms['MALE']; ?></span>
+							<span><input type="radio"  name="sex" value="M" > <?php echo LangUtil::$generalTerms['MALE']; ?></span>
 							</label>
 					</div>
 					<div class="controls">
@@ -103,19 +103,19 @@ $script_elems->enableAutocomplete();
 			</tr>
 
 			<tr valign='top'<?php
-			if($_SESSION['dob'] == 0)
+			if($_SESSION['dob'] != 0)
 				echo " style='display:none;' ";
 			?>>	
-				<td>
+				<td><label class="radio"><input type="radio" id="select_dobage_1" name="select_dobage" onclick="SelectDOBAge(1)" checked /></label>
 					<?php echo LangUtil::$generalTerms['DOB']; ?> 
 					<?php
 					if($_SESSION['dob'] == 2)
 						$page_elems->getAsterisk();
 					?>
 				</td>
-				<td>                               
+				<td>				  
                   <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd"> 
-					<input class="m-wrap m-ctrl-medium" size="16" name="patient_birth_date" id="patient_b_day" type="text" value=""><span class="add-on"><i class="icon-calendar"></i></span>
+					<input class="m-wrap m-ctrl-medium" size="16" name="patient_birth_date" id="patient_b_day" type="text" value="" readonly><span class="add-on" id="span_dob"><i class="icon-calendar"></i></span>
 					</div>
                 </td>
 			</tr>
@@ -124,14 +124,15 @@ $script_elems->enableAutocomplete();
 			if($_SESSION['age'] == 0)
 				echo " style='display:none;' ";
 			?>
-				<td><?php echo LangUtil::$generalTerms['AGE']; ?> <?php
+				<td><label class="radio"><input type="radio" id="select_dobage_2" name="select_dobage" onclick="SelectDOBAge(2)" /></label>
+				<?php echo LangUtil::$generalTerms['AGE']; ?> <?php
 					if($_SESSION['age'] == 2)
 						$page_elems->getAsterisk();
 					?>
 					<!-- <font style='color:red'><?php echo LangUtil::$pageTerms['TIPS_DOB_AGE'];?></font> -->
 				</td>
 				<td>
-					<input type="text" name="age" id="age" value="" size="4" maxlength="10" class='uniform_width m-wrap tooltips' />
+					<input type="text" name="age" id="age" value="" size="4" maxlength="3" class='uniform_width m-wrap tooltips' />
 					
 					<select name='age_param' id='age_param' class='uniform_width m-wrap tooltips'>
 						<option value='1'><?php echo LangUtil::$generalTerms['YEARS']; ?></option>
@@ -170,7 +171,7 @@ $script_elems->enableAutocomplete();
 				<td>
 					<input class="btn green button-submit" type="button" id='submit_button' onclick="add_patient();" value="<?php echo LangUtil::$generalTerms['CMD_SUBMIT']; ?> " />
 					&nbsp;&nbsp;
-					<a class="btn red icn-only" href='find_patient.php'><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></i></a>
+					<a class="btn red icn-only" href='find_patient.php?div=reception'><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></i></a>
 					&nbsp;&nbsp;
 					<span id='progress_spinner' style='display:none'>
 						<?php $page_elems->getProgressSpinner(LangUtil::$generalTerms['CMD_SUBMITTING']); ?>
@@ -201,6 +202,7 @@ $script_elems->enableAutocomplete();
 </table>
 <script type='text/javascript'>
 $(document).ready(function(){
+	SelectDOBAge(1);
 	$('#progress_spinner').hide();
 	<?php
 	if(isset($_REQUEST['n']))
@@ -253,7 +255,47 @@ function add_patient()
 	var phone = $("#phone").val();
 	var error_message = "";
 	var error_flag = 0;
+	var curr_date = new Date();
 	var patient_birth_date = $('#patient_b_day').val();
+	if (patient_birth_date!=""){
+		var pt_dob_y = patient_birth_date.slice(0, 4);
+		var pt_dob_m = parseInt(patient_birth_date.slice(5, 7));
+		var pt_dob_d = patient_birth_date.slice(-2);
+		if (parseInt(pt_dob_y)==0){
+			error_message += "The year of birth must be greater than zero\n";
+			error_flag = 1;
+			alert("Error: The year of birth must be greater than zero");
+			return;
+		}
+		if (parseInt(pt_dob_m)==0){
+			error_message += "The month of birth must be greater than zero\n";
+			error_flag = 1;
+			alert("Error: The month of birth must be greater than zero");
+			return;
+		}
+		if (parseInt(pt_dob_d)==0){
+			error_message += "The day of birth must be greater than zero\n";
+			error_flag = 1;
+			alert("Error: The day of birth must be greater than zero");
+			return;
+		}
+		var pt_dob = new Date(pt_dob_y, pt_dob_m-1, pt_dob_d);		
+		if (curr_date<pt_dob){
+			error_message += "The date of birth cannot be after today\n";
+			error_flag = 1;
+			alert("Error: The date of birth cannot be after today");
+			return;
+		}
+	}
+	if (pat_reg_date!=""){
+		var pt_regdate = new Date(pat_reg_date.slice(0, 4), parseInt(pat_reg_date.slice(5, 7))-1, pat_reg_date.slice(-2));
+		if (curr_date<pt_regdate){
+			error_message += "The registration date cannot be after today\n";
+			error_flag = 1;
+			alert("Error: The registration date cannot be after today");
+			return;
+		}
+	}
 	for(i = 0; i < radio_sex.length; i++)
 	{
 		if(radio_sex[i].checked)
@@ -304,7 +346,16 @@ function add_patient()
 			alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$generalTerms['AGE']; ?>");
 			return;
 		}
-	}	
+	}
+	else if (age<=0){
+		alert("Age cannot be zero or less");
+		return;
+	}
+	else if (age>120)
+	{
+		alert("Age cannot be greater than 120!");
+		return;
+	}
 	if(sex == "" || !sex)
 	{
 		alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$generalTerms['GENDER']; ?>");
@@ -317,6 +368,7 @@ function add_patient()
 	
 	if(error_flag == 0)
 	{
+		//alert(data_string);
 		$("#progress_spinner").show();
 		//Submit form by ajax
 		$.ajax({  
@@ -354,4 +406,22 @@ function reset_new_patient()
 {
 	$('#new_record').resetForm();
 }
+
+function SelectDOBAge(optionval){
+	if (optionval==1){
+		$('#patient_b_day').show();
+		$('#span_dob').show();
+		$('#age').hide();
+		$('#age_param').hide();
+		$('#age').val('');
+	} else {
+		$('#patient_b_day').hide();
+		$('#span_dob').hide();
+		$('#age').show();
+		$('#age_param').show();
+		$('#patient_b_day').val('');
+	}
+}
+
 </script>
+

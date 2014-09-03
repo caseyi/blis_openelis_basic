@@ -1251,7 +1251,7 @@ function print_daily_patients()
 		return;
 	}
 	var url = "reports_dailypatients.php?yt="+yt+"&mt="+mt+"&dt="+dt+"&yf="+yf+"&mf="+mf+"&df="+df+"&l="+l;
-	window.open(url);
+	location.href=url;
 }
 
 function print_daily_specimens()
@@ -1280,7 +1280,7 @@ function print_daily_specimens()
 	var ip= 0;
 	var p=0;
 	var url = "reports_dailyspecimens.php?yt="+yt+"&mt="+mt+"&dt="+dt+"&yf="+yf+"&mf="+mf+"&df="+df+"&l="+l+"&c="+cat_code+"&t="+ttype+"&ip="+ip;
-	window.open(url);
+	location.href = url;
 }
 
 function print_daily_log()
@@ -1417,6 +1417,54 @@ function get_disease_report()
 	$('#disease_report_form').submit();
 }
 
+function get_consumption_report()
+{
+	var location = $("#location5").attr("value");
+	
+	var from_date = $("#from-date-tat").attr("value");
+    var to_date = $("#to-date-tat").attr("value");
+    
+    dateFromArray = from_date.split("-");
+    yyyy_from = dateFromArray[0];
+    mm_from = dateFromArray[1];
+    dd_from = dateFromArray[2];
+    
+    dateToArray = to_date.split("-");
+    yyyy_to = dateToArray[0];
+    mm_to = dateToArray[1];
+    dd_to = dateToArray[2];
+	
+	if(location == "")
+	{
+		alert("<?php echo LangUtil::$generalTerms['TIPS_SELECTSITE']; ?>");
+		return;
+	}
+	else if(checkDate(yyyy_from, mm_from, dd_from) == false)
+	{
+		alert("<?php echo LangUtil::$generalTerms['TIPS_DATEINVALID']; ?>");
+		return;
+	}
+	else if(checkDate(yyyy_to, mm_to, dd_to) == false)
+	{
+		alert("<?php echo LangUtil::$generalTerms['TIPS_DATEINVALID']; ?>");
+		return;
+	}
+	if(
+		isNaN(yyyy_from) || 
+		isNaN(yyyy_to) ||
+		isNaN(mm_from) ||
+		isNaN(mm_to) ||
+		isNaN(dd_from) ||
+		isNaN(dd_to)
+		)
+	{
+		$("#from-date-tat").val("");
+		$("#to-date-tat").val("");
+	}
+	//$('#tat_progress_spinner').show();
+	$('#get_consumption').submit();
+}
+
 function show_custom_report_form(report_id)
 {
 	var url_string = "report_custom.php?rid="+report_id;
@@ -1458,7 +1506,7 @@ function show_custom_report_form(report_id)
                                 <h4><i class="icon-reorder"></i><?php echo "User Statistics"; ?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
-                                    <a data-toggle="modal" class="config"></a>
+                                   <!-- <a data-toggle="modal" class="config"></a>-->
                                 </div>
         </div>
     <div class="portlet-body" style="height: 400px">
@@ -1479,14 +1527,14 @@ function show_custom_report_form(report_id)
                                         </div>
                     </div>
                         <?php $userStats = new UserStats(); ?>
-                        <form name="user_stats_form" id="user_stats_form" action="reports_user_stats_all.php" method='post' target='_blank'>
+                        <form name="user_stats_form" id="user_stats_form" action="reports_user_stats_all.php" method='post'>
                                     <table cellpadding="4px">
                             
                                 <tr valign='top'>
                                     <td><?php echo LangUtil::$generalTerms['FROM_DATE']; ?> </td>
                                     <td>
                                      <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                                           <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-us" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                                           <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-us" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                                     </div>
                                     </td>
                                 </tr>
@@ -1494,7 +1542,7 @@ function show_custom_report_form(report_id)
                                     <td><?php echo LangUtil::$generalTerms['TO_DATE']; ?> </td>
                                     <td>
                                     <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                                           <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-us" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                                           <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-us" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                                     </div>
                                     </td>
                                 </tr>
@@ -1676,7 +1724,7 @@ function show_custom_report_form(report_id)
                                 <h4><i class="icon-reorder"></i><?php echo LangUtil::$pageTerms['MENU_INFECTIONREPORT']; ?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
-                                    <a data-toggle="modal" class="config"></a>
+                                   <!-- <a data-toggle="modal" class="config"></a> -->
                                 </div>
         </div>
     <div class="portlet-body" style="height: 400px">
@@ -1696,7 +1744,7 @@ function show_custom_report_form(report_id)
                                         </div>
                     </div>
                 <br><br>
-            <form id='disease_report_form' action='report_disease.php' method='post' target='_blank'>
+            <form id='disease_report_form' action='report_disease.php' method='post'>
             <table>
                 <tbody>
                 <?php
@@ -1727,14 +1775,14 @@ function show_custom_report_form(report_id)
                         <td><?php echo LangUtil::$generalTerms['FROM_DATE']; ?> </td>
                         <td>
                         <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                                <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-dr" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                                <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-dr" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                          </div>
                     </tr>
                     <tr class="edate_row" id="edate_row" valign='top'>
                         <td><?php echo LangUtil::$generalTerms['TO_DATE']; ?>&nbsp;&nbsp;&nbsp;</td>
                         <td>
                         <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                                <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-dr" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                                <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-dr" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                          </div>
                         </td>
                     </tr>
@@ -1798,7 +1846,7 @@ function show_custom_report_form(report_id)
                                 <h4><i class="icon-reorder"></i><?php echo LangUtil::$pageTerms['MENU_TAT']; ?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
-                                    <a data-toggle="modal" class="config"></a>
+                                   <!-- <a data-toggle="modal" class="config"></a>-->
                                 </div>
         </div>
     <div class="portlet-body" style="height: 400px">
@@ -1850,7 +1898,7 @@ function show_custom_report_form(report_id)
                         <td><?php echo LangUtil::$generalTerms['FROM_DATE']; ?> </td>
                         <td>
                         <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                                <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-tat" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                                <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-tat" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                          </div>
                         </td>
                     </tr>
@@ -1858,7 +1906,7 @@ function show_custom_report_form(report_id)
                         <td><?php echo LangUtil::$generalTerms['TO_DATE']; ?> </td>
                         <td>
                         <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                                <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-tat" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                                <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-tat" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                          </div>
                         </td>
                     </tr>
@@ -1906,7 +1954,7 @@ function show_custom_report_form(report_id)
                                 <h4><i class="icon-reorder"></i>Specimen counts</h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
-                                    <a data-toggle="modal" class="config"></a>
+                                   <!-- <a data-toggle="modal" class="config"></a>-->
                                 </div>
         </div>
     <div class="portlet-body" style="height: 400px">
@@ -1956,7 +2004,7 @@ function show_custom_report_form(report_id)
                     <td><?php echo LangUtil::$generalTerms['FROM_DATE']; ?> </td>
                     <td>
                     <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-count" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-count" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                      </div>
                     </td>
                 </tr>
@@ -1964,7 +2012,7 @@ function show_custom_report_form(report_id)
                     <td><?php echo LangUtil::$generalTerms['TO_DATE']; ?> </td>
                     <td>
                     <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-count" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-count" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                      </div>
                     </td>
                 </tr>
@@ -2038,10 +2086,10 @@ function show_custom_report_form(report_id)
                                 <h4><i class="icon-reorder"></i>Patient Report</h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
-                                    <a data-toggle="modal" class="config"></a>
+                                   <!-- <a data-toggle="modal" class="config"></a>-->
                                 </div>
         </div>
-    <div class="portlet-body" style="overflow:hidden;">           
+    <div class="portlet-body" style="height: auto">           
         <div id='test_history'>
             <div class='reports_subdiv_help' id='test_history_div_help' style='display:none'>
                 
@@ -2121,7 +2169,7 @@ function show_custom_report_form(report_id)
                                 <h4><i class="icon-reorder"></i>Daily Log</h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
-                                    <a data-toggle="modal" class="config"></a>
+                                   <!-- <a data-toggle="modal" class="config"></a>-->
                                 </div>
         </div>
     <div class="portlet-body" style="height: 400px">   
@@ -2170,7 +2218,7 @@ function show_custom_report_form(report_id)
                     <td><?php echo LangUtil::$generalTerms['FROM_DATE']; ?></td>
                     <td>
                         <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                         </div>
                     </td>
                 </tr>
@@ -2179,7 +2227,7 @@ function show_custom_report_form(report_id)
                     <td><?php echo LangUtil::$generalTerms['TO_DATE']; ?></td>
                     <td>
                     <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                      </div>
                     </td>
                 </tr>
@@ -2242,7 +2290,7 @@ function show_custom_report_form(report_id)
                                 <h4><i class="icon-reorder"></i>Prevalence rate</h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
-                                    <a data-toggle="modal" class="config"></a>
+                                <!--    <a data-toggle="modal" class="config"></a>-->
                                 </div>
         </div>
         <div class="portlet-body" style="height: 400px"> 
@@ -2296,7 +2344,7 @@ function show_custom_report_form(report_id)
                     <td><?php echo LangUtil::$generalTerms['FROM_DATE']; ?> </td>
                     <td>
                    <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-prev" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-prev" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                      </div>
                     </td>
                 </tr>
@@ -2304,7 +2352,7 @@ function show_custom_report_form(report_id)
                     <td><?php echo LangUtil::$generalTerms['TO_DATE']; ?> </td>
                     <td>
                     <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-prev" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-prev" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                      </div>
                     </td>
                 </tr>
@@ -2354,9 +2402,131 @@ function show_custom_report_form(report_id)
                     </td>
                 </tr>
             </table>
-        </form>
+			</form>
+		</div>
+		</div>
     </div>
-    </div>
+    
+    <div class="portlet box blue reports_subdiv" id="consumption_report_div" style="display: none">
+        <div class="portlet-title" >
+                                <h4><i class="icon-reorder"></i>Consumption Report</h4>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse"></a>
+                                  <!--  <a data-toggle="modal" class="config"></a>-->
+                                </div>
+        </div>
+        <div class="portlet-body" style="height: 400px"> 
+        <div id='consumption' >
+            <?php echo getStartDate();?>
+
+            <div class="span4" style="position: absolute;top: 150px;right: 30px;">
+                        <!-- BEGIN Portlet PORTLET-->
+                        <div class="">
+                                            <div class="well text-success">
+                                            <?php
+                                            //Consummption
+                                            $tips_string = "Select the date range to view the consumption report";
+                                            $page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], $tips_string);
+                                            echo "<br><br><br>";
+                                            ?>
+                                                
+                                            </div>
+                                        </div>
+                    </div>
+
+            <form name="get_consumption" id="get_consumption" action="reports_consumption.php" method='post'>
+            <table cellpadding="4px">
+            <?php
+            $site_list = get_site_list($_SESSION['user_id']);
+            if(count($site_list) == 1)
+            {
+                foreach($site_list as $key=>$value)
+                echo "<input type='hidden' name='location' id='location2' value='$key'></input>";
+            }
+            else
+            {
+
+            ?>
+            
+                <tr class="location_row" id="location_row">
+                <td><?php echo LangUtil::$generalTerms['FACILITY']; ?> </td>
+                <td>
+                    <select name='location' id='location2' class='uniform_width'>
+                    <option value='0'><?php echo LangUtil::$generalTerms['ALL']; ?></option>
+                    <?php
+                        $page_elems->getSiteOptions();
+                    ?>
+                    </select>
+                </td>
+                </tr>
+            <?php
+            }
+            ?>
+                <tr valign='top'>
+                    <td><?php echo LangUtil::$generalTerms['FROM_DATE']; ?> </td>
+                    <td>
+                   <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
+                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-prev" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
+                     </div>
+                    </td>
+                </tr>
+                <tr valign='top'>
+                    <td><?php echo LangUtil::$generalTerms['TO_DATE']; ?> </td>
+                    <td>
+                    <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
+                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-prev" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
+                     </div>
+                    </td>
+                </tr>
+            <?php
+            if ( count($site_list) > 1 ) { ?>
+                <tr id='testType'>
+                    <td><?php echo LangUtil::$generalTerms['TEST_TYPE']; ?></td>
+                    <td>
+                        <select name='ttype' id='ttype' class='uniform_width' onchange='changeAvailableLocations(this)'>
+                            <option value='0'><?php echo LangUtil::$generalTerms['ALL']; ?></option>
+                            <?php
+                                $page_elems->getTestTypesCountrySelect();
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="location_row_aggregate" id="location_row_aggregate">
+                    <td><?php echo LangUtil::$generalTerms['FACILITY']; ?> &nbsp;&nbsp;&nbsp;</td>
+                    <td id='locationAggregation'>
+                        <input type='checkbox' name='locationAgg' id='locationAgg' value='0'><?php echo LangUtil::$generalTerms['ALL']; ?></input>
+                        <?php
+                            $page_elems->getSiteOptionsCheckBoxes("locationAgg");
+                        ?>
+                    </td>
+                </tr>
+                <?php
+            } else {
+                foreach($site_list as $key=>$value)
+                echo "<input type='hidden' name='location' id='location2' value='$key'></input>";
+            }
+            ?>
+                <tr>
+                    <td style="visibility: hidden">
+                       <input type="radio" name="summary_type" id="summary_type" VALUE="C"  style="display: none" checked="" autocomplete="on" />
+                        &nbsp;&nbsp;
+                        <input type="radio" name="summary_type" style="display:none;" VALUE="M" autocomplete="on"/>
+                    </td>
+                    <td>
+                        <br>
+                        <input type="button" class="btn blue" value="<?php echo LangUtil::$generalTerms['CMD_SUBMIT']; ?>" onclick="get_consumption_report();"/>
+                        &nbsp;&nbsp;
+                        <!--<input type="button" value="View Monthly" onclick="get_summary_fn(1);"/>-->
+                        <!--<br><br>-->
+                        <span id='summary_progress_bar'  style='display:none;'>
+                            <?php $page_elems->getProgressSpinner(LangUtil::$generalTerms['CMD_FETCHING']); ?>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+			</form>
+		</div>
+		</div>
     </div>
     
         
@@ -2546,7 +2716,7 @@ function show_custom_report_form(report_id)
 					<td><?php echo LangUtil::$generalTerms['FROM_DATE']; ?> </td>
 					<td>
 					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-doctordiv" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-doctordiv" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                      </div>
 					</td>
 				</tr>
@@ -2554,7 +2724,7 @@ function show_custom_report_form(report_id)
 					<td><?php echo LangUtil::$generalTerms['TO_DATE']; ?> </td>
 					<td>
 					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-doctordiv" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-doctordiv" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                      </div>
 					</td>
 				</tr>
@@ -2606,7 +2776,7 @@ function show_custom_report_form(report_id)
 					<td><?php echo LangUtil::$generalTerms['FROM_DATE']; ?> </td>
 					<td>
 					 <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-testdone" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-testdone" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                      </div>
 					</td>
 				</tr>
@@ -2614,7 +2784,7 @@ function show_custom_report_form(report_id)
 					<td><?php echo LangUtil::$generalTerms['TO_DATE']; ?> </td>
 					<td>
 					 <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-testdone" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-testdone" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                      </div>
 					</td>
 				</tr>
@@ -2636,7 +2806,7 @@ function show_custom_report_form(report_id)
         <div id='testcount_grouped_div' style='display:none;' class='reports_subdiv'>
 		<b>Test Count Report</b>
 		<br><br>
-		<form name="testcount_grouped_form" id="testcount_grouped_form" action="reports_testcount_grouped.php" method='post' target='_blank'>
+		<form name="testcount_grouped_form" id="testcount_grouped_form" action="reports_testcount_grouped.php" method='post'>
 		<table cellpadding="4px">
 		<?php
 			$site_list = get_site_list($_SESSION['user_id']);
@@ -2666,7 +2836,7 @@ function show_custom_report_form(report_id)
 					<td><?php echo LangUtil::$generalTerms['FROM_DATE']; ?> </td>
 					<td>
 					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-testcgrouped" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-testcgrouped" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                      </div>
 					</td>
 				</tr>
@@ -2674,7 +2844,7 @@ function show_custom_report_form(report_id)
 					<td><?php echo LangUtil::$generalTerms['TO_DATE']; ?> </td>
 					<td>
 					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-testcgrouped" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-testcgrouped" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                      </div>
 				</tr>
 				<tr>
@@ -2695,7 +2865,7 @@ function show_custom_report_form(report_id)
         <div id='specimencount_grouped_div' style='display:none;' class='reports_subdiv'>
 		<b>Test Count Report</b>
 		<br><br>
-		<form name="specimencount_grouped_form" id="specimencount_grouped_form" action="reports_specimencount_grouped.php" method='post' target='_blank'>
+		<form name="specimencount_grouped_form" id="specimencount_grouped_form" action="reports_specimencount_grouped.php" method='post'>
 		<table cellpadding="4px">
 		<?php
 			$site_list = get_site_list($_SESSION['user_id']);
@@ -2725,7 +2895,7 @@ function show_custom_report_form(report_id)
 					<td><?php echo LangUtil::$generalTerms['FROM_DATE']; ?> </td>
 					<td>
 					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-scgrouped" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-scgrouped" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                      </div>
 					</td>
 				</tr>
@@ -2733,7 +2903,7 @@ function show_custom_report_form(report_id)
 					<td><?php echo LangUtil::$generalTerms['TO_DATE']; ?> </td>
 					<td>
 					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-scgrouped" type="text" value="<?php echo date("Y-m-d"); ?>"><span class="add-on"><i class="icon-calendar"></i></span>
+                            <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-scgrouped" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
                      </div>
 					</td>
 				</tr>

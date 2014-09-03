@@ -22,7 +22,8 @@ function get_result_form($test_type, $test_id, $num_tests, $patient, $parent_tes
 	<form name='<?php echo $curr_form_id; ?>' id='<?php echo $curr_form_id; ?>' action='' method=''>
 	<input type='hidden' name='test_id' value='<?php echo $test_id; ?>'></input>
 	<input type='hidden' name='specimen_id' value='<?php echo $specimen_id; ?>'></input>
-	<input type='hidden' name='parent_test_id' value='<?php echo $parent_test_id; ?>'></input>   
+	<input type='hidden' name='parent_test_id' value='<?php echo $parent_test_id; ?>'></input>
+	<div><strong><?php echo $patient->getName().' (Patient ID '.$patient->patientId.')'; ?></strong><br></div>
 	
 	<?php
 	# Fetch all measures for this test
@@ -310,6 +311,11 @@ $test_type = get_test_type_by_id($test_type_id);
 	}
 	
 	?>
+	<div class="modal-footer">
+	<input type='button' class="btn" value='<?php echo LangUtil::$generalTerms['CMD_SUBMIT']; ?>' onclick='javascript:submit_forms(<?php echo $test_id ?>);'></input>
+	<a href='javascript:hide_test_result_form(<?php echo $test_id ?>);' class='btn'><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></a>
+</div>
+
 	</div>
 	<div class="span6 sortable">
 	
@@ -327,10 +333,6 @@ $test_type = get_test_type_by_id($test_type_id);
 	</div>
 	</div>
 	</div>
-</div>
-<div class="modal-footer">
-	<input type='button' class="btn" value='<?php echo LangUtil::$generalTerms['CMD_SUBMIT']; ?>' onclick='javascript:submit_forms(<?php echo $test_id ?>);'></input>
-	<a href='javascript:hide_test_result_form(<?php echo $test_id ?>);' class='btn'><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></a>
 </div>
 <input type='hidden' id='form_id_list' value='<?php echo implode(",", $form_id_list); ?>'></input>
 <script type='text/javascript'>

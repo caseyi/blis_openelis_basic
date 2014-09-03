@@ -46,7 +46,7 @@ putUILog('new_specimen', $uiinfo, basename($_SERVER['REQUEST_URI'], ".php"), 'X'
   $(document).ready(function(){
 //var data = "Core Selectors Attributes Traversing Manipulation CSS Events Effects Ajax Utilities".split(" ");
 var data_string="<?php echo $php_array;?>";
-var data=data_string.split("%"); 
+var data=data_string.split("%");
 $("#doc_row_1_input").autocomplete(data);
   });
   </script>
@@ -160,9 +160,13 @@ function add_specimens()
 		for(var i = 0; i < ttype_list.length; i++)
 		{
 			//if(ttype_list[i].selected){
-			if (ttype_list[i].options.length>0){
-				ttype_notselected = false;
-				break;
+			for (var k=0; k < ttype_list[i].length; k++){
+				//if (ttype_list[i].options.length>0){
+				if (ttype_list[i][k].selected){
+					ttype_notselected = false;
+					break;
+					break;
+				}
 			}
 		}
 		if(ttype_notselected == true)
@@ -175,6 +179,22 @@ function add_specimens()
 		{
 			alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['MSG_SID_MISSING']; ?>");
 			return;
+		}
+		var doctor = $("#"+form_id+" [name='doctor']").attr("value");
+		if(doctor.trim() == "")
+		{
+			alert("<?php echo 'Please Enter Clinician Name to proceed' ?>");
+			return;
+		}
+		var checkedValue = $("#"+form_id+" input[type='radio']:checked").val();
+		var facility = $("#"+form_id+" [name='MFL_Code']").attr("value");
+		//var facility_sel = $( "#MFL_Code option:selected" ).text();
+		if(checkedValue.trim() == "2")
+		{
+		if (facility.trim() == ""){
+			alert("Select a facility");
+			return;
+			}
 		}
 		var specimen_valid = $("#specimen_msg_"+j).html();
 		if(specimen_valid != "")
@@ -279,8 +299,12 @@ function add_specimenbox()
 	$.ajax({ 
 		url: url_string, 
 		success: function(msg){
+			var currentTime = new Date()
+			var hours = currentTime.getHours()
+			var minutes = currentTime.getMinutes()
 			$('#specimenboxes').append(msg);
 			$('#sbox_progress_spinner').hide();
+			$('#specimenform_'+specimen_count+'_ctime').val(hours + ':' + minutes);
 		}
 	});
 }
@@ -360,7 +384,7 @@ function checkandtoggle_ref(ref_check_id, ref_row_id)
 </script>
 <p style="text-align: right;"><a rel='facebox' href='#NEW_SPECIMEN'>Page Help</a></p>
 <span class='page_title'><?php echo LangUtil::getTitle(); ?></span>
- | <?php echo LangUtil::$generalTerms['ACCESSION_NUM']; ?> <?php echo $session_num; ?>
+ | <?php echo "Visit Number:"; ?> <?php echo $session_num; ?>
  | <a href='javascript:history.go(-1);'><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></a>
 <br>
 <br>
@@ -397,7 +421,7 @@ if($patient == null)
 			</td>
 			<td>
 				<div>
-					<?php echo $page_elems->getPatientInfo($pid, 400); ?>
+					<?php echo $page_elems->getPatientInfo($pid, 300); ?>
 				</div>
 			</td>
 		</tr>
@@ -405,9 +429,9 @@ if($patient == null)
 </table>
 <br>
 &nbsp;&nbsp;
-<input type="button" name="add_sched" id="add_button" onclick="add_specimens();" value="<?php echo LangUtil::$generalTerms['CMD_SUBMIT']; ?>" size="20" />
+<input type="button" name="add_sched" class="btn green" id="add_button" onclick="add_specimens();" value="<?php echo LangUtil::$generalTerms['CMD_SUBMIT']; ?>" size="20" />
 &nbsp;&nbsp;&nbsp;&nbsp;
-<small><a href='javascript:askandback();'><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></a></small>
+<small><a href='javascript:askandback();' class="btn red icn-only"><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></a></small>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <div id='NEW_SPECIMEN' class='right_pane' style='display:none;margin-left:10px;'>
 	<ul>
@@ -441,3 +465,37 @@ echo("Page generated in " . $page_load_time . " seconds");
 */
 include("includes/footer.php"); 
 ?>
+<script type="text/javascript">
+$(document).ready(function(){
+	if (document.getElementById("rdb2_1").checked="true"){
+		$('#blk-1').show(); //$('.toHide').show('slow');
+	} else {
+		$('#blk-1').hide(); //$('.toHide').hide();
+	}
+    /*$("[name=toggler]").click(function(){
+		var opt = $(this).val();
+		if (opt==="1"){
+            $('#blk-1').hide(); //$('.toHide').hide();
+        } else {
+            $('#blk-1').show(); //$('.toHide').show('fast');
+        }
+    });*/
+ });
+
+function ShowFacility(form){
+var form_id = 'specimenform_'+form;
+	var opt = $("#"+form_id+" input[type='radio']:checked").val();
+	//var formid = Element.id.substr(Element.id.lastIndexOf('_')+1);
+	if (opt==="1"){
+	$("#"+form_id+" tr[class='toHide']").hide();
+		//$('#blk-'+formid).hide(); //$('.toHide').hide();
+		$("#"+form_id+" option[id='empty_opt']").attr('selected','true');
+	//$('#empty_opt').attr('selected','true');
+} else {
+		$("#"+form_id+" tr[class='toHide']").show(); //$('.toHide').show('fast');
+		$("#"+form_id+" option[id='empty_opt']").attr('selected','false');
+	}
+	
+}
+ 
+</script>

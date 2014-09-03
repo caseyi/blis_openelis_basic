@@ -29,9 +29,9 @@ putUILog('search_p', $uiinfo, basename($_SERVER['REQUEST_URI'], ".php"), 'X', 'X
 ?>
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		$('#patientListTable').tablesorter();
-	});
+//	$(document).ready(function(){
+//		$('#patientListTable').tablesorter();
+//	});
 </script>
 
 <?php
@@ -120,7 +120,7 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 }
 # Build HTML table
 ?>
-<table class='hor-minimalist-c' id='patientListTable' name='patientListTable'>
+<table class='hor-minimalist-c tablesorter table' id='patientListTable' name='patientListTable'>
 	<thead>
 		<tr valign='top'>
 			<?php
@@ -130,12 +130,12 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 				<th><?php echo LangUtil::$generalTerms['PATIENT_ID']; ?></th>
 				<?php
 			}
-			if($lab_config->dailyNum >= 11)
-			{
+			//if($lab_config->dailyNum >= 11)
+			//{
 				?>
-				<th><?php echo LangUtil::$generalTerms['PATIENT_DAILYNUM']; ?></th>
+				<th><?php echo "Visit Number"; ?></th>
 				<?php
-			}
+			//}
 			if($lab_config->patientAddl != 0)
 			{
 				?>
@@ -182,8 +182,8 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 				</td>
 				<?php
 			}
-			if($lab_config->dailyNum >= 11)
-			{
+		//	if($lab_config->dailyNum >= 11)
+		//	{
 				//$daily_num = "-".$lab_config->dailyNum;
                                 $daily_num = "-";
 				//if($a == 3)
@@ -207,7 +207,7 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 					<?php echo $daily_num; ?>
 				</td>
 				<?php
-			}
+		//	}
 			if($lab_config->patientAddl != 0)
 			{
 				?>
@@ -264,7 +264,7 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 					# Called from find_patient.php. Show 'profile' and 'register specimen' link
 					?>
 					<a href='new_specimen.php?pid=<?php echo $patient->patientId; ?>' title='Click to Register New Specimen for this Patient'><?php echo LangUtil::$pageTerms['CMD_REGISTERSPECIMEN']; ?></a>
-					</td><td>
+					&nbsp;&nbsp;&nbsp;</td><td>
 					<a href='patient_profile.php?pid=<?php echo $patient->patientId; ?>' title='Click to View Patient Profile'><?php echo LangUtil::$pageTerms['CMD_VIEWPROFILE']; ?></a>
 					<?php
 				}

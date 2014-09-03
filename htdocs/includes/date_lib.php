@@ -99,7 +99,7 @@ class DateLib
 		if($lab_config == null)
 		{	
 			# Fetch format from session variable
-			$target_format = $_SESSION['dformat'];
+			$target_format ="Y-m-d"; /*$_SESSION['dformat']*/;
 		}
 		else
 		{

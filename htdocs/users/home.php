@@ -1,6 +1,7 @@
 <?php 
 include("redirect.php");
 include("includes/header.php");
+//require_once("includes/db_mysql_lib.php");
 
 LangUtil::setPageId("home");
 $page_elems = new PageElems();

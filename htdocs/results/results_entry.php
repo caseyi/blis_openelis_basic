@@ -12,12 +12,12 @@ $test_categories = TestCategory::geAllTestCategories($lab_config_id);
 <!-- BEGIN PAGE TITLE & BREADCRUMB-->		
 						<h3>
 						</h3>
-						<ul class="breadcrumb">
+						<!--ul class="breadcrumb">
 							<li>
 								<i class="icon-beaker"></i>
 								<a href="index.html">Tests</a>
 							</li>
-						</ul>
+						</ul-->
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
 				</div>
@@ -40,7 +40,7 @@ $test_categories = TestCategory::geAllTestCategories($lab_config_id);
 		<div class="portlet-title">
 			<h4><i class="icon-reorder"></i><?php echo "Test Queue - ";?><span class="section-name">All Sections</span></h4>
 			<div class="tools">
-				<a href="javascript:fetch_tests(<?php echo Specimen::$STATUS_STARTED?>);" class="reload"></a>
+				<a href="javascript:fetch_tests(<?php echo Specimen::$STATUS_ALL; ?>);" class="reload"></a>
 				<a href="javascript:;" class="collapse"></a>
 			</div>
 		</div>
@@ -368,8 +368,11 @@ if($SHOW_REPORT_RESULTS === true)
 </div>
 </div>
 <!-- END ROW-FLUID--> 
-<?php include("includes/scripts.php");?>
-<?php $script_elems->enableDatePicker();
+<?php 
+include("includes/scripts.php"); 
+require_once("includes/script_elems.php");
+
+$script_elems->enableDatePicker();
 $script_elems->enableJQueryForm();
 $script_elems->enableJQueryValidate();
 $script_elems->enableTableSorter();
@@ -478,7 +481,7 @@ function right_load(destn_div)
 		load_unreported_results();
 	}
 	else if(destn_div == "tests"){
-		fetch_tests(<?php echo Specimen::$STATUS_PENDING?>);
+		fetch_tests(<?php echo Specimen::$STATUS_ALL;?>);
 		
 	}
 }
@@ -585,9 +588,10 @@ function fetch_tests(status,page,search_term)
 		{a: '', t: 10, df:date_from, dt:date_to, s:status, p:page, st:search_term}, 
 		function() 
 		{
-			handleDataTable(10);
+			App.unblockUI(el);
+			handlePaginateDataTable('10');
 			enableAdvancedDatePicker(date_from, date_to);
-			if (status==<?php echo Specimen::$STATUS_PENDING;?>){
+			/*if (status==<?php echo Specimen::$STATUS_PENDING;?>){
 				$('select', '#status')[0].selectedIndex = 1;
 			}else if (status==<?php echo Specimen::$STATUS_STARTED;?>){
 				$('select', '#status')[0].selectedIndex = 2;
@@ -597,10 +601,9 @@ function fetch_tests(status,page,search_term)
 				$('select', '#status')[0].selectedIndex = 4;
 			} else {
 				$('select', '#status')[0].selectedIndex = 0;
-			}
+			}*/
 			$(".chosen").chosen();
 			$("#search_tests").val(search_term);
-			App.unblockUI(el);
 		}
 	);
 }
@@ -624,24 +627,28 @@ function accept_specimen(specimen_id,test_id)
 {
 
 		var el = jQuery('.portlet .tools a.reload').parents(".portlet");
+		var currentTime = new Date()
 		App.blockUI(el);
 		//Mark specimen as accepted
   		url = "ajax/specimen_change_status.php";
   		$.post(url, 
-		{sid: specimen_id}, 
+		{sid: specimen_id, tc: currentTime.getFullYear()+'-'+(currentTime.getMonth()<9 ? '0' : '')+(currentTime.getMonth()+1)+'-'+(currentTime.getDate()<10 ? '0' : '')+currentTime.getDate()+' '+(currentTime.getHours()<10 ? '0' : '')+currentTime.getHours()+':'+(currentTime.getMinutes()<10 ? '0' : '')+currentTime.getMinutes()+':'+(currentTime.getSeconds()<10 ? '0' : '')+currentTime.getSeconds()}, 
 		function(result) 
 		{
 			$('#span'+test_id).addClass('label-important');
-			$('#span'+test_id).html('Pending');
+			$('#span'+test_id).html('Accepted');
 			actions = result.split('%');
 			$('#actionA'+test_id).html('<td id=actionA'+test_id+' style="width:100px;">'+
 					'<a href="javascript:start_test('+test_id+');"'+ 
 					'title="Click to begin testing this Specimen" class="btn red mini">'+
 					'<i class="icon-ok"></i> Start Test</a></td>');
 			$('#actionB'+test_id).html('<td id=actionB'+test_id+' style="width:100px;">'+
-					'<a href="javascript:refer_specimen('+test_id+');"'+ 
+					'<a href="javascript:specimen_info('+specimen_id+');"'+
+					'title="View Specimen Details" class="btn blue mini">'+
+					'<i class="icon-search"></i>View Details</a></td>');
+					/*'<a href="javascript:refer_specimen('+test_id+');"'+ 
 					'title="Click to begin testing this Specimen" class="btn inverse mini">'+
-					'<i class="icon-ok"></i>Refer</a></td>');
+					'<i class="icon-ok"></i>Refer</a></td>');*/
 			App.unblockUI(el);
 		}
 	);
@@ -832,16 +839,18 @@ function submit_forms(test_id)
 				//$("#test_"+actual_test_id)[0].reset();
 				$("#test_"+actual_test_id).remove();
 				$("#"+target_div_id).html(msg);
-				$("tr#"+test_id).remove();
-
-
-
+				//$("tr#"+test_id).remove();
+				
 				$('#span'+actual_test_id).removeClass('label-warning');
 				$('#span'+actual_test_id).addClass('label-info');
 				$('#span'+actual_test_id).html('Tested');
-				actions = result.split('%');
-				$('#actionA'+test_id).html(actions[0]);
-				$('#actionB'+test_id).html(actions[1]);		
+				actions = msg.split('%'); //result.split('%');
+				if (actions[0].slice(0, 4)!='<div') $('#actionA'+test_id).html(actions[0]);
+				$('#actionB'+test_id).html(actions[1]);
+				$('#Link_'+test_id).removeClass('yellow mini');
+				$('#Link_'+test_id).addClass('blue mini');
+				$('#Link_'+test_id).html('<i class="icon-edit"></i>Verify Results');
+				$('#Link_'+test_id).attr('href', 'javascript:view_test_result('+test_id+')');
 			}
 		});	
 	}

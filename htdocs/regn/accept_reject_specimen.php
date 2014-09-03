@@ -9,7 +9,9 @@ putUILog('accept_reject_specimen', 'X', basename($_SERVER['REQUEST_URI'], ".php"
 static $STATUS_REJECTED = 6;
 $reasons_for_rejection = $_REQUEST['reasons'];
 $specimen=$_REQUEST['specimen'];
-$query = mysql_query("UPDATE specimen SET status_code_id=$STATUS_REJECTED, comments='$reasons_for_rejection' WHERE specimen_id = $specimen") or die(mysql_error());
+$rejection_date=date('Y-m-d H:i:s');
+$rejected_by=$_SESSION['username'];
+$query = mysql_query("UPDATE specimen SET status_code_id=$STATUS_REJECTED, comments='$reasons_for_rejection', ts_accept_reject='$rejection_date',accept_rejected_by='$rejected_by' WHERE specimen_id = $specimen") or die(mysql_error());
 		if($query){
 			header('Location: find_patient.php?show_sc=1');
 			

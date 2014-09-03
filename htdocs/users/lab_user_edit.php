@@ -38,7 +38,7 @@ $script_elems->enableDatePicker();
 
 <div class="portlet box green right_pane" id="users_div" >
         <div class="portlet-title" >
-                                <h4><i class="icon-reorder"></i><?php echo LangUtil::$pageTerms['EDIT_LAB_USER']; ?></h4>
+                                <h4><i class="icon-reorder"></i><?php echo "User Profile"; ?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                     <a data-toggle="modal" class="config"></a>
@@ -209,6 +209,9 @@ function update_lab_user()
 $(document).ready(function(){
     $('#lang_id').attr("value", "<?php echo $user->langId; ?>");
 
+if ($("#level option:selected").val()==<?php echo $LIS_CLERK;?>){
+    $('#verify').attr("disabled","true");}
+
     $('#phone').keypress(function(event) {
     var code = (event.keyCode ? event.keyCode : event.which);
     if (!(
@@ -222,6 +225,17 @@ $(document).ready(function(){
         event.preventDefault();
     });
 });
+//disabling can verify result if user level is receptionist
+$('#level').change(function() {
+   
+    if ($("#level option:selected").val()==<?php echo $LIS_CLERK;?>){
+    $('#verify').attr("disabled","true");}
+    else if ($("#level option:selected").val()!=<?php echo $LIS_CLERK;?>){
+    $('#verify').removeAttr("disabled");
+    }
+    
+});
+
 
 </script>
 

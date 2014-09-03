@@ -159,12 +159,12 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 			<div class="slide hide">
 				<i class="icon-angle-left"></i>
 			</div>
-			<form class="sidebar-search" />
+			<!--form class="sidebar-search" />
 				<div class="input-box">
 					<input type="text" class="" placeholder="Search" />
 					<input type="button" class="submit" value=" " />
 				</div>
-			</form>
+			</form-->
 			<div class="clearfix"></div>
 			<!-- END RESPONSIVE QUICK SEARCH FORM -->
 			<!-- BEGIN SIDEBAR MENU -->
@@ -353,7 +353,10 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 													<a href='javascript:show_selection(".$quote."tat".$quote.");'> <i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_TAT']."</a>
 												</li>
 												<li class='menu_option' id='disease_report_menu'>
-													<a href='javascript:show_selection(".$quote."disease_report".$quote.");'> <i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_INFECTIONREPORT']."</a>
+													<a href='#'> <i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_INFECTIONREPORT']."</a>
+												</li>
+												<li class='menu_option' id='consumption_report_menu'>
+													<a href='javascript:show_selection(".$quote."consumption_report".$quote.");'> <i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_CONSUMPTIONREPORT']."</a>
 												</li>";
 						                     	if(is_admin(get_user_by_id($_SESSION['user_id'])))
 						                        { 
@@ -427,11 +430,11 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 						
 						echo 
 						"<li>
-							<a id='test' class='menu_option' href='javascript:test_setup();'><i class='icon-tag'></i> ".LangUtil::$allTerms['Tests']." </a>
+							<a id='test' class='menu_option' href='javascript:_test_setup();'><i class='icon-tag'></i> ".LangUtil::$allTerms['Tests']." </a>
 						</li>
 						
 						<li>                         
-							<a id='option21' class='menu_option' href='javascript:right_load(21, ".$quote."search_div".$quote.");'><i class='icon-tag'></i> Search</a>
+							<a id='option21' class='menu_option' href='javascript:_right_load(21, ".$quote."search_div".$quote.");'><i class='icon-tag'></i> Search</a>
 						</li>
 						<li>
 							<a id='report' class='menu_option' href='javascript:report_setup();'><i class='icon-tag'></i> ".LangUtil::$allTerms['Reports']." </a>
@@ -439,7 +442,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 						<div id='report_setup' name='report_setup' style='display:none;'>
 						<ul class='subb'>
 						    <li><br>
-							<a id='option8' class='menu_option' href='javascript:right_load(8, ".$quote."agg_report_div".$quote.");'>".LangUtil::$allTerms['MENU_INFECTION']."</a>
+							<a id='option8' class='menu_option' href='#'>".LangUtil::$allTerms['MENU_INFECTION']."</a>
 							<br><br> 
 							</li>
 							<li>
@@ -451,7 +454,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 							<br><br>
 							</li>
 							<li>
-							<a id='option12' class='menu_option' href='javascript:right_load(12, ".$quote."worksheet_config_div".$quote.");'> ".LangUtil::$allTerms['MENU_WORKSHEETCONFIG']."</a>
+							<a id='option12' class='menu_option' href='#'> ".LangUtil::$allTerms['MENU_WORKSHEETCONFIG']."</a>
 							<br><br>
 							</li>
 						</ul>
@@ -469,7 +472,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 							<a id='option3' class='menu_option' href='javascript:right_load(3, ".$quote."users_div".$quote.");'><i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_USERS']."</a>
 						</li>
 						<li>
-							<a id='option4' class='menu_option' href='javascript:right_load(4, ".$quote."fields_div".$quote.");'><i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_CUSTOM']."</a>
+							<a id='option4' class='menu_option' href='javascript:_right_load(4, ".$quote."fields_div".$quote.");'><i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_CUSTOM']."</a>
 						</li>
 						<li style='display: none'>			
 							<a id='option19' class='menu_option' href='javascript:language_div_load();'><i class='icon-tag'></i> ".LangUtil::$allTerms['MODIFYLANG']."</a>
