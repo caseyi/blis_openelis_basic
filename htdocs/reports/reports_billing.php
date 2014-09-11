@@ -693,7 +693,7 @@ else
 			if($report_config->usePatientRegistrationDate == 1) {
 				?>
 				<tr valign='top'>
-					<td><?php echo "Registration Date DATED TODAY"; ?></td>
+					<td><?php echo "Registration Date"; ?></td>
 					<td><?php echo $patient->regDate ?></td>
 				</tr>
 				<?php
