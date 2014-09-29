@@ -1775,14 +1775,14 @@ function show_custom_report_form(report_id)
                         <td><?php echo LangUtil::$generalTerms['FROM_DATE']; ?> </td>
                         <td>
                         <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                                <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-dr" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
+                                <input class="m-wrap m-ctrl-medium" size="16" name="from-report-date" id="from-date-dr" type="text" value="<?php echo date("Y-m-d"); ?>" ><span class="add-on"><i class="icon-calendar"></i></span>
                          </div>
                     </tr>
                     <tr class="edate_row" id="edate_row" valign='top'>
                         <td><?php echo LangUtil::$generalTerms['TO_DATE']; ?>&nbsp;&nbsp;&nbsp;</td>
                         <td>
                         <div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-                                <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-dr" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
+                                <input class="m-wrap m-ctrl-medium" size="16" name="to-report-date" id="to-date-dr" type="text" value="<?php echo date("Y-m-d"); ?>" ><span class="add-on"><i class="icon-calendar"></i></span>
                          </div>
                         </td>
                     </tr>
@@ -3204,7 +3204,7 @@ function show_custom_report_form(report_id)
 	
 	
             
-	<div id='daily_report_div' class='reports_subdiv' style='display:none'>
+	<!--<div id='daily_report_div' class='reports_subdiv' style='display:none'>
 		<b><?php echo LangUtil::$pageTerms['MENU_DAILYLOGS']; ?></b>
 		<br><br>
 		<table cellpadding='4px'>
@@ -3301,7 +3301,7 @@ function show_custom_report_form(report_id)
 				</tr>
 			</tbody>
 		</table>
-	</div>
+	</div>-->
 	
 	<div id='billing_report_div' class='reports_subdiv' style='display:none'>
 		<b><?php echo "Bill Generation"; ?></b>

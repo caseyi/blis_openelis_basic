@@ -103,13 +103,13 @@ $script_elems->enableAutocomplete();
 			</tr>
 
 			<tr valign='top'<?php
-			if($_SESSION['dob'] != 0)
-				echo " style='display:none;' ";
+		//	if($_SESSION['dob'] != 0)
+		//		echo " style='display:none;' ";
 			?>>	
 				<td><label class="radio"><input type="radio" id="select_dobage_1" name="select_dobage" onclick="SelectDOBAge(1)" checked /></label>
 					<?php echo LangUtil::$generalTerms['DOB']; ?> 
 					<?php
-					if($_SESSION['dob'] == 2)
+		//			if($_SESSION['dob'] == 2)
 						$page_elems->getAsterisk();
 					?>
 				</td>
@@ -121,8 +121,8 @@ $script_elems->enableAutocomplete();
 			</tr>
 			
 			<tr><?php
-			if($_SESSION['age'] == 0)
-				echo " style='display:none;' ";
+		//	if($_SESSION['age'] == 0)
+		//		echo " style='display:none;' ";
 			?>
 				<td><label class="radio"><input type="radio" id="select_dobage_2" name="select_dobage" onclick="SelectDOBAge(2)" /></label>
 				<?php echo LangUtil::$generalTerms['AGE']; ?> <?php

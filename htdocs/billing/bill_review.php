@@ -51,6 +51,7 @@ $script_elems->enableTableSorter();
 		<form id='payments_form' name='payments_form' action=''>
 			<table class='tablesorter table-hover' id='bill_table' style="border-collapse: separate;">
 				<tr valign='top'>
+					<th >Specimen ID</th>
 					<th style="width: 75px;">Test Date</th>
 					<th>Test Name</th>
 					<th>Specimen Type</th>
@@ -67,6 +68,7 @@ $script_elems->enableTableSorter();
 						$specimen = Specimen::getById($test->specimenId);
 						?>
 				<tr>
+					<td <?php echo $style_string ?>><?php echo $test->getLabSectionByTest(); ?></td>
 					<td><?php echo date("Y-m-d", strtotime($test->timestamp)); ?></td>
 					<td><?php echo $testType->name; ?></td>
 					<td><?php echo $specimen->getTypeName(); ?></td>

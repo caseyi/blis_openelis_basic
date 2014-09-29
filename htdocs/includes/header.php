@@ -239,6 +239,14 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 					case 'results_entry':
 						echo "<i class='icon-beaker'></i>";
 						echo $key.$selected;
+						echo 
+						"<ul class='sub'>
+							<li>
+								<a href='javascript:right_load(".$quote."worksheet_div".$quote.")'  title='Generate worksheet with a list of pending specimens' class='menu_option' id='worksheet_div_menu'>
+								<i class='icon-tag'></i>Worksheet
+								</a>
+							</li>
+						</ul>";
 					break;
 					case "catalog":
 						echo "<i class='icon-cogs'></i>";
@@ -338,9 +346,9 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 												<li class='menu_option' id='tat_menu'>
 													<a href='javascript:show_selection(".$quote."tat_aggregate".$quote.");'> <i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_TAT']."</a>
 												</li>
-												<!--<li class='menu_option' id='disease_report_menu'>
+												<li class='menu_option' id='disease_report_menu'>
 													<a href='javascript:show_selection(".$quote."infection_aggregate".$quote.");'> <i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_INFECTIONREPORT']."</a>
-												</li>-->";
+												</li>";
 											} else {
 												echo "
 												<li class='menu_option' id='summary_menu'>
@@ -353,7 +361,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 													<a href='javascript:show_selection(".$quote."tat".$quote.");'> <i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_TAT']."</a>
 												</li>
 												<li class='menu_option' id='disease_report_menu'>
-													<a href='#'> <i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_INFECTIONREPORT']."</a>
+													<a href='javascript:show_selection(".$quote."disease_report".$quote.");'> <i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_INFECTIONREPORT']."</a>
 												</li>
 												<li class='menu_option' id='consumption_report_menu'>
 													<a href='javascript:show_selection(".$quote."consumption_report".$quote.");'> <i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_CONSUMPTIONREPORT']."</a>
@@ -430,10 +438,10 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 						
 						echo 
 						"<li>
-							<a id='test' class='menu_option' href='javascript:_test_setup();'><i class='icon-tag'></i> ".LangUtil::$allTerms['Tests']." </a>
+							<a id='test' class='menu_option' href='javascript:test_setup();'><i class='icon-tag'></i> ".LangUtil::$allTerms['Tests']." </a>
 						</li>
 						
-						<li>                         
+						<li style='display: none'>                         
 							<a id='option21' class='menu_option' href='javascript:_right_load(21, ".$quote."search_div".$quote.");'><i class='icon-tag'></i> Search</a>
 						</li>
 						<li>
@@ -441,7 +449,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 						</li>
 						<div id='report_setup' name='report_setup' style='display:none;'>
 						<ul class='subb'>
-						    <li><br>
+						    <li style='display: none'><br>
 							<a id='option8' class='menu_option' href='#'>".LangUtil::$allTerms['MENU_INFECTION']."</a>
 							<br><br> 
 							</li>
@@ -454,7 +462,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 							<br><br>
 							</li>
 							<li>
-							<a id='option12' class='menu_option' href='#'> ".LangUtil::$allTerms['MENU_WORKSHEETCONFIG']."</a>
+							<a id='option12' class='menu_option' href='javascript:right_load(12, ".$quote."worksheet_config_div".$quote.");'> ".LangUtil::$allTerms['MENU_WORKSHEETCONFIG']."</a>
 							<br><br>
 							</li>
 						</ul>
@@ -471,7 +479,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 						<li>
 							<a id='option3' class='menu_option' href='javascript:right_load(3, ".$quote."users_div".$quote.");'><i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_USERS']."</a>
 						</li>
-						<li>
+						<li style='display: none'>
 							<a id='option4' class='menu_option' href='javascript:_right_load(4, ".$quote."fields_div".$quote.");'><i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_CUSTOM']."</a>
 						</li>
 						<li style='display: none'>			
@@ -536,3 +544,5 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 <?php
 }
 ?>
+
+

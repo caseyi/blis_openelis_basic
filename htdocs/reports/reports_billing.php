@@ -665,13 +665,14 @@ else if(file_exists($logo_path) === true)
 </div>
 <!--//If condition for the font size
 <STYLE>H3 {FONT-SIZE: <?php echo $size; ?>}</STYLE>-->
+<center>
 <div id="report_word_content">
 <div id="date_section" >
 <?php $align=$report_config->alignment_header;?>
 <h3 align="<?php echo $align; ?>"><?php echo $report_config->headerText; ?><?php #echo LangUtil::$pageTerms['MENU_PHISTORY']; ?></h3>
 <h4 align="<?php echo $align; ?>"><?php echo "Patient Bill"; ?></h4>
 </div>
-<center>
+
 <?php
 if(isset($_REQUEST['date_from']))
 {

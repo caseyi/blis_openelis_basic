@@ -350,6 +350,10 @@ $daycount++;
 			echo " selected ";
 		echo ">Tech read-only</option>";
 		*/
+		echo "<option value='$LIS_ADMIN'";
+		if($selected_value == $LIS_ADMIN)
+			echo " selected ";
+		echo ">Admin</option>";
 		echo "<option value='$LIS_CLERK'";
 		if($selected_value == $LIS_CLERK)
 			echo " selected ";
@@ -825,6 +829,20 @@ $daycount++;
 		else
 			return 0;
 	}
+	public function getTestCategorySelectOption()
+	{
+		# Returns a set of drop down options for test categories in catalog
+		
+
+				$r = mysql_query("select * from test_category ORDER BY name ASC");
+
+				while($row = mysql_fetch_assoc($r))
+						{
+				echo "<option value='{$row['test_category_id']}'>{$row['name']}</option>";
+						}
+	
+	}
+	
 	
 	public function getRejectionPhasesSelect($lab_config_id=null, $rejectionreasonid=null)
 	{
@@ -2467,8 +2485,8 @@ $daycount++;
 				</tr>
 				<?php
 				}
-				if($lab_config->patientAddl != 0)
-				{
+// 				if($lab_config->patientAddl == 0)
+// 				{
 				?>
 				<tr>
 					<td><u><?php echo LangUtil::$generalTerms['ADDL_ID']; ?></u></td>
@@ -2477,16 +2495,16 @@ $daycount++;
 					</td>
 				</tr>
 				<?php
-				}
+				//}
 				if($patient->patientId != 0)
 				{
 				?>
-				<tr>
+				<!--<tr>
 					<td><u><?php echo "Registration Number" ?></u></td>
 					<td>
 						<?php echo $patient->patientId; ?>
 					</td>
-				</tr>
+				</tr>-->
 				<?php
 				}
 				?>
@@ -2803,7 +2821,7 @@ $daycount++;
 				<?php echo get_specimen_name_by_id($specimen->specimenTypeId); ?>
 			</td>
 			<td>
-				<?php echo DateLib::mysqlToString($specimen->dateRecvd); ?>
+				<?php echo DateLib::mysqlToString($specimen->dateCollected); ?>
 			</td>
 			<td>
 				<?php if($admin == 1)
@@ -3199,7 +3217,7 @@ $daycount++;
 				<tr>
 					<td><u><?php echo LangUtil::$generalTerms['R_DATE']; ?></u></td>
 					<td>
-						<?php echo DateLib::mysqlToString($specimen->dateRecvd); ?>
+						<?php echo DateLib::mysqlToString($specimen->dateCollected); ?>
 					</td>
 				</tr>
 				<tr>
@@ -3477,6 +3495,34 @@ $daycount++;
 				<?php if (!$test->isVerified()){ ?>
 				<input type="button" id="Btn_Verify" value="Verify Result" onclick="javascript:verify_result('<?php echo $test->testId."','".
 					str_replace('&nbsp;', '', str_replace('<br>', '', $test->decodeResult()))."','".mysql_real_escape_string($test->getComments()); ?>');" />					
+				
+				<br/>
+				<a href="#" class="btn btn-danger" title="Reject" data-content="Result Rejection" data-toggle="modal" data-target=".bs-example-modal-lg">Reject</a>	
+  <!--pop up begin-->
+  <div class="modal fade bs-example-modal-lg" id="issue_report" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="margin-left:10px">
+     <form id="result_rejection_form" action="ajax/reject_result.php" method="post">
+      <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title" id="myModalLabel"><i class="icon-pencil"></i>Reject a Result Entry</h4>
+        
+      </div>
+      <label  for="spec">Specimen Id</label>  
+      <input id="spec" name="spec" type="hidden" class="form-control input-md" value="<?php echo $test->specimenId; ?>" />
+      <input id="ttype" name="ttype" type="hidden" class="form-control input-md" value="<?php echo $test->testTypeId; ?>" />
+             <input id="body" name="spec_id" type="text" class="form-control input-md" value="<?php echo $test->getLabSectionByTest(); ?>" />
+       <label  for="tname">Test :</label>  
+             <input id="tname" name="tname" type="text" class="form-control input-md" value="<?php echo get_test_name_by_id($test->testTypeId); ?>" />
+		<label  for="message">Rejection Reason:</label>
+		<textarea id="rej_reason" name="rej_reason" ></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" onclick="javascript:$('.bs-example-modal-lg').hide();">Close</button>
+        <button type="button" name="submit_iss" class="btn btn-primary" onclick="javascript:$('#result_rejection_form').submit();">Submit</button>
+      </div>
+    </form>
+  </div>
+  <!--pop up end-->
 				<?php }
 				} else {
 					echo $is_modal ? ($user->canverify!=1 ? 'You are not allowed to verify results.<br>Please contact your system administrator' : ($test->userId==$user->userId ? 'You cannot verify results that you have entered!' : '')) : '';
@@ -4461,19 +4507,20 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 			</tr>
 			
 			<tr id="blk-<?php echo $form_num; ?>" class="toHide"><td>Referral Facility:<?php if($_SESSION['refout'] == 1) $this->getAsterisk(); ?></td><td>
-					<select name="MFL_Code" id="MFL_Code">
-						<option id="empty_opt" value="" disabled selected>Select a facility</option>
-						<?php
+			<input type="text" list=MFL_Code name="MFL_Code" class="tooltip-examples" data-toggle="tooltip" data-original-title="Input code or name & select from suggestions in dropdown">
+			<datalist id=MFL_Code >
 
-						$r = mysql_query("select Facility_Code,Facility_Name from facility_list");
+			<?php
 
-						while($row = mysql_fetch_assoc($r))
+				$r = mysql_query("select Facility_Code,Facility_Name from facility_list ORDER BY Facility_Name ASC");
+
+				while($row = mysql_fetch_assoc($r))
 						{
-						echo "<option value='{$row['Facility_Code']}'><span>{$row['Facility_Name']}:&nbsp;</span>{$row['Facility_Code']}</option>";
+				echo "<option value='{$row['Facility_Code']}'><span>{$row['Facility_Name']}:&nbsp;</span>{$row['Facility_Code']}</option>";
 						}
 
-						?>			
-					</select>
+						?>
+		      </datalist>
 					</td>
 					
 			</tr>		
@@ -6746,7 +6793,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 	{echo "( Add a Logo)"; }else echo "(Change Logo)"; ?>
 	Choose a .jpg logo File to upload:
 	<input type="file" name="file" >
-	</>
+	<input/>
 	<br />
 	</td></tr> <?php }?>
     </table>

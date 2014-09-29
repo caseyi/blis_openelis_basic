@@ -457,6 +457,7 @@ for($i = 0; $i < count($margin_list); $i++) {
 					<?php } ?>
 					<table>
 						<tr>
+							<td>Specimen Id</td>
 							<td>Test Date</td>
 							<td>Test Name</td>
 							<td>Specimen Type</td>
@@ -467,7 +468,7 @@ for($i = 0; $i < count($margin_list); $i++) {
 						<?php $test = Test::getById($association->getTestId());
 						$testType = TestType::getById($test->testTypeId);
 						$specimen = Specimen::getById($test->specimenId);
-						?>
+						?>	<td><?php echo $test->getLabSectionByTest() ?></td>
 							<td><?php echo $association->getTestDate() ?></td>
 							<td><?php echo $association->getTestName() ?></td>
 							<td><?php echo $specimen->getTypeName()?></td>

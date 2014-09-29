@@ -15,7 +15,7 @@ LangUtil::setPageId("reports");
 $page_elems = new PageElems();
 $script_elems = new ScriptElems();
 $script_elems->enableJQuery();
-$script_elems->enableTableSorter();
+//$script_elems->enableTableSorter();
 $script_elems->enableDragTable();
 
 $date_from = $_REQUEST['yf']."-".$_REQUEST['mf']."-".$_REQUEST['df'];
@@ -262,26 +262,21 @@ if( (count($patient_list) == 0 || $patient_list == null) && (count($patient_list
 <br>
 <b>Reported</b>
 <?php if(count($patient_list) > 0 ) { ?>
-<table class='print_entry_border draggable' id='report_content_table5'>
+<table class='print_entry_border' id='report_content_table5'>
 <thead>
 	<tr valign='top'>
+		
 		<?php
-		if($report_config->usePatientId == 1)
+		if($report_config->usePatientAddlId == 1)
 		{
 		?>
-			<th><?php echo LangUtil::$generalTerms['PATIENT_ID']; ?></th>
+			<th><?php echo LangUtil::$generalTerms['ADDL_ID']; ?></th>
 		<?php
 		}
 		if($report_config->useDailyNum == 1)
 		{
 		?>
-			<th><?php echo LangUtil::$generalTerms['PATIENT_DAILYNUM']; ?></th>
-		<?php
-		}
-		if($report_config->usePatientAddlId == 1)
-		{
-		?>
-			<th><?php echo LangUtil::$generalTerms['ADDL_ID']; ?></th>
+			<th><?php echo "Visit No."; ?></th>
 		<?php
 		}
 		if($report_config->usePatientName == 1)
@@ -338,22 +333,16 @@ if( (count($patient_list) == 0 || $patient_list == null) && (count($patient_list
 		?>
 		<tr>
 		<?php
-		if($report_config->usePatientId == 1)
+		if($report_config->usePatientAddlId == 1)
 		{
 		?>
-			<td><?php echo $patient->patientId; //$patient->getSurrogateId(); ?></td>
+			<td><?php echo $patient->getAddlId(); ?></td>
 		<?php
 		}
 		if($report_config->useDailyNum == 1)
 		{
 		?>
-			<td><?php echo $patient->getDailyNum(); ?></td>
-		<?php
-		}
-		if($report_config->usePatientAddlId == 1)
-		{
-		?>
-			<td><?php echo $patient->getAddlId(); ?></td>
+			<td><?php echo $patient->getDailyNum();?></td>
 		<?php
 		}
 		if($report_config->usePatientName == 1)
@@ -425,22 +414,16 @@ if( (count($patient_list) == 0 || $patient_list == null) && (count($patient_list
 <thead>
 	<tr valign='top'>
 		<?php
-		if($report_config->usePatientId == 1)
+		if($report_config->usePatientAddlId == 1)
 		{
 		?>
-			<th><?php echo LangUtil::$generalTerms['PATIENT_ID']; ?></th>
+			<th><?php echo LangUtil::$generalTerms['ADDL_ID']; ?></th>
 		<?php
 		}
 		if($report_config->useDailyNum == 1)
 		{
 		?>
-			<th><?php echo LangUtil::$generalTerms['PATIENT_DAILYNUM']; ?></th>
-		<?php
-		}
-		if($report_config->usePatientAddlId == 1)
-		{
-		?>
-			<th><?php echo LangUtil::$generalTerms['ADDL_ID']; ?></th>
+			<th><?php echo  "Visit No.";?></th>
 		<?php
 		}
 		if($report_config->usePatientName == 1)
@@ -491,23 +474,19 @@ if( (count($patient_list) == 0 || $patient_list == null) && (count($patient_list
 		$count++;
 		?>
 		<tr>
+		
 		<?php
-		if($report_config->usePatientId == 1)
+		
+		if($report_config->usePatientAddlId == 1)
 		{
 		?>
-			<td><?php echo $patient->patientId; //$patient->getSurrogateId(); ?></td>
+			<td><?php echo $patient->getAddlId(); ?></td>
 		<?php
 		}
 		if($report_config->useDailyNum == 1)
 		{
 		?>
 			<td><?php echo $patient->getDailyNum(); ?></td>
-		<?php
-		}
-		if($report_config->usePatientAddlId == 1)
-		{
-		?>
-			<td><?php echo $patient->getAddlId(); ?></td>
 		<?php
 		}
 		if($report_config->usePatientName == 1)
