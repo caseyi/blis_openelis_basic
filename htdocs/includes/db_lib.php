@@ -2495,6 +2495,7 @@ class Patient
 		else
 			return $this->surrogateId;
 	}
+<<<<<<< HEAD
         
         //added by EC
         public function getSpecimenId($patient_id)
@@ -2505,6 +2506,8 @@ class Patient
 		$record = query_associative_one($query_string);
 		return $record['specimen_id'];
 	}
+=======
+>>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 
 	public function getBlisTests()
 	{
@@ -2623,6 +2626,10 @@ class Patient
 
 class Specimen
 {
+<<<<<<< HEAD
+=======
+	public $specimenId;
+>>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 	public $specimenTypeId;
 	public $patientId;
 	public $statusCodeId;

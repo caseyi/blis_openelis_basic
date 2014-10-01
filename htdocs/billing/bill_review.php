@@ -7,8 +7,12 @@ include("includes/header.php");
 LangUtil::setPageId("bill_review");
 
 $lab_config_id = $_SESSION['lab_config_id'];
+<<<<<<< HEAD
 if ($_REQUEST['bill_id'] != '') // modified by echiteri
 {
+=======
+
+>>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 $pid = $_REQUEST['pid'];
 $billId = $_REQUEST['bill_id'];
 
@@ -42,11 +46,17 @@ $script_elems->enableTableSorter();
 	
 	<body>
 		<?php
+<<<<<<< HEAD
                 
 			$bill = Bill::loadFromId($billId, $lab_config_id);
 			$patient = Patient::getById($bill->getPatientId());
 			$associations = $bill->getAllAssociationsForBill($lab_config_id);
                         
+=======
+			$bill = Bill::loadFromId($billId, $lab_config_id);
+			$patient = Patient::getById($bill->getPatientId());
+			$associations = $bill->getAllAssociationsForBill($lab_config_id);
+>>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 		?>
 		<div class='patient_bill_title' style="margin-top:50px;">
 			Bill <?php echo $bill->getId(); ?> for <?php echo $patient->getName(); ?>
@@ -88,13 +98,17 @@ $script_elems->enableTableSorter();
 				</tr>
 				<?php } ?>
 				<tr>
+<<<<<<< HEAD
                                 <div style=" text-align: center"
+=======
+>>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 					<td colspan='6'></td>
 					<td>Bill Total: <div id="bill_total" ><?php echo format_number_to_money($bill->getBillTotal($lab_config_id)); ?></div></td>
 				</tr>
 			</table>
 			<input type='button' value='Print Bill' onclick="javascript:print_bill(<?php echo $bill->getId() . ", " . $lab_config_id; ?>)"\>
 		</form>
+<<<<<<< HEAD
             
 	</body>
 </html>
@@ -105,5 +119,9 @@ else
 }
 ?>
 
+=======
+	</body>
+</html>
+>>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 
 <?php include("includes/footer.php"); ?>
