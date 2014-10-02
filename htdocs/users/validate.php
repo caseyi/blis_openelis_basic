@@ -99,8 +99,19 @@ if($login_correct && $active_status)
 	$_SESSION['DELAY_RECORDED'] = false;
 	#TODO: Add other session variables here
 	$_SESSION['user_role'] = "garbage";
-	#Redirect to home page
-	header("Location:home.php");
+        
+        $changed_times = check_password_change($username, $password);
+        $_SESSION['PWD'] = $changed_times;
+	if($changed_times == 0)//added by EC to check initial password change
+            {
+                #Redirect to first password change page
+                header("Location:first_pwd_change.php");
+            } 
+        else
+            {
+                #Redirect to home page
+                header("Location:home.php");
+            }
 }
 else
 {
