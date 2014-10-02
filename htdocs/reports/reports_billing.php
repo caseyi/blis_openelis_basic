@@ -26,15 +26,13 @@ $view_viz = $_REQUEST['viz'];
 // visualization parameters
 $chart_column_width = 360;
 
-<<<<<<< HEAD
+
 if(isset($_REQUEST['yf'])) {
 	$date_from = $_REQUEST['yf']."-".$_REQUEST['mf']."-".$_REQUEST['df'];
 	$date_to = $_REQUEST['yt']."-".$_REQUEST['mt']."-".$_REQUEST['dt'];
-=======
 if(isset($_REQUEST['date_from'])) {
 	$date_from = $_REQUEST['date_from'];
 	$date_to = $_REQUEST['date_to'];
->>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 } else {
 	$date_from = date("Y-m-d");
 	$date_to = $date_from;
@@ -314,11 +312,8 @@ for($i = 0; $i < count($margin_list); $i++) {
 
 <?php
 
-<<<<<<< HEAD
 $specimen = new Specimen();
 
-=======
->>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 $script_elems = new ScriptElems();
 $script_elems->enableJQuery();
 $script_elems->enableTableSorter();
@@ -360,7 +355,6 @@ function print_content(div_id) {
 }
 
 function fetch_report() {
-<<<<<<< HEAD
 	var yf = $('#yyyy_from').attr("value");
 	var mf = $('#mm_from').attr("value");
 	var df = $('#dd_from').attr("value");
@@ -370,7 +364,7 @@ function fetch_report() {
 	var ip = 0;
 	$('#fetch_progress').show();
 	var url_string = "reports_billing.php?location=<?php echo $lab_config_id; ?>&patient_id=<?php echo $patient_id; ?>&yf="+yf+"&mf="+mf+"&df="+df+"&yt="+yt+"&mt="+mt+"&dt="+dt;
-=======
+
 	var date_from = $('#date_from').attr("value");
 	
 	var date_to = $('#date_to').attr("value");
@@ -378,7 +372,6 @@ function fetch_report() {
 	var ip = 0;
 	$('#fetch_progress').show();
 	var url_string = "reports_billing.php?location=<?php echo $lab_config_id; ?>&patient_id=<?php echo $patient_id; ?>&date_from="+date_from+"&date_to="+date_to;
->>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 	window.location=url_string;
 }
 
@@ -468,8 +461,6 @@ $(document).ready(function(){
 <style type="text/css">
 p.main {text-align:justify;}
 </style>
-<<<<<<< HEAD
-=======
 
 <link rel="stylesheet" type="text/css" media="all" href="jsdatepick-calendar/jsDatePick_ltr.min.css" />
 <script type="text/javascript" src="jsdatepick-calendar/jsDatePick.min.1.3.js"></script>
@@ -510,7 +501,6 @@ p.main {text-align:justify;}
 	};
 </script>
 
->>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 </head>
 
 <body>
@@ -531,7 +521,6 @@ $monthago_array = explode("-", $monthago_date);
 <table class='no_border'>
 	<tr valign='top'>
 	<td>
-<<<<<<< HEAD
 		<?php echo LangUtil::$generalTerms['FROM_DATE']; ?>
 	</td>
 	<td>
@@ -546,7 +535,6 @@ $monthago_array = explode("-", $monthago_date);
 			}
 			$page_elems->getDatePickerPlain($name_list, $id_list, $value_list);
 			?>
-=======
 		<?php //echo LangUtil::$generalTerms['FROM_DATE']; ?>
 	</td>
 	<td>
@@ -567,7 +555,6 @@ $monthago_array = explode("-", $monthago_date);
 // 			}
 // 			$page_elems->getDatePickerPlain($name_list, $id_list, $value_list);
 // 			?>
->>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 	</td>
 	<td>
 	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -602,7 +589,6 @@ $monthago_array = explode("-", $monthago_date);
 <tr >
 	<td>
 			&nbsp;&nbsp;
-<<<<<<< HEAD
 			<?php echo LangUtil::$generalTerms['TO_DATE']; ?>
 	</td>
 	<td>
@@ -617,7 +603,6 @@ $monthago_array = explode("-", $monthago_date);
 			}
 			$page_elems->getDatePickerPlain($name_list, $id_list, $value_list);
 			?>
-=======
 			<?php // echo LangUtil::$generalTerms['TO_DATE']; ?>
 	</td>
 	<td>
@@ -632,7 +617,6 @@ $monthago_array = explode("-", $monthago_date);
 // 			}
 // 			$page_elems->getDatePickerPlain($name_list, $id_list, $value_list);
 // 			?>
->>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 	</td>
 	<td>
 	&nbsp;&nbsp;
@@ -734,11 +718,10 @@ else if(file_exists($logo_path) === true)
 <<<<<<< HEAD
 <?php
 if(isset($_REQUEST['yf']))
-=======
+
 <center>
 <?php
 if(isset($_REQUEST['date_from']))
->>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 {
 	echo "<br>";
 	if($date_from == $date_to) {
@@ -779,11 +762,7 @@ else
 			}
 			?>
 	</div>
-<<<<<<< HEAD
-=======
-	
->>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
-	<table class='print_entry_border'>
+		<table class='print_entry_border'>
 		<tbody>
 			<?php
 			if($report_config->usePatientId == 1) {
@@ -850,7 +829,6 @@ else
 				</tr>
 				<?php
 			}
-<<<<<<< HEAD
                         
                         //add the specimen ID
                         //
@@ -864,10 +842,8 @@ else
 			}
 			# Patient Custom fields here
 //			$custom_field_list = $lab_config->getPatientCustomFields();
-=======
 			# Patient Custom fields here
 			$custom_field_list = $lab_config->getPatientCustomFields();
->>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 			foreach($custom_field_list as $custom_field) {
 				if(in_array($custom_field->id, $report_config->patientCustomFields)) {
 					$field_name = $custom_field->fieldName;
@@ -930,7 +906,6 @@ if(count($billing_info['names']) != 0)
     </tr>
 </table>
     <?php
-<<<<<<< HEAD
 	if(!isset($_REQUEST['yf'])) {
 		?>
 		<script type='text/javascript'>
@@ -941,7 +916,6 @@ if(count($billing_info['names']) != 0)
 			$('#dd_to').attr("value", "<?php echo $latest_collection_parts[2]; ?>");
 			$('#mm_to').attr("value", "<?php echo $latest_collection_parts[1]; ?>");
 			$('#yyyy_to').attr("value", "<?php echo $latest_collection_parts[0]; ?>");
-=======
 	if(!isset($_REQUEST['date_from'])) {
 		?>
 		<script type='text/javascript'>
@@ -950,7 +924,6 @@ if(count($billing_info['names']) != 0)
 			
 			$('#date_to').attr("value", "<?php echo DateLib::mysqlToString($latest_specimen->dateCollected); ?>");
 			
->>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 			var date_from = "<?php echo DateLib::mysqlToString($earliest_specimen->dateCollected); ?>";
 			var date_to = "<?php echo DateLib::mysqlToString($latest_specimen->dateCollected); ?>";
 			var html_string = "";

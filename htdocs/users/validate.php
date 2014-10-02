@@ -102,7 +102,7 @@ if($login_correct && $active_status)
         
         $changed_times = check_password_change($username, $password);
         $_SESSION['PWD'] = $changed_times;
-	if($changed_times == 0)//added by EC to check initial password change
+	if($changed_times == 0)//added by echiteri to check initial password change
             {
                 #Redirect to first password change page
                 header("Location:first_pwd_change.php");

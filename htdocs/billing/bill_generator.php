@@ -21,11 +21,16 @@ $script_elems->enableJQueryForm();
 			$("#generate_bill_button").click(function() {
 				var url = "bill_review.php";
 				$('#submit_progress').show();
-				$("#bill_generator_form").ajaxSubmit({
+                                $("#bill_generator_form").ajaxSubmit({
 					success: function(data)
 					{
+                                            if (data === ''){//Checks and stops if no test is selected echiteri
+                                                alert('No Test is Selected: Please select a Test for billing');
+                                                $('#submit_progress').hide();}
+                                            else {
 						$('#submit_progress').hide();
 						window.location = url + "?bill_id=" + data;
+                                            }
 					}
 				});
 			});

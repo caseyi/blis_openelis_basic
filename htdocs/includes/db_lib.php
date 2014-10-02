@@ -2496,7 +2496,7 @@ class Patient
 			return $this->surrogateId;
 	}
         
-        //added by EC
+        //added by echiteri
         public function getSpecimenId($patient_id)
 	{
 		global $con;
@@ -6057,6 +6057,21 @@ function encrypt_password($password)
 	return sha1($password.$salt);
 }
 
+ # Added by echiteri
+ # get the number of time the password has been changed
+ # to check if it is first login
+function check_password_change($username, $password)
+{
+	global $con;
+	$username = mysql_real_escape_string($username, $con);
+	$saved_db = DbUtil::switchToGlobal();
+	$password = encrypt_password($password);
+        $query_string = "SELECT change_count FROM user WHERE username='$username' AND password='$password'";
+	$record = query_associative_one($query_string);
+	DbUtil::switchRestore($saved_db);
+	return $record['change_count'];  
+}
+
 function check_user_password($username, $password)
 {
 	# Verifies username and password
@@ -6107,7 +6122,7 @@ $url_append = "";
         }
 
 	if($count==1){
-            if($changed_times == 0)//added by EC to check initial password change
+            if($changed_times == 0)//added by echiteri to check initial password change
             {
                 change_user_password($username, $new_password);
                 $url_append = "pupdate";
@@ -6120,7 +6135,7 @@ $url_append = "";
             }
 
       }
-      #added by EC to check the id of the previous page [first_pwd_change.php 
+      #added by echiteri to check the id of the previous page [first_pwd_change.php 
       #so as to redirect back to the same page in case of an error
       else if ($_SESSION['id'] == 'change_password'){ 
         $url_append = "pmatcherr";
@@ -6130,7 +6145,7 @@ $url_append = "";
         $url_append = "pmatcherr";
         header("location:edit_profile.php?".$url_append);
       }
-      // Destroy session keep the house clean
+      // Destroy session keep the house clean echiteri
     unset($_SESSION['id']);
 
 }
@@ -6151,7 +6166,7 @@ function log_access($userid , $accesstype, $username ){
 		DbUtil::switchRestore($saved_db);
 	}
 }
-//added change_count updated with an increment by 1 to keep count on number of times the password has changed By EC
+//added change_count updated with an increment by 1 to keep count on number of times the password has changed By echiteri
 function change_user_password($username, $password)
 {
 	# Changes user password
