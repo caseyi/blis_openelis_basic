@@ -2495,7 +2495,6 @@ class Patient
 		else
 			return $this->surrogateId;
 	}
-<<<<<<< HEAD
         
         //added by EC
         public function getSpecimenId($patient_id)
@@ -2506,8 +2505,7 @@ class Patient
 		$record = query_associative_one($query_string);
 		return $record['specimen_id'];
 	}
-=======
->>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
+        //=======
 
 	public function getBlisTests()
 	{
@@ -2626,10 +2624,7 @@ class Patient
 
 class Specimen
 {
-<<<<<<< HEAD
-=======
 	public $specimenId;
->>>>>>> a3b973799ee120b81562f55495a9ce2ad415279b
 	public $specimenTypeId;
 	public $patientId;
 	public $statusCodeId;
@@ -6099,21 +6094,44 @@ function confirm_and_change_password($username, $password, $new_password)
 	$saved_db = DbUtil::switchToGlobal();
 	$password = encrypt_password($password);
 $url_append = "";
-	$query_string = 
-		"SELECT * FROM user WHERE username='$username' AND password='$password'";
+	$query_string = "SELECT * FROM user WHERE username='$username' AND password='$password'";
 	$result=mysql_query($query_string);
 	$count=mysql_num_rows($result);
+        
+        
+        # get the number of time the password has been changed
+        # to check if it is first login
+        
+        while($row = mysqli_fetch_array($result)) {
+        $changed_times = $row['change_count'];
+        }
 
 	if($count==1){
-	change_user_password($username, $new_password);
-$url_append = "pupdate";
-	  header("location:edit_profile.php?".$url_append);
+            if($changed_times == 0)//added by EC to check initial password change
+            {
+                change_user_password($username, $new_password);
+                $url_append = "pupdate";
+                header("Location:home.php");
+            }else
+            {
+                change_user_password($username, $new_password);
+                $url_append = "pupdate";
+                header("location:edit_profile.php?".$url_append);
+            }
 
       }
-      else{
-$url_append = "pmatcherr";
-      header("location:edit_profile.php?".$url_append);
+      #added by EC to check the id of the previous page [first_pwd_change.php 
+      #so as to redirect back to the same page in case of an error
+      else if ($_SESSION['id'] == 'change_password'){ 
+        $url_append = "pmatcherr";
+        header("location:first_pwd_change.php?".$url_append);
+      }else
+      {
+        $url_append = "pmatcherr";
+        header("location:edit_profile.php?".$url_append);
       }
+      // Destroy session keep the house clean
+    unset($_SESSION['id']);
 
 }
 //Function for Logging and logout and also failed attempts
@@ -6133,6 +6151,7 @@ function log_access($userid , $accesstype, $username ){
 		DbUtil::switchRestore($saved_db);
 	}
 }
+//added change_count updated with an increment by 1 to keep count on number of times the password has changed By EC
 function change_user_password($username, $password)
 {
 	# Changes user password
@@ -6142,7 +6161,7 @@ function change_user_password($username, $password)
 	$password = encrypt_password($password);
 	$query_string =
 		"UPDATE user ".
-		"SET password='$password' ".
+		"SET password='$password' , change_count=change_count+1 ".
 		"WHERE username='$username'";
 	query_blind($query_string);
 	DbUtil::switchRestore($saved_db);
