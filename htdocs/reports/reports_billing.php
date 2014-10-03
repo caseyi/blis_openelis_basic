@@ -719,8 +719,6 @@ else if(file_exists($logo_path) === true)
 <?php
 if(isset($_REQUEST['yf']))
 
-<center>
-<?php
 if(isset($_REQUEST['date_from']))
 {
 	echo "<br>";
