@@ -42,14 +42,11 @@ $script_elems->enableTableSorter();
 	</head>
 	
 	<body>
-		<?php               
+		<?php
+                
 			$bill = Bill::loadFromId($billId, $lab_config_id);
 			$patient = Patient::getById($bill->getPatientId());
-			$associations = $bill->getAllAssociationsForBill($lab_config_id);
-                        
-			$bill = Bill::loadFromId($billId, $lab_config_id);
-			$patient = Patient::getById($bill->getPatientId());
-			$associations = $bill->getAllAssociationsForBill($lab_config_id);
+			$associations = $bill->getAllAssociationsForBill($lab_config_id); 
 		?>
 		<div class='patient_bill_title' style="margin-top:50px;">
 			Bill <?php echo $bill->getId(); ?> for <?php echo $patient->getName(); ?>
@@ -92,7 +89,6 @@ $script_elems->enableTableSorter();
 				<?php } ?>
 				<tr>
                                 <div style=" text-align: center"
-
 					<td colspan='6'></td>
 					<td>Bill Total: <div id="bill_total" ><?php echo format_number_to_money($bill->getBillTotal($lab_config_id)); ?></div></td>
 				</tr>
