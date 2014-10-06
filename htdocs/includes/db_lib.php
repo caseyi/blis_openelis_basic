@@ -2623,6 +2623,7 @@ class Patient
 
 class Specimen
 {
+	public $specimenId;
 	public $specimenTypeId;
 	public $patientId;
 	public $statusCodeId;

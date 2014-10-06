@@ -33,6 +33,12 @@ if(isset($_REQUEST['yf'])) {
 if(isset($_REQUEST['date_from'])) {
 	$date_from = $_REQUEST['date_from'];
 	$date_to = $_REQUEST['date_to'];
+if(isset($_REQUEST['yf'])) {
+	$date_from = $_REQUEST['yf']."-".$_REQUEST['mf']."-".$_REQUEST['df'];
+	$date_to = $_REQUEST['yt']."-".$_REQUEST['mt']."-".$_REQUEST['dt'];
+if(isset($_REQUEST['date_from'])) {
+	$date_from = $_REQUEST['date_from'];
+	$date_to = $_REQUEST['date_to'];
 } else {
 	$date_from = date("Y-m-d");
 	$date_to = $date_from;
@@ -314,6 +320,8 @@ for($i = 0; $i < count($margin_list); $i++) {
 
 $specimen = new Specimen();
 
+$specimen = new Specimen();
+
 $script_elems = new ScriptElems();
 $script_elems->enableJQuery();
 $script_elems->enableTableSorter();
@@ -355,6 +363,7 @@ function print_content(div_id) {
 }
 
 function fetch_report() {
+
 	var yf = $('#yyyy_from').attr("value");
 	var mf = $('#mm_from').attr("value");
 	var df = $('#dd_from').attr("value");
@@ -372,6 +381,7 @@ function fetch_report() {
 	var ip = 0;
 	$('#fetch_progress').show();
 	var url_string = "reports_billing.php?location=<?php echo $lab_config_id; ?>&patient_id=<?php echo $patient_id; ?>&date_from="+date_from+"&date_to="+date_to;
+
 	window.location=url_string;
 }
 
@@ -715,10 +725,7 @@ else if(file_exists($logo_path) === true)
 <h3 align="<?php echo $align; ?>"><?php echo $report_config->headerText; ?><?php #echo LangUtil::$pageTerms['MENU_PHISTORY']; ?></h3>
 <h4 align="<?php echo $align; ?>"><?php echo "Patient Bill"; ?></h4>
 </div>
-<<<<<<< HEAD
 <?php
-if(isset($_REQUEST['yf']))
-
 if(isset($_REQUEST['date_from']))
 {
 	echo "<br>";
@@ -761,6 +768,8 @@ else
 			?>
 	</div>
 		<table class='print_entry_border'>
+	
+	<table class='print_entry_border'>
 		<tbody>
 			<?php
 			if($report_config->usePatientId == 1) {
@@ -840,6 +849,8 @@ else
 			}
 			# Patient Custom fields here
 //			$custom_field_list = $lab_config->getPatientCustomFields();
+			# Patient Custom fields here
+			$custom_field_list = $lab_config->getPatientCustomFields();
 			# Patient Custom fields here
 			$custom_field_list = $lab_config->getPatientCustomFields();
 			foreach($custom_field_list as $custom_field) {
