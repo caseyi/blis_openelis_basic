@@ -42,7 +42,8 @@ $php_array= addslashes(implode("%", $doc_array));
 $uiinfo = "pid=".$_REQUEST['pid']."&dnum=".$_REQUEST['dnum'];
 putUILog('new_specimen', $uiinfo, basename($_SERVER['REQUEST_URI'], ".php"), 'X', 'X', 'X');
 ?>
-	<script>
+	<script type="text/javascript" src="js/check_date_format.js"></script>
+        <script>
   $(document).ready(function(){
 //var data = "Core Selectors Attributes Traversing Manipulation CSS Events Effects Ajax Utilities".split(" ");
 var data_string="<?php echo $php_array;?>";
@@ -202,13 +203,20 @@ function add_specimens()
 			alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['MSG_SID_INVALID']; ?>");
 			return;
 		}
+           /*
+            * Call a  function to validate the format of the keyed in format
+            */
+            var lab_receipt_date = $("#"+form_id+" [name='spec_date']").attr("value");//get lab receipt date
+            if (dt_format_check(lab_receipt_date, "Lab Receipt Date") == false)
+            {return;}
+            /* execute if the date is ok echiteri*/
 		var ry = $("#"+form_id+" [name='receipt_yyyy']").attr("value");
 		if (ry!=undefined) ry = ry.replace(/[^0-9]/gi,'');
 		var rm = $("#"+form_id+" [name='receipt_mm']").attr("value");
 		if (rm!=undefined) rm = rm.replace(/[^0-9]/gi,'');
 		var rd = $("#"+form_id+" [name='receipt_dd']").attr("value");
 		if (rd!=undefined) rd = rd.replace(/[^0-9]/gi,'');
-		var cy = $("#"+form_id+" [name='collect_yyyy']").attr("value");
+     		var cy = $("#"+form_id+" [name='collect_yyyy']").attr("value");
 		if (cy!=undefined) cy = cy.replace(/[^0-9]/gi,'');
 		var cm = $("#"+form_id+" [name='collect_mm']").attr("value");
 		if (cm!=undefined) cm = cm.replace(/[^0-9]/gi,'');
@@ -219,7 +227,7 @@ function add_specimens()
 		var cmm = $("#"+form_id+" [name='ctime_mm']").attr("value");
 		if (cmm!=undefined) cmm = cmm.replace(/[^0-9]/gi,'');
 		if ((ry!=undefined) && (rm!=undefined) && (rd!=undefined)){
-			if(checkDate(ry, rm, rd) == false)
+                    if(checkDate(ry, rm, rd) == false)
 			{
 				var answer = confirm("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['MSG_RDATE_INVALID']; ?> . Are you sure you want to continue?");
 				if (answer == false)
