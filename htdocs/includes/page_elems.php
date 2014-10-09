@@ -350,6 +350,7 @@ $daycount++;
 			echo " selected ";
 		echo ">Tech read-only</option>";
 		*/
+                
 		echo "<option value='$LIS_CLERK'";
 		if($selected_value == $LIS_CLERK)
 			echo " selected ";
@@ -3202,6 +3203,12 @@ $daycount++;
 						<?php echo DateLib::mysqlToString($specimen->dateRecvd); ?>
 					</td>
 				</tr>
+                                <tr>
+					<td><u><?php echo LangUtil::$generalTerms['C_DATE']; ?></u></td>
+					<td>
+						<?php echo DateLib::mysqlToString($specimen->dateCollected); ?>
+					</td>
+				</tr>
 				<tr>
 					<td><u><?php echo LangUtil::$generalTerms['REGD_BY']; ?></u></td>
 					<td><?php echo get_username_by_id($specimen->userId); ?></td>
@@ -4264,8 +4271,8 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		$ref_out_row_id = 'ref_out_row_'.$form_num;
 		$ref_out_check_id = 'ref_out_'.$form_num;
 		$lab_config = LabConfig::getById($_SESSION['lab_config_id']);
-        $custom_class = 'custom_'.$form_num;
-        $radio_name = 'ref_out_'.$form_num;
+                $custom_class = 'custom_'.$form_num;
+                $radio_name = 'ref_out_'.$form_num;
 		?>
 		<div id='<?php echo $div_id; ?>'>
 		<div class='pretty_box' style='width:630px;'>
@@ -6367,7 +6374,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		}
 		?>
 		<div class='pretty_box' style='width:100%;'>
-		<table class='table table-bordered table-hover>
+		<table class='table table-bordered table-hover'>
 			<tbody>
 				<tr valign='top'>
 					<td><?php echo LangUtil::$pageTerms['GROUP_BYGENDER']; ?></td>

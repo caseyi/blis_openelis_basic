@@ -50,7 +50,7 @@ $script_elems->enableAutocomplete();
 				<td>  Date of Registration </td>
 				<td>
 					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
-					<input class="m-wrap m-ctrl-medium" size="16" name="patient_reg_date" id="patient_regist_date" type="text" value="<?php echo date("Y-m-d"); ?>" readonly><span class="add-on"><i class="icon-calendar"></i></span>
+					<input class="m-wrap m-ctrl-medium" size="16" name="patient_reg_date" id="patient_regist_date" type="text" value="<?php echo date("Y-m-d"); ?>" ><span class="add-on"><i class="icon-calendar"></i></span>
 					</div>
 				</td>			
 			</tr>
@@ -103,8 +103,8 @@ $script_elems->enableAutocomplete();
 			</tr>
 
 			<tr valign='top'<?php
-			if($_SESSION['dob'] != 0)
-				echo " style='display:none;' ";
+		//	if($_SESSION['dob'] != 0)
+		//		echo " style='display:none;' ";
 			?>>	
 				<td><label class="radio"><input type="radio" id="select_dobage_1" name="select_dobage" onclick="SelectDOBAge(1)" checked /></label>
 					<?php echo LangUtil::$generalTerms['DOB']; ?> 
@@ -115,14 +115,14 @@ $script_elems->enableAutocomplete();
 				</td>
 				<td>				  
                   <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd"> 
-					<input class="m-wrap m-ctrl-medium" size="16" name="patient_birth_date" id="patient_b_day" type="text" value="" readonly><span class="add-on" id="span_dob"><i class="icon-calendar"></i></span>
+					<input class="m-wrap m-ctrl-medium" size="16" name="patient_birth_date" id="patient_b_day" type="text" value="" ><span class="add-on" id="span_dob"><i class="icon-calendar"></i></span>
 					</div>
                 </td>
 			</tr>
 			
 			<tr><?php
-			if($_SESSION['age'] == 0)
-				echo " style='display:none;' ";
+		//	if($_SESSION['age'] == 0)
+		//		echo " style='display:none;' ";
 			?>
 				<td><label class="radio"><input type="radio" id="select_dobage_2" name="select_dobage" onclick="SelectDOBAge(2)" /></label>
 				<?php echo LangUtil::$generalTerms['AGE']; ?> <?php
@@ -200,6 +200,7 @@ $script_elems->enableAutocomplete();
 		</td>
 		</tr>
 </table>
+<script type="text/javascript" src="js/check_date_format.js"></script>
 <script type='text/javascript'>
 $(document).ready(function(){
 	SelectDOBAge(1);
@@ -257,7 +258,14 @@ function add_patient()
 	var error_flag = 0;
 	var curr_date = new Date();
 	var patient_birth_date = $('#patient_b_day').val();
+                
 	if (patient_birth_date!=""){
+           /*
+            * Call a  function to validate the format of the keyed in format
+            */             
+            if (dt_format_check(patient_birth_date, "Date of Birth") == false)
+            {return;}
+            /* execute if the date is ok echiteri*/
 		var pt_dob_y = patient_birth_date.slice(0, 4);
 		var pt_dob_m = parseInt(patient_birth_date.slice(5, 7));
 		var pt_dob_d = patient_birth_date.slice(-2);
@@ -288,6 +296,12 @@ function add_patient()
 		}
 	}
 	if (pat_reg_date!=""){
+            /*
+            * Call a  function to validate the format of the keyed in format
+            */             
+            if (dt_format_check(pat_reg_date, "Registration Date") == false)
+            {return;}
+            /* execute if the date is ok echiteri*/
 		var pt_regdate = new Date(pat_reg_date.slice(0, 4), parseInt(pat_reg_date.slice(5, 7))-1, pat_reg_date.slice(-2));
 		if (curr_date<pt_regdate){
 			error_message += "The registration date cannot be after today\n";
@@ -424,4 +438,3 @@ function SelectDOBAge(optionval){
 }
 
 </script>
-

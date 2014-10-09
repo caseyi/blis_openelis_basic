@@ -69,7 +69,7 @@ class User
 		$user->phone = $record['phone'];
 		$user->createdBy = $record['created_by'];
 		$user->labConfigId = $record['lab_config_id'];
-        $user->img = $record['img'];
+                $user->img = $record['img'];
 		$user->canverify = $record['verify'];
 		if(isset($record['lang_id']))
 			$user->langId = $record['lang_id'];
@@ -12050,13 +12050,13 @@ class GlobalPatient
 		return Patient::getObject($record);
 	}
 	
-	public function getSurrogateId()
+	/*public function getSurrogateId()
 	{
 		if($this->surrogateId == null || trim($this->surrogateId) == "")
 			return "-";
 		else
 			return $this->surrogateId;
-	}
+	}*/
 	
 	public function getDailyNum()
 	{

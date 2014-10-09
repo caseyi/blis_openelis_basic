@@ -613,7 +613,7 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 					$billing_url_string = "reports_billing.php?patient_id=".$patient->patientId."&location=".$_REQUEST['l']."&date_from=".$today."&date_to=".$today."&ip=0";
 
                                         ?>
-					<a href='<?php echo $url_string; ?>' title='Click to View Report for this Patient'><?php echo LangUtil::$generalTerms['CMD_VIEW']; ?> Report</a>
+                                        <a href='<?php echo $url_string; ?>' title='Click to View Report for this Patient' target="_blank"><?php echo LangUtil::$generalTerms['CMD_VIEW']; ?> Report</a>
 					</td>
 					<td>
 					<a href='select_test_profile.php?pid=<?php echo $patient->patientId; ?>' title='Click to View Patient Profile'>Select Tests</a>

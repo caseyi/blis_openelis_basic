@@ -43,6 +43,7 @@ include("../users/accesslist.php");
 
 <link rel="stylesheet" type="text/css" media="all" href="jsdatepick-calendar/jsDatePick_ltr.min.css" />
 <script type="text/javascript" src="jsdatepick-calendar/jsDatePick.min.1.3.js"></script>
+<script type="text/javascript" src="js/check_date_format.js"></script>
 <script type="text/javascript">
 	window.onload = function(){
 		new JsDatePick({
@@ -84,9 +85,9 @@ include("../users/accesslist.php");
 <body>
 <!--date selection begins-->
 <label for"date_from">From</label>
- <input type="text" size="12" id="date_from" name="date_from" readonly/>
+ <input type="text" size="12" id="date_from" name="date_from" />
 <label for"date_to">To</label>
- <input type="text" size="12" id="date_to" name="date_to" readonly/>
+ <input type="text" size="12" id="date_to" name="date_to" />
  <!--date selection ends-->
 <?php
 $date_from = "";
@@ -896,8 +897,20 @@ function print_content(div_id) {
 function fetch_report() {
 
 	var date_from = $('#date_from').attr("value");
+        /*
+        * Call a  function to validate the format of the keyed in format
+        */             
+        if (dt_format_check(date_from, "From Date") == false)
+        {return;}
+        /* execute if the date is ok echiteri*/
 
 	var date_to = $('#date_to').attr("value");
+        /*
+        * Call a  function to validate the format of the keyed in format
+        */             
+        if (dt_format_check(date_to, "To Date") == false)
+        {return;}
+        /* execute if the date is ok echiteri*/
 
 // 	var df = $('#dd_from').attr("value");
 // 
