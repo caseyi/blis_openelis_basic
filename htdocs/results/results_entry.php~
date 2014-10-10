@@ -260,8 +260,20 @@ $test_categories = TestCategory::geAllTestCategories($lab_config_id);
 </div>
 		
 <div id='worksheet_div' class='results_subdiv' style='display:none;'>
-	<div class="panel-heading"><span class='page_title'><?php echo LangUtil::$pageTerms['MENU_WORKSHEET']; ?></span></div>
-	<form name='worksheet_form' id='worksheet_form' action='worksheet.php' method='post' target='_blank'>
+
+
+
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<h4><i class="icon-reorder"></i><?php echo "Worksheet";?></h4>
+			<div class="tools">
+				<a href="javascript:;" class="reload"></a>
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+		</div>
+		<div class="portlet-body">
+			<div class="scroller" data-height=900px" data-always-visible="0">
+				<form name='worksheet_form' id='worksheet_form' action='worksheet.php' method='post' target='_blank'>
 		<table cellspacing='4px'>
 			<tbody>
 			<tr valign='top'>
@@ -322,6 +334,19 @@ $test_categories = TestCategory::geAllTestCategories($lab_config_id);
 		</table>
 	</form>
 </div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END TESTS PORTLET-->
+
+
+
+
+
+	
+	
 
 <?php
 if($SHOW_REPORT_RESULTS === true)

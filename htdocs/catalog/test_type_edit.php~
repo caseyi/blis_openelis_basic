@@ -329,7 +329,7 @@ $page_elems->getTestTypeInfo($test_type->name, true);
 									if($range_type == Measure::$RANGE_AUTOCOMPLETE)
 										echo " selected='selected' ";
 									?>><?php echo LangUtil::$generalTerms['RANGE_AUTOCOMPLETE']; ?></option>
-                                                                        <option disabled value='<?php echo Measure::$RANGE_FREETEXT; ?>' <?php 
+                                                                        <option value='<?php echo Measure::$RANGE_FREETEXT; ?>' <?php 
 									if($range_type == Measure::$RANGE_FREETEXT)
 										echo " selected='selected' ";
 									?>><?php echo "Free Text"; ?></option>

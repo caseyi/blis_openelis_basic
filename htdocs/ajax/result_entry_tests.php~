@@ -7,6 +7,7 @@ include("../includes/db_lib.php");
 include("../includes/user_lib.php");
 LangUtil::setPageId("results_entry");
 
+$lab_sec= $_REQUEST['ls'];
 $attrib_value = $_REQUEST['a'];
 $attrib_type = $_REQUEST['t'];
 $date_from = $_REQUEST['df'];
@@ -158,6 +159,25 @@ else
             
     } elseif($attrib_type == 10)
     {
+    //get user lab sections so that user only views their lab section
+    $user=$_SESSION['user_id'];
+				$r = mysql_query("select lab_sec_code from user where user_id=$user");
+
+				if($row = mysql_fetch_assoc($r))
+						{
+				$lab_sec =$row['lab_sec_code'];
+						}
+    
+ //$lab_sec= echo $page_elems->getLabUserLabSectionIds();   
+$keywords = explode(',', $lab_sec);  //if keywords entered is "white black new", will convert to array of "white","black","new". The delimiter here is the space.
+$keywordsBits = array(); 
+foreach ($keywords as $keyword) { 
+          $keyword = trim($keyword); 
+          if (!empty($keyword)) { 
+                $keywordsBits[] = "test_category_id = $keyword"; 
+          } 
+} 
+
             # Get all specimens with pending status
             $query_string = 
                     "SELECT *, p.name AS patient_name, st.name as specimen_name, tt.name AS test_name, tc.name AS category_name, t.status_code_id AS status
@@ -167,7 +187,7 @@ else
 						LEFT JOIN specimen_type st ON s.specimen_type_id = st.specimen_type_id
 						LEFT JOIN test_type tt ON t.test_type_id = tt.test_type_id
 						LEFT JOIN test_category tc ON tt.test_category_id = tc.test_category_id
-            		WHERE s.status_code_id!=".Specimen::$STATUS_REJECTED." AND ";
+            		WHERE s.status_code_id!=".Specimen::$STATUS_REJECTED." AND t.test_type_id in (select test_type_id from test_type where ".implode(' OR ', $keywordsBits).") AND ";
             
             if (($status!="all") && ($status!=Specimen::$STATUS_ALL)){
             	$query_string.="

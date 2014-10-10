@@ -1314,7 +1314,7 @@ if($lab_config == null)
 					$reload_url = "lab_config_home.php?id=$lab_config_id";
 					?>
 					<p style="text-align: right;"><a rel='facebox' href='#UserAccounts_config'>Page Help</a></p>
-					 <a rel='facebox' class="btn blue-stripe" href='lab_user_new.php?ru=<?php echo $reload_url; ?>&lid=<?php echo $lab_config_id; ?>'>
+					 <a  class="btn blue-stripe" href='lab_user_new.php?ru=<?php echo $reload_url; ?>&lid=<?php echo $lab_config_id; ?>'>
 					 <i class='icon-plus'></i> 
 					 <?php echo LangUtil::$generalTerms['CMD_ADDNEWACCOUNT']; ?>
 					 </a>

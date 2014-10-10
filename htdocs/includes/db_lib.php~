@@ -6231,8 +6231,7 @@ function update_lab_user($updated_entry)
 		"email='$updated_entry->email', ".
 		"level=$updated_entry->level, ".
 		"verify=$updated_entry->canverify, ".
-		"lang_id='$updated_entry->langId', ".
-		"lab_sec_code='$updated_entry->labSection' ".
+		"lang_id='$updated_entry->langId' ".
 		"WHERE user_id=$updated_entry->userId";
 	query_blind($query_string);
 	if($updated_entry->password != "")

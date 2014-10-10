@@ -8,5 +8,6 @@ $test = $_REQUEST['tname'];
 $test_type_id = $_REQUEST['ttype'];
 //echo $specimen_id." ".$reasons." ".$test;	
  reject_test($specimen_id, $test_type_id, $reason);
-header('location:../results/results_entry.php?prompt#tests');
+ header('location:../');
+// header('location:../results/results_entry.php?prompt#tests');
 ?>
