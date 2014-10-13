@@ -211,6 +211,10 @@ RewriteRule ^lab_backups\.php$ export/lab_backups.php
 ## /users folder
 RewriteRule ^edit_profile\.php$ users/edit_profile.php
 RewriteRule ^change_profile\.php$ users/change_profile.php
+## /added by EC
+RewriteRule ^first_pwd_change\.php$ users/first_pwd_change.php 
+RewriteRule ^first_change_pwd\.php$ users/first_change_pwd.php
+#//
 RewriteRule ^change_pwd\.php$ users/change_pwd.php
 RewriteRule ^password_reset\.php$ users/password_reset.php
 RewriteRule ^lab_admins\.php$ users/lab_admins.php

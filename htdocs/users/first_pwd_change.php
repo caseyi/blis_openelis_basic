@@ -2,21 +2,25 @@
 #
 # Main page for editting user profile
 #
-
 include("redirect.php");
-include("includes/header.php"); 
+include("includes/hd_cpwd.php"); 
 LangUtil::setPageId("edit_profile");
 
 $user_profile = get_user_by_id($_SESSION['user_id']);
+
+// ID variable generated for first_pwd_change.php
+// Create the session variable for the first_pwd_change.php
+$_SESSION['id'] = 'change_password';
+
 ?>
-<link href="assets/bootstrap/css/bootstrap-fileupload.css" rel="stylesheet" />
+<!--<link href="assets/bootstrap/css/bootstrap-fileupload.css" rel="stylesheet" />
 <!-- BEGIN PAGE TITLE & BREADCRUMB-->       
                         <h3>
                         </h3>
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-download-alt"></i>
-                                <a href="index.php">Home</a> 
+                                <!--<a href="index.php">Home</a> -->
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -30,7 +34,8 @@ $user_profile = get_user_by_id($_SESSION['user_id']);
 <div id="edit profile" class='edit_subdiv'>
     <div class="portlet box blue">
         <div class="portlet-title">
-            <h4><i class="icon-reorder"></i>Edit profile</h4>
+            <h4><i class="icon-reorder"></i></h4>
+            <?php     unset($_SESSION['PWD']);     ?>
             <div class="tools">
             <a href="javascript:;" class="collapse"></a>
             <a href="javascript:;" class="reload"></a>
@@ -39,22 +44,22 @@ $user_profile = get_user_by_id($_SESSION['user_id']);
         <div class="portlet-body form" style="height: 500px">
                 <br>
                 <?php
-                $pwd_tip = LangUtil::getPageTerm("TIPS_CASEPWD");
+                $pwd_tip = LangUtil::getPageTerm("TIPS_CHANGEPWD");
                 $page_elems->getSideTip(LangUtil::$generalTerms["TIPS"], $pwd_tip);
                 ?>
                 <table>
                 <tr valign='top'>
-                <td class='left_menu' id='left_pane' width='150px'>
-                <a href="javascript:right_load1();" id='option_1' class='menu_option'><?php echo $LANG_ARRAY["header"]["EDITPROFILE"]; ?></a>
+                <!--<td class='left_menu' id='left_pane' width='150px'>
+                <a href="javascript:right_load1();" id='option_1' class='menu_option'><?php //echo $LANG_ARRAY["header"]["EDITPROFILE"]; ?></a>
                 <br><br>
-                <a href="javascript:right_load2();" id='option_2' class='menu_option'><?php echo LangUtil::getPageTerm("LINK_CHANGEPWD"); ?></a>
+                <a href="javascript:right_load2();" id='option_2' class='menu_option'><?php// echo LangUtil::getPageTerm("LINK_CHANGEPWD"); ?></a>
                 <br><br>
-                </td>
+                </td>-->
                 <td><br><br><br><br><br></td><td></td><td></td><td></td><td></td>
                 <td>
                 <div id='err_msg'>
                 <?php
-                if(isset($_REQUEST['upd']))
+                /*if(isset($_REQUEST['upd']))
                 {
                     ?>
                     <div class='sidetip_nopos'>
@@ -62,7 +67,7 @@ $user_profile = get_user_by_id($_SESSION['user_id']);
                     </div>
                     <?php
                 }
-                else if(isset($_REQUEST['pupdate']))
+                else*/ if(isset($_REQUEST['pupdate']))
                 {
                     ?>
                     <div class='sidetip_nopos'>
@@ -90,71 +95,8 @@ $user_profile = get_user_by_id($_SESSION['user_id']);
                 </div>
                 <div id='edit_profile_div' >
                 <div id="err_message_profile"></div>
-                <form name="input" id="change_profile_form" action="change_profile.php" enctype="multipart/form-data" method="post">
-                <input type='hidden' name='user_id' value='<?php echo $_SESSION['user_id']; ?>'></input>
                 
-                <table cellpadding="2">
-                <tr>
-                <td><?php echo LangUtil::$generalTerms['USERNAME']; ?></td>
-                <td><?php echo $_SESSION['username'];?></td>
-                </tr>
-                
-                <tr>
-                <td><?php echo LangUtil::$generalTerms['NAME']; ?></td>
-                <td><input type="text" name="fullname" id="fullname" value="<?php echo $user_profile->actualName; ?>"  class='uniform_width' /></td>
-                </tr>
-                
-                <tr>
-                <td><?php echo LangUtil::$generalTerms['EMAIL']; ?></td>
-                <td><input type="text" name="email" id="email" value="<?php echo $user_profile->email; ?>"  class='uniform_width' /></td>
-                </tr>
-                
-                <tr>
-                <td><?php echo LangUtil::$generalTerms['PHONE']; ?>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td><input type="text" name="phone" id="phone" value="<?php echo $user_profile->phone; ?>"  class='uniform_width' /></td>
-                </tr>
-                <tr><!-- TODO: disable the display of image upload until the functionality is enhanced.
-                    <!-- <td>Upload your image</td>
-                    <td>
-                              <div class="controls">
-                                        <?php
-                                        /*if ($user_profile->img == null){
-                                            echo '
-                                            <div class="fileupload fileupload-new" data-provides="fileupload">
-                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                            <img src="/assets/img/avatar.png" alt="no image" />
-                                            </div>
-                                    <div class="fileupload-preview fileupload-exists" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>';
-                                            } 
-                                        else {
-                                            echo '
-                                            <div class="fileupload fileupload-exists" data-provides="fileupload">
-                                            <div class="fileupload-preview fileupload-exists thumbnail" style="width: 200px; height: 150px;">
-                                            <img src="img/'.$user_profile->img.'" alt="no image" />
-                                            </div>';
-                                        }*/
-                                       ?>
-                                    <div>
-                                       <span class="btn btn-file"><span class="fileupload-new">Select image</span>
-                                       <span class="fileupload-exists">Change</span>
-                                       <input type="file" class="default" name="imgupload" /></span>
-                                       <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                    </div>
-                                 </div>
-                              </div>
-                         
-                     </td> : echiteri -->
-                </tr>
-                <tr>
-                <td><br></td>
-                <td>
-                <input type="button" class="btn blue" value="<?php echo LangUtil::$generalTerms["CMD_UPDATE"]; ?>" onclick="javascript:check_entry_profile();"/>&nbsp;&nbsp;
-                </td>
-                </tr>
-                </table>
-                </form>
-                </div>
-                <div id='change_pwd_div' style='display:none;'>
+                <div id='change_pwd_div'>
                 <b><?php echo LangUtil::getPageTerm("LINK_CHANGEPWD"); ?></b>
                 <br><br>
                 <div id="err_message_pwd"></div>
@@ -219,7 +161,7 @@ $(document).ready(function(){
     $('#lang_id').attr("value", "<?php echo $user_profile->langId; ?>");
 });
 
-function right_load1()
+/*function right_load1()
 {
     $('#change_pwd_div').hide();
     $('#edit_profile_div').show();
@@ -251,7 +193,7 @@ function check_entry_profile()
     {
         $("#change_profile_form").submit();
     }
-}
+}*/
 
 function check_entry_pwd()
 {

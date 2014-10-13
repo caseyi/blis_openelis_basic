@@ -70,8 +70,12 @@ class User
 		$user->phone = $record['phone'];
 		$user->createdBy = $record['created_by'];
 		$user->labConfigId = $record['lab_config_id'];
+<<<<<<< HEAD
 		$user->labSection = $record['lab_sec_code'];
 		$user->img = $record['img'];
+=======
+                $user->img = $record['img'];
+>>>>>>> def2af0cafb819d2b8dbf62be0a90e6d64a587a4
 		$user->canverify = $record['verify'];
 		if(isset($record['lang_id']))
 			$user->langId = $record['lang_id'];
@@ -2496,6 +2500,16 @@ class Patient
 			return "-";
 		else
 			return $this->surrogateId;
+	}
+        
+        //added by EC
+        public function getSpecimenId($patient_id)
+	{
+		global $con;
+		$specimen_id = mysql_real_escape_string($patient_id, $con);
+		$query_string = "SELECT * FROM specimen WHERE patient_id=$patient_id";
+		$record = query_associative_one($query_string);
+		return $record['specimen_id'];
 	}
 
 	public function getBlisTests()
@@ -6047,7 +6061,21 @@ function encrypt_password($password)
 	$salt = "This comment should suffice as salt.";
 	return sha1($password.$salt);
 }
-
+ # Added by echiteri
+ # get the number of time the password has been changed
+ # to check if it is first login
+function check_password_change($username, $password)
+{
+	global $con;
+	$username = mysql_real_escape_string($username, $con);
+	$saved_db = DbUtil::switchToGlobal();
+	$password = encrypt_password($password);
+        $query_string = "SELECT change_count FROM user WHERE username='$username' AND password='$password'";
+	$record = query_associative_one($query_string);
+	DbUtil::switchRestore($saved_db);
+	return $record['change_count'];  
+}
+#=========
 function check_user_password($username, $password)
 {
 	# Verifies username and password
@@ -6089,17 +6117,38 @@ $url_append = "";
 		"SELECT * FROM user WHERE username='$username' AND password='$password'";
 	$result=mysql_query($query_string);
 	$count=mysql_num_rows($result);
+        # get the number of time the password has been changed
+        # to check if it is first login
+        while($row = mysqli_fetch_array($result)) {
+        $changed_times = $row['change_count'];
+        }
 
 	if($count==1){
-	change_user_password($username, $new_password);
-$url_append = "pupdate";
-	  header("location:edit_profile.php?".$url_append);
+            if($changed_times == 0)//added by echiteri to check initial password change
+            {
+                change_user_password($username, $new_password);
+                $url_append = "pupdate";
+                header("Location:home.php");
+            }else
+            {
+                change_user_password($username, $new_password);
+                $url_append = "pupdate";
+                header("location:edit_profile.php?".$url_append);
+            }
 
       }
-      else{
-$url_append = "pmatcherr";
-      header("location:edit_profile.php?".$url_append);
+      #added by echiteri to check the id of the previous page [first_pwd_change.php 
+      #so as to redirect back to the same page in case of an error
+      else if ($_SESSION['id'] == 'change_password'){ 
+        $url_append = "pmatcherr";
+        header("location:first_pwd_change.php?".$url_append);
+      }else
+      {
+        $url_append = "pmatcherr";
+        header("location:edit_profile.php?".$url_append);
       }
+      // Destroy session keep the house clean echiteri
+    unset($_SESSION['id']);
 
 }
 //Function for Logging and logout and also failed attempts
@@ -6128,7 +6177,7 @@ function change_user_password($username, $password)
 	$password = encrypt_password($password);
 	$query_string =
 		"UPDATE user ".
-		"SET password='$password' ".
+		"SET password='$password', change_count=change_count+1  ".
 		"WHERE username='$username'";
 	query_blind($query_string);
 	DbUtil::switchRestore($saved_db);
@@ -7528,6 +7577,25 @@ function set_specimen_status_toverify($specimen_id)
 	# Update specimen status to complete
 	$status_code = Specimen::$STATUS_TOVERIFY;
 	set_specimen_status($specimen_id, $status_code);
+}
+function reject_test($specimen_id,$test_type_id,$reason)
+{
+	global $con;
+	
+	$status_code = Specimen::$STATUS_REJECTED;
+	$query = mysql_query("UPDATE test SET status_code_id=$status_code WHERE specimen_id = $specimen_id AND test_type_id=$test_type_id" );
+//	add_rejected_test($specimen_id,$test_type_id,$reason);
+	#updates test status to rejected
+      
+}
+function add_rejected_test($specimen_id,$test_type_id,$reason)
+{
+	global $con;
+	
+	$ts=date();
+	$query = mysql_query("INSERT INTO rejected_tests Values($specimen_id,$test_type_id,'$reason','$ts')");
+	#updates test status to rejected
+      
 }
 function update_specimen_status($specimen_id)
 {
@@ -12007,13 +12075,13 @@ class GlobalPatient
 		return Patient::getObject($record);
 	}
 	
-	public function getSurrogateId()
+	/*public function getSurrogateId()
 	{
 		if($this->surrogateId == null || trim($this->surrogateId) == "")
 			return "-";
 		else
 			return $this->surrogateId;
-	}
+	}*/
 	
 	public function getDailyNum()
 	{

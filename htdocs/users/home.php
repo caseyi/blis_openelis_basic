@@ -10,6 +10,11 @@ $profile_tip = LangUtil::getPageTerm("TIPS_PWD");
 
 $facilityname = get_facility_name($_SESSION['lab_config_id']);
 
+// check if the password has been change at the first login. Restrict visit to other pages without password reset: echiteri
+if($_SESSION['id'] != "")
+{
+    session_destroy();
+}
 global $top_menu_options;
 $menu_vals = array_values($top_menu_options);
 echo '<input type="hidden" id="redir_page" value="'.$menu_vals[1].'" />';
