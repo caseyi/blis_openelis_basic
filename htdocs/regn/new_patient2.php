@@ -109,7 +109,7 @@ $script_elems->enableAutocomplete();
 				<td><label class="radio"><input type="radio" id="select_dobage_1" name="select_dobage" onclick="SelectDOBAge(1)" checked /></label>
 					<?php echo LangUtil::$generalTerms['DOB']; ?> 
 					<?php
-					if($_SESSION['dob'] == 2)
+		//			if($_SESSION['dob'] == 2)
 						$page_elems->getAsterisk();
 					?>
 				</td>

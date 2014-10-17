@@ -646,12 +646,14 @@ else if(file_exists($logo_path) === true)
 </div>
 <!--//If condition for the font size
 <STYLE>H3 {FONT-SIZE: <?php echo $size; ?>}</STYLE>-->
+<center>
 <div id="report_word_content">
 <div id="date_section" >
 <?php $align=$report_config->alignment_header;?>
 <h3 align="<?php echo $align; ?>"><?php echo $report_config->headerText; ?><?php #echo LangUtil::$pageTerms['MENU_PHISTORY']; ?></h3>
 <h4 align="<?php echo $align; ?>"><?php echo "Patient Bill"; ?></h4>
 </div>
+
 <?php
 if(isset($_REQUEST['yf']))
 {
@@ -904,17 +906,17 @@ $lab_config_id=$_SESSION['lab_config_id'];
 <table width=100% border="0" class="no_border" ">
 <tr>
 <?php for($j=0;$j<count($footerText);$j++) {?>
-<td <?php if($lab_config_id==234) {?>style="font-size:14pt;"<?php }?> ><?php echo $new_footer_part; ?></td>
+<td <?php if($lab_config_id==234) {?> style="font-size:14pt;"<?php }?> ><?php echo $new_footer_part; ?></td>
 <?php }?>
 </tr>
 <tr>
 <?php for($j=0;$j<count($footerText);$j++) {?>
-<td align="center" <?php if($lab_config_id==234) {?>style="font-size:14pt;"<?php }?>><?php echo $footerText[$j]; ?></td>
+<td align="center" <?php if($lab_config_id==234) {?> style="font-size:14pt;"<?php }?>><?php echo $footerText[$j]; ?></td>
 <?php }?>
 </tr>
 <tr>
 <?php for($j=0;$j<count($designation);$j++) {?>
-<td align="center"<?php if($lab_config_id==234) {?>style="font-size:14pt;"<?php }?> ><?php echo $designation[$j]; ?></td>
+<td align="center"<?php if($lab_config_id==234) {?> style="font-size:14pt;"<?php }?> ><?php echo $designation[$j]; ?></td>
 <?php }
 /*
 $load_time = microtime();

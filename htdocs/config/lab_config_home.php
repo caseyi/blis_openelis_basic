@@ -317,7 +317,7 @@ if($lab_config == null)
                                 <tr valign='top'>
                                     <td><?php echo LangUtil::$generalTerms['LAB_SECTION']; ?></td>
                                     <td>
-                                        <select name='cat_code' id='cat_code12' class='uniform_width'>
+                                        <select name='cat_code12' id='cat_code12' class='uniform_width'>
                                             <option value="0"><?php echo LangUtil::$generalTerms['ALL']; ?></option>
                                             <?php $page_elems->getTestCategorySelect(); ?>
                                         </select>
@@ -1336,6 +1336,7 @@ if($lab_config == null)
 						<div class="portlet box green">
 							<div class="portlet-title">
 								<h4><i class="icon-reorder"></i><?php echo 'Sanitas Users' ?></h4>
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 							</div>
 							<div class="portlet-body">
 							<table class='table table-striped table-condensed table-hover' id="result">

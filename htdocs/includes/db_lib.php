@@ -50,7 +50,8 @@ class User
 	public $labConfigId;
 	public $langId;
 	public $country;
-    public $img;
+	public $labSection;
+	public $img;
 	public $canverify;
 	
     public static function getObject($record)
@@ -69,7 +70,12 @@ class User
 		$user->phone = $record['phone'];
 		$user->createdBy = $record['created_by'];
 		$user->labConfigId = $record['lab_config_id'];
+<<<<<<< HEAD
+		$user->labSection = $record['lab_sec_code'];
+		$user->img = $record['img'];
+=======
                 $user->img = $record['img'];
+>>>>>>> def2af0cafb819d2b8dbf62be0a90e6d64a587a4
 		$user->canverify = $record['verify'];
 		if(isset($record['lang_id']))
 			$user->langId = $record['lang_id'];
@@ -6197,8 +6203,8 @@ function add_user($user)
 	$saved_db = DbUtil::switchToGlobal();
 	$password = encrypt_password($user->password);
 	$query_string = 
-		"INSERT INTO user(username, password, actualname, level, created_by, lab_config_id, email, phone, lang_id) ".
-		"VALUES ('$user->username', '$password', '$user->actualName', $user->level, $user->createdBy, '$user->labConfigId', '$user->email', '$user->phone', '$user->langId')";
+		"INSERT INTO user(username, password, actualname, level, created_by, lab_config_id, email, phone, lang_id,lab_sec_code) ".
+		"VALUES ('$user->username', '$password', '$user->actualName', $user->level, $user->createdBy, '$user->labConfigId', '$user->email', '$user->phone', '$user->langId', '$user->labSection')";
 	query_insert_one($query_string);
 	DbUtil::switchRestore($saved_db);
 }
@@ -6274,7 +6280,8 @@ function update_lab_user($updated_entry)
 		"email='$updated_entry->email', ".
 		"level=$updated_entry->level, ".
 		"verify=$updated_entry->canverify, ".
-		"lang_id='$updated_entry->langId' ".
+		"lang_id='$updated_entry->langId', ".
+		"lab_sec_code='$updated_entry->labSection' ".
 		"WHERE user_id=$updated_entry->userId";
 	query_blind($query_string);
 	if($updated_entry->password != "")
@@ -7609,7 +7616,25 @@ function update_specimen_status($specimen_id)
 	$status_code = Specimen::$STATUS_DONE;
 	set_specimen_status($specimen_id, $status_code);
 }
-
+function reject_test($specimen_id,$test_type_id,$reason)
+{
+	global $con;
+	
+	$status_code = Specimen::$STATUS_REJECTED;
+	$query = mysql_query("UPDATE test SET status_code_id=$status_code WHERE specimen_id = $specimen_id AND test_type_id=$test_type_id" );
+	add_rejected_test($specimen_id,$test_type_id,$reason);
+	#updates test status to rejected
+      
+}
+function add_rejected_test($specimen_id,$test_type_id,$reason)
+{
+	global $con;
+	
+	$ts=date();
+	$query = mysql_query("INSERT INTO rejected_tests Values($specimen_id,$test_type_id,'$reason','$ts')");
+	#updates test status to rejected
+      
+}
 // Reject specimen status, updates a specimen status to 6 (rejected)
 // as specified in specimen class
 function update_specimen_status_rejected($specimen_id, $rejectionreason){

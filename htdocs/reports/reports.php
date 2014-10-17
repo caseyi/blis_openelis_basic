@@ -3336,7 +3336,7 @@ function show_custom_report_form(report_id)
 	
 	
             
-	<div id='daily_report_div' class='reports_subdiv' style='display:none'>
+	<!--<div id='daily_report_div' class='reports_subdiv' style='display:none'>
 		<b><?php echo LangUtil::$pageTerms['MENU_DAILYLOGS']; ?></b>
 		<br><br>
 		<table cellpadding='4px'>
@@ -3433,7 +3433,7 @@ function show_custom_report_form(report_id)
 				</tr>
 			</tbody>
 		</table>
-	</div>
+	</div>-->
 	
 	<div id='billing_report_div' class='reports_subdiv' style='display:none'>
 		<b><?php echo "Bill Generation"; ?></b>

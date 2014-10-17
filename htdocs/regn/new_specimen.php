@@ -197,6 +197,17 @@ function add_specimens()
 			return;
 			}
 		}
+		var spec_reg_date = $("#"+form_id+" [name='spec_date']").attr("value");
+		var curr_date = new Date();
+		if (spec_reg_date!=""){
+		var pt_regdate = new Date(spec_reg_date.slice(0, 4), parseInt(spec_reg_date.slice(5, 7))-1, spec_reg_date.slice(-2));
+		if (curr_date<pt_regdate){
+
+			alert("Error: The registration date cannot be after today");
+			return;
+		}
+	}
+		
 		var specimen_valid = $("#specimen_msg_"+j).html();
 		if(specimen_valid != "")
 		{
@@ -294,6 +305,22 @@ function add_specimens()
 	*/
 	window.location="specimen_added.php?snum=<?php echo $session_num; ?>";
 }
+$(document).ready(function() {
+    $('.date-picker').live('click', function() {
+    $(this).datepicker('destroy').datepicker({showOn:'focus'}).focus();
+        });
+});
+$(document).ready(function() {
+    $('.bootstrap-timepicker-component').live('click', function() {
+   // $('.timepicker-24').timepicker();
+  
+  $('.timepicker-24').timepicker({
+            showMeridian: false     
+        });
+  
+  
+        });
+});
 
 function add_specimenbox()
 {
@@ -390,6 +417,7 @@ function checkandtoggle_ref(ref_check_id, ref_row_id)
 
 // ]]> -->
 </script>
+
 <p style="text-align: right;"><a rel='facebox' href='#NEW_SPECIMEN'>Page Help</a></p>
 <span class='page_title'><?php echo LangUtil::getTitle(); ?></span>
  | <?php echo "Visit Number:"; ?> <?php echo $session_num; ?>
@@ -497,13 +525,21 @@ var form_id = 'specimenform_'+form;
 	if (opt==="1"){
 	$("#"+form_id+" tr[class='toHide']").hide();
 		//$('#blk-'+formid).hide(); //$('.toHide').hide();
-		$("#"+form_id+" option[id='empty_opt']").attr('selected','true');
+		$("#"+form_id+" input[name='MFL_Code']").attr('value','');
 	//$('#empty_opt').attr('selected','true');
 } else {
 		$("#"+form_id+" tr[class='toHide']").show(); //$('.toHide').show('fast');
-		$("#"+form_id+" option[id='empty_opt']").attr('selected','false');
+		//$("#"+form_id+" option[id='empty_opt']").attr('selected','false');
 	}
 	
 }
  
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".tooltip-examples").tooltip({
+        placement : 'right'
+    });
+});
+</script>
+

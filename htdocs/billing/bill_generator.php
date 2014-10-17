@@ -46,6 +46,7 @@ $script_elems->enableJQueryForm();
 		?><table class='tablesorter table-hover' id='billing_popup_table' style="border-collapse: separate; width: 700px;">
 			<thead>
 				<tr valign='top'>
+					<th id='billing_popup_specimen_id'>Specimen ID</th>
 					<th id='billing_popup_date'>Test Date</th>
 					<th id='billing_popup_name'>Test Name</th>
 					<th id='billing_popup_specimen_type'>Specimen Type</th>
@@ -69,7 +70,7 @@ $script_elems->enableJQueryForm();
 				$style_string = "";
 			}
 			$cost = get_cost_of_test($test);
-			?><tr>
+			?><tr>	<td <?php echo $style_string ?>><?php echo $test->getLabSectionByTest(); ?></td>
 				<td <?php echo $style_string ?>><?php echo date("Y-m-d", strtotime($test->timestamp)); ?></td>
 				<td <?php echo $style_string ?>><?php echo get_test_name_by_id($test->testTypeId); ?></td>
 				<td <?php echo $style_string ?>><?php echo $specimen->getTypeName(); ?></td>

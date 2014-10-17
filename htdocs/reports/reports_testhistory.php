@@ -2107,7 +2107,7 @@ else
 
 		//		{
 
-					echo "<td>".DateLib::mysqlToString($specimen->dateRecvd)."</td>";
+					echo "<td>".DateLib::mysqlToString($specimen->dateCollected)."</td>";
 
 		//		}
 				echo "<td>".$specimen->timeCollected."</td>";
@@ -2156,7 +2156,7 @@ else
 				}
 				else{
 						echo "<td>".$specimen->getSpecimenCollector()."</td>";
-						echo "<td>".DateLib::mysqlToString($specimen->dateCollected)."</td>";
+						echo "<td>".DateLib::mysqlToString($specimen->dateRecvd)."</td>";
 						
 
 				}

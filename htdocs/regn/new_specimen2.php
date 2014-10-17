@@ -392,6 +392,33 @@ function add_specimens()
             alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['MSG_SID_MISSING']; ?>");
             return;
         }
+        var doctor = $("#"+form_id+" [name='doctor']").attr("value");
+		if(doctor.trim() == "")
+		{
+			alert("<?php echo 'Please Enter Clinician Name to proceed' ?>");
+			return;
+		}
+		var checkedValue = $("#"+form_id+" input[type='radio']:checked").val();
+		var facility = $("#"+form_id+" [name='MFL_Code']").attr("value");
+		//var facility_sel = $( "#MFL_Code option:selected" ).text();
+		if(checkedValue.trim() == "2")
+		{
+		if (facility.trim() == ""){
+			alert("Select a facility");
+			return;
+			}
+		}
+	var spec_reg_date = $("#"+form_id+" [name='spec_date']").attr("value");
+		var curr_date = new Date();
+		if (spec_reg_date!=""){
+		var pt_regdate = new Date(spec_reg_date.slice(0, 4), parseInt(spec_reg_date.slice(5, 7))-1, spec_reg_date.slice(-2));
+		if (curr_date<pt_regdate){
+
+			alert("Error: The registration date cannot be after today");
+			return;
+		}
+	}
+	
         var specimen_valid = $("#specimen_msg_"+j).html();
         if(specimen_valid != "")
         {
@@ -462,25 +489,61 @@ function add_specimens()
    window.location="specimen_added.php?snum=<?php echo $session_num; ?>";
 }
 
+// function add_specimenbox()
+// {
+//     specimen_count++;
+//     var doc = $('#doc_row_1_input').val();
+//     var title= $('#doc_row_1_title').val();
+//     var dnumInit = "<?php echo $dnum; ?>";
+//     dnum = dnumInit.toString();
+//     var url_string = "ajax/specimenbox_add.php?num="+specimen_count+"&pid=<?php echo $pid; ?>"+"&dnum="+dnum+"&doc="+doc+"&title="+title+"&session_num=<?php echo $session_num; ?>";
+//     $('#sbox_progress_spinner').show();
+//     $.ajax({ 
+//         url: url_string, 
+//         success: function(msg){
+//             $('#specimenboxes').append(msg);
+//             $('#sbox_progress_spinner').hide();
+//             App.init();
+//         }
+//     });
+// }
+$(document).ready(function() {
+    $('.date-picker').live('click', function() {
+    $(this).datepicker('destroy').datepicker({showOn:'focus'}).focus();
+        });
+});
+$(document).ready(function() {
+    $('.bootstrap-timepicker-component').live('click', function() {
+   // $('.timepicker-24').timepicker();
+  
+  $('.timepicker-24').timepicker({
+            showMeridian: false     
+        });
+  
+  
+        });
+});
 function add_specimenbox()
 {
-    specimen_count++;
-    var doc = $('#doc_row_1_input').val();
-    var title= $('#doc_row_1_title').val();
-    var dnumInit = "<?php echo $dnum; ?>";
-    dnum = dnumInit.toString();
-    var url_string = "ajax/specimenbox_add.php?num="+specimen_count+"&pid=<?php echo $pid; ?>"+"&dnum="+dnum+"&doc="+doc+"&title="+title+"&session_num=<?php echo $session_num; ?>";
-    $('#sbox_progress_spinner').show();
-    $.ajax({ 
-        url: url_string, 
-        success: function(msg){
-            $('#specimenboxes').append(msg);
-            $('#sbox_progress_spinner').hide();
-            App.init();
-        }
-    });
+	specimen_count++;
+	var doc = $('#doc_row_1_input').attr("value");
+	var title= $('#doc_row_1_title').attr("value");
+	var dnumInit = "<?php echo $dnum; ?>";
+	dnum = dnumInit.toString();
+	var url_string = "ajax/specimenbox_add.php?num="+specimen_count+"&pid=<?php echo $pid; ?>"+"&dnum="+dnum+"&doc="+doc+"&title="+title+"&session_num=<?php echo $session_num; ?>";
+	$('#sbox_progress_spinner').show();
+	$.ajax({ 
+		url: url_string, 
+		success: function(msg){
+			var currentTime = new Date()
+			var hours = currentTime.getHours()
+			var minutes = currentTime.getMinutes()
+			$('#specimenboxes').append(msg);
+			$('#sbox_progress_spinner').hide();
+			$('#specimenform_'+specimen_count+'_ctime').val(hours + ':' + minutes);
+		}
+	});
 }
-
 function get_testbox(testbox_id, stype_id, external_tests)
 {
     var stype_val = $('#'+stype_id).val();
@@ -571,14 +634,27 @@ $(document).ready(function(){
     });*/
  });
 
-function ShowFacility(Element){
-	var opt = Element.value;
-	var formid = Element.id.substr(Element.id.lastIndexOf('_')+1);
+function ShowFacility(form){
+var form_id = 'specimenform_'+form;
+	var opt = $("#"+form_id+" input[type='radio']:checked").val();
+	//var formid = Element.id.substr(Element.id.lastIndexOf('_')+1);
 	if (opt==="1"){
-		$('#blk-'+formid).hide(); //$('.toHide').hide();
-	} else {
-		$('#blk-'+formid).show(); //$('.toHide').show('fast');
+	$("#"+form_id+" tr[class='toHide']").hide();
+		//$('#blk-'+formid).hide(); //$('.toHide').hide();
+		$("#"+form_id+" input[name='MFL_Code']").attr('value','');
+	//$('#empty_opt').attr('selected','true');
+} else {
+		$("#"+form_id+" tr[class='toHide']").show(); //$('.toHide').show('fast');
+		//$("#"+form_id+" option[id='empty_opt']").attr('selected','false');
 	}
+	
 }
 
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".tooltip-examples").tooltip({
+        placement : 'right'
+    });
+});
 </script>
