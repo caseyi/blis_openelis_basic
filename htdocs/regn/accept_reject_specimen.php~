@@ -14,7 +14,7 @@ $reasons_for_rejection = $_REQUEST['reasons'];
 $reason="";
 $flag=0;
 foreach($reasons_for_rejection as $entry){
-$reason .= $entry.";";
+$reason .= $entry."; ";
 $flag=1;
 }
 if($flag==1){

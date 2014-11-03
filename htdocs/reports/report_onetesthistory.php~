@@ -404,7 +404,7 @@ else
 				</tr>
 			<tr valign='top'>
 					<td><?php echo "Rejection Reason "; ?></td>
-					<td><?php echo $specimen->getComments(); ?></td>
+					<td><?php echo $specimen->getRejectedSpecimenReasons($specimen_id); ?></td>
 				</tr>
 				
 				<tr valign='top'>

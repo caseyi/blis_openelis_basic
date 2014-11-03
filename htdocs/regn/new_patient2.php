@@ -132,7 +132,7 @@ $script_elems->enableAutocomplete();
 					<!-- <font style='color:red'><?php echo LangUtil::$pageTerms['TIPS_DOB_AGE'];?></font> -->
 				</td>
 				<td>
-					<input type="text" name="age" id="age" value="" size="4" maxlength="3" class='uniform_width m-wrap tooltips' />
+					<input type="text" name="age" id="age" value="" size="4" maxlength="5" class='uniform_width m-wrap tooltips' />
 					
 					<select name='age_param' id='age_param' class='uniform_width m-wrap tooltips'>
 						<option value='1'><?php echo LangUtil::$generalTerms['YEARS']; ?></option>

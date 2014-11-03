@@ -3486,7 +3486,7 @@ $user=$_SESSION['user_id'];
 					echo LangUtil::$generalTerms['PENDING_RESULTS'];
 				else
 					echo ($allowedit && !$test->isVerified() ? '<input type="text" style="width:60px" id="test_result_'.$test->testId.'" name="'.get_test_name_by_id($test->testTypeId).'_Result" value="' : '').
-						($allowedit && !$test->isVerified() ? str_replace('<br>', '', $test->decodeResult()) : $test->decodeResult()).($allowedit && !$test->isVerified() ? '" />' : '');
+						($allowedit && !$test->isVerified() ? str_replace(array('<br>','</br>','<b>','</b>'), '', $test->decodeResult()) : $test->decodeResult()).($allowedit && !$test->isVerified() ? '" />' : '');
 				?>
 			</td>
 			<td style="font-size:10px">
