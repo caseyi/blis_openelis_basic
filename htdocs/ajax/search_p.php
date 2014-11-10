@@ -152,7 +152,7 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 			if($lab_config->age >= 11)
 			{
 				?>
-				<th><?php echo LangUtil::$generalTerms['AGE']; ?></th>
+				<th><?php echo LangUtil::$generalTerms['AGE']."(Years)"; ?></th>
 				<?php
 			}?>
 			
@@ -228,7 +228,7 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 			{
 				?>
 				<td>
-					<?php echo $patient->getAge(); ?>
+					<?php echo $patient->getAgeNumber(); ?>
 				</td>
 				<?php
 			}?>

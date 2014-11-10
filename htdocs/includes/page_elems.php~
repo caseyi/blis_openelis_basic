@@ -3516,7 +3516,7 @@ $user=$_SESSION['user_id'];
 				<?php if (!$test->isVerified()){ ?>
 				<input type="button" id="Btn_Verify" value="Verify Result" onclick="javascript:verify_result('<?php echo $test->testId."','".
 					str_replace('&nbsp;', '', str_replace('<br>', '', $test->decodeResult()))."','".mysql_real_escape_string($test->getComments()); ?>');" />					
-				
+				<br/>
 				<br/>
 				<a href="#" class="btn btn-danger" title="Reject" data-content="Result Rejection" data-toggle="modal" data-target=".bs-example-modal-lg">Reject</a>	
   <!--pop up begin-->
@@ -4528,8 +4528,9 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 			</tr>
 			
 			<tr id="blk-<?php echo $form_num; ?>" class="toHide"><td>Referral Facility:<?php if($_SESSION['refout'] == 1) $this->getAsterisk(); ?></td><td>
-			<input type="text" list=MFL_Code name="MFL_Code" class="tooltip-examples" data-toggle="tooltip" data-original-title="Input code or name & select from suggestions in dropdown">
-			<datalist id=MFL_Code >
+			<input type="text" list=MFL name="MFL" id="MFL_Codeid" class="tooltip-examples" data-toggle="tooltip" data-original-title="Input code or name & select from suggestions in dropdown">
+			<input type="hidden" name="MFL_Code" id="MFL_Code" class="tooltip-examples" data-toggle="tooltip" data-original-title="Input code or name & select from suggestions in dropdown">
+			<datalist id=MFL >
 
 			<?php
 
@@ -4537,7 +4538,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 
 				while($row = mysql_fetch_assoc($r))
 						{
-				echo "<option value='{$row['Facility_Code']}'><span>{$row['Facility_Name']}:&nbsp;</span>{$row['Facility_Code']}</option>";
+				echo "<option data-value='{$row['Facility_Code']}' value='{$row['Facility_Name']}'><span>{$row['Facility_Name']}:&nbsp;</span>{$row['Facility_Code']}</option>";
 						}
 
 						?>
