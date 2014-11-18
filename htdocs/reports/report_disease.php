@@ -368,10 +368,14 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 		foreach($measures as $measure)
 		{
 			$male_total = array();
+			$male_total1=array();
 			$female_total = array();
+			$female_total1 = array();
 			$cross_gender_total = array();
 			$curr_male_total = 0;
+			$curr_male_total1 = 0;
 			$curr_female_total = 0;
+			$curr_female_total1= 0;
 			$curr_cross_gender_total = 0;
 			$disease_report = DiseaseReport::getByKeys($lab_config->id, $test->testTypeId, $measure->measureId);
 			
@@ -409,13 +413,23 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 				<td><?php echo $test->getName(); //$measure->getName(); ?></td>
 				<td>
 				<?php 
+				if($is_range_options){
 				foreach($range_values as $range_value)
 				{
 					if($is_range_options)
 						echo "$range_value<br>";
 					else
-						echo "Not in Normal Range:$range_value[0]-$range_value[1]<br>";
+						
+						echo "$range_value[0]-$range_value[1]<br>";
 					if($site_settings->groupByGender == 1)
+					{
+						echo "<br>";
+					}
+				}
+				}
+				else{
+				echo "Positive<br><br>Negative<br>";
+				if($site_settings->groupByGender == 1)
 					{
 						echo "<br>";
 					}
@@ -427,9 +441,15 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 				{
 					# Group by gender set to true
 					echo "<td>";
+					if($is_range_options){
 					for($i = 1; $i <= count($range_values); $i++)
 					{
 						echo "M<br>F<br>";
+					}
+					}
+					else{
+					echo "M<br>F<br>";
+					echo "M<br>F<br>";
 					}
 				}
 				if($site_settings->groupByAge == 1)
@@ -438,20 +458,30 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 					$age_slot_list = $site_settings->getAgeGroupAsList();
 					foreach($age_slot_list as $age_slot)
 					{
+					#added by Norbert to display Numeric range results as Positive or Negative
+					$men=array();
+					$female=array();
+					$men_neg=array();
+					$female_neg=array();
+					#end add
 						echo "<td>";
 						$range_value_count = 0;
 						//echo 'Range Values: '; var_dump($range_values);
 						foreach($range_values as $range_value)
 						{
 							$range_value_count++;
-							if(!isset($male_total[$range_value_count]))
+							if(!isset($male_total[$range_value_count]) || !isset($male_total1[$range_value_count]))
 							{
 								$male_total[$range_value_count] = 0;
+								$male_total1[$range_value_count] = 0;
 								$female_total[$range_value_count] = 0;
+								$female_total1[$range_value_count] = 0;
 								$cross_gender_total[$range_value_count] = 0;
 							}
 							$curr_male_total = 0;
+							$curr_male_total1 = 0;
 							$curr_female_total = 0;
+							$curr_female_total1 = 0;
 							$curr_cross_gender_total = 0;
 							$range_type = DiseaseSetFilter::$CONTINUOUS;
 							if($is_range_options == true)
@@ -482,18 +512,35 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 								## Count for males.
 								$disease_filter->patientGender = 'M';
 								$curr_total1 = StatsLib::getDiseaseFilterCount($disease_filter);
+								$curr_total3 = StatsLib::getDiseaseFilterCount1($disease_filter);#for negative range numeric values for males
 								$curr_male_total += $curr_total1;
+								$curr_male_total1 += $curr_total3;
 								## Count for females.
 								$disease_filter->patientGender = 'F';
 								//if ($test->name=='G6PD') {echo 'DFC='; var_dump($disease_filter);}
 								$curr_total2 = StatsLib::getDiseaseFilterCount($disease_filter);
+								$curr_total4 = StatsLib::getDiseaseFilterCount1($disease_filter);#for negative range numeric values for females
 								$curr_female_total += $curr_total2;
+								$curr_female_total1 += $curr_total4;
+								#added by Norbert to capture totals for all ranges men/female
+								$men[$range_value_count]=$curr_total1;#for positive males
+								$men_neg[$range_value_count]=$curr_total3;#for negative males
+								$female[$range_value_count]=$curr_total2;#for positive females
+								$female_neg[$range_value_count]=$curr_total4;#for negative females
+								if($is_range_options){
 								echo "$curr_total1<br>$curr_total2<br>";
+								}
 							}
 							# Build assoc list to track genderwise totals
 							$male_total[$range_value_count] += $curr_male_total;
+							$male_total1[$range_value_count] +=$curr_male_total1;
 							$female_total[$range_value_count] += $curr_female_total;
+							$female_total1[$range_value_count] += $curr_female_total1;
 							$cross_gender_total[$range_value_count] += $curr_cross_gender_total;
+						}
+					if(!$is_range_options){
+						echo array_sum($men)."<br>".array_sum($female)."<br>";
+						echo array_sum($men_neg)."<br>".array_sum($female_neg)."<br>";
 						}
 						echo "</td>";
 					}
@@ -558,6 +605,7 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 				if($site_settings->groupByGender == 1)
 				{
 					echo "<td>";
+					if($is_range_options){
 					for($i = 1; $i <= count($range_values); $i++)
 					{
 						$this_male_total = $male_total[$i];
@@ -565,10 +613,19 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 						echo "$this_male_total<br>$this_female_total<br>";
 						$this_cross_gender_total = $this_male_total + $this_female_total;
 					}
+					}
+					if(!$is_range_options){
+											$this_male_total = $male_total[$i];
+						$this_female_total = $female_total[$i];
+						echo array_sum($male_total)."<br>".array_sum($female_total)."<br>";
+						echo array_sum($male_total1)."<br>".array_sum($female_total1)."<br>";
+						$this_cross_gender_total = $this_male_total + $this_female_total;
+					}
 					echo "</td>";
 				}
 				
 				echo "<td>";
+				if($is_range_options){
 				for($i = 1; $i <= count($range_values); $i++)
 				{
 					if($site_settings->groupByGender == 1)
@@ -582,6 +639,23 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 						echo "<br>";
 					}				
 				}
+				}
+				if(!$is_range_options){
+				if($site_settings->groupByGender == 1)
+					{
+						$temp_sum=array_sum($male_total)+array_sum($female_total);
+						
+						echo $temp_sum;
+						
+						echo "<br><br>";
+						echo array_sum($male_total1)+array_sum($female_total1);
+					}
+					else
+					{
+						echo $cross_gender_total[$i];
+						echo "<br>";
+					}
+				}
 				echo "</td>";
 				# Grand total:
 				# TODO: Check the following function for off-by-one error
@@ -590,8 +664,17 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 				echo "<td>";
 				if($site_settings->groupByGender == 1)
 				{
+				if($is_range_options){
 					echo array_sum($male_total) + array_sum($female_total);
 					$grand_total = array_sum($male_total) + array_sum($female_total);
+					}
+				if(!$is_range_options){
+				$temp_sum=(array_sum($male_total) + array_sum($female_total))+array_sum($male_total1)+array_sum($female_total1);
+				
+				echo $temp_sum;
+				
+				
+				}
 				}
 				else
 				{
