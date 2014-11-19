@@ -2762,6 +2762,26 @@ class Specimen
 			echo $this->comments;
 	}
 	
+	public function getRejectedSpecimenReasons($specimen_id)
+	{
+	$query_string = "SELECT reason_id FROM rejected_specimen WHERE specimen_id=$specimen_id;";
+		$record = query_associative_one($query_string);		
+		$retval = "";
+			$retval = $record['reason_id'];
+			$keywords = explode(';', $retval);  //if keywords entered is "white black new", will convert to array of "white","black","new". The delimiter here is the space.
+$keywordsBits = array(); 
+foreach ($keywords as $keyword) { 
+          $keyword = trim($keyword); 
+          if (!empty($keyword)) { 
+                $keywordsBits[] = "rejection_reason_id = '$keyword'"; 
+          } 
+}
+$query_string = "SELECT description FROM rejection_reasons WHERE ".implode(' OR ', $keywordsBits);
+		$record = query_associative_one($query_string);		
+		$retval = "";
+			$retval = $record['description'];
+		return $retval;	
+	}
 	public function getAuxId()
 	{
 		if($this->auxId == "" || $this->auxId == null)

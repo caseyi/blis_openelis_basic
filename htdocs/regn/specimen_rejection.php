@@ -113,30 +113,7 @@ $patient = get_patient_by_id($main_rs['patient_number']);
     <input name="specimen" id="specimen" type="hidden" value="<?php echo $sid; ?>" />
     <td>
                                           <select class="large m-wrap" rows="3" id="reasons" name="reasons[]" multiple="multiple" >
-                                          <optgroup label="Request Form">
-                                          <option value="Request form not received with specimen">Request form not received with specimen</option>
-                                          <option value="Specimen not received along with request form">Specimen not received along with request form</option>
-                                          <option value="Missing collection date on specimen container or request form">Missing collection date on specimen container or request form</option>
-                                          <option value="Name and signature of requesting clinician missing">Name and signature of requesting clinician missing</option>
-                                          <option value="Mismatch of information details on request form with details on the specimen container">Mismatch of information details on request form with details on the specimen container</option>
-                                          <option value="Request form contaminated with specimen">Request form contaminated with specimen</option>
-                                          </optgroup>
-                                          <optgroup label="Specimen">
-                                          <option value="Container used not appropriate for investigation requested">Container used not appropriate for investigation requested
-                                          </option>
-                                          <option value="Specimen unlabelled or has inadequate labelling">Specimen unlabelled or has inadequate labelling
-                                          </option>
-                                          <option value="Specimen Container broken">Specimen Container broken
-                                          </option>
-                                          </optgroup>
-                                          <optgroup label="Tests Requested">
-                                          <option value="Requested test not performed by the laboratory">Requested test not performed by the laboratory
-                                          </option>
-                                          <option value="Inappropriate specimen is provided for the requested test">Inappropriate specimen is provided for the requested test
-                                          </option>
-                                          <option value="Test requested is inappropriate to the clinical condition">Test requested is inappropriate to the clinical condition
-                                          </option>
-                                          </optgroup>
+                                          <?php  $page_elems->getRejectionReasonsSelect();?>
                                           </select>
                                        </td>
   </tr>

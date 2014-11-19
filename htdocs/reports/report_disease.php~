@@ -414,7 +414,7 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 					if($is_range_options)
 						echo "$range_value<br>";
 					else
-						echo "$range_value[0]-$range_value[1]<br>";
+						echo "Not in Normal Range:$range_value[0]-$range_value[1]<br>";
 					if($site_settings->groupByGender == 1)
 					{
 						echo "<br>";

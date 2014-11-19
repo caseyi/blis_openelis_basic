@@ -350,10 +350,12 @@ $daycount++;
 			echo " selected ";
 		echo ">Tech read-only</option>";
 		*/
+
 		echo "<option value='$LIS_ADMIN'";
 		if($selected_value == $LIS_ADMIN)
 			echo " selected ";
 		echo ">Admin</option>";
+
 		echo "<option value='$LIS_CLERK'";
 		if($selected_value == $LIS_CLERK)
 			echo " selected ";
@@ -3233,6 +3235,12 @@ $user=$_SESSION['user_id'];
 						<?php echo DateLib::mysqlToString($specimen->dateCollected); ?>
 					</td>
 				</tr>
+                                <tr>
+					<td><u><?php echo LangUtil::$generalTerms['C_DATE']; ?></u></td>
+					<td>
+						<?php echo DateLib::mysqlToString($specimen->dateCollected); ?>
+					</td>
+				</tr>
 				<tr>
 					<td><u><?php echo LangUtil::$generalTerms['REGD_BY']; ?></u></td>
 					<td><?php echo get_username_by_id($specimen->userId); ?></td>
@@ -3478,7 +3486,7 @@ $user=$_SESSION['user_id'];
 					echo LangUtil::$generalTerms['PENDING_RESULTS'];
 				else
 					echo ($allowedit && !$test->isVerified() ? '<input type="text" style="width:60px" id="test_result_'.$test->testId.'" name="'.get_test_name_by_id($test->testTypeId).'_Result" value="' : '').
-						($allowedit && !$test->isVerified() ? str_replace('<br>', '', $test->decodeResult()) : $test->decodeResult()).($allowedit && !$test->isVerified() ? '" />' : '');
+						($allowedit && !$test->isVerified() ? str_replace(array('<br>','</br>','<b>','</b>'), '', $test->decodeResult()) : $test->decodeResult()).($allowedit && !$test->isVerified() ? '" />' : '');
 				?>
 			</td>
 			<td style="font-size:10px">
@@ -3508,7 +3516,7 @@ $user=$_SESSION['user_id'];
 				<?php if (!$test->isVerified()){ ?>
 				<input type="button" id="Btn_Verify" value="Verify Result" onclick="javascript:verify_result('<?php echo $test->testId."','".
 					str_replace('&nbsp;', '', str_replace('<br>', '', $test->decodeResult()))."','".mysql_real_escape_string($test->getComments()); ?>');" />					
-				
+				<br/>
 				<br/>
 				<a href="#" class="btn btn-danger" title="Reject" data-content="Result Rejection" data-toggle="modal" data-target=".bs-example-modal-lg">Reject</a>	
   <!--pop up begin-->
@@ -4323,8 +4331,8 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		$ref_out_row_id = 'ref_out_row_'.$form_num;
 		$ref_out_check_id = 'ref_out_'.$form_num;
 		$lab_config = LabConfig::getById($_SESSION['lab_config_id']);
-        $custom_class = 'custom_'.$form_num;
-        $radio_name = 'ref_out_'.$form_num;
+                $custom_class = 'custom_'.$form_num;
+                $radio_name = 'ref_out_'.$form_num;
 		?>
 		<div id='<?php echo $div_id; ?>'>
 		<div class='pretty_box' style='width:630px;'>
@@ -4520,8 +4528,9 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 			</tr>
 			
 			<tr id="blk-<?php echo $form_num; ?>" class="toHide"><td>Referral Facility:<?php if($_SESSION['refout'] == 1) $this->getAsterisk(); ?></td><td>
-			<input type="text" list=MFL_Code name="MFL_Code" class="tooltip-examples" data-toggle="tooltip" data-original-title="Input code or name & select from suggestions in dropdown">
-			<datalist id=MFL_Code >
+			<input type="text" list=MFL name="MFL" id="MFL_Codeid" class="tooltip-examples" data-toggle="tooltip" data-original-title="Input code or name & select from suggestions in dropdown">
+			<input type="hidden" name="MFL_Code" id="MFL_Code" class="tooltip-examples" data-toggle="tooltip" data-original-title="Input code or name & select from suggestions in dropdown">
+			<datalist id=MFL >
 
 			<?php
 
@@ -4529,7 +4538,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 
 				while($row = mysql_fetch_assoc($r))
 						{
-				echo "<option value='{$row['Facility_Code']}'><span>{$row['Facility_Name']}:&nbsp;</span>{$row['Facility_Code']}</option>";
+				echo "<option data-value='{$row['Facility_Code']}' value='{$row['Facility_Name']}'><span>{$row['Facility_Name']}:&nbsp;</span>{$row['Facility_Code']}</option>";
 						}
 
 						?>
@@ -6427,7 +6436,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		}
 		?>
 		<div class='pretty_box' style='width:100%;'>
-		<table class='table table-bordered table-hover>
+		<table class='table table-bordered table-hover'>
 			<tbody>
 				<tr valign='top'>
 					<td><?php echo LangUtil::$pageTerms['GROUP_BYGENDER']; ?></td>

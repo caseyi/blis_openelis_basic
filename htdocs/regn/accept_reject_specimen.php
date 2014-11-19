@@ -24,14 +24,15 @@ $specimen=$_REQUEST['specimen'];
 $rejection_date=date('Y-m-d H:i:s');
 $rejected_by=$_SESSION['username'];
 $query = mysql_query("UPDATE specimen SET status_code_id=$STATUS_REJECTED, comments='$reason', ts_accept_reject='$rejection_date',accept_rejected_by='$rejected_by' WHERE specimen_id = $specimen") or die(mysql_error());
-		if($query){
+$query = mysql_query("INSERT INTO rejected_specimen VALUES ($specimen,'$reason','$rejection_date')") or die(mysql_error());
+if($query){
 			header('Location: find_patient.php?show_sc=1');
 			
 		}
 		else{
 			echo '<div class="alert alert-error">
 									<button class="close" data-dismiss="alert"></button>
-									<strong>Error!</strong> The daily cronjob has failed.
+									<strong>Error!</strong> The Update has failed.
 								</div>';
 		}
 ?>
