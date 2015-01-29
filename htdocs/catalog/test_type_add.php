@@ -46,16 +46,39 @@ $scc = 0;
 $ccc = 0;
 /*if(isset($_REQUEST['ispanel']))
 {
+// 	# Panel test. Collect all selected measures*/
+// 	$is_panel = true;
+// 	$measure_list = get_measures_catalog();
+// 	foreach($measure_list as $measure_id=>$measure_name)
+// 	{
+// 		if(isset($_REQUEST['m_'.$measure_id]))
+// 		{
+// 			# Track the measure ID (key)
+// 			$added_measures_list[] = $measure_id;
+// 		}
+// 	}
+//edited by glen to capture test type measures for panel tests
 	# Panel test. Collect all selected measures*/
 	$is_panel = true;
-	$measure_list = get_measures_catalog();
-	foreach($measure_list as $measure_id=>$measure_name)
+	$reff=1;
+	$test_list = get_test_types_catalog($_SESSION['lab_config_id'],$reff);
+	
+	foreach($test_list as $key=>$value)
 	{
-		if(isset($_REQUEST['m_'.$measure_id]))
+		if(isset($_REQUEST['t_type_'.$key]))
 		{
-			# Track the measure ID (key)
-			$added_measures_list[] = $measure_id;
+		
+		//echo $test_id.'<br>';
+		$measure_list= get_test_type_measure($key);
+		//echo $measure_list;
+		foreach($measure_list as $measure){
+		$added_measures_list1 = $measure->measureId;
+		
 		}
+	$added_measures_list[]=$added_measures_list1;
+	
+		}
+		
 	}
 /*}
 else

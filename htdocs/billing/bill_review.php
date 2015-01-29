@@ -44,15 +44,6 @@ $script_elems->enableTableSorter();
 	
 	<body>
 		<?php
-                
-			$bill = Bill::loadFromId($billId, $lab_config_id);
-			$patient = Patient::getById($bill->getPatientId());
-			$associations = $bill->getAllAssociationsForBill($lab_config_id); 
-                
-			$bill = Bill::loadFromId($billId, $lab_config_id);
-			$patient = Patient::getById($bill->getPatientId());
-			$associations = $bill->getAllAssociationsForBill($lab_config_id);
-                        
 			$bill = Bill::loadFromId($billId, $lab_config_id);
 			$patient = Patient::getById($bill->getPatientId());
 			$associations = $bill->getAllAssociationsForBill($lab_config_id);
@@ -99,25 +90,12 @@ $script_elems->enableTableSorter();
 				</tr>
 				<?php } ?>
 				<tr>
-                                <div style=" text-align: center"
-                                <div style=" text-align: center"
 					<td colspan='6'></td>
 					<td>Bill Total: <div id="bill_total" ><?php echo format_number_to_money($bill->getBillTotal($lab_config_id)); ?></div></td>
 				</tr>
 			</table>
 			<input type='button' value='Print Bill' onclick="javascript:print_bill(<?php echo $bill->getId() . ", " . $lab_config_id; ?>)"\>
 		</form>
-          
-            	</body>
-</html>
-<?php }// modified by echiteri to display a soft message in case a test is not selected or there is not tests to bill
-else{
-    echo '<div style=" text-align: center" > There is no test(s) for billing or no test was selected for billing.</br> Ensure you have selected atleast one test for billing. </div>';
-}
-?>
-
-	</body>
-</html>
 	</body>
 </html>
 

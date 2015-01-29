@@ -223,7 +223,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 					{
 						echo " class='' ";
 					}
-					echo ">";
+					//echo ">";
 
 					
 					if($page== $page_value[0] || $page==$page_value1[0].'_home'){

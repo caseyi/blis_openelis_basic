@@ -42,6 +42,25 @@ $pid = $_REQUEST['pid'];
                             				<?php $page_elems->getPatientInfo($pid); ?>
                             			</div>
                             			<div id='profile_update_div' style='display:none;' >
+                            			<link rel="stylesheet" type="text/css" media="all" href="jsdatepick-calendar/jsDatePick_ltr.min.css" />
+<script type="text/javascript" src="jsdatepick-calendar/jsDatePick.min.1.3.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		new JsDatePick({
+			useMode:2,
+			target:"by_date",
+			dateFormat:"%Y-%m-%d"
+			
+		});
+		new JsDatePick({
+			useMode:2,
+			target:"patient_b_day",
+			dateFormat:"%Y-%m-%d"
+			
+		});
+	};
+</script>
+
                             				<?php $page_elems->getPatientUpdateForm($pid); ?>
                             			</div>
                             		</td>
@@ -140,63 +159,11 @@ function Popup(data)
 
 function update_profile()
 {
-    $('#pd_ym').attr("value", "0");
-    $('#pd_y').attr("value", "0");
-    var yyyy = $('#yyyy').attr("value");
-    var mm = $('#mm').attr("value");
-    var dd = $('#dd').attr("value");
-    var age = $('#age').attr("value");
+    
+    var dob = $('#patient_b_day').attr("value");
     var error_message = "";
     var error_flag = 0;
-    //Age not given
-    if(age.trim() == "")
-    {
-        //Check partial DoB
-        if(yyyy.trim() != "" && mm.trim() != "" && dd.trim() == "")
-        {
-            dd = "01";
-            if(checkDate(yyyy, mm, dd) == false)
-            {
-                alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$generalTerms['DOB']." ".LangUtil::$generalTerms['INVALID']; ?>");
-                return;
-            }
-            $('#pd_ym').attr("value", "1");
-            
-        }
-        else if(yyyy.trim() != "" && mm.trim() == "" && dd.trim() == "")
-        {
-            mm = "01";
-            dd = "01";
-            if(checkDate(yyyy, mm, dd) == false)
-            {
-                alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$generalTerms['DOB']." ".LangUtil::$generalTerms['INVALID']; ?>");
-                return;
-            }
-            $('#pd_y').attr("value", "1");
-        }
-        else if(yyyy.trim() == "" && mm.trim() == "" && dd.trim() == "")
-        {
-            error_message += "Please enter either Age or Date of Birth\n";//<br>";
-            error_flag = 1;
-            alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['TIPS_AGEORDOB']; ?>");
-            return;
-        }
-        else
-        {
-            //Full DoB - check
-            if(checkDate(yyyy, mm, dd) == false)
-            {
-                alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$generalTerms['DOB']." ".LangUtil::$generalTerms['INVALID']; ?>");
-                return;
-            }
-        }
-    }
-    else if (isNaN(age))
-    {
-        alert("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$generalTerms['AGE']." ".LangUtil::$generalTerms['INVALID']; ?>");
-        return;
-    }   
-    
+   
     $('#update_profile_progress').show();
     var params = $('#profile_update_form').formSerialize();
     $.ajax({
@@ -208,6 +175,23 @@ function update_profile()
             window.location.reload();
         }
     }); 
+}
+function calc_dob(){
+var age=$('#years').val();
+var curr_date=new Date($('#by_date').val());
+if(age.trim() == "" || $('#by_date').val()== ""){
+alert("Empty field!");
+return;
+}
+if(isNaN(age)){
+alert("Error: Numeric input required for age");
+return;
+}
+console.log(curr_date);
+curr_date.setMonth(curr_date.getMonth() -12*age);
+//curr_date=curr_date.format("yy-m-dd");
+$('#patient_b_day').attr('value',curr_date.getFullYear() + '-' + (curr_date.getMonth() +1) + '-' + curr_date.getDate());
+$('#dobcal1').toggle('modal');
 }
 </script>
 <?php include("includes/footer.php"); ?>

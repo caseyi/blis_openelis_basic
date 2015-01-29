@@ -70,12 +70,8 @@ class User
 		$user->phone = $record['phone'];
 		$user->createdBy = $record['created_by'];
 		$user->labConfigId = $record['lab_config_id'];
-<<<<<<< HEAD
 		$user->labSection = $record['lab_sec_code'];
 		$user->img = $record['img'];
-=======
-                $user->img = $record['img'];
->>>>>>> def2af0cafb819d2b8dbf62be0a90e6d64a587a4
 		$user->canverify = $record['verify'];
 		if(isset($record['lang_id']))
 			$user->langId = $record['lang_id'];
@@ -2500,16 +2496,6 @@ class Patient
 			return "-";
 		else
 			return $this->surrogateId;
-	}
-        
-        //added by EC
-        public function getSpecimenId($patient_id)
-	{
-		global $con;
-		$specimen_id = mysql_real_escape_string($patient_id, $con);
-		$query_string = "SELECT * FROM specimen WHERE patient_id=$patient_id";
-		$record = query_associative_one($query_string);
-		return $record['specimen_id'];
 	}
 
 	public function getBlisTests()
@@ -6146,26 +6132,26 @@ $url_append = "";
 	if($count==1){
             if($changed_times == 0)//added by echiteri to check initial password change
             {
-                change_user_password($username, $new_password);
-                $url_append = "pupdate";
+	change_user_password($username, $new_password);
+$url_append = "pupdate";
                 header("Location:home.php");
             }else
             {
                 change_user_password($username, $new_password);
                 $url_append = "pupdate";
-                header("location:edit_profile.php?".$url_append);
+	  header("location:edit_profile.php?".$url_append);
             }
 
       }
       #added by echiteri to check the id of the previous page [first_pwd_change.php 
       #so as to redirect back to the same page in case of an error
       else if ($_SESSION['id'] == 'change_password'){ 
-        $url_append = "pmatcherr";
+$url_append = "pmatcherr";
         header("location:first_pwd_change.php?".$url_append);
       }else
       {
         $url_append = "pmatcherr";
-        header("location:edit_profile.php?".$url_append);
+      header("location:edit_profile.php?".$url_append);
       }
       // Destroy session keep the house clean echiteri
     unset($_SESSION['id']);
@@ -7215,8 +7201,7 @@ function update_patient($modified_record)
 {
 	# Updates an existing patient record
 	# Called from ajax/patient_update.php
-	$myFile = "../locale/myFile.txt";
-$fh = fopen($myFile, 'a') or die("can't open file");
+	
 $pid = $modified_record->patientId;
 	$current_record = get_patient_by_id($pid);
 	if($modified_record->name == "")
@@ -7597,25 +7582,6 @@ function set_specimen_status_toverify($specimen_id)
 	# Update specimen status to complete
 	$status_code = Specimen::$STATUS_TOVERIFY;
 	set_specimen_status($specimen_id, $status_code);
-}
-function reject_test($specimen_id,$test_type_id,$reason)
-{
-	global $con;
-	
-	$status_code = Specimen::$STATUS_REJECTED;
-	$query = mysql_query("UPDATE test SET status_code_id=$status_code WHERE specimen_id = $specimen_id AND test_type_id=$test_type_id" );
-//	add_rejected_test($specimen_id,$test_type_id,$reason);
-	#updates test status to rejected
-      
-}
-function add_rejected_test($specimen_id,$test_type_id,$reason)
-{
-	global $con;
-	
-	$ts=date();
-	$query = mysql_query("INSERT INTO rejected_tests Values($specimen_id,$test_type_id,'$reason','$ts')");
-	#updates test status to rejected
-      
 }
 function update_specimen_status($specimen_id)
 {
@@ -12095,13 +12061,13 @@ class GlobalPatient
 		return Patient::getObject($record);
 	}
 	
-	/*public function getSurrogateId()
+	public function getSurrogateId()
 	{
 		if($this->surrogateId == null || trim($this->surrogateId) == "")
 			return "-";
 		else
 			return $this->surrogateId;
-	}*/
+	}
 	
 	public function getDailyNum()
 	{

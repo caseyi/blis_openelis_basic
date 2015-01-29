@@ -175,7 +175,7 @@ class="span12">
 											</ul>
 											<div class="tab-content">
 												<div class="tab-pane active" id="tab_phases">
-		<a rel='facebox' href='catalog/rejection_phase_new.php' class="btn 
+		<a href='catalog/rejection_phase_new.php' rel='facebox' class="btn 
 blue-stripe" title='Click to Add a New Specimen Rejection Phase'><i 
 class='icon-plus'></i> <?php echo LangUtil::$generalTerms['ADDNEW']; 
 ?></a>
@@ -191,7 +191,7 @@ LangUtil::$generalTerms['CMD_HIDE']; ?></a>
 $page_elems->getRejectionPhaseTable($_SESSION['lab_config_id']); ?>
 												</div>
 												<div class="tab-pane" id="tab_reasons">
-													<a rel='facebox' href='catalog/rejection_reason_new.php' class="btn blue-stripe" title='Click to Add a New Specimen Rejection Reason'><i class='icon-plus'></i> <?php echo LangUtil::$generalTerms['ADDNEW']; ?></a>
+													<a href='catalog/rejection_reason_new.php' rel='facebox' class="btn blue-stripe" title='Click to Add a New Specimen Rejection Reason'><i class='icon-plus'></i> <?php echo LangUtil::$generalTerms['ADDNEW']; ?></a>
 		<br><br>
 		<div id='sdel_msg' class='clean-orange' 
 style='display:none;'>

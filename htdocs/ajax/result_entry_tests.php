@@ -571,10 +571,10 @@ else{
 					echo 'label-inverse">Rejected';
 					echo '</span></td>';
 					echo '
-				<td style="width:100px;"><a href="javascript:start_test('.$quote.$specimen->specimenId.$quote.');" title="Click to begin testing this Specimen" class="btn red mini">
+				<td style="width:100px; "><a style="display:none" href="javascript:start_test('.$quote.$specimen->specimenId.$quote.');" title="Click to begin testing this Specimen" class="btn red mini">
 					<i class="icon-ok"></i>'.LangUtil::$generalTerms['START_TEST'].'</a>
 				</td>
-				<td style="width:280px;"><a href="javascript:fetch_specimen2('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn blue mini">
+				<td style="width:280px;"><a style="display:none" href="javascript:fetch_specimen2('.$quote.$specimen->specimenId.$quote.');" title="View specimen details" class="btn blue mini">
 					<i class="icon-group"></i>'.LangUtil::$generalTerms['ASSIGN_TO'].'</a>
 				</td>';
 				}else

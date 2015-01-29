@@ -82,6 +82,7 @@ class DateLib
 		}
 		return $value;
 	}
+	
 	public static function dobToAgeNumber($dob)
 	{
 		# Converts date of birth to age in years without appendin string " years" 

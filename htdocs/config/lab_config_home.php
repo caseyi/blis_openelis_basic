@@ -1318,11 +1318,11 @@ if($lab_config == null)
 					 <i class='icon-plus'></i> 
 					 <?php echo LangUtil::$generalTerms['CMD_ADDNEWACCOUNT']; ?>
 					 </a>
-					 <!-- <a class="btn blue-stripe" href='javascript:import_users();'> "this feature will be enabled upon completion of the importation module: echiteri"
+					 <a class="btn blue-stripe" href='javascript:import_users();'>
 					 <i class='icon-download'></i> 
-					 <?php //echo 'Import from HMIS/EMR' ?>
+					 <?php echo 'Import from HMIS/EMR' ?>
 					 </a>
-					<br><br>-->
+					<br><br>
 					<div id='user_acc_msg' class='clean-orange' style='display:none;width:100%;'>
 					</div>
 					<div id='user_list_table'>

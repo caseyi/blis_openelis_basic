@@ -350,12 +350,10 @@ $daycount++;
 			echo " selected ";
 		echo ">Tech read-only</option>";
 		*/
-
 		echo "<option value='$LIS_ADMIN'";
 		if($selected_value == $LIS_ADMIN)
 			echo " selected ";
 		echo ">Admin</option>";
-
 		echo "<option value='$LIS_CLERK'";
 		if($selected_value == $LIS_CLERK)
 			echo " selected ";
@@ -572,7 +570,7 @@ $daycount++;
 		<tr>
 		<td></td>		
 		<td><input type="button" id="submit" type="submit" onclick="submitTestNames();" value="<?php echo LangUtil::$generalTerms['CMD_UPDATE']; ?>" size="20" />
-		<?
+		<?php
 	}
 	
 	public function getSpecimenTypesCountrySelect()
@@ -617,7 +615,7 @@ $daycount++;
 		<tr>
 		<td></td>		
 		<td><input type="button" id="submit" type="submit" onclick="submitTestCategoryNames();" value="<?php echo LangUtil::$generalTerms['CMD_SUBMIT']; ?>" size="20" />
-		<?
+		<?php
 	}
 	
 	public function getTestCategoryTypesCountrySelect() {
@@ -2645,74 +2643,55 @@ $user=$_SESSION['user_id'];
 						</option>
 						</select>
 				</tr>
-				<tr>
-					<td><u title='Enter either Age or Date of Birth'><?php echo LangUtil::$generalTerms['AGE']; ?></u></td>
-					<td>
-						<?php
-						if($patient->age != null and $patient->age != "" and $patient->age != "0")
-						{
-						?>
-							<input type='text' name='age' id='age' value='<?php echo $patient->age; ?>'  class='uniform_width'></input>
-						<?php
-						}
-						else
-						{
-						?>
-							<input type='text' name='age' id='age' value=''  class='uniform_width'></input>
-						<?php
-						}
-						?>
-						<select name='age_param' id='age_param'>
-							<option value='1'><?php echo LangUtil::$generalTerms['YEARS']; ?></option>
-							<option value='2'><?php echo LangUtil::$generalTerms['MONTHS']; ?></option>
-						</select>
-					</td>
-				</tr>
+				
 				<tr valign='top'>
 					<td><u title='Enter either Age or Date of Birth'><?php echo LangUtil::$generalTerms['DOB']; ?></u></td>
-					<td><?php
-						$value_list = array();
-						$name_list = array();
-						$id_list = array();
-						$name_list[] = "yyyy";
-						$name_list[] = "mm";
-						$name_list[] = "dd";
-						$id_list = $name_list;
-						if($patient->partialDob != null && $patient->partialDob != "")
-						{
-							# Partial DoB value is present
-							if(strpos($patient->partialDob, "-") === false)
-							{
-								# Year-only available
-								$value_list[] = $patient->partialDob;
-								$value_list[] = "";
-								$value_list[] = "";
-							}
-							else
-							{
-								# Year and month available
-								$partial_dob_parts = explode("-", $patient->partialDob);
-								$value_list[] = $partial_dob_parts[0];
-								$value_list[] = $partial_dob_parts[1];
-								$value_list[] = "";
-							}
-						}
-						else if($patient->dob == null || $patient->dob == "")
-						{
-							# DoB not previously entered
-							$value_list[] = "";
-							$value_list[] = "";
-							$value_list[] = "";
-						}
-						else
-						{
-							# Previous DoB value exists
-							$dob_parts = explode("-", $patient->dob);
-							$value_list = $dob_parts;
-						}
-						$this->getDatePicker($name_list, $id_list, $value_list, $show_format=true);
-						?>
-					</td>
+					<!--edited by norbert to emulate KenyaEMR date entry -->
+					<td>
+					<div class="input-append"> 
+                  <input type="text" class="m-wrap m-ctrl-medium" name="patient_birth_date" id="patient_b_day" value="<?php echo $patient->getDob();?>"/><span class="add-on" id="span_dob"><i class="icon-calendar"></i></span>
+					</div>
+                </td>
+                <td>				  
+                  <a style="margin-top:5px" href="" class="btn-default btn " data-toggle="modal" data-target=".bs-example-modal-sm"><span class="add-on" id="span_calcdob"><i class="icon-calendar"></i> From Age</span></a>
+			 <!--pop up for dob calc begin-->
+  <div class="modal fade bs-example-modal-sm" id="dobcal1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+     
+      <div class="portlet box green">
+                        <div class="portlet-title" >
+                            <h4><i class="icon-reorder"></i> <?php echo "Date-of-Birth Calculator"; ?> </h4>           
+                        </div>
+      </div>
+      </div>
+      <div class="modal-body">
+       <div class="form-group">
+              <label class="col-md-2 control-label" for="body">Age in Years</label>  
+              <input id="years" name="years" type="text" maxlength="3" class="form-control input-md">
+              
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="by_date">On Date</label>  
+              <style>
+              .datepicker{
+              z-index:1151 !important;
+              }
+              </style>
+              <div class="input-append"> 
+					<input class="m-wrap m-ctrl-medium" name="by_date" id="by_date" type="text" value="<?php echo date('Y-m-d');?>"><span class="add-on" id="span_dob"><i class="icon-calendar"></i></span>
+					</div>
+                 
+            </div>
+           
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" name="submit_iss" class="btn btn-primary" onclick="javascript:calc_dob();">Submit</button>
+      </div>
+    
+  </div>
+  <!--pop up end-->		
+                </td>
 				</tr>
 				<?php
 				# Custom fields here
@@ -3235,7 +3214,7 @@ $user=$_SESSION['user_id'];
 						<?php echo DateLib::mysqlToString($specimen->dateCollected); ?>
 					</td>
 				</tr>
-                                <tr>
+				<tr>
 					<td><u><?php echo LangUtil::$generalTerms['C_DATE']; ?></u></td>
 					<td>
 						<?php echo DateLib::mysqlToString($specimen->dateCollected); ?>
@@ -3516,15 +3495,16 @@ $user=$_SESSION['user_id'];
 				<?php if (!$test->isVerified()){ ?>
 				<input type="button" id="Btn_Verify" value="Verify Result" onclick="javascript:verify_result('<?php echo $test->testId."','".
 					str_replace('&nbsp;', '', str_replace('<br>', '', $test->decodeResult()))."','".mysql_real_escape_string($test->getComments()); ?>');" />					
+				
 				<br/>
 				<br/>
 				<a href="#" class="btn btn-danger" title="Reject" data-content="Result Rejection" data-toggle="modal" data-target=".bs-example-modal-lg">Reject</a>	
   <!--pop up begin-->
   <div class="modal fade bs-example-modal-lg" id="issue_report" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" style="margin-left:10px">
-     <form id="result_rejection_form" action="ajax/reject_result.php" method="post">
+     <form id="result_rejection_form" action="" method="post">
       <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+      <button type="button" class="close" data-dismiss="modal" onclick="javascript:$('.bs-example-modal-lg').modal('hide');" aria-hidden="true"></button>
         <h4 class="modal-title" id="myModalLabel"><i class="icon-pencil"></i>Reject a Result Entry</h4>
         
       </div>
@@ -3538,8 +3518,8 @@ $user=$_SESSION['user_id'];
 		<textarea id="rej_reason" name="rej_reason" ></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" onclick="javascript:$('.bs-example-modal-lg').hide();">Close</button>
-        <button type="button" name="submit_iss" class="btn btn-primary" onclick="javascript:$('#result_rejection_form').submit();">Submit</button>
+        <button type="button" class="btn btn-default" onclick="javascript:$('.bs-example-modal-lg').modal('hide');">Close</button>
+        <button type="button" name="submit_iss" class="btn btn-primary" onclick="javascript:reject();">Submit</button>
       </div>
     </form>
   </div>
@@ -4331,8 +4311,8 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		$ref_out_row_id = 'ref_out_row_'.$form_num;
 		$ref_out_check_id = 'ref_out_'.$form_num;
 		$lab_config = LabConfig::getById($_SESSION['lab_config_id']);
-                $custom_class = 'custom_'.$form_num;
-                $radio_name = 'ref_out_'.$form_num;
+        $custom_class = 'custom_'.$form_num;
+        $radio_name = 'ref_out_'.$form_num;
 		?>
 		<div id='<?php echo $div_id; ?>'>
 		<div class='pretty_box' style='width:630px;'>

@@ -517,7 +517,7 @@ $LANG_ARRAY = array (
 	) , 
 	"edit_profile" => array ( 
 		"LINK_CHANGEPWD" => "Change Password", 
-		"TIPS_CASEPWD" => "Please note that passwords are case-sensitive.",
+		"TIPS_CASEPWD" => "Please note that passwords are case-sensitive.", 
                 "TIPS_CHANGEPWD" => "Password must be changed on the first login.",
 		"MSG_NOFIELDUPDATE" => "No profile fields to update", 
 		"CURRPWD" => "Current Password", 
