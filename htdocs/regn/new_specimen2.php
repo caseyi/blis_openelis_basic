@@ -642,6 +642,7 @@ var form_id = 'specimenform_'+form;
 	$("#"+form_id+" tr[class='toHide']").hide();
 		//$('#blk-'+formid).hide(); //$('.toHide').hide();
 		$("#"+form_id+" input[name='MFL_Code']").attr('value','');
+		$("#"+form_id+" input[name='MFL']").attr('value','');
 	//$('#empty_opt').attr('selected','true');
 } else {
 		$("#"+form_id+" tr[class='toHide']").show(); //$('.toHide').show('fast');
@@ -655,6 +656,23 @@ var form_id = 'specimenform_'+form;
 $(document).ready(function(){
     $(".tooltip-examples").tooltip({
         placement : 'right'
+    });
+    
+  var data = {}; 
+$("#MFL option").each(function(i,el) {  
+   data[$(el).data("value")] = $(el).val();
+});
+// `data` : object of `data-value` : `value`
+console.log(data, $("#MFL option").val());
+
+
+    $('#MFL_Codeid').bind('input',function()
+    {
+    
+        var value = $('#MFL_Codeid').val();
+        var val=$('#MFL [value="' + value + '"]').data('value');
+        $('#MFL_Code').attr('value',val);
+        
     });
 });
 </script>

@@ -1073,6 +1073,26 @@ function update_remarks(test_type_id, count, patient_age, patient_sex)
 		 }
 	 });
 }
+function reject(){
+var reason=$('#rej_reason').val();
+var t_type=$('#ttype').val();
+var spec=$('#spec').val();
+var t_name=$('#tname').val();
+var data_string = "rej_reason="+reason+"&spec="+spec
+	+"&tname="+t_name+"&ttype="+t_type;
+var url_string = "ajax/reject_result.php";
+ $.ajax({
+	 type: "POST",
+		 url: url_string,
+		 data: data_string,
+		 success: function(msg) {
+		// alert('success');
+		$("#issue_report").modal('hide');
+		$(".modal").modal('hide');
+		fetch_tests(<?php echo Specimen::$STATUS_ALL; ?>);
+		 }
+	 });
+}
 </script>
 <?php
 $script_elems->bindEntertoClick("#specimen_id", "#fetch_specimen_button");

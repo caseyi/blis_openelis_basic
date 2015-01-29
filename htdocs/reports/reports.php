@@ -510,8 +510,8 @@ function get_summary_fn(all_sites_flag)
 		//Change checkbox value to "L"
 		$('input[name=summary_type]:checked').attr('value', 'L');
 	}
-    var location = $("#location2").attr("value");
-    var from_date = $("#from-date-prev").attr("value");
+	var location = $("#location2").attr("value");
+	var from_date = $("#from-date-prev").attr("value");
    /*
     * Call a  function to validate the format of the keyed in format
     */             
@@ -637,8 +637,8 @@ function get_tests_done_report()
 
 function get_doctor_stats()
 {
-    var location = $("#location7").attr("value");
-    var from_date = $("#from-date-count").attr("value");
+	var location = $("#location7").attr("value");
+	var from_date = $("#from-date-count").attr("value");
     /*
     * Call a  function to validate the format of the keyed in format
     */             
@@ -703,8 +703,8 @@ function get_doctor_stats()
 function get_tests_done_report2()
 {
 	
-    var location = $("#location7").attr("value");
-    var from_date = $("#from-date-count").attr("value");
+	var location = $("#location7").attr("value");
+	var from_date = $("#from-date-count").attr("value");
    /*
     * Call a  function to validate the format of the keyed in format
     */             
@@ -768,8 +768,8 @@ function get_tests_done_report2()
 function get_testcount_grouped()
 {
 	
-    var location = $("#location7").attr("value");
-    var from_date = $("#from-date-count").attr("value");
+	var location = $("#location7").attr("value");
+	var from_date = $("#from-date-count").attr("value");
     /*
     * Call a  function to validate the format of the keyed in format
     */             
@@ -832,8 +832,8 @@ function get_testcount_grouped()
 function get_specimencount_grouped()
 {
 	
-    var location = $("#location7").attr("value");
-    var from_date = $("#from-date-count").attr("value");
+	var location = $("#location7").attr("value");
+	var from_date = $("#from-date-count").attr("value");
         /*
     * Call a  function to validate the format of the keyed in format
     */             
@@ -896,8 +896,8 @@ function get_specimencount_grouped()
 
 function get_tat_report()
 {
-    var location = $("#location5").attr("value");
-    var from_date = $("#from-date-tat").attr("value");
+	var location = $("#location5").attr("value");
+	var from_date = $("#from-date-tat").attr("value");
         /*
     * Call a  function to validate the format of the keyed in format
     */             
@@ -1059,8 +1059,8 @@ function get_count_report()
 
 function get_specimen_count_report()
 {
-    var location = $("#location7").attr("value");
-    var from_date = $("#from-date-count").attr("value");
+	var location = $("#location7").attr("value");
+	var from_date = $("#from-date-count").attr("value");
         /*
     * Call a  function to validate the format of the keyed in format
     */             
@@ -1310,8 +1310,8 @@ function get_specimen_log()
 
 function print_daily_patients()
 {
-    var l = $("#location13").attr("value");
-    var from_date = $("#from-date").attr("value");
+	var l = $("#location13").attr("value");
+	var from_date = $("#from-date").attr("value");
     /*
     * Call a  function to validate the format of the keyed in format
     */             
@@ -1349,15 +1349,15 @@ function print_daily_patients()
 
 function print_daily_specimens()
 {
-    var l = $("#location13").attr("value");
-    var from_date = $("#from-date").attr("value");
+	var l = $("#location13").attr("value");
+	var from_date = $("#from-date").attr("value");
         /*
     * Call a  function to validate the format of the keyed in format
     */             
     if (dt_format_check(from_date, "From Date") == false)
     {return;}
     /* execute if the date is ok echiteri*/
-    var to_date = $("#to-date").attr("value");
+	var to_date = $("#to-date").attr("value");
         /*
     * Call a  function to validate the format of the keyed in format
     */             
@@ -1493,9 +1493,9 @@ function get_infection_report_aggregate() {
 function get_disease_report()
 {
 	// Validate
-    var l = $("#location14").attr("value");
+	var l = $("#location14").attr("value");
 	
-    var from_date = $("#from-date-dr").attr("value");
+	var from_date = $("#from-date-dr").attr("value");
     /*
     * Call a  function to validate the format of the keyed in format
     */             
@@ -1538,9 +1538,9 @@ function get_disease_report()
 
 function get_consumption_report()
 {
-    var location = $("#location5").attr("value");
+	var location = $("#location5").attr("value");
 	
-    var from_date = $("#from-date-tat").attr("value");
+	var from_date = $("#from-date-tat").attr("value");
     /*
     * Call a  function to validate the format of the keyed in format
     */             

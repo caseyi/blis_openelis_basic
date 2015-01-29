@@ -43,7 +43,7 @@ $uiinfo = "pid=".$_REQUEST['pid']."&dnum=".$_REQUEST['dnum'];
 putUILog('new_specimen', $uiinfo, basename($_SERVER['REQUEST_URI'], ".php"), 'X', 'X', 'X');
 ?>
 	<script type="text/javascript" src="js/check_date_format.js"></script>
-        <script>
+	<script>
   $(document).ready(function(){
 //var data = "Core Selectors Attributes Traversing Manipulation CSS Events Effects Ajax Utilities".split(" ");
 var data_string="<?php echo $php_array;?>";
@@ -197,6 +197,7 @@ function add_specimens()
 			return;
 			}
 		}
+		
 		var spec_reg_date = $("#"+form_id+" [name='spec_date']").attr("value");
 		var curr_date = new Date();
 		if (spec_reg_date!=""){
@@ -227,7 +228,7 @@ function add_specimens()
 		if (rm!=undefined) rm = rm.replace(/[^0-9]/gi,'');
 		var rd = $("#"+form_id+" [name='receipt_dd']").attr("value");
 		if (rd!=undefined) rd = rd.replace(/[^0-9]/gi,'');
-     		var cy = $("#"+form_id+" [name='collect_yyyy']").attr("value");
+		var cy = $("#"+form_id+" [name='collect_yyyy']").attr("value");
 		if (cy!=undefined) cy = cy.replace(/[^0-9]/gi,'');
 		var cm = $("#"+form_id+" [name='collect_mm']").attr("value");
 		if (cm!=undefined) cm = cm.replace(/[^0-9]/gi,'');
@@ -238,7 +239,7 @@ function add_specimens()
 		var cmm = $("#"+form_id+" [name='ctime_mm']").attr("value");
 		if (cmm!=undefined) cmm = cmm.replace(/[^0-9]/gi,'');
 		if ((ry!=undefined) && (rm!=undefined) && (rd!=undefined)){
-                    if(checkDate(ry, rm, rd) == false)
+			if(checkDate(ry, rm, rd) == false)
 			{
 				var answer = confirm("<?php echo LangUtil::$generalTerms['ERROR'].": ".LangUtil::$pageTerms['MSG_RDATE_INVALID']; ?> . Are you sure you want to continue?");
 				if (answer == false)
@@ -542,7 +543,8 @@ $(document).ready(function(){
         placement : 'right'
     });
 
-    var data = {}; 
+
+var data = {}; 
 $("#MFL option").each(function(i,el) {  
    data[$(el).data("value")] = $(el).val();
 });

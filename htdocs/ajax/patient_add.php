@@ -37,7 +37,7 @@ if(trim($_REQUEST['dob']) == "")
 // 		$day = date("d", $timestamp);
 // 		$dob = "";
 // 		$partial_dob = $year."-".$month."-".$day;
-
+		
 		#editted by norbert to enable entry of dob beyond unix epoch timestamp
 		$age=30*$age;
 		$timestamp = gregoriantojd($today_parts[1], $today_parts[2], $today_parts[0]);
@@ -46,7 +46,6 @@ if(trim($_REQUEST['dob']) == "")
 		$partial_dob1 = jdtogregorian($timestamp);
 		$partial_dob_array = explode('/',$partial_dob1);
 		$partial_dob = $partial_dob_array[2]."-".$partial_dob_array[0]."-".$partial_dob_array[1];
-
 	}
 	else if($age_param == 1)
 	{
@@ -83,7 +82,7 @@ if(trim($_REQUEST['dob']) == "")
 	else if($age_param == 4)
 	{
 		# Age specified in weeks
-// 		$age=$age*7;
+//		$age=$age*7;
 // 		$timestamp = mktime(0, 0, 0, $today_parts[1], $today_parts[2]-($age), $today_parts[0]);
 // 		$year = date("Y", $timestamp);
 // 		$month = date("m", $timestamp);

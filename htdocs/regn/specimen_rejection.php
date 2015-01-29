@@ -113,7 +113,7 @@ $patient = get_patient_by_id($main_rs['patient_number']);
     <input name="specimen" id="specimen" type="hidden" value="<?php echo $sid; ?>" />
     <td>
                                           <select class="large m-wrap" rows="3" id="reasons" name="reasons[]" multiple="multiple" >
-                                          <?php  $page_elems->getRejectionReasonsSelect();?>
+                                         <?php  $page_elems->getRejectionReasonsSelect();?>
                                           </select>
                                        </td>
   </tr>

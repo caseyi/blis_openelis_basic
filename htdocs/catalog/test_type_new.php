@@ -90,12 +90,12 @@ putUILog('test_type_new', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', '
 		<td><?php echo LangUtil::$generalTerms['PANEL_TEST']; ?>?</td>
 		<td><input type='checkbox' name='ispanel' id='ispanel'></input></td>
 	</tr>
-	<tr valign='top' class='panel_row'>
+	<tr valign='top' class='panel_row' style='display:none'>
 		<td>
 			<?php echo LangUtil::$generalTerms['MEASURES']; ?> <?php $page_elems->getAsterisk(); ?>
 		</td>
 		<td>
-			<?php $page_elems->getMeasureCheckboxes(); ?>
+			<?php $page_elems->getTestTypeCheckboxes(); ?>
 		</td>
 	</tr>
 	
@@ -387,18 +387,24 @@ for(var k = 0; k < 100; k++)
 {
 	num_ranges[k] = 0;
 }
-
 $(document).ready(function() {
 	$('#new_category').hide();
 	$('#new_entries').show();
-	$('.panel_row').hide();
-	$('#ispanel').change( function() {
-		toggle_panel();
+// 	$('.panel_row').hide();
+// 	$('#ispanel').change( function() {
+// 		toggle_panel();
+// 	});
+// 	$('.range_select').change( function() {
+// 		toggle_range_type(this);
+// 	});
+});
+$('#ispanel').change( function() {
+		$('.nonpanel_row').toggle();
+		$('.panel_row').toggle('style');
 	});
 	$('.range_select').change( function() {
 		toggle_range_type(this);
 	});
-});
 
 function toggle_range_type(select_elem)
 {
@@ -619,7 +625,7 @@ function check_input()
 	var checkbox_val = $('#ispanel').attr("checked");
 	//if(checkbox_val == 'checked') //true)
 	//{
-		var mtype_entries = $('.m_entry');
+		var mtype_entries = $('.ttype_entry');
 		var mtype_selected = false;
 		for(var i = 0; i < mtype_entries.length; i++)
 		{
@@ -784,11 +790,11 @@ function check_input()
 			break;
 		}
 	}
-	if(stype_selected == false)
-	{
-		alert("<?php echo LangUtil::$pageTerms['TIPS_MISSING_SELECTEDSPECIMEN']; ?>");
-		return;
-	}
+ 	if(stype_selected == false)
+ 	{
+ 		alert("<?php echo LangUtil::$pageTerms['TIPS_MISSING_SELECTEDSPECIMEN']; ?>");
+ 		return;
+ 	}
 	$('#new_test_form').submit();
 }
 
@@ -824,3 +830,5 @@ function isInputNumber(evt) {
 }
 </script>
 <?php include("includes/footer.php"); ?>
+
+
