@@ -35,6 +35,7 @@ $test_clinical_data=$_REQUEST['clinical_data'];
 # Check test type (panel or normal)
 $reference_ranges_list = array();
 $added_measures_list = array();
+$added_tests_list = array();
 
 $added_submeasures_list = array();
 $sub_reference_ranges_list = array();
@@ -44,21 +45,9 @@ $is_panel = false;
 $r = 0;
 $scc = 0;
 $ccc = 0;
-/*if(isset($_REQUEST['ispanel']))
+if(isset($_REQUEST['ispanel']))
 {
-// 	# Panel test. Collect all selected measures*/
-// 	$is_panel = true;
-// 	$measure_list = get_measures_catalog();
-// 	foreach($measure_list as $measure_id=>$measure_name)
-// 	{
-// 		if(isset($_REQUEST['m_'.$measure_id]))
-// 		{
-// 			# Track the measure ID (key)
-// 			$added_measures_list[] = $measure_id;
-// 		}
-// 	}
-//edited by glen to capture test type measures for panel tests
-	# Panel test. Collect all selected measures*/
+	# Panel test. Collect all selected measures
 	$is_panel = true;
 	$reff=1;
 	$test_list = get_test_types_catalog($_SESSION['lab_config_id'],$reff);
@@ -67,6 +56,7 @@ $ccc = 0;
 	{
 		if(isset($_REQUEST['t_type_'.$key]))
 		{
+		$added_tests_lists[]=$key;
 		
 		//echo $test_id.'<br>';
 		$measure_list= get_test_type_measure($key);
@@ -77,13 +67,15 @@ $ccc = 0;
 		}
 	$added_measures_list[]=$added_measures_list1;
 	
+	
 		}
 		
 	}
-/*}
+	$added_tests_list=implode(',', $added_tests_lists);
+}
 else
 {
-	# Non-panel test. Collect all newly entered measures*/
+	# Non-panel test. Collect all newly entered measures
 	$measure_names = $_REQUEST['measure'];
 	$measure_types = $_REQUEST['mtype'];
         $units = $_REQUEST['unit'];
@@ -296,7 +288,7 @@ else
         
         # Store Submeasures
         
-//}
+}
 
 # Fetch compatible specimen types
 $specimen_list = array();
@@ -316,12 +308,12 @@ $test_type_id = "";
 if(count($specimen_list) != 0)
 {
 	# Add entries to 'specimen_test' map table
-	  $test_type_id = add_test_type($test_name, $test_descr, $test_clinical_data, $cat_code, $is_panel, $lab_config_id, $hide_patient_name, $prevalenceThreshold, $targetTat, $specimen_list);
+	  $test_type_id = add_test_type($test_name, $test_descr, $test_clinical_data, $cat_code, $is_panel, $added_tests_list, $lab_config_id, $hide_patient_name, $prevalenceThreshold, $targetTat, $specimen_list);
 }
 else
 {
 	# No specimens selected. Add test anyway
-	  $test_type_id = add_test_type($test_name, $test_descr, $test_clinical_data, $cat_code, $is_panel, $lab_config_id, $hide_patient_name, $prevalenceThreshold, $targetTat);
+	  $test_type_id = add_test_type($test_name, $test_descr, $test_clinical_data, $cat_code, $is_panel, $added_tests_list, $lab_config_id, $hide_patient_name, $prevalenceThreshold, $targetTat);
 }
 
 if($newCostToPatient > 0 && is_billing_enabled($_SESSION['lab_config_id'])) { // If the cost is greater than 0, we go ahead and add the cost.  If not, there's no reason to make another sql call here.  It'll be done elsewhere.

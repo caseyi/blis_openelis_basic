@@ -1160,6 +1160,7 @@ class TestType
 	public $targetTat;
 	public $test_name;
 	public $parent_test_type_id;
+	public $panel_child_test;
 	
 	public static function getObject($record)
 	{
@@ -1193,6 +1194,10 @@ class TestType
 			$test_type->parent_test_type_id = $record['parent_test_type_id'];
 		else
 			$test_type->parent_test_type_id = null;
+		if(isset($record['panel_child_test']))
+			$test_type->panel_child_test = $record['panel_child_test'];
+		else
+			$test_type->panel_child_test = null;
 		
 		return $test_type;
 	}
@@ -1229,6 +1234,14 @@ class TestType
 			return "-";
 		else
 			return trim($this->description);
+	}
+	
+	public function getPanelChildTests()
+	{
+		if(trim($this->panel_child_test) == "" || $this->panel_child_test == null)
+			return "-";
+		else
+			return trim($this->panel_child_test);
 	}
 	
 	public function getClinicalData()
@@ -8872,7 +8885,7 @@ function update_specimen_type($updated_entry, $new_test_list)
 	DbUtil::switchRestore($saved_db);
 }
 
-function add_test_type($test_name, $test_descr, $clinical_data, $cat_code, $is_panel, $lab_config_id, $hide_patient_name, $prevalenceThreshold, $targetTat, $specimen_list = array())
+function add_test_type($test_name, $test_descr, $clinical_data, $cat_code, $is_panel, $panel_child_test, $lab_config_id, $hide_patient_name, $prevalenceThreshold, $targetTat, $specimen_list = array())
 {
 	global $con;
 	$test_name = mysql_real_escape_string($test_name, $con);
@@ -8898,14 +8911,14 @@ function add_test_type($test_name, $test_descr, $clinical_data, $cat_code, $is_p
 	if($clinical_data=="")
 	{
 	$query_string = 
-		"INSERT INTO test_type(name, description,test_category_id, is_panel, hide_patient_name, prevalence_threshold, target_tat) ".
-		"VALUES ('$test_name', '$test_descr','$cat_code', '$is_panel_num', '$hide_patient_name', $prevalenceThreshold, $targetTat)";
+		"INSERT INTO test_type(name, description,test_category_id, is_panel, hide_patient_name, prevalence_threshold, target_tat,panel_child_test) ".
+		"VALUES ('$test_name', '$test_descr','$cat_code', '$is_panel_num', '$hide_patient_name', $prevalenceThreshold, $targetTat, '$panel_child_test')";
 	}
 	else
 	{
 	$query_string = 
-		"INSERT INTO test_type(name, description,clinical_data, test_category_id, is_panel, hide_patient_name, prevalence_threshold, target_tat) ".
-		"VALUES ('$test_name', '$test_descr','$clinical_data', '$cat_code', '$is_panel_num', '$hide_patient_name', $prevalenceThreshold, $targetTat)";
+		"INSERT INTO test_type(name, description,clinical_data, test_category_id, is_panel, hide_patient_name, prevalence_threshold, target_tat,panel_child_test) ".
+		"VALUES ('$test_name', '$test_descr','$clinical_data', '$cat_code', '$is_panel_num', '$hide_patient_name', $prevalenceThreshold, $targetTat, '$panel_child_test')";
 	}
 	query_insert_one($query_string);
 	$test_type_id = get_max_test_type_id();
@@ -9659,7 +9672,7 @@ function get_child_tests($test_type_id)
 	# Returns a list of all measures available in catalog
 	
 	$query_child_tests =
-	"SELECT test_type_id FROM test_type WHERE parent_test_type_id = $test_type_id";
+	"SELECT test_type_id FROM test_type WHERE parent_test_type_id like '%$test_type_id%'";
 	$resultset = query_associative_all($query_child_tests, $row_count);
 	$retval = array();
 	$retval = $resultset;
