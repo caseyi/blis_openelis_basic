@@ -4,6 +4,7 @@
 #
 include("redirect.php");
 @include("includes/header.php");
+require_once("includes/scripts.php");
 //error_reporting(0);
 LangUtil::setPageId("catalog");
 ?>

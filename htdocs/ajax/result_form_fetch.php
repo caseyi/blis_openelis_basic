@@ -23,7 +23,7 @@ function get_result_form($test_type, $test_id, $num_tests, $patient, $parent_tes
 	<input type='hidden' name='test_id' value='<?php echo $test_id; ?>'></input>
 	<input type='hidden' name='specimen_id' value='<?php echo $specimen_id; ?>'></input>
 	<input type='hidden' name='parent_test_id' value='<?php echo $parent_test_id; ?>'></input>
-	<div><strong><?php echo $patient->getName().' (Patient ID '.$patient->patientId.')'; ?></strong><br></div>
+	<div><strong><?php echo $patient->getName().' (Patient ID '.$patient->patientId.')'; echo $test_type->getName();?></strong><br></div>
 	
 	<?php
 	# Fetch all measures for this test
@@ -288,6 +288,55 @@ $test_type = get_test_type_by_id($test_type_id);
             
         </div>
 	<?php
+	if($test_type->isPanel && ($test_type->panel_child_test !="")){
+	$parent_test_id = $test_id;
+	get_result_form($test_type, $test_id, 0, $patient, $parent_test_id);	  
+	$child_tests = get_child_tests($test_type_id);
+$child_tests =$test_type->panel_child_test;   
+$tests = explode(',', $child_tests);  
+$testBits = array(); 
+foreach ($tests as $test) { 
+          $test = trim($test); 
+          if (!empty($test)) { 
+          
+                $testBits[] = $test; 
+                //$test_type=$testBits;
+          } 
+}
+	
+	if (count($testBits)>0){
+		foreach($testBits as $child_test)
+		{
+			$test_type = get_test_type_by_id($child_test);
+			$chid_test_entry = get_test_entry($specimen_id, $child_test);
+			
+			get_result_form($test_type, $chid_test_entry->testId, 0, $patient, $parent_test_id);
+			
+		}
+	}
+	
+	$child_tests =$test_type->panel_child_test;   
+$tests = explode(',', $child_tests);  
+$testBits = array(); 
+foreach ($tests as $test) { 
+          $test = trim($test); 
+          if (!empty($test)) { 
+          
+                $testBits[] = $test; 
+                //$test_type=$testBits;
+          } 
+}
+			if (count($testBits)>0){
+				foreach($testBits as $child_test)
+				{
+					$test_type = get_test_type_by_id($child_test);
+					$chid_test_entry = get_test_entry($specimen_id, $child_test);
+					get_result_form($test_type, $chid_test_entry->testId, 0, $patient, $parent_test_id);
+				}
+			}
+	
+	}
+	else{
 	$parent_test_id = $test_id;
 	get_result_form($test_type, $test_id, 0, $patient, $parent_test_id);	  
 	$child_tests = get_child_tests($test_type_id);
@@ -309,7 +358,7 @@ $test_type = get_test_type_by_id($test_type_id);
 			}
 		}
 	}
-	
+	}
 	?>
 	<div class="modal-footer">
 	<input type='button' class="btn" value='<?php echo LangUtil::$generalTerms['CMD_SUBMIT']; ?>' onclick='javascript:submit_forms(<?php echo $test_id ?>);'></input>
