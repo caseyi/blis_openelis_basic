@@ -28,22 +28,22 @@ if($SERVER == $ON_ARC)
 
 $DB_HOST = "localhost";
 $DB_USER = "root";
-$GLOBAL_DB_NAME="blis";
+$GLOBAL_DB_NAME="blis_revamp";
 $DB_NAME = $GLOBAL_DB_NAME;	
 
-$DB_PASS = "1234";
+$DB_PASS = ""; //1234";
 
 if($SERVER == $ON_DEV)
 {
-	$DB_PASS = "1234";
+	$DB_PASS = ""; //"1234";
 }
 else if($SERVER == $ON_ARC)
 {
-	$DB_PASS = "1234";
+	$DB_PASS = ""; //"1234";
 }
 else if($SERVER == $ON_PORTABLE)
 {
-	$DB_PASS = "1234";
+	$DB_PASS = ""; //"1234";
 }
 
 if(isset($_SESSION['username']))

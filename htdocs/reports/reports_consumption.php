@@ -200,7 +200,7 @@ display:none;
 &nbsp;&nbsp;
 <input type='radio' name='do_landscape' value='Y' <?php
 	//if($report_config->landscape == true) echo " checked ";
-?>>Landscape</input>&nbsp;&nbsp;
+?>><?php echo LangUtil::$generalTerms['LANDSCAPE_TYPE']; ?></input>&nbsp;&nbsp;
 <input type='button' onclick="javascript:print_content('report_config_content');" value='<?php echo LangUtil::$generalTerms['CMD_PRINT']; ?>'></input>
 &nbsp;&nbsp;
 <!-- <input type='button' onclick="javascript:export_as_word('report_config_content');" value='<?php echo LangUtil::$generalTerms['CMD_EXPORTWORD']; ?>'></input> -->
@@ -217,7 +217,7 @@ display:none;
 <hr>
 
 <div id='report_config_content'>
-<b><?php echo "Consumption Report"; ?></b>
+<b><?php echo LangUtil::$pageTerms['MENU_CONSUMPTIONREPORT']; ?></b>
 <br><br>
 
 <?php
@@ -291,9 +291,12 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 <?php
 	if ($result){
 		echo '<thead><tr>';
-		for ($counter=0; $counter<mysql_num_fields($result); $counter++){
-			echo '<th>'.mysql_field_name($result, $counter).'</th>';
-		}
+// 		for ($counter=0; $counter<mysql_num_fields($result); $counter++){
+// 			echo '<th>'.mysql_field_name($result, $counter).'</th>';
+// 		}
+		echo '<th>' . LangUtil::$generalTerms['REAGENT'] . '</th>';
+		echo '<th>' . LangUtil::$generalTerms['UNIT'] . '</th>';
+		echo '<th>' . LangUtil::$generalTerms['QTY_CONSUMED'] . '</th>';
 		echo '</tr></thead><tbody>';
 		while($row = mysql_fetch_assoc($result)){
 			echo '<tr><td>'.implode($row, '</td><td>').'</tr>';

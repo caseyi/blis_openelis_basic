@@ -68,8 +68,8 @@ $specimen_id_list_rj = array_values(array_unique($specimen_id_list_rj));
 ?>
 <div class="tabbable tabbable-custom">                                          
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab_1_1" data-toggle="tab">Pending samples</a></li>
-            <li class=""><a href="#tab_1_2" data-toggle="tab">Rejected samples</a></li>
+            <li class="active"><a href="#tab_1_1" data-toggle="tab"><?php echo LangUtil::$generalTerms['PENDING_SAMPLES']; ?></a></li>
+            <li class=""><a href="#tab_1_2" data-toggle="tab"><?php echo LangUtil::$generalTerms['REJECTED_SAMPLES']; ?></a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="tab_1_1">
@@ -88,7 +88,7 @@ $specimen_id_list_rj = array_values(array_unique($specimen_id_list_rj));
                                     if($attrib_type == 9)
                                     {
                                         echo LangUtil::$pageTerms['MSG_PENDINGNOTFOUND'];
-                                        echo '<br>'.'Try searching by patient name';
+                                        echo '<br>'.LangUtil::$generalTerms['TRY_SEARCH_BY_PAT_NAME'];
                                     }
                                     else
                                     {
@@ -111,18 +111,18 @@ $specimen_id_list_rj = array_values(array_unique($specimen_id_list_rj));
                             <th style='width:75px;'><?php echo LangUtil::$generalTerms['SPECIMEN_ID']; ?></th>
                         <?php
                         }?>
-                         	<th>Time Registered</th>
+                         	<th><?php echo LangUtil::$generalTerms['TIME_REGISTERED']; ?></th>
                         <?php
                         if($_SESSION['pid'] != 0)
                         {
                         ?>
-                            <th style='width:75px;'><?php echo "Patient ID"; ?></th>
+                            <th style='width:75px;'><?php LangUtil::$generalTerms['PATIENT_ID']; ?></th>
                         <?php
                         }
                         if(false) //Not displaying Lab no
                         {
                         ?>
-                            <th style='width:100px;'><?php echo "Visit No"; ?></th>
+                            <th style='width:100px;'><?php LangUtil::$generalTerms['VISIT_NO']; ?></th>
                         <?php
                         }
                         if($_SESSION['p_addl'] != 0)
@@ -143,8 +143,8 @@ $specimen_id_list_rj = array_values(array_unique($specimen_id_list_rj));
                         <th style='width:200px;'><?php echo LangUtil::$generalTerms['PATIENT_NAME']; ?></th>
                         <th style='width:100px;'><?php echo LangUtil::$generalTerms['SPECIMEN_TYPE']; ?></th>
                         <th style='width:100px;'><?php echo LangUtil::$generalTerms['TESTS']; ?></th>
-                        <th style='width:130px;'><?php echo "Status"; ?></th>
-                        <th style='width:130px;'><?php echo "Accept/Reject"; ?></th>
+                        <th style='width:130px;'><?php echo LangUtil::$generalTerms['STATUS']; ?></th>
+                        <th style='width:130px;'><?php echo LangUtil::$generalTerms['ACCEPT'] . "/" . LangUtil::$generalTerms['REJECT']; ?></th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -225,16 +225,16 @@ $specimen_id_list_rj = array_values(array_unique($specimen_id_list_rj));
                         ?>
                         </td>
                         <td>
-                        <span class="label"> Not Accepted</span>
+                        <span class="label"> <?php echo LangUtil::$generalTerms['NOT_ACCEPTED']; ?></span>
                         </td>
                         
                         <?php if($attrib_type == 10)
                         {?>
-                        <td style='width:130px;'><a href="specimen_acceptance.php?sid=<?php echo $specimen->specimenId; ?>&pid=<?php echo $patient->patientId; ?>" class="btn mini green"><i class="icon-thumbs-up"></i> Accept</a>
-                        <a href="javascript:load_specimen_rejection(<?php echo $specimen->specimenId; ?>)" class="btn mini yellow"><i class="icon-thumbs-down"></i> Reject</a>
+                        <td style='width:130px;'><a href="specimen_acceptance.php?sid=<?php echo $specimen->specimenId; ?>&pid=<?php echo $patient->patientId; ?>" class="btn mini green"><i class="icon-thumbs-up"></i> <?php echo LangUtil::$generalTerms['ACCEPT']; ?></a>
+                        <a href="javascript:load_specimen_rejection(<?php echo $specimen->specimenId; ?>)" class="btn mini yellow"><i class="icon-thumbs-down"></i> <?php echo LangUtil::$generalTerms['REJECT']; ?></a>
                         </td>
-                        <td style="width:250px;"><a href="javascript:specimen_info(<?php echo $specimen->specimenId; ?>);" title="View test details" class="btn blue mini">
-							<i class="icon-search"></i> View Details</a>
+                        <td style="width:250px;"><a href="javascript:specimen_info(<?php echo $specimen->specimenId; ?>);" title="<?php echo LangUtil::$generalTerms['VIEW_TEST_DETAILS']; ?>" class="btn blue mini">
+							<i class="icon-search"></i> <?php echo LangUtil::$generalTerms['TEST_DETAILS']; ?></a>
 						</td>
                         <?php }?>
                     </tr>
@@ -268,7 +268,7 @@ $specimen_id_list_rj = array_values(array_unique($specimen_id_list_rj));
                                     if($attrib_type == 9)
                                     {
                                         echo LangUtil::$pageTerms['MSG_PENDINGNOTFOUND'];
-                                        echo '<br>'.'Try searching by patient name';
+                                        echo '<br>'.LangUtil::$generalTerms['TRY_SEARCH_BY_PAT_NAME'];
                                     }
                                     else
                                     {
@@ -331,7 +331,7 @@ $specimen_id_list_rj = array_values(array_unique($specimen_id_list_rj));
                         ?>
                         <th style='width:100px;'><?php echo LangUtil::$generalTerms['SPECIMEN_TYPE']; ?></th>
                         <th style='width:100px;'><?php echo LangUtil::$generalTerms['TESTS']; ?></th>
-                        <th style='width:100px;'><?php echo "Rejection report"; ?></th>
+                        <th style='width:100px;'><?php echo LangUtil::$generalTerms['REJECTION_REPORT']; ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -414,7 +414,7 @@ $specimen_id_list_rj = array_values(array_unique($specimen_id_list_rj));
                         </td>
                         <?php if($attrib_type == 10)
                         {?>
-                        <td style='width:100px;'><a href="report_onetesthistory.php?ppid=<?php echo $patient->getPatientID() ?>&spid=<?php echo $specimen->specimenId ?>" target="_blank" class="btn mini green"><i class="icon-thumbs-up"></i> View Report</a>
+                        <td style='width:100px;'><a href="report_onetesthistory.php?ppid=<?php echo $patient->getPatientID() ?>&spid=<?php echo $specimen->specimenId ?>" target="_blank" class="btn mini green"><i class="icon-thumbs-up"></i> <?php echo LangUtil::$generalTerms['VIEW_REPORT']; ?></a>
                         </td>
                         <?php }?>
                     </tr>

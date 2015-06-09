@@ -86,7 +86,7 @@ function display_unit()
 
 <?php
 $tips_string =LangUtil::$pageTerms['TIPS_ADD'];// "Add the details of the stock in the given form. To add more that one stock items you can select Add Another.";
-$page_elems->getSideTip("Tips", $tips_string);
+$page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], $tips_string);
 ?>
 
 <form name='new_test_form' id='new_test_form' action='inventory/add_new_stock.php' method='post'>

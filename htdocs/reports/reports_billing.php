@@ -569,7 +569,7 @@ $monthago_array = explode("-", $monthago_date);
 	<td>
 		<input type='radio' name='do_landscape' value='Y' <?php
 			//if($report_config->landscape == true) echo " checked ";
-			?>>Landscape</input>
+			?>><?php echo LangUtil::$generalTerms['LANDSCAPE_TYPE']; ?></input>
 	</td>
 	</tr>
 	</table>

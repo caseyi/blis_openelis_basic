@@ -40,7 +40,7 @@ $facilityname = get_facility_name($_SESSION['lab_config_id']);
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <!-- BEGIN HEAD --><head>
 	<meta charset="utf-8" />
-	<title>BLIS <?php echo $VERSION; ?> - Kenya<?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?></title>
+	<title><?php echo LangUtil::$generalTerms['BLIS']; ?> <?php echo $VERSION; ?> - <?php echo LangUtil::$generalTerms['KENYA']; ?><?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?></title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -84,19 +84,18 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 				<!-- BEGIN LOGO -->
 				<a class="brand" href="index.php">
 				<!--img src="assets/img/logo.png" alt="logo" /-->
-				BLIS v<?php echo $VERSION; ?> - Kenya<?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?>
+				<?php echo LangUtil::$generalTerms['BLIS']; ?> v<?php echo $VERSION; ?> - <?php echo LangUtil::$generalTerms['KENYA']; ?><?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?>
 				</a>
 				<!-- END LOGO -->
 				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
 				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
 				<img src="assets/img/menu-toggler.png" alt="" />
-				</a>          
+				</a>         
 				<!-- END RESPONSIVE MENU TOGGLER -->				
 				<!-- BEGIN TOP NAVIGATION MENU -->					
 				<ul class="nav pull-right">
 					<!-- NOTIFICATIONS -->
 					<?php //include ('notifications.php');?>
-					
 					<!-- BEGIN USER LOGIN DROPDOWN -->
 					 <?php     if(isset($_SESSION['username']))
 					{
@@ -111,7 +110,6 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
                                   echo '<img alt="" src="img/'.$_SESSION['img'].'" height=28 width=28/>';
                               }
                             ?>
-						
 						<span class="username"> <?php echo $_SESSION['username']; ?></span>
 						<i class="icon-angle-down"></i>
 						</a>
@@ -242,9 +240,9 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 						echo 
 						"<ul class='sub'>
 							<li>
-								<a href='javascript:right_load(".$quote."worksheet_div".$quote.")'  title='Generate worksheet with a list of pending specimens' class='menu_option' id='worksheet_div_menu'>
-								<i class='icon-tag'></i>Worksheet
-								</a>
+								<a href='javascript:right_load(".$quote."worksheet_div".$quote.")'  title=' " . LangUtil::getPageTerm("GENERATE_WORKSHEET_WITH_LIST") . "' class='menu_option' id='worksheet_div_menu'>
+								<i class='icon-tag'></i>" . LangUtil::$allTerms['MENU_WORKSHEET'] .
+								"</a>
 							</li>
 						</ul>";
 					break;
@@ -255,7 +253,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 						"<ul class='sub'>
 							<li>
 								<a href='javascript:load_right_pane(".$quote."test_categories_div".$quote.");' class='menu_option' id='test_categories_div_menu'>
-								<i class='icon-tag'></i> Lab Sections
+								<i class='icon-tag'></i>" . LangUtil::$generalTerms['LAB_SECTIONS'] . "
 								</a>
 							</li>
 							<li>
@@ -270,7 +268,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 							</li>
 							<li>
 								<a href='javascript:load_right_pane(".$quote."specimen_rejection_div".$quote.");' class='menu_option' id='specimen_rejection_div_menu'>
-								<i class='icon-thumbs-down'></i> "."Specimen Rejection"."
+								<i class='icon-thumbs-down'></i> ".LangUtil::$generalTerms['MENU_SPECIMEN_REJECTION']. "
 								</a>
 							</li>
 							
@@ -370,7 +368,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 						                        { 
 						                       echo "
 						                            <li class='menu_option' id='user_stats_menu'>
-														<a href='javascript:show_selection(".$quote."user_stats".$quote.");'> <i class='icon-tag'></i> User Statistics</a>
+														<a href='javascript:show_selection(".$quote."user_stats".$quote.");'> <i class='icon-tag'></i> ".LangUtil::$allTerms['USER_STATISTICS']."</a>
 													</li>";
 						                        }
                                                 
@@ -454,7 +452,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 							<br><br> 
 							</li>
 							<li>
-                            <a id='option36' class='menu_option' href='javascript:right_load(36, ".$quote."grouped_count_div".$quote.");'> ".'Test/Specimen Grouped Reports'."</a>
+                            <a id='option36' class='menu_option' href='javascript:right_load(36, ".$quote."grouped_count_div".$quote.");'> ".LangUtil::$allTerms['TEST_SPECIMENT_GROUP_REPORT']."</a>
 							<br><br>
 							</li>
 							<li>
@@ -471,10 +469,10 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 							<a id='option15' class='menu_option' href='javascript:right_load(15, ".$quote."inventory_div".$quote.");'><i class='icon-tag'></i> ".LangUtil::$allTerms['Inventory']."</a>
 						</li>
 						<li>
-							<a id='option28' class='menu_option' href='javascript:right_load(28, ".$quote."barcode_div".$quote.");'><i class='icon-tag'></i> ".'Barcode Settings'."</a>
+							<a id='option28' class='menu_option' href='javascript:right_load(28, ".$quote."barcode_div".$quote.");'><i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_BARCODE_SETTINGS']."</a>
 							</li>
 						<li style='display: none'>
-							<a id='option22' class='menu_option' href='javascript:right_load(22, ".$quote."billing_div".$quote.");'><i class='icon-tag'></i> ".'Billing'."</a>
+							<a id='option22' class='menu_option' href='javascript:right_load(22, ".$quote."billing_div".$quote.");'><i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_BILLING']."</a>
 						</li>
 						<li>
 							<a id='option3' class='menu_option' href='javascript:right_load(3, ".$quote."users_div".$quote.");'><i class='icon-tag'></i> ".LangUtil::$allTerms['MENU_USERS']."</a>
@@ -486,7 +484,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 							<a id='option19' class='menu_option' href='javascript:language_div_load();'><i class='icon-tag'></i> ".LangUtil::$allTerms['MODIFYLANG']."</a>
 						</li>
 						<li style='display: none'>
-							<a id='option14' class='menu_option' href='javascript:export_html();'><i class='icon-tag'></i> Setup Network</a>
+							<a id='option14' class='menu_option' href='javascript:export_html();'><i class='icon-tag'></i>" .LangUtil::$allTerms['MENU_SETUP_NETWORK']. " </a>
 						</li>";
 						if($SERVER != $ON_ARC) {
 						echo"
@@ -497,7 +495,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 							<a id='option18' class='menu_option' href='javascript:right_load(18, ".$quote."update_database_div".$quote.");'><i class='icon-tag'></i> ".'Update Data'."</a>
 						</li>
 						<li>
-							<a id='option34' class='menu_option' href='javascript:right_load(34, ".$quote."import_config_div".$quote.");'>Import Configuration</a><br><br>
+							<a id='option34' class='menu_option' href='javascript:right_load(34, ".$quote."import_config_div".$quote.");'>" .LangUtil::$allTerms['MENU_IMPORT_CONFIGURTION']. "</a><br><br>
 						</li>";
 						}
 						}

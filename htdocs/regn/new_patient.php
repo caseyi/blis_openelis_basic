@@ -298,7 +298,7 @@ function reset_new_patient()
 		<input type="text" name="pid" id="pid" value="" size="20" class='uniform_width form-control'>
 	 </div>
 	<tr>
-		<td>Date of Registration</td>
+		<td><?php echo LangUtil::$generalTerms['DATE_REGISTRATION']; ?></td>
 		<td>
 		<?php
 

@@ -1611,7 +1611,7 @@ function show_custom_report_form(report_id)
 						<h3>
 						</h3>
 						<ul class="breadcrumb">
-							<li><i class='icon-wrench'></i> Reports
+							<li><i class='icon-wrench'></i><?php echo LangUtil::$pageTerms['REPORTS']; ?>
 							</li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -1635,7 +1635,7 @@ function show_custom_report_form(report_id)
     
     <div class="portlet box blue reports_subdiv" id="user_stats_div" style="display: none">
         <div class="portlet-title" >
-                                <h4><i class="icon-reorder"></i><?php echo "User Statistics"; ?></h4>
+                                <h4><i class="icon-reorder"></i><?php echo LangUtil::$pageTerms['USER_STATISCTICS']; ?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                    <!-- <a data-toggle="modal" class="config"></a>-->
@@ -1650,7 +1650,7 @@ function show_custom_report_form(report_id)
                                             <div class="well text-success">
                                             <?php
                                             //User Statistics
-                                            $tips_string = "Display user specific statistics and user activity logs.";
+                                            $tips_string = LangUtil::$pageTerms['DISPLAY_USER_STAT'];
                                             $page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], $tips_string);
                                             echo "<br><br><br>";
                                             ?>
@@ -1680,18 +1680,18 @@ function show_custom_report_form(report_id)
                                 </tr>
                                 
                                                 <tr valign='top'>
-                                    <td><?php echo "Stat Type" ?></td>
+                                    <td><?php echo LangUtil::$pageTerms['STAT_TYPE'] ?></td>
                                      <td>
                                          <div class="controls">
                                             <label class="radio">
                                                 <span><input type='radio' id='stat_type' name='stat_type' value='a' onclick="user_radio(1)">
-                                                    Collective User Stats
+                                                     <?php echo LangUtil::$pageTerms['COLL_USER_STAT'] ?>
                                                 </span>
                                              </label>
                                              
                                              <label class="radio">
                                                 <span><input type="radio"  id='stat_type' name='stat_type' value='i' onclick="user_radio(2)">
-                                                    Individual User Logs
+                                                    <?php echo LangUtil::$pageTerms['INDIVIDUAL_USER_LOGS'] ?>
                                                 </span>
                                              </label>
                                          </div>
@@ -1707,22 +1707,22 @@ function show_custom_report_form(report_id)
                                                
                                             <label class="checkbox">
                                                 <span><input type='checkbox' id='count_type_pr' name='count_type_pr' value='Yes' checked>
-                                                    Patients Registered
+                                                    <?php echo LangUtil::$pageTerms['PATIENT_REGISTERED'] ?>
                                             </span>
                                             </label>
                                             <label class="checkbox">
                                                 <span><input type='checkbox' id='count_type_sr' name='count_type_sr' value='Yes' checked>
-                                                    Specimens Registered
+                                                    <?php echo LangUtil::$pageTerms['SPECIMEN_REGISTERED'] ?>
                                             </span>
                                             </label>
                                             <label class="checkbox">
                                                 <span><input type='checkbox' id='count_type_tr' name='count_type_tr' value='Yes' checked>
-                                                    Tests Registered
+                                                    <?php echo LangUtil::$pageTerms['TESTS_REGISTERED'] ?>
                                             </span>
                                             </label>
                                             <label class="checkbox">
                                                 <span><input type='checkbox' id='count_type_re' name='count_type_re' value='Yes' checked>
-                                                    Results Entered
+                                                    <?php echo LangUtil::$pageTerms['RESULTS_ENTERED'] ?>
                                             </span>
                                             </div>
                                         <br>
@@ -1765,7 +1765,7 @@ function show_custom_report_form(report_id)
                                                 //print_r($user_ids);
                                         ?>
                                                 <tr>
-                                    <td><?php echo "User"; ?> </td>
+                                    <td><?php echo LangUtil::$pageTerms['USER'] ?> </td>
                                     <td>
                                         <select name='user_id' id='user_id' class='uniform_width'>
                                         <?php foreach($user_ids as $uid) {?>
@@ -1795,35 +1795,35 @@ function show_custom_report_form(report_id)
                             ?>
                                 
                                 <tr valign='top'>
-                                    <td><?php echo "Log Type"; ?></td>
+                                    <td><?php echo LangUtil::$pageTerms['LOG_TYPE']; ?></td>
                                     <td>
                                         <div class="controls">
                                             <label class="radio">
                                                 <span><input type="radio"  id='log_type' name='log_type' value='1' checked>  
-                                                   Patients Registry</span>
+                                                   <?php echo LangUtil::$pageTerms['PATIENT_REGISTRY']; ?></span>
                                                 </label>
                                             <label class="radio">
                                                 <span>
                                                     <input type="radio"  id='log_type' name='log_type' value='2'>
-                                                    Specimens Registry
+                                                    <?php echo LangUtil::$pageTerms['SPECIMENS_REGISTRY']; ?>
                                                 </span>
                                             </label>
                                             <label class="radio">
                                                 <span>
                                                     <input type="radio"  id='log_type' name='log_type' value='3'>
-                                                    Tests Registry
+                                                    <?php echo LangUtil::$pageTerms['TESTS_REGISTRY']; ?>
                                                 </span>
                                             </label>
                                             <label class="radio">
                                                 <span>
                                                     <input type="radio"  id='log_type' name='log_type' value='4'>
-                                                    Results Entry
+                                                    <?php echo LangUtil::$pageTerms['RESULTS_ENTRY']; ?>
                                                 </span>
                                             </label>
                                             <label class="radio">
                                                 <span>
                                                     <input type="radio"  id='log_type' name='log_type' value='5'>
-                                                    Inventory Transaction
+                                                    <?php echo LangUtil::$pageTerms['INVENTORY_TRANSACTION']; ?>
                                                 </span>
                                             </label>
                                         </div>                                      
@@ -1867,7 +1867,7 @@ function show_custom_report_form(report_id)
                                             <div class="well text-success">
                                             <?php
                                             //Infection report
-                                            $tips_string = "Select Date range and lab section to view the Infection report";
+                                            $tips_string = LangUtil::$pageTerms['SELECT_DATE_RANGE_LAB'];
                                             $page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], $tips_string);
                                             echo "<br><br>";
                                             ?>
@@ -1990,7 +1990,7 @@ function show_custom_report_form(report_id)
                                             <div class="well text-success">
                                             <?php
                                             //Turnaround time
-                                            $tips_string = "Select the date interval to view the average test-wise turn-around times for the lab test reports.";
+                                            $tips_string = LangUtil::$pageTerms['SELECT_DATE_INTERVAL'];
                                             $page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], $tips_string);
                                             echo "<br><br><br>";
                                             ?>
@@ -2083,7 +2083,7 @@ function show_custom_report_form(report_id)
     
     <div class="portlet box blue reports_subdiv" id="specimen_count_div" style="display: none">
         <div class="portlet-title" >
-                                <h4><i class="icon-reorder"></i>Specimen counts</h4>
+                                <h4><i class="icon-reorder"></i><?php echo LangUtil::$generalTerms['SPECIMEN_COUNTS']?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                    <!-- <a data-toggle="modal" class="config"></a>-->
@@ -2096,7 +2096,7 @@ function show_custom_report_form(report_id)
                         <div class="">
                                             <div class="well text-success">
                                             <?php
-                                            $tips_string = "Select date range and type of count required";
+                                            $tips_string = LangUtil::$pageTerms['SELECT_DATE_RANGE_TYPE'];
                                             $page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], $tips_string);
                                             echo "<br><br>";
                                             ?>
@@ -2154,34 +2154,34 @@ function show_custom_report_form(report_id)
                     <td>
                         <div class="controls">
                         <label class="radio">
-                            <span><input type="radio"  id='count_type' name='count_type' value='2' checked>  <?php echo LangUtil::$pageTerms['COUNT_TEST']." (Ungrouped)"; ?></span>
+                            <span><input type="radio"  id='count_type' name='count_type' value='2' checked>  <?php echo LangUtil::$pageTerms['COUNT_TEST']." (" . LangUtil::$pageTerms['UNGROUPED'] . ")"; ?></span>
                             </label>
                         </div>
                         <div class="controls">
                         <label class="radio">
                             <span>
-                                <input type="radio"  id='count_type' name='count_type' value='4'> <?php echo LangUtil::$pageTerms['COUNT_TEST']." (Grouped)"; ?>
+                                <input type="radio"  id='count_type' name='count_type' value='4'> <?php echo LangUtil::$pageTerms['COUNT_TEST']." (" . LangUtil::$pageTerms['GROUPED'] . ")"; ?>
                             </span>
                         </label>
                         </div>
                         <div class="controls">
                         <label class="radio">
                             <span>
-                                <input type="radio"  id='count_type' name='count_type' value='1'>  <?php echo LangUtil::$pageTerms['COUNT_SPECIMEN']." (Ungrouped)"; ?>
+                                <input type="radio"  id='count_type' name='count_type' value='1'>  <?php echo LangUtil::$pageTerms['COUNT_SPECIMEN']." (" . LangUtil::$pageTerms['UNGROUPED'] . ")"; ?>
                             </span>
                         </label>
                         </div>
                         <div class="controls">
                         <label class="radio">
                             <span>
-                                <input type="radio" id='count_type' name='count_type' value='5'>  <?php echo LangUtil::$pageTerms['COUNT_SPECIMEN']." (Grouped)"; ?>
+                                <input type="radio" id='count_type' name='count_type' value='5'>  <?php echo LangUtil::$pageTerms['COUNT_SPECIMEN']." (" . LangUtil::$pageTerms['GROUPED'] . ")"; ?>
                             </span>
                         </label>
                         </div>
                         <div class="controls">
                         <label class="radio">
                             <span>
-                                <input type="radio" id='count_type' name='count_type' value='3'> Doctor Statistics
+                                <input type="radio" id='count_type' name='count_type' value='3'> <?php echo LangUtil::$pageTerms['DOCTOR_STATISTICS']; ?>
                             </span>
                         </label>
                         </div>
@@ -2215,7 +2215,7 @@ function show_custom_report_form(report_id)
     
 	<div class="portlet box blue reports_subdiv" id="test_history_div" style="display: none">
         <div class="portlet-title" >
-                                <h4><i class="icon-reorder"></i>Patient Report</h4>
+                                <h4><i class="icon-reorder"></i> <?php echo LangUtil::$pageTerms['MENU_PATIENT']; ?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                    <!-- <a data-toggle="modal" class="config"></a>-->
@@ -2230,7 +2230,7 @@ function show_custom_report_form(report_id)
                         <div class="">
                                             <div class="well text-success">
                                             <?php
-                                            $tips_string = "Select Patient Name, Number or ID to retrieve patient's lab reports";
+                                            $tips_string = LangUtil::$pageTerms['SELECT_PATIENT_BY'];
                                             $page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], $tips_string);
                                             echo "<br><br>";
                                             ?>
@@ -2298,7 +2298,7 @@ function show_custom_report_form(report_id)
     
     <div class="portlet box blue reports_subdiv" id="daily_report_div" style="display: none">
         <div class="portlet-title" >
-                                <h4><i class="icon-reorder"></i>Daily Log</h4>
+                                <h4><i class="icon-reorder"></i> <?php  echo LangUtil::$pageTerms['DAILY_LOG'];?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                    <!-- <a data-toggle="modal" class="config"></a>-->
@@ -2419,7 +2419,7 @@ function show_custom_report_form(report_id)
     
     <div class="portlet box blue reports_subdiv" id="summary_div" style="display: none">
         <div class="portlet-title" >
-                                <h4><i class="icon-reorder"></i>Prevalence rate</h4>
+                                <h4><i class="icon-reorder"></i><?php echo LangUtil::$pageTerms['PREVALENCE_RATE']?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                 <!--    <a data-toggle="modal" class="config"></a>-->
@@ -2435,7 +2435,7 @@ function show_custom_report_form(report_id)
                                             <div class="well text-success">
                                             <?php
                                             //Prevelance Rate
-                                            $tips_string = "Select the date range to view the infection graph and prevalence rates.";
+                                            $tips_string = LangUtil::$pageTerms['SELECT_DATE_RANGE'];
                                             $page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], $tips_string);
                                             echo "<br><br><br>";
                                             ?>
@@ -2541,7 +2541,7 @@ function show_custom_report_form(report_id)
     
     <div class="portlet box blue reports_subdiv" id="consumption_report_div" style="display: none">
         <div class="portlet-title" >
-                                <h4><i class="icon-reorder"></i>Consumption Report</h4>
+                                <h4><i class="icon-reorder"></i><?php echo LangUtil::$pageTerms['MENU_CONSUMPTIONREPORT']; ?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                   <!--  <a data-toggle="modal" class="config"></a>-->
@@ -2557,7 +2557,7 @@ function show_custom_report_form(report_id)
                                             <div class="well text-success">
                                             <?php
                                             //Consummption
-                                            $tips_string = "Select the date range to view the consumption report";
+                                            $tips_string = LangUtil::$pageTerms['SELECT_DATE_RANGE_VIEW'];
                                             $page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], $tips_string);
                                             echo "<br><br><br>";
                                             ?>
@@ -3721,7 +3721,7 @@ function show_custom_report_form(report_id)
 	</div>
 	
 	<div id='infection_report_settings_div' class='reports_subdiv'  style='display:none;'>
-		<p style="text-align: right;"><a rel='facebox' href='#IR_rc'>Page Help</a></p>
+		<p style="text-align: right;"><a rel='facebox' href='#IR_rc'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 		<b><?php echo "Infection Report Settings"; ?></b>
 		 | <a href='javascript:toggleInfectionReportSettings();' id='agg_edit_link'><?php echo LangUtil::$generalTerms['CMD_EDIT']; ?></a>
 		<br><br>

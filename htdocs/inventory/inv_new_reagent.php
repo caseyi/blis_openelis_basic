@@ -89,13 +89,12 @@ function prefetch_pname()
 	$('#patient_prompt_div').load(url_string);
 }
 </script>
-<a href='view_stock.php'>&laquo; <?php echo LangUtil::$generalTerms['CMD_BACK']; ?></a>&nbsp;|&nbsp;<b><?php echo "Add New Reagent"; ?></b>
+<a href='view_stock.php'>&laquo; <?php echo LangUtil::$generalTerms['CMD_BACK']; ?></a>&nbsp;|&nbsp;<b><?php echo LangUtil::$generalTerms['ADD_NEW_REAGENT']; ?></b>
 <br><br>
 
 <div class="span4" style="position: absolute;top: 100px;right: 30px;">
 <?php
-$tips_string = "Add new Reagent by completing this form. Stocks can then be added for these reagents. Reagent name is required. Entering units for the reagent is optional. As you type letters in reagent name field, reageants with similar names are dispayed below.";
-$page_elems->getSideTip("Tips", $tips_string);
+$page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], LangUtil::$generalTerms['TIPS_INV_NEW_REAG_1']);
 ?>
 </div>
 
@@ -116,7 +115,7 @@ $page_elems->getSideTip("Tips", $tips_string);
 				</tr>
 				<tr>
 					<td>
-						&nbsp;<?php echo "Unit"; ?> 
+						&nbsp;<?php echo LangUtil::$generalTerms['UNIT']; ?> 
 					</td>
 					<td></td>
 					<td>
@@ -127,7 +126,7 @@ $page_elems->getSideTip("Tips", $tips_string);
 				</tr>
 				<tr>
 					<td>
-						&nbsp;<?php echo "Remarks"; ?> 
+						&nbsp;<?php echo LangUtil::$generalTerms['REMARKS']; ?> 
 						
 					</td>
 					<td></td>

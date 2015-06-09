@@ -34,7 +34,7 @@ class='menu_option' id='remove_data_div_menu'>
 						</h3>
 						<ul class="breadcrumb">
 							<li><i 
-class='icon-cogs'></i> Test Catalog
+class='icon-cogs'></i> <?php echo LangUtil::$pageTerms['TEST_CATALOG']; ?>
 							</li>
 						</ul>
 						<!-- END PAGE TITLE & 
@@ -62,15 +62,14 @@ class="collapse"></a>
 		</div>
 		<div class="portlet-body">
 		<p style="text-align: right;"><a rel='facebox' 
-href='#TestType_tc'>Page Help</a></p>
+href='#TestType_tc'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 		 <a href='test_type_new.php' class="btn blue-stripe" 
 title='Click to Add a New Test Type'><i class='icon-plus'></i> <?php 
 echo LangUtil::$generalTerms['ADDNEW']; ?></a>
 		<br><br>
 		<div id='tdel_msg' class='clean-orange' 
 style='display:none;'>
-			<?php echo 
-LangUtil::$generalTerms['MSG_DELETED']; ?>&nbsp;&nbsp;<a 
+			<?php echo LangUtil::$generalTerms['MSG_DELETED']; ?>&nbsp;&nbsp;<a 
 href="javascript:toggle('tdel_msg');"><?php echo 
 LangUtil::$generalTerms['CMD_HIDE']; ?></a>
 		</div>
@@ -93,7 +92,7 @@ class="collapse"></a>
 		</div>
 		<div class="portlet-body">
 		<p style="text-align: right;"><a rel='facebox' 
-href='#SpecimenType_tc'>Page Help</a></p>
+href='#SpecimenType_tc'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 		<a href='specimen_type_new.php' class="btn blue-stripe" 
 title='Click to Add a New Specimen Type'><i class='icon-plus'></i> <?php 
 echo LangUtil::$generalTerms['ADDNEW']; ?></a>
@@ -114,8 +113,7 @@ $page_elems->getSpecimenTypeTable($_SESSION['lab_config_id']); ?>
     <div id='test_categories_div' class='content_div'>
     <div class="portlet box green">
 		<div class="portlet-title">
-			<h4><i class="icon-reorder"></i><?php echo "Lab 
-Sections"; ?></h4>
+			<h4><i class="icon-reorder"></i><?php echo LangUtil::$pageTerms['LAB_SECTIONS']; ?></h4>
 			<div class="tools">
 				<a href="javascript:;" 
 class="collapse"></a>
@@ -124,7 +122,7 @@ class="collapse"></a>
 		</div>
 		<div class="portlet-body">
 		<p style="text-align: right;"><a rel='facebox' 
-href='#TestCategory_tc'>Page Help</a></p>
+href='#TestCategory_tc'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 		<a href='javascript:add_section();' class="btn 
 blue-stripe" title='Click to Add a New Test Category'><i 
 class='icon-plus'></i> <?php echo LangUtil::$generalTerms['ADDNEW']; 
@@ -152,7 +150,7 @@ REJECTION---------------------------------------------------------->
 							<div 
 class="portlet-title">
 								<h4><i 
-class="icon-reorder"></i>Specimen Phases and Rejection</h4>
+class="icon-reorder"></i><?php echo LangUtil::$pageTerms['SPECIMEN_REJECTION_PHASE']; ?></h4>
 								<div 
 class="tools">
 									<a 
@@ -170,13 +168,13 @@ class="span12">
 										<!--BEGIN TABS-->
 										<div class="tabbable tabbable-custom">
 											<ul class="nav nav-tabs">
-												<li class="active"><a href="#tab_phases" data-toggle="tab"><h4>Specimen Rejection Phases</h4></a></li>
-												<li><a href="#tab_reasons" data-toggle="tab"><h4>Specimen Rejection Reasons</h4></a></li>
+												<li class="active"><a href="#tab_phases" data-toggle="tab"><h4><?php echo LangUtil::$pageTerms['SPECIMEN_REJECTION_PHASES']; ?></h4></a></li>
+												<li><a href="#tab_reasons" data-toggle="tab"><h4><?php echo LangUtil::$pageTerms['SPECIMEN_REJECTION_REASONS']; ?></h4></a></li>
 											</ul>
 											<div class="tab-content">
 												<div class="tab-pane active" id="tab_phases">
 		<a href='catalog/rejection_phase_new.php' rel='facebox' class="btn 
-blue-stripe" title='Click to Add a New Specimen Rejection Phase'><i 
+blue-stripe" title='<?php echo LangUtil::$pageTerms['CLICK_TO_ADD_SPECIMEN_REJECTION_PHASE']; ?>'><i 
 class='icon-plus'></i> <?php echo LangUtil::$generalTerms['ADDNEW']; 
 ?></a>
 		<br><br>
@@ -191,7 +189,7 @@ LangUtil::$generalTerms['CMD_HIDE']; ?></a>
 $page_elems->getRejectionPhaseTable($_SESSION['lab_config_id']); ?>
 												</div>
 												<div class="tab-pane" id="tab_reasons">
-													<a href='catalog/rejection_reason_new.php' rel='facebox' class="btn blue-stripe" title='Click to Add a New Specimen Rejection Reason'><i class='icon-plus'></i> <?php echo LangUtil::$generalTerms['ADDNEW']; ?></a>
+													<a href='catalog/rejection_reason_new.php' rel='facebox' class="btn blue-stripe" title='<?php echo LangUtil::$pageTerms['CLICK_TO_ADD_SPECIMEN_REJECTION_REASON']; ?>'><i class='icon-plus'></i> <?php echo LangUtil::$generalTerms['ADDNEW']; ?></a>
 		<br><br>
 		<div id='sdel_msg' class='clean-orange' 
 style='display:none;'>

@@ -1219,7 +1219,7 @@ $monthago_array = explode("-", $monthago_date);
 
 			//if($report_config->landscape == true) echo " checked ";
 
-			?>>Landscape</input>
+			?>><?php echo LangUtil::$generalTerms['LANDSCAPE_TYPE']; ?></input>
 
 	</td>
 
@@ -1814,7 +1814,7 @@ else
 			?>
 			<tr valign='top'>	
 
-					<td><strong><?php echo "Visit Number"; ?></strong></td>
+					<td><strong><?php echo LangUtil::$generalTerms['VISIT_NUMBER']; ?></strong></td>
 
 					<td><?php echo $patient->getDailyNum(); ?></td>
 
@@ -3272,7 +3272,7 @@ echo "<td>".$test->getLabSectionByTest()."</td>";
 
 				<b>
 
-					Clinical Data:
+					<?php echo LangUtil::$generalTerms['CLINICAL_DATA']; ?>:
 
 					</b>
 
@@ -3392,7 +3392,7 @@ echo "<td>".$test->getLabSectionByTest()."</td>";
 
 					<br><b>
 
-					Clinical Data:
+					<?php echo LangUtil::$generalTerms['CLINICAL_DATA']; ?>:
 
 					</b>
 

@@ -108,7 +108,7 @@ function get_barcode(code)
 
 </script>
 <div id="count" style='display:none;'>0</div>
-<p style="text-align: right;"><a rel='facebox' href='#view_stocks_help'>Page Help</a></p>
+<p style="text-align: right;"><a rel='facebox' href='#view_stocks_help'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 
 <a href='view_stock.php'>&laquo; <?php echo LangUtil::$generalTerms['CMD_BACK']; ?></a> &nbsp;|&nbsp;<b> <?php echo LangUtil::$pageTerms['Current_Inventory']; ?></b>
 

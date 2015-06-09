@@ -12,7 +12,7 @@ LangUtil::setPageId("specimen_info");
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-download-alt"></i>
-                                <a href="index.php">Home</a> 
+                                <a href="index.php"><?php echo LangUtil::$generalTerms['HOME']; ?></a> 
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -35,7 +35,7 @@ LangUtil::setPageId("specimen_info");
                             $specimen_id = $_REQUEST['sid'];
                             $specimen = Specimen::getById($_REQUEST['sid']);
                             ?>
-                            <a href='javascript:history.go(-1);'>Back</a>
+                            <a href='javascript:history.go(-1);'><?php echo LangUtil::$generalTerms['BACK']; ?></a>
                             <br><br>
                             <?php
                             if($specimen == null)

@@ -7,8 +7,8 @@ include("includes/header.php");
 LangUtil::setPageId("quality");
 ?>
 <br>
-<b><?php echo "Quality Control Category Updated."; ?></b>
- | <a href='quality.php?show_qcc=1'>&laquo; <?php echo "Back to Quality Control"; ?></a>
+<b><?php echo LangUtil::$generalTerms['QC_CATEGORY_UPDATED']; ?></b>
+ | <a href='quality.php?show_qcc=1'>&laquo; <?php echo LangUtil::$generalTerms['BACK_QC']; ?></a>
 <br><br>
 <?php 
 $qcc = get_test_category_by_id($_REQUEST['qccid']);

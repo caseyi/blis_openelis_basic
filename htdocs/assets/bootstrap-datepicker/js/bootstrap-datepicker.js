@@ -338,6 +338,23 @@
 	};
 	$.fn.datepicker.Constructor = Datepicker;
 	
+	//TA: french translation
+	var locale = getCookie('locale');
+	var months_arr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	var months_short_arr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+	var days_arr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+	var days_min_arr = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+	var days_short_arr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+	var invalid_date_format_string = "Invalid date format.";
+	if(locale === 'fr'){
+		months_arr = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"];
+		months_short_arr = ["Jan", "Fev", "Mar", "Avr", "Mai", "Jui", "Jul", "Aou;", "Sep", "Oct", "Nov", "Dec"];
+		days_arr = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
+		days_min_arr = ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"];
+		days_short_arr = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+		invalid_date_format_string = "Format de date incorrect.";
+	}
+	
 	var DPGlobal = {
 		modes: [
 			{
@@ -356,11 +373,11 @@
 				navStep: 10
 		}],
 		dates:{
-			days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-			daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-			daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
-			months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-			monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+			days: days_arr,
+			daysShort: days_short_arr,
+			daysMin: days_min_arr,
+			months: months_arr,
+			monthsShort: months_short_arr
 		},
 		isLeapYear: function (year) {
 			return (((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0))
@@ -372,7 +389,7 @@
 			var separator = format.match(/[.\/\-\s].*?/),
 				parts = format.split(/\W+/);
 			if (!separator || !parts || parts.length === 0){
-				throw new Error("Invalid date format.");
+				throw new Error(invalid_date_format_string);
 			}
 			return {separator: separator, parts: parts};
 		},
@@ -453,3 +470,84 @@
 						'</div>';
 
 }( window.jQuery )
+
+//TA: get cookie by name
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+} 
+
+function utf8_encode(argString) {
+	  //  discuss at: http://phpjs.org/functions/utf8_encode/
+	  // original by: Webtoolkit.info (http://www.webtoolkit.info/)
+	  // improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+	  // improved by: sowberry
+	  // improved by: Jack
+	  // improved by: Yves Sucaet
+	  // improved by: kirilloid
+	  // bugfixed by: Onno Marsman
+	  // bugfixed by: Onno Marsman
+	  // bugfixed by: Ulrich
+	  // bugfixed by: Rafal Kukawski
+	  // bugfixed by: kirilloid
+	  //   example 1: utf8_encode('Kevin van Zonneveld');
+	  //   returns 1: 'Kevin van Zonneveld'
+
+	  if (argString === null || typeof argString === 'undefined') {
+	    return '';
+	  }
+
+	  var string = (argString + ''); // .replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+	  var utftext = '',
+	    start, end, stringl = 0;
+
+	  start = end = 0;
+	  stringl = string.length;
+	  for (var n = 0; n < stringl; n++) {
+	    var c1 = string.charCodeAt(n);
+	    var enc = null;
+
+	    if (c1 < 128) {
+	      end++;
+	    } else if (c1 > 127 && c1 < 2048) {
+	      enc = String.fromCharCode(
+	        (c1 >> 6) | 192, (c1 & 63) | 128
+	      );
+	    } else if ((c1 & 0xF800) != 0xD800) {
+	      enc = String.fromCharCode(
+	        (c1 >> 12) | 224, ((c1 >> 6) & 63) | 128, (c1 & 63) | 128
+	      );
+	    } else { // surrogate pairs
+	      if ((c1 & 0xFC00) != 0xD800) {
+	        throw new RangeError('Unmatched trail surrogate at ' + n);
+	      }
+	      var c2 = string.charCodeAt(++n);
+	      if ((c2 & 0xFC00) != 0xDC00) {
+	        throw new RangeError('Unmatched lead surrogate at ' + (n - 1));
+	      }
+	      c1 = ((c1 & 0x3FF) << 10) + (c2 & 0x3FF) + 0x10000;
+	      enc = String.fromCharCode(
+	        (c1 >> 18) | 240, ((c1 >> 12) & 63) | 128, ((c1 >> 6) & 63) | 128, (c1 & 63) | 128
+	      );
+	    }
+	    if (enc !== null) {
+	      if (end > start) {
+	        utftext += string.slice(start, end);
+	      }
+	      utftext += enc;
+	      start = end = n + 1;
+	    }
+	  }
+
+	  if (end > start) {
+	    utftext += string.slice(start, stringl);
+	  }
+
+	  return utftext;
+	} 

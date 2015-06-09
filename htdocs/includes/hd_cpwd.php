@@ -53,7 +53,7 @@ $facilityname = get_facility_name($_SESSION['lab_config_id']);
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <!-- BEGIN HEAD --><head>
 	<meta charset="utf-8" />
-	<title>BLIS <?php echo $VERSION; ?> - Kenya<?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?></title>
+	<title><?php echo LangUtil::$generalTerms['BLIS']; ?> <?php echo $VERSION; ?> - <?php echo LangUtil::$generalTerms['KENYA']; ?><?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?></title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -101,7 +101,7 @@ if(strpos($_SERVER['PHP_SELF'], 'login.php') === false)
 				<!-- BEGIN LOGO -->
 				<a class="brand" href="#">
 				<!--img src="assets/img/logo.png" alt="logo" /-->
-				BLIS v<?php echo $VERSION; ?> - Kenya<?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?>
+				<?php echo LangUtil::$generalTerms['BLIS']; ?> v<?php echo $VERSION; ?> - <?php echo LangUtil::$generalTerms['KENYA']; ?><?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?>
 				</a>
 				<!-- END LOGO -->
 				<!-- BEGIN RESPONSIVE MENU TOGGLER -->

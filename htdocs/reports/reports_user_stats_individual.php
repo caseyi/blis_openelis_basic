@@ -185,7 +185,7 @@ display:none;
 &nbsp;&nbsp;
 <input type='radio' name='do_landscape' value='Y' <?php
 	//if($report_config->landscape == true) echo " checked ";
-?>>Landscape</input>&nbsp;&nbsp;
+?>><?php echo LangUtil::$generalTerms['LANDSCAPE_TYPE']; ?></input>&nbsp;&nbsp;
 
 	<input type='button' onclick="javascript:print_content('export_content');" value='<?php echo LangUtil::$generalTerms['CMD_PRINT']; ?>'></input>
 	&nbsp;&nbsp;
@@ -209,7 +209,7 @@ display:none;
 <div id='export_content'>
 <link rel='stylesheet' type='text/css' href='css/table_print.css' />
 <div id='report_config_content'>
-<b><?php echo "User Log"; ?></b>
+<b><?php echo LangUtil::$pageTerms['USER_LOG']; ?></b>
 <br><br>
 <?php
 $lab_config_id = $_REQUEST['location'];
@@ -238,22 +238,22 @@ $user_obj = get_user_by_id($user_id);
 			<td><?php echo $lab_config->getSiteName(); ?></td>
 		</tr>
                 <tr>
-			<td><?php echo "User"; ?>:</td>
+			<td><?php echo LangUtil::$pageTerms['USER']; ?>:</td>
 			<td><b><?php echo $user_obj->actualName; ?></b></td>
 		</tr>
                 <tr>
-			<td><?php echo "User ID"; ?>:</td>
+			<td><?php echo LangUtil::$pageTerms['USER_ID']; ?>:</td>
 			<td><?php echo $user_obj->username; ?></td>
 		</tr>
                 <tr>
-			<td><?php echo "Designation"; ?>:</td>
+			<td><?php echo LangUtil::$pageTerms['DESIGNATION']; ?>:</td>
 			<td><?php  
                         if ($user_obj->level == 0 || $user_obj->level == 1 || $user_obj->level == 13)
-                            echo "Technician";
+                            echo LangUtil::$pageTerms['TECHNICAN'];
                         else if ($user_obj->level == 2)
-                            echo "Administrator";
+                            echo LangUtil::$pageTerms['ADMIN'];
                         else if ($user_obj->level == 5)
-                            echo "Clerk";
+                            echo LangUtil::$pageTerms['CLERK'];
                         ?></td>
 		</tr>
 		<tr>
@@ -272,19 +272,19 @@ $user_obj = get_user_by_id($user_id);
 			</td>
 		</tr>
                 <tr>
-			<td><?php echo "Log Type"; ?>:</td>
+			<td><?php echo LangUtil::$pageTerms['LOG_TYPE']; ?>:</td>
 			<td>
 			<?php
                             if($log_type == 1)
-                                echo "Patients Registry Log";
+                                echo LangUtil::$pageTerms['PATIENT_REGISTRY_LOG'];
                             else if($log_type == 2)
-                                echo "Specimens Registry Log";
+                                echo LangUtil::$pageTerms['SPECIMENS_REGISTRY_LOG'];
                             else if($log_type == 3)
-                                echo "Tests Registry Log";
+                                echo LangUtil::$pageTerms['TESTS_REGISTRY_LOG'];
                             else if($log_type == 4)
-                                echo "Results Entry Log";
+                                echo LangUtil::$pageTerms['RESULTS_ENTRY_LOG'];
                             else if($log_type == 5)
-                                echo "Inventory Transaction Log";
+                                echo LangUtil::$pageTerms['INVENTORY_TRANSACTION_LOG'];
 			?>
 			</td>
 		</tr>
@@ -303,12 +303,12 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
                         $count = 0;
                         echo "S.No.";
                     ?></th>
-			<th>Patient Name</th>
-			<th>Patient ID</th>
-                        <th>Patient Number</th>
-                        <th>Patient Gender</th>
-                        <th>Patient Age</th>
-                        <th>Date of Registration</th>
+			<th><?php echo LangUtil::$generalTerms['PATIENT_NAME']?></th>
+			<th><?php echo LangUtil::$generalTerms['PATIENT_ID']?></th>
+                        <th><?php echo LangUtil::$generalTerms['PATIENT_DAILYNUM']?></th>
+                        <th><?php echo LangUtil::$generalTerms['PATIENT_GENDER']?></th>
+                        <th><?php echo LangUtil::$generalTerms['PATIENT_AGE']?></th>
+                        <th><?php echo LangUtil::$generalTerms['DATE_REGISTRATION']?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -392,11 +392,11 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
                         $count = 0;
                         echo "S.No.";
                     ?></th>
-			<th>Specimen Name</th>
-			<th>Specimen ID</th>
-                        <th>Patient Name</th>
-                        <th>Patient ID</th>
-                        <th>Date of Registration</th>
+			<th><?php echo LangUtil::$generalTerms['SPECIMEN_NAME']?></th>
+			<th><?php echo LangUtil::$generalTerms['SPECIMEN_ID']?></th>
+                        <th><?php echo LangUtil::$generalTerms['PATIENT_NAME']?></th>
+                        <th><?php echo LangUtil::$generalTerms['PATIENT_DAILYNUM']?></th>
+                        <th><?php echo LangUtil::$generalTerms['DATE_REGISTRATION']?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -479,12 +479,12 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
                         $count = 0;
                         echo "S.No.";
                     ?></th>
-			<th>Test Name</th>
-			<th>Test ID</th>
-                        <th>Patient Name</th>
-                        <th>Patient ID</th>
-                        <th>Specimen ID</th>
-                        <th>Date of Registration</th>
+			<th><?php echo LangUtil::$generalTerms['TEST_NAME']?></th>
+			<th><?php echo LangUtil::$generalTerms['TEST_ID']?></th>
+                        <th><?php echo LangUtil::$generalTerms['PATIENT_NAME']?></th>
+                        <th><?php echo LangUtil::$generalTerms['PATIENT_DAILYNUM']?></th>
+                        <th><?php echo LangUtil::$generalTerms['SPECIMEN_ID']?></th>
+                        <th><?php echo LangUtil::$generalTerms['DATE_REGISTRATION']?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -575,12 +575,12 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
                         $count = 0;
                         echo "S.No.";
                     ?></th>
-			<th>Test Name</th>
-			<th>Test ID</th>
-                        <th>Patient Name</th>
-                        <th>Patient ID</th>
-                        <th>Specimen ID</th>
-                        <th>Date of Result Entry</th>
+			<th><?php echo LangUtil::$generalTerms['TEST_NAME']?></th>
+			<th><?php echo LangUtil::$generalTerms['TEST_ID']?></th>
+                        <th><?php echo LangUtil::$generalTerms['PETIENT_NAME']?></th>
+                        <th><?php echo LangUtil::$generalTerms['PATIENT_DAILYNUM']?></th>
+                        <th><?php echo LangUtil::$generalTerms['SPECIMEN_ID']?></th>
+                        <th><?php echo LangUtil::$generalTerms['DATE_RESULT_ENTRY']?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -663,7 +663,7 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 <?php } ?>
 
 <?php if($log_type == 5) { ?> 
-<b>Inventory In-Flow</b>
+<b><?php echo LangUtil::$pageTerms['INVENTORY_IN_FLOW']?></b>
 <table id='report_content_table' class="print_entry_border draggable">
 	<thead>
 		<tr>
@@ -671,16 +671,16 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
                         $count = 0;
                         echo "S.No.";
                     ?></th>
-			<th>Reagent</th>
-			<th>Lot</th>
-                        <th>Expiry Date</th>
-                        <th>Manufacturer</th>
-                        <th>Supplier</th>
-                        <th>Quantity Supplied</th>
-                        <th>Cost Per Unit</th>
-                        <th>Date of Supply</th>
-                        <th>Remarks</th>
-                        <th>Date of Transaction</th>
+			<th><?php echo LangUtil::$generalTerms['REAGENT']?></th>
+			<th><?php echo LangUtil::$generalTerms['LOT']?></th>
+                        <th><?php echo LangUtil::$generalTerms['EXPIRE_DATE']?></th>
+                        <th><?php echo LangUtil::$generalTerms['MANUFACTURER']?></th>
+                        <th><?php echo LangUtil::$generalTerms['SUPPLIER']?></th>
+                        <th><?php echo LangUtil::$generalTerms['QUANTITY_SUPPLIED']?></th>
+                        <th><?php echo LangUtil::$generalTerms['COST_PER_UNIT']?></th>
+                        <th><?php echo LangUtil::$generalTerms['DATE_SUPPLY']?></th>
+                        <th><?php echo LangUtil::$generalTerms['REMARKS']?></th>
+                        <th><?php echo LangUtil::$generalTerms['DATE_TRANSACTION']?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -788,7 +788,7 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 	</tbody>
 </table>
 <br><br>
-<b>Inventory Out-Flow</b>
+<b><?php echo LangUtil::$pageTerms['INVENTORY_OUT_FLOW']?></b>
 <table id='report_content_table' class="print_entry_border draggable">
 	<thead>
 		<tr>
@@ -796,12 +796,12 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
                         $count = 0;
                         echo "S.No.";
                     ?></th>
-			<th>Reagent</th>
-			<th>Lot</th>
-                        <th>Quantity Used</th>
-                        <th>Date of Use</th>
-                        <th>Remarks</th>
-                        <th>Date of Transaction</th>
+			<th><?php echo LangUtil::$generalTerms['REAGENT']?></th>
+			<th><?php echo LangUtil::$generalTerms['LOT']?></th>
+                        <th><?php echo LangUtil::$generalTerms['QUANTITY_USED']?></th>
+                        <th><?php echo LangUtil::$generalTerms['DATE_USED']?></th>
+                        <th><?php echo LangUtil::$generalTerms['REMARKS']?></th>
+                        <th><?php echo LangUtil::$generalTerms['DATE_TRANSACTION']?></th>
 		</tr>
 	</thead>
 	<tbody>

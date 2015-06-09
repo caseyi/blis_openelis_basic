@@ -12,7 +12,7 @@
 	<div class="footer">
 			<center>
 				<small>
-		<a href='userguide/BLIS_User_Guide.pdf' target='_blank' >User Guide |</a>
+		<a href='userguide/BLIS_User_Guide.pdf' target='_blank' ><?php echo LangUtil::$generalTerms['USER_GUIDE']; ?> |</a>
 		<?php
 		//Disabling language switching functionality
 		/*
@@ -31,10 +31,10 @@
          * */
 		?>
 		
-		<a rel='facebox' href='feedback/comments.php?src=<?php echo $_SERVER['PHP_SELF']; ?>'><?php echo "Comments" ?>?</a> |
+		<a rel='facebox' href='feedback/comments.php?src=<?php echo $_SERVER['PHP_SELF']; ?>'><?php echo LangUtil::$generalTerms['COMMENTS'] ?>?</a> |
 		C4G BLIS v<?php echo $VERSION; ?> - <?php echo LangUtil::$allTerms["FOOTER_MSG"]; ?>
 		<?php
-		/*
+		//TA: this part was commented out, I removed this comments
 		if($_SESSION['locale'] !== "en")
 		{
 			?>
@@ -54,17 +54,14 @@
 		else
 		{
 			echo " | Francais";
+			$str = utf8_encode("Facilité");
+			//$str = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
+			echo " |  $str";
 		}
-		if($_SESSION['locale'] !== "default")
-		{
-			?>
-			 | <a href='lang_switch?to=default'><?php echo "Default"; ?></a>
+		?>
+			 
 			<?php
-		}
-		else
-		{
-			echo " | Default";
-		}
+
 		/*Change Theme: <a href=javascript:changeTheme('Blue');>Blue</a> | <a href=javascript:changeTheme('Grey');>Grey*/
 		
 		if($TRACK_LOADTIME)

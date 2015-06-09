@@ -29,7 +29,7 @@ $sid = $_REQUEST['sid'];
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-download-alt"></i>
-                                <a href="index.php">Home</a> 
+                                <a href="index.php"><?php echo LangUtil::$generalTerms['HOME']; ?></a> 
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -176,7 +176,7 @@ function remove_modal(id){
 }else if($is_modal){
 ?>
 <div class="modal-footer">
-<button type="button" data-dismiss="modal" class="btn" onclick='javascript:remove_modal("specimen_info");'>Close</button>
+<button type="button" data-dismiss="modal" class="btn" onclick='javascript:remove_modal("specimen_info");'><?php echo LangUtil::$generalTerms['CMD_CLOSE']; ?></button>
 </div>
 <?php 
 }

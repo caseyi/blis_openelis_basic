@@ -367,9 +367,9 @@ else{
 			?>
 			<th style='width:200px;'><?php echo LangUtil::$generalTerms['PATIENT_NAME']; ?></th>
 			<th style='width:100px;'><?php echo LangUtil::$generalTerms['SPECIMEN_TYPE']; ?></th>
-			<th style='width:100px;'><?php echo "Test"; ?></th>
+			<th style='width:100px;'><?php echo LangUtil::$generalTerms['TEST']; ?></th>
 			<th style='width:100px;'><?php echo "Status";?></th>
-			<th style='width:300px;'>Action</th>
+			<th style='width:300px;'><?php echo LangUtil::$generalTerms['ACTION']; ?></th>
 			<?php if($attrib_type==10){
 			?>
 			<th style='width:100px;'>View</th>

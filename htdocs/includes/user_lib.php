@@ -40,11 +40,11 @@ function get_top_menu_options($user_role)
 	else if($user_role == $LIS_TECH_RW || $user_role == $LIS_TECH_SHOWPNAME)
 	{
 		$page_list["Reception"] = "find_patient.php?div=reception";
-		$page_list["Sample Collection"] = "find_patient.php?div=sample_collection";
+		$page_list[LangUtil::$generalTerms["SAMPLE_COLLECTION"]] = "find_patient.php?div=sample_collection";
 		$page_list[LangUtil::getPageTitle("results_entry")] = "results_entry.php";
 		//$page_list[LangUtil::getPageTitle("search")] = "search.php";
 		$page_list[LangUtil::getPageTitle("reports")] = "reports.php";
-		$page_list["Inventory"]="view_stock.php";
+		$page_list[LangUtil::$allTerms["Inventory"]]="view_stock.php";
 		$id=get_lab_config_id($_SESSION['user_id']);
 		if($id==0)
 		{
@@ -64,7 +64,7 @@ function get_top_menu_options($user_role)
 		# ... 
 		$page_list[LangUtil::getPageTitle("lab_config_home")] = "lab_configs.php";
 		$page_list[LangUtil::getPageTitle("catalog")] = "catalog.php";
-		$page_list["Quality Control"]="quality.php";
+		$page_list[LangUtil::$generalTerms['MENU_QUALITY_CONTROL']]="quality.php";
 		$page_list[LangUtil::getPageTitle("reports")] = "reports.php";
 		if($SERVER != $ON_ARC)
 		{

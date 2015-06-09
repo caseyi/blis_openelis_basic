@@ -1629,7 +1629,7 @@ class PageElems
 					</td>
 				</tr>
 				<tr valign='top'>
-					<td>Test Types</td>
+					<td><?php echo LangUtil::$generalTerms['TEST_TYPES']; ?></td>
 					<td>
 					<?php
 					$test_list = get_test_types_by_site($lab_config_id);
@@ -2199,7 +2199,7 @@ class PageElems
 			$pid=$specimen->patientId;
 			
 			?>
-			<td><a href="javascript:get_report(<?php echo $pid;?>,<?php echo $sid;?> )">Report</a> </td>
+			<td><a href="javascript:get_report(<?php echo $pid;?>,<?php echo $sid;?> )"><?php echo LangUtil::$generalTerms['REPORT']; ?></a> </td>
 		</tr>
 		<?php
 	}

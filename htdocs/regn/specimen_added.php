@@ -23,7 +23,7 @@ $specimen_list = get_specimens_by_session($session_num);
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-download-alt"></i>
-                                <a href="index.php">Home</a> 
+                                <a href="index.php"><?php echo LangUtil::$generalTerms['HOME']; ?></a> 
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -51,11 +51,11 @@ $specimen_list = get_specimens_by_session($session_num);
             					{ ?><div class="well text-info">
 						<?php
 							echo "<li>";
-							echo "This page allows us to view a summary of both patient and the specimens we registered.";
+							echo LangUtil::$generalTerms['TIPS_SPECIMENT_ADDED_1'];
 							echo "</li>";
 						
 							echo "<li>"; 
-							echo "Once a specimen has been registered, we can use this page to get the specimen number for labelling of the specimen.";
+							echo LangUtil::$generalTerms['TIPS_SPECIMENT_ADDED_2'];
 							echo "</li>";
 						
 							/*echo "<li>"; 
@@ -66,7 +66,7 @@ $specimen_list = get_specimens_by_session($session_num);
 					</div>
             <div id='specimen_added_body'> </div>           
             
-            Visit Number <?php echo $session_num; ?>
+            <?php echo LangUtil::$generalTerms['VISIT_NUMBER'];?> <?php echo $session_num; ?>
             <?php
             if(count($specimen_list) > 1)
             {
@@ -137,16 +137,16 @@ $specimen_list = get_specimens_by_session($session_num);
 						<?php
 						
 							echo "<li>";
-							echo "This page allows us to view a summary of both patient and the specimens we registered.";
+							echo LangUtil::$generalTerms['TIPS_SPECIMENT_ADDED_1'];
 							echo "</li>";
 						
 							echo "<li>"; 
-							echo "Once a specimen has been registered, we can use this page to get the specimen number for labelling of the specimen.";
+							echo LangUtil::$generalTerms['TIPS_SPECIMENT_ADDED_2'];
 							echo "</li>";
 						
-							echo "<li>"; 
-							echo "The specimen number is indicated in in bigger fonts than the other details (e.g. MIC-52510).";
-							echo "</li>"; 
+// 							echo "<li>"; 
+// 							echo "The specimen number is indicated in in bigger fonts than the other details (e.g. MIC-52510).";
+// 							echo "</li>"; 
 						
 						?>
 					</ul>

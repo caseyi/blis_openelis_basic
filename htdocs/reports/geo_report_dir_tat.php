@@ -1096,7 +1096,7 @@ function pauseClick()
 
 </script>  
 
-    <div id="page_help" style="float:right;" ><p style="text-align: right;"><a rel='facebox' href='#SpecimenType_tc'>Page Help</a></p>
+    <div id="page_help" style="float:right;" ><p style="text-align: right;"><a rel='facebox' href='#SpecimenType_tc'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 </div>
 <div id="reportcontent">
          <div id='rsr' style=" float: inherit"></div>

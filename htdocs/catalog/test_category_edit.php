@@ -12,7 +12,7 @@ $test_category = get_test_category_by_id($_REQUEST['tcid']);
 ?>
 
 <br>
-<b><?php echo "Edit Test Category"; ?></b>
+<b><?php echo LangUtil::$generalTerms['EDIT_TEST_CATEGORY']; ?></b>
 | <a href="catalog.php?show_tc=1"><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></a>
 <br><br>
 <?php
@@ -65,7 +65,7 @@ if($test_category == null)
 </div>
 <div id='test_help' style='display:none'>
 <small>
-Use Ctrl+F to search easily through the list. Ctrl+F will prompt a box where you can enter the test name you are looking for.
+<?php echo LangUtil::$generalTerms['USE_CTRL']; ?>
 </small>
 </div>
 <script type='text/javascript'>

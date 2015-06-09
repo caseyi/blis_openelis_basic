@@ -38,7 +38,7 @@ LangUtil::setPageId("footer");
 		<?php
 		if($_SESSION['locale'] == "en")
 		{
-			echo "<a href='userguide/BLIS_User_Guide.pdf' target='_blank' >User Guide |</a>";
+			echo "<a href='userguide/BLIS_User_Guide.pdf' target='_blank' >" . LangUtil::$generalTerms['USER_GUIDE'] . "|</a>";
 		}
 		else if($_SESSION['locale'] == "fr")
 		{
@@ -46,7 +46,7 @@ LangUtil::setPageId("footer");
 		}
 		else
 		{
-			echo "<a href='userguide/BLIS_User_Guide.pdf' target='_blank'>User Guide |</a>";
+			echo "<a href='userguide/BLIS_User_Guide.pdf' target='_blank'>" . LangUtil::$generalTerms['USER_GUIDE'] . " |</a>";
 		}
 		?>
 		

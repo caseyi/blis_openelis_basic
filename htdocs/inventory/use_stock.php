@@ -116,7 +116,7 @@ function display_unit()
 <div class="span4" style="position: absolute;top: 100px;right: 30px;">
 <?php
 $tips_string = "Log stock usage (quantity signed out) by completing this form. Available quantity for the selected lot is displayed. Quantity signed out should be less than or equal to the available quantity.";
-$page_elems->getSideTip("Tips", $tips_string);
+$page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], $tips_string);
 ?>
 </div>
 

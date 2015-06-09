@@ -34,10 +34,10 @@ $php_array= addslashes(implode("%", $doc_array));
 
 ?>
 
-<p style="text-align: right;"><a rel='facebox' href='#NEW_SPECIMEN'>Page Help</a></p>
+<p style="text-align: right;"><a rel='facebox' href='#NEW_SPECIMEN'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 <span class='page_title'><?php echo LangUtil::getTitle(); ?></span>
  | Visit No:<?php //echo LangUtil::$generalTerms['ACCESSION_NUM']; ?> <?php echo $session_num; ?>
- | <a href="find_patient.php?div=reception">Back</a>
+ | <a href="find_patient.php?div=reception"><?php echo LangUtil::$generalTerms['BACK']; ?></a>
 <br>
 <br>
 <?php

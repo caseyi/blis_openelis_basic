@@ -14,7 +14,7 @@ putUILog('test_type_new', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', '
 						<h3>
 						</h3>
 						<ul class="breadcrumb">
-							<li><i class='icon-cogs'></i> Test Types
+							<li><i class='icon-cogs'></i> <?php echo LangUtil::$generalTerms['TEST_TYPES']; ?>
 							</li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -48,7 +48,7 @@ putUILog('test_type_new', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', '
 		<td><textarea name='test_descr' id='test_descr' class='uniform_width'></textarea></td>
 	</tr>
 	<tr valign='top'>
-		<td>Clinical Data [<a href='#clinical_help' rel='facebox'>?</a>] </td><td>
+		<td><?php echo LangUtil::$generalTerms['CLINICAL_DATA']; ?> [<a href='#clinical_help' rel='facebox'>?</a>] </td><td>
 			<div id="text">
 			<textarea name='clinical_data' id='clinical_data' class='uniform_width'></textarea>
 			</div>
@@ -71,8 +71,8 @@ putUILog('test_type_new', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', '
 				</td>
 			</tr>
 			</table>
-			<input type="button" value="Add" onclick="addRowToTable();" />
-			<input type="button" value="Remove" onclick="removeRowFromTable();" />
+			<input type="button" value="<?php echo LangUtil::$generalTerms['CMD_ADD']; ?>" onclick="addRowToTable();" />
+			<input type="button" value="<?php echo LangUtil::$generalTerms['CMD_REMOVE']; ?>" onclick="removeRowFromTable();" />
 			</div>
 			</td>
 			</div>
@@ -127,7 +127,7 @@ putUILog('test_type_new', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', '
 					echo "<input type='text' style='width:50px' name='measure[]' value='' />";
                                         echo "<br>";
                                         ?>
-                                        <small><a id='new_submeasure_link' href='javascript:add_new_submeasure(<?php echo $i; ?>);'><?php echo 'Add Sub Measure'; ?> &raquo;</a></small>
+                                        <small><a id='new_submeasure_link' href='javascript:add_new_submeasure(<?php echo $i; ?>);'><?php echo LangUtil::$generalTerms['ADD_SUB_MEASURE']; ?> &raquo;</a></small>
                                         <?php
 					echo "</td>";
 					echo "<td>";
@@ -148,7 +148,7 @@ putUILog('test_type_new', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', '
 							<table style='font-size:11px'><tr><td><?php echo LangUtil::$generalTerms['RANGE']; ?></td>
 							<td><input type='text' class='range_field span3 m-wrap' name='range_l_<?php echo $i; ?>[]' value='' />&nbsp;-&nbsp;
 								<input type='text' class='range_field span3 m-wrap' name='range_u_<?php echo $i; ?>[]' value=''/></td></tr>
-							<tr><td>Gender<br>(Male, Female or Both)</td>
+							<tr><td><?php echo LangUtil::$generalTerms['GENDER']; ?><br>(<?php echo LangUtil::$generalTerms['MALE_FEMALE_BOTH']; ?>)</td>
 							<td><input type='text' class='range_field span3 m-wrap' name='gender_<?php echo $i; ?>[]' value='B'/></td></tr>
 							<tr><td>Age&nbsp;Range</td>
 							<td><input type='text' class='range_field span3 m-wrap'  name='agerange_l_<?php echo $i; ?>[]' id='agerange_l_<?php echo $i; ?>[]' value='0' />&nbsp;-&nbsp;
@@ -223,7 +223,7 @@ putUILog('test_type_new', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', '
                                                             <input type='text' class='range_field' name='agerange_u_<?php echo $i.$us.$y; ?>[]' id='agerange_u_<?php echo $i.$us.$y; ?>[]' value='100' />
                                                             <br>
                                                     </span>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo LangUtil::$generalTerms['RANGE']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gender &nbsp;&nbsp;Age_Range
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;<?php echo LangUtil::$generalTerms['RANGE']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo LangUtil::$generalTerms['GENDER']; ?> &nbsp;&nbsp;Age_Range
                                                             <br>
                                                     <small><a href="javascript:add_range_field('<?php echo $i.$us.$y; ?>');"><?php echo LangUtil::$generalTerms['ADDANOTHER']; ?> &raquo;</a></small>
                                                     <br><br>
@@ -288,7 +288,7 @@ putUILog('test_type_new', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', '
 	<td></td>
 	<tr valign='top'>
 		<td>
-			Hide Patient Name in Report 
+			<?php echo LangUtil::$generalTerms['HIDE_PATIENT_NAME_IN_REPORT']; ?>
 		</td>
 		<td>
 			<select name="hidePatientName">
@@ -298,7 +298,7 @@ putUILog('test_type_new', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', '
 		</td>		
 	</tr>
 	<tr valign='top'>
-		<td>Prevalence Threshold </td>
+		<td><?php echo LangUtil::$generalTerms['PREVAL_THRESHOLD']; ?></td>
 		<td><input id='prevalenceThreshold' name='prevalenceThreshold' type='text' size='3' maxLength='3' onkeypress="return isInputNumber(event);" />
 			<span id='prevalenceThresholdError' class='error_string' style='display:none;'>
 			<?php echo "Threshold Value cannot be more than 100"; ?>
@@ -307,12 +307,12 @@ putUILog('test_type_new', 'X', basename($_SERVER['REQUEST_URI'], ".php"), 'X', '
 	</tr>
 			
 	<tr valign='top'>
-		<td>Target TAT</td>
+		<td><?php echo LangUtil::$allTerms['MENU_TAT']; ?></td>
 		<td><input id='targetTat' name='targetTat' type='text' size='3' maxLength='3' onkeypress="return isInputNumber(event);" />
 		</td>
 	</tr>
         <tr valign='top' <?php if (!is_billing_enabled($_SESSION['lab_config_id'])) {echo "style='display:none;'";} ?>>
-		<td>Cost To Patient</td>
+		<td><?php echo LangUtil::$generalTerms['COST_PATIENT']; ?></td>
                 <td>
                     <input id='cost_to_patient_dollars' name='cost_to_patient_dollars' type='number' size='4' maxLength='4' onkeypress="return isInputNumber(event);" value='0' />
                     <?php echo get_currency_delimiter_from_lab_config_settings(); ?>
@@ -353,7 +353,7 @@ For e.g., if test results can be either one from 'P','N' or 'D', please enter 'P
 </div>
 <div id='clinical_help' style='display:none'>
 <small>
-<u>Clinical Data </u> can be entered either in the table or text on both forms. If it is not requried please leave it blank.
+<u>Clinical<?php echo LangUtil::$generalTerms['CLINICAL_DATA']; ?> Data </u> can be entered either in the table or text on both forms. If it is not requried please leave it blank.
 </small>
 </div>
 <div id='specimen_help' style='display:none'>
@@ -450,7 +450,7 @@ function add_range_field(mrow_num)
 	var num_row = num_ranges[mrow_num];
 	
 //		var map=map_offset-1;									
-	var html_code = "<table style='font-size:11px'><tr><td><?php echo LangUtil::$generalTerms['RANGE']; ?></td><td><input type='text'  class='range_field span3 m-wrap' name='range_l_"+mrow_num+"[]' value='' />&nbsp;-&nbsp;<input type='text'  class='range_field span3 m-wrap' name='range_u_"+mrow_num+"[]' value='' /></td></tr><tr><td>Gender<br>(Male, Female or Both)</td><td><input type='text'  class='range_field span3 m-wrap' name='gender_"+mrow_num+"[]' value='B'/></td></tr><tr><td>Age&nbsp;Range</td><td><input type='text'  class='range_field span3 m-wrap' name='agerange_l_"+mrow_num+"[]' id='agerange_l_"+mrow_num+"[]' value='0' />&nbsp;-&nbsp;<input type='text'  class='range_field span3 m-wrap' name='agerange_u_"+mrow_num+"[]' id='agerange_u_"+mrow_num+"[]' value='100' /></td</tr></table><br>";
+	var html_code = "<table style='font-size:11px'><tr><td><?php echo LangUtil::$generalTerms['RANGE']; ?></td><td><input type='text'  class='range_field span3 m-wrap' name='range_l_"+mrow_num+"[]' value='' />&nbsp;-&nbsp;<input type='text'  class='range_field span3 m-wrap' name='range_u_"+mrow_num+"[]' value='' /></td></tr><tr><td><?php echo LangUtil::$generalTerms['GENDER']; ?><br>(<?php echo LangUtil::$generalTerms['MALE_FEMALE_BOTH']; ?>)</td><td><input type='text'  class='range_field span3 m-wrap' name='gender_"+mrow_num+"[]' value='B'/></td></tr><tr><td>Age&nbsp;Range</td><td><input type='text'  class='range_field span3 m-wrap' name='agerange_l_"+mrow_num+"[]' id='agerange_l_"+mrow_num+"[]' value='0' />&nbsp;-&nbsp;<input type='text'  class='range_field span3 m-wrap' name='agerange_u_"+mrow_num+"[]' id='agerange_u_"+mrow_num+"[]' value='100' /></td</tr></table><br>";
 	$('#numeric_'+mrow_num).append(html_code);
 }
 
@@ -663,36 +663,36 @@ function check_input()
 						var range_u = range_u_elems[k].value;
 						if(range_l.trim()=="" && range_u.trim()=="")
 						{
-							alert("If you do not want to add new measure then please delete the name");
+							alert("<?php echo LangUtil::$generalTerms['TIPS_TEST_TYPE_NEW_1']; ?>");
 							return;
 						}
 						if(isNaN(range_l))
 						{
 							
-							alert("Lower Range value should be numeric: Not '"+range_l+"'!");
+							alert("<?php echo LangUtil::$generalTerms['TIPS_TEST_TYPE_NEW_2']; ?> '"+range_l+"'!");
 							return;
 						}
 						if(isNaN(range_u))
 						{
 							
-							alert("Upper Range value should be numeric: Not '"+range_u+"'!");
+							alert("<?php echo LangUtil::$generalTerms['TIPS_TEST_TYPE_NEW_3']; ?> '"+range_u+"'!");
 							return;
 						}
 						if((range_l.trim()== "")&&(isNaN(range_u)==false))
 						{
 						
-							alert("Lower bound cannot be blank");
+							alert("<?php echo LangUtil::$generalTerms['LOWER_BOUND_NO_BLANK']; ?>");
 							return;
 						}
 						if((range_u.trim()== "")&&(isNaN(range_l)==false))
 						{
 						
-							alert("Upper bound cannot be blank");
+							alert("<?php echo LangUtil::$generalTerms['UPPER_BOUND_NO_BLANK']; ?>");
 							return;
 						}
 						if((range_u.trim()-range_l.trim())<=0)
 						{
-							alert("Upper bound cannot be less than or equal to lower bound");
+							alert("<?php echo LangUtil::$generalTerms['UPPER_BOUND_NO_LESS_LOWER']; ?>");
 							return;
 						}
 						if($("#agerange_l_"+(j+1)+"_"+k).is(":disabled") == true)
@@ -726,7 +726,7 @@ function check_input()
 						}
 						else if((upper_value.trim()-lower_value.trim())<=0)
 						{
-							alert("Age range cannot be negative.");
+							alert("<?php echo LangUtil::$generalTerms['AGE_RANGE_NO_NEGATIVE']; ?>");
 							return;
 						}
 					}				

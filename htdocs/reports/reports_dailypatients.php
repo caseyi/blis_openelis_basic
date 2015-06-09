@@ -212,7 +212,7 @@ display:none;
 &nbsp;&nbsp;
 <input type='radio' name='do_landscape' value='Y' <?php
 	//if($report_config->landscape == true) echo " checked ";
-?>>Landscape</input>&nbsp;&nbsp;
+?>><?php echo LangUtil::$generalTerms['LANDSCAPE_TYPE']; ?></input>&nbsp;&nbsp;
 <input type='button' onclick="javascript:print_content('export_content');" value='<?php echo LangUtil::$generalTerms['CMD_PRINT']; ?>'></input>
 &nbsp;&nbsp;
 <!-- <input type='button' onclick="javascript:export_as_word('export_content');" value='<?php echo LangUtil::$generalTerms['CMD_EXPORTWORD']; ?>'></input> -->
@@ -233,7 +233,7 @@ display:none;
 	<?php $page_elems->getReportConfigCss($margin_list, false); ?>
 </style>
 <div id='report_config_content'>
-<h3><?php echo $report_config->headerText; ?></h3>
+<h3><?php echo LangUtil::$pageTerms[$report_config->headerText]; ?></h3>
 <b><?php echo $report_config->titleText; ?></b>
 <br>
 <!--<?php echo LangUtil::$generalTerms['FACILITY']; ?>: <?php echo $lab_config->getSiteName(); ?>

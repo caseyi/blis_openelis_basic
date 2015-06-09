@@ -7821,7 +7821,40 @@
 		"sWidthOrig": null
 	};
 	
-	
+	//TA: french translation
+	var locale = getCookie('locale');
+	var search_string = "Search:";
+	var no_data_in_table_string = "No data available in table";
+	var prev_string = "Prev";
+	var next_string = "Next";
+	var showing_0_0_string = "Showing 0 to 0 of 0 entries";
+	var showing_START_END_string = "Showing _START_ to _END_ of _TOTAL_ entries";
+	var show_menu_entries_string = "Show _MENU_ entries";
+	var loading_string= "Loading...";
+	var process_string = "Processing...";
+	var no_records_found_string = "No matching records found";
+	var filter_max_string = "(filtered from _MAX_ total entries)";
+	var last_string = "Last";
+	var first_string = "First";
+	var activate_sort_desc_string = ": activate to sort column descending";
+	var activate_sort_asc_string = ": activate to sort column ascending";
+	if(locale === 'fr'){
+		search_string = "Rechercher:";
+		no_data_in_table_string = "Pas de r&eacute;sultat disponible";
+		prev_string = "Pr&eacute;c&eacute;dent";
+		next_string = "Suivant";
+		showing_0_0_string = "Entr&eacute;es # 0 &agrave; 0 sur y totale";
+		showing_START_END_string = "Entr&eacute;es # _START_ &agrave; _END_ sur y totale _TOTAL_";
+		show_menu_entries_string = "Entr&eacute;es # _MENU_ totale";
+		loading_string= "Chargement...";
+		process_string = "Traitement...";
+		no_records_found_string = "Aucun enregistrements correspondants trouv&eacute;s";
+		filter_max_string = "(filtr&eacute; _MAX_ entr&eacute;es totale)";
+		last_string = "Dernier";
+		first_string = "Premi&eacute;re";
+		activate_sort_desc_string = ": activer la colonne pour trier descendant";
+		activate_sort_asc_string = ": activer pour trier la colonne ascendante";
+	}
 	
 	/**
 	 * Initialisation options that can be given to DataTables at initialisation 
@@ -9134,7 +9167,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sSortAscending": ": activate to sort column ascending",
+				"sSortAscending": activate_sort_asc_string, //TA: ": activate to sort column ascending",
 	
 				/**
 				 * ARIA label that is added to the table headers when the column may be
@@ -9155,7 +9188,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sSortDescending": ": activate to sort column descending"
+				"sSortDescending": activate_sort_desc_string, //TA: ": activate to sort column descending"
 			},
 	
 			/**
@@ -9182,7 +9215,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sFirst": "First",
+				"sFirst": first_string, //TA: "First",
 			
 			
 				/**
@@ -9203,7 +9236,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sLast": "Last",
+				"sLast": last_string, //TA: "Last",
 			
 			
 				/**
@@ -9224,7 +9257,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Next",
+				"sNext": next_string,
 			
 			
 				/**
@@ -9245,7 +9278,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Previous"
+				"sPrevious": prev_string
 			},
 		
 			/**
@@ -9266,7 +9299,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "No data available in table",
+			"sEmptyTable": no_data_in_table_string,
 		
 		
 			/**
@@ -9287,7 +9320,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": showing_START_END_string, //TA: "Showing _START_ to _END_ of _TOTAL_ entries",
 		
 		
 			/**
@@ -9306,7 +9339,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": showing_0_0_string, //TA: "Showing 0 to 0 of 0 entries"
 		
 		
 			/**
@@ -9326,7 +9359,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(filtered from _MAX_ total entries)",
+			"sInfoFiltered": filter_max_string, //TA: "(filtered from _MAX_ total entries)",
 		
 		
 			/**
@@ -9407,7 +9440,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLengthMenu": "Show _MENU_ entries",
+			"sLengthMenu": show_menu_entries_string, //TA: "Show _MENU_ entries",
 		
 		
 			/**
@@ -9429,7 +9462,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLoadingRecords": "Loading...",
+			"sLoadingRecords": loading_string, //TA: "Loading...",
 		
 		
 			/**
@@ -9448,7 +9481,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sProcessing": "Processing...",
+			"sProcessing": process_string, //TA: "Processing...",
 		
 		
 			/**
@@ -9481,7 +9514,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Search:",
+			"sSearch": search_string,
 		
 		
 			/**
@@ -9524,7 +9557,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No matching records found"
+			"sZeroRecords": no_records_found_string, //TA: "No matching records found"
 		},
 	
 	
@@ -12096,3 +12129,15 @@
 }));
 
 }(window, document));
+
+//TA: get cookie by name
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+} 

@@ -186,6 +186,10 @@
 			<value>Facility</value>
 		</term>
 		<term>
+			<key>FACILITY_NAME</key>
+			<value>Facility Name</value>
+		</term>
+		<term>
 			<key>LOCATION</key>
 			<value>Location</value>
 		</term>
@@ -352,6 +356,10 @@
 		<term>
 			<key>TEST_TYPES</key>
 			<value>Test Types</value>
+		</term>
+		<term>
+			<key>TECH_ACCOUNTS</key>
+			<value>Technician Accounts</value>
 		</term>		
 		<term>
 			<key>DATE</key>
@@ -695,6 +703,10 @@
 		<term>
 			<key>LANDSCAPE</key>
 			<value>Landscape mode</value>
+		</term>
+		<term>
+			<key>RESULTS_INTERPRETATION</key>
+			<value>Results Interpretation</value>
 		</term>
 	</page>
 	<page id="header" descr="Page Header">
@@ -1090,6 +1102,14 @@
 			<value>Lab Configurations</value>
 		</term>
 		<term>
+			<key>SUMMARY</key>
+			<value>Summary</value>
+		</term>
+		<term>
+			<key>PAGE_HELP</key>
+			<value>Page Help</value>
+		</term>
+		<term>
 			<key>CMD_ADDNEWLAB</key>
 			<value>Add New Lab</value>
 		</term>
@@ -1146,6 +1166,34 @@
 		<term>
 			<key>TITLE</key>
 			<value>Lab Configuration</value>
+		</term>
+		<term>
+			<key>MENU_TESTS</key>
+			<value>Tests</value>
+		</term>
+		<term>
+			<key>TEST_SPECIMENT_COUNT_GROUP_REPORT</key>
+			<value>Test/Specimen Count/Grouped Reports</value>
+		</term>
+		<term>
+			<key>TEST_SPECIMENT_GROUP_REPORT</key>
+			<value>Test/Specimen Grouped Reports</value>
+		</term>
+		<term>
+			<key>TEST_COUNT_GROUP_REPORT_SETTINGS</key>
+			<value>Test Count (Grouped) Report Settings</value>
+		</term>
+		<term>
+			<key>SPECIMEN_COUNT_GROUP_REPORT_SETTINGS</key>
+			<value>Specimen Count (Grouped) Report Settings</value>
+		</term>
+		<term>
+			<key>GROUP_BY_LAB_SECTION</key>
+			<value>Group By Lab Section</value>
+		</term>
+		<term>
+			<key>COUNTS_TO_DISPLAY</key>
+			<value>Counts to Display</value>
 		</term>
 		<term>
 			<key>MENU_SUMMARY</key>

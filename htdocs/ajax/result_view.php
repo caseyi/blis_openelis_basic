@@ -25,7 +25,7 @@ $test_name = get_test_name_by_id($test_type_id);
 <div class="modal-body">
 <div class="portlet box grey">
 <div class="portlet-title">
-<h4>Results</h4>
+<h4><?php echo LangUtil::$generalTerms['RESULTS']; ?></h4>
 </div>
 <div class="portlet-body">
 <table class="table table-striped table-bordered table-advance">
@@ -90,7 +90,7 @@ Action
 </div>
 </div>
 <div class="modal-footer">
-<a href='javascript:hide_test_result_form_confirmed(<?php echo $test_id ?>);' class='btn success'>Close</a>
+<a href='javascript:hide_test_result_form_confirmed(<?php echo $test_id ?>);' class='btn success'><?php echo LangUtil::$generalTerms['CMD_CLOSE']; ?></a>
 </div>
 <script>
 function verify_result(test_id, result, comments){

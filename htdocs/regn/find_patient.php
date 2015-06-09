@@ -16,7 +16,7 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-download-alt"></i>
-								<a href="index.php">Home</a> 
+								<a href="index.php"><?php echo LangUtil::$generalTerms['HOME']; ?></a> 
 							</li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -31,14 +31,14 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 <div id="sample_collection" class='reg_subdiv' style='display:none;'>
 	<div class="portlet box blue">
 		<div class="portlet-title">
-			<h4><i class="icon-reorder"></i>Sample Collection</h4>
+			<h4><i class="icon-reorder"></i><?php echo LangUtil::$generalTerms['SAMPLE_COLLECTION']; ?></h4>
 			<div class="tools">
 			<a href="javascript:;" class="collapse"></a>
 			<a href="javascript:fetch_patient_specimens_accept_reject();" class="reload"></a>
 			</div>
 		</div>
 		<div class="portlet-body form">
-		  <p style="text-align: right;"><a rel='facebox' href='#Rejection'>Page Help</a></p>
+		  <p style="text-align: right;"><a rel='facebox' href='#Rejection'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 		   <div class="alert alert-info" style="display: none">
                             <button class="close" data-dismiss="alert"></button>
                             <strong>You have successfully rejected the specimen.</strong>
@@ -60,7 +60,7 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 <div id="lab_requests" class='reg_subdiv' style='display:none;'>
 <div class="portlet box blue">
     <div class="portlet-title">
-    <h4><i class="icon-reorder"></i>Search Lab Requests</h4>
+    <h4><i class="icon-reorder"></i><?php echo LangUtil::$generalTerms['SEARCH_LAB_REQUEST']; ?></h4>
             <div class="tools">
             <a href="javascript:;" class="collapse"></a>
             <!--a href="#portlet-config" data-toggle="modal" class="config"></a-->
@@ -70,12 +70,12 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
     </div>
 
     <div class="portlet-body form" >
-            	<p style="text-align: right;"><a rel='facebox' href='#Registration'>Page Help</a></p>
+            	<p style="text-align: right;"><a rel='facebox' href='#Registration'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
                 
                 <div id='add_anyway_div' >
                     <a class ="btn" id='add_anyway_link' href='javascript:load_patient_reg()'><i class='icon-plus'></i> <?php echo LangUtil::$pageTerms['ADD_NEW_PATIENT']; ?> &raquo;</a>
                 	<a href='javascript:load_all_external_requests();' id="refresh" class="btn blue icn-only">
-                	Refresh <i class="icon-refresh m-icon-white"></i>
+                	<?php echo LangUtil::$generalTerms['CMD_REFRESH']; ?> <i class="icon-refresh m-icon-white"></i>
 					</a>
                 </div>
                
@@ -114,7 +114,7 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 <div id="patient_registration" class='reg_subdiv' style='display:none;'>
 	<div class="portlet box blue">
 		<div class="portlet-title">
-			<h4><i class="icon-reorder"></i>Patient Registration</h4>
+			<h4><i class="icon-reorder"></i><?php echo LangUtil::$generalTerms['PATIENT_REGISTRATION']; ?></h4>
 			<div class="tools">
 				<a href="javascript:;" class="collapse"></a>
 				<a href="javascript:load_patient_reg();" class="reload"></a>
@@ -122,23 +122,23 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 			</div>
 		</div>
 		<div class="portlet-body form">
-		<p style="text-align: right;"><a rel='facebox' href='#Registration'>Page Help</a></p>
+		<p style="text-align: right;"><a rel='facebox' href='#Registration'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 		<div class="span4" style="position: absolute;top: 180px;right: 30px;">
 						<!-- BEGIN Portlet PORTLET-->
 						<div class="">
 											<div class="well text-info">
 											<?php
-											echo "<b>Tips</b>";
+											echo "<b>" . LangUtil::$generalTerms['TIPS'] . "</b>";
 											echo "<li>";
-											echo "This page allows us to register new patients. Enter the details of the patient carefully and appropriately.";
+											echo LangUtil::$generalTerms['TIPS_FIND_PATIENS_1'];
 											echo "</li>";
 										
 											echo "<li>"; 
-											echo "Remember to select the correct gender and type of patient you are registering.";
+											echo LangUtil::$generalTerms['TIPS_FIND_PATIENS_2'];
 											echo "</li>";
 										
 											echo "<li>"; 
-											echo "Enter the correct date of birth, otherwise, enter the age if the patient does not know the date of birth.";
+											echo LangUtil::$generalTerms['TIPS_FIND_PATIENS_3'];
 											echo "</li>";
 											?>
 												
@@ -156,7 +156,7 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 <div id="specimen_reg" class='reg_subdiv' style='display:none;'>
 	<div class="portlet box blue">
 		<div class="portlet-title">
-			<h4><i class="icon-reorder"></i>Registration of Lab Requests</h4>
+			<h4><i class="icon-reorder"></i><?php echo LangUtil::$generalTerms['REGISTER_LAB_REQUESTS']; ?></h4>
 
 			<div class="tools">
 				<a href="javascript:;" class="collapse"></a>
@@ -180,7 +180,7 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 	<div class="portlet box yellow">
 		<div class="portlet-title">
 
-			<h4><i class="icon-reorder"></i>Specimen Rejection</h4>
+			<h4><i class="icon-reorder"></i><?php echo LangUtil::$generalTerms['MENU_SPECIMEN_REJECTION']; ?></h4>
 			<div class="tools">
 				<a href="javascript:;" class="collapse"></a>
 				<a href="javascript:;" class="reload"></a>
@@ -198,7 +198,7 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 <div id="specimen_acceptance" class='reg_subdiv' style='display:none;'>
 	<div class="portlet box green">
 		<div class="portlet-title">
-			<h4><i class="icon-reorder"></i>Specimen Acceptance</h4>
+			<h4><i class="icon-reorder"></i><?php echo LangUtil::$generalTerms['SPECIMEN_ACCEPTENCE']; ?></h4>
 
 			<div class="tools">
 				<a href="javascript:;" class="collapse"></a>
@@ -218,7 +218,7 @@ $lab_config = get_lab_config_by_id($_SESSION['lab_config_id']);
 	   
 	  </div>
 	  <div class="modal-footer">
-	    <button type="button" data-dismiss="modal" class="btn" onclick='javascript:cancel_hide()'>No</button>
+	    <button type="button" data-dismiss="modal" class="btn" onclick='javascript:cancel_hide()'><?php echo LangUtil::$generalTerms['NO']; ?></button>
 	  
 	  </div>
 </div>

@@ -33,7 +33,7 @@ function toggle_stat_table()
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-home"></i>
-                                <a href="index.html">Home</a> 
+                                <a href="index.html"><?php echo LangUtil::$generalTerms['HOME']; ?></a> 
                                 <span class="icon-angle-right"></span>
                             </li>
                             <li><a href="#">Reports</a>
@@ -49,7 +49,7 @@ function toggle_stat_table()
 
                     <div class="portlet box green" id="prevalence_div">
                         <div class="portlet-title" >
-                            <h4><i class="icon-reorder"></i> Collective User Stats </h4>           
+                            <h4><i class="icon-reorder"></i> <?php echo LangUtil::$pageTerms['COLL_USER_STAT']; ?></h4>           
                         </div>
                         
                           <div class="portlet-body" >
@@ -121,26 +121,26 @@ function toggle_stat_table()
                                                 <table class='table table-striped table-bordered table-advance' id='testsdone_table' >
                                                 <thead>
                                                     <tr>
-                                                        <th>Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                        <th><?php echo LangUtil::$pageTerms['NAME']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                                                         
-                                                                        <th>User Name &nbsp;&nbsp;&nbsp;</th>
+                                                                        <th><?php echo LangUtil::$pageTerms['USER_NAME']; ?> &nbsp;&nbsp;&nbsp;</th>
                                                                         
-                                                                        <th>Designation&nbsp;&nbsp;</th>
+                                                                        <th><?php echo LangUtil::$pageTerms['DESIGNATION']; ?>&nbsp;&nbsp;</th>
                                                                         
                                                                         <?php if($pr_c == 'Yes') { ?>
-                                                        <th>Patients Registered</th>
+                                                        <th><?php echo LangUtil::$pageTerms['PATIENT_REGISTERED']; ?></th>
                                                                         <?php } ?>
                                                                         
                                                                         <?php if($sr_c == 'Yes') { ?>
-                                                        <th>Specimens Registered</th>
+                                                        <th><?php echo LangUtil::$pageTerms['SPECIMEN_REGISTERED']; ?></th>
                                                                         <?php } ?>
                                                                         
                                                                         <?php if($tr_c == 'Yes') { ?>
-                                                        <th>Tests Registered</th>
+                                                        <th><?php echo LangUtil::$pageTerms['TESTS_REGISTERED']; ?></th>
                                                                         <?php } ?>
                                                                         
                                                                         <?php if($re_c == 'Yes') { ?>
-                                                        <th>Results Entered</th>
+                                                        <th><?php echo LangUtil::$pageTerms['RESULTS_ENTERED']; ?></th>
                                                         <?php } ?>
                                                                         
                                                     </tr>

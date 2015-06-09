@@ -30,7 +30,7 @@ function getBarcode()
     var code = $('#code').val();
     if(code == '')
         {
-             alert('cannot be empty');
+             alert('<?php echo LangUtil::$generalTerms['CANNOT_BE_EMPTY']; ?>');
                 return;
         }
     var count = parseInt($('#count').html()); 
@@ -55,7 +55,7 @@ function generateRemoveLink(div)
     var divR = div+"Remove";
     var oc = "hide_div('"+div+"')";
     //var content = "<div float class='remove' id ='"+divR+"' >"+"<img src='includes/img/knob_cancel.png' alt='Remove' onclick=\""+oc+"\";' />"+"</div>";
-    var content = "<br><br><div float class='remove' id ='"+divR+"' >"+"<a onclick=\""+oc+"\"' >Remove</a>"+"</div>";
+    var content = "<br><br><div float class='remove' id ='"+divR+"' >"+"<a onclick=\""+oc+"\"' ><?php echo LangUtil::$generalTerms['CMD_REMOVE']; ?></a>"+"</div>";
     $('#barcodeList').append(content);
 }
 
@@ -107,7 +107,7 @@ function export_as_pdf2(div_id)
     function Popup(data) 
     {
         var mywindow = window.open('', 'my div', 'height=400,width=600');
-        mywindow.document.write('<html><head><title>Barcodes</title>');
+        mywindow.document.write('<html><head><title><?php echo LangUtil::$generalTerms['BARCODES']; ?></title>');
         /*optional stylesheet*/ //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
         mywindow.document.write('</head><body >');
         mywindow.document.write(data);
@@ -128,7 +128,7 @@ function get_next(url, sno, cap)
     var displayed = tot - rem;
     if(displayed > tot)
         displayed = tot;
-    $('#result_counts').html(displayed + '/' + tot + ' Results');
+    $('#result_counts').html(displayed + '/' + tot + ' <?php echo LangUtil::$generalTerms['RESULTS']; ?>');
     $('.more_link').hide();
     url = url + '&rem=' + rem;
     var div_name = 'resultset'+sno;
@@ -154,13 +154,13 @@ function export_to_pdf(div_id)
 <?php
 
 ?>
-<p style="text-align: right;"><a rel='facebox' href='#generate_barcode_help'>Page Help</a></p>
+<p style="text-align: right;"><a rel='facebox' href='#generate_barcode_help'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 
 <div id="count" style="display: none;">0</div>
 
 Code: <input type="text" id="code" name="code"></input>
-<input type="button" onclick='getBarcode();' value="Generate">  
-<input type="button" value="Print" onclick="PrintElem('#barcodeList')" />
+<input type="button" onclick='getBarcode();' value="<?php echo LangUtil::$generalTerms['CMD_GENERATE']; ?>">  
+<input type="button" value="<?php echo LangUtil::$generalTerms['CMD_PRINT']; ?>" onclick="PrintElem('#barcodeList')" />
 <!--
 <!-- <input type='button' onclick="javascript:export_as_word('barcodeList');" value='<?php echo LangUtil::$generalTerms['CMD_EXPORTWORD']; ?>'></input> -->
 <input type='button' onclick="javascript:export_as_pdf2('barcodeList');" value='<?php echo LangUtil::$generalTerms['CMD_EXPORTPDF']; ?>'></input>
@@ -188,19 +188,19 @@ Code: <input type="text" id="code" name="code"></input>
 <ul>	
         <?php
                 echo "<li>";
-                echo " Generate barcodes by typing text in the govin field";
+                echo LangUtil::$generalTerms['TIPS_GENERATE_BC_1'];
                 echo "</li>";
                 echo "<li>";
-                echo " Each generated barcode is appended below for batch printing ";
+                echo LangUtil::$generalTerms['TIPS_GENERATE_BC_2'];
                 echo "</li>";
                 echo "<li>";
-                echo " Barcodes can be printed by clicking the Print button ";
+                echo LangUtil::$generalTerms['TIPS_GENERATE_BC_3'];
                 echo "</li>";
                 echo "<li>";
-                echo " Barcodes are printed according to the barcode settings";
+                echo LangUtil::$generalTerms['TIPS_GENERATE_BC_4'];
                 echo "</li>";
                 echo "<li>";
-                echo " These barcode settings including barcode type, size, color scheme can be configured from the lab configuration by the admin";
+                echo LangUtil::$generalTerms['TIPS_GENERATE_BC_5'];
                 echo "</li>";
         ?>
 </ul>

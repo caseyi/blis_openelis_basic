@@ -16,7 +16,7 @@ $user_profile = get_user_by_id($_SESSION['user_id']);
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-download-alt"></i>
-                                <a href="index.php">Home</a> 
+                                <a href="index.php"><?php echo LangUtil::$generalTerms['HOME']; ?></a> 
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->

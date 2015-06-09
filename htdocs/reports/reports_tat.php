@@ -23,7 +23,7 @@ if($_REQUEST['pending'] == 'Y')
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-home"></i>
-                                <a href="index.html">Home</a> 
+                                <a href="index.html"><?php echo LangUtil::$generalTerms['HOME']; ?></a> 
                                 <span class="icon-angle-right"></span>
                             </li>
                             <li><a href="#">Reports</a>

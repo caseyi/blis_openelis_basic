@@ -3008,7 +3008,7 @@ function show_custom_report_form(report_id)
 	</div>
 	
 	<div id='stock_report_div' class='reports_subdiv' style='display:none'>
-		<b>Inventory</b>
+		<b><?php echo LangUtil::$allTerms['Inventory']; ?></b>
 		<br><br>
 		<form id='stock_report_form' action='current_inventory.php' method='post'>
 		<table>
@@ -3458,7 +3458,7 @@ function show_custom_report_form(report_id)
 	</div>
 	
 	<div id='infection_report_settings_div' class='reports_subdiv'  style='display:none;'>
-		<p style="text-align: right;"><a rel='facebox' href='#IR_rc'>Page Help</a></p>
+		<p style="text-align: right;"><a rel='facebox' href='#IR_rc'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 		<b><?php echo "Infection Report Settings"; ?></b>
 		 | <a href='javascript:toggleInfectionReportSettings();' id='agg_edit_link'><?php echo LangUtil::$generalTerms['CMD_EDIT']; ?></a>
 		<br><br>

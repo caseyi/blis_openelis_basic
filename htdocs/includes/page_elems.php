@@ -251,7 +251,7 @@ $yearcount--;
 			while($monthcount<=12)
 {
 echo "<option value='$monthcount'";
-if($monthcount==date('m')){ echo "selected";}
+if($monthcount==date('m')){ echo ' selected '; }
 echo ">$monthcount-</option>";
 $monthcount++;
 }
@@ -263,7 +263,7 @@ $monthcount++;
 			while($daycount<=31)
 {
 echo "<option value='$daycount'"; 
-if($daycount==date('d')){ echo "selected";}
+if($daycount==date('d')){ echo ' selected ';}
 echo">$daycount</option>";
 $daycount++;
 }?>
@@ -342,7 +342,7 @@ $daycount++;
 		$LIS_TECH_SHOWPNAME = 13;
 		echo "<option value='$LIS_TECH_RW'";
 		if($selected_value == $LIS_TECH_RW)
-			echo " selected ";
+			echo ' selected ';
 		echo ">".LangUtil::$generalTerms['LAB_TECH']."</option>";
 		/*
 		echo "<option value='$LIS_TECH_RO'";
@@ -352,11 +352,11 @@ $daycount++;
 		*/
 		echo "<option value='$LIS_ADMIN'";
 		if($selected_value == $LIS_ADMIN)
-			echo " selected ";
+			echo ' selected ';
 		echo ">Admin</option>";
 		echo "<option value='$LIS_CLERK'";
 		if($selected_value == $LIS_CLERK)
-			echo " selected ";
+			echo ' selected ';
 		echo ">".LangUtil::$generalTerms['LAB_RECEPTIONIST']."</option>";
 	}	
 		
@@ -605,7 +605,7 @@ $daycount++;
 		echo "<tr><td></td><td></td>";
 		echo "</tr>";
 		echo "<tr>"; ?>
-		<td>Country Category Name:</td>
+		<td><?php echo LangUtil::$generalTerms['COUNTRY_CATEGORY_NAME'];?>:</td>
 		<td><input type="text" id="commonTestCategoryName" size="50"></input>
 		<div id='commonTestCategoryNameError' style='display:none'>
 			<label class="error" id="commonTestCategoryNameErrorLabel"><small><font color="red"><?php echo LangUtil::getGeneralTerm("MSG_REQDFIELD"); ?></font></small></label>
@@ -748,7 +748,7 @@ $daycount++;
 		}
 		echo "<tr><td></td><td></td></tr>";
 		echo "<tr>";
-		echo "<td>Country Specimen Name:</td>"; ?>
+		echo "<td>" . LangUtil::$generalTerms['COUNTRY_SPECIMEN_NAME'] . ":</td>"; ?>
 		<td><input type="text" id="commonSpecimenName" size="50"></input>
 		<div id='commonSpecimenNameError' style='display:none'>
 			<label class="error" id="commonSpecimenNameErrorLabel"><small><font color="red"><?php echo LangUtil::getGeneralTerm("MSG_REQDFIELD"); ?></font></small></label>
@@ -905,7 +905,7 @@ $user=$_SESSION['user_id'];
 	
 	public function getLangSelect()
 	{
-		echo "<option value='default'>Default</option>";
+		echo "<option value='default'>" . LangUtil::$generalTerms['DEFAULT'] . "</option>";
 		echo "<option value='en'>English</option>";
 		echo "<option value='fr'>Francais</option>";		
 	}
@@ -916,7 +916,7 @@ $user=$_SESSION['user_id'];
 		$test_list = get_specimen_types_catalog();
 		if(count($test_list) == 0)
 		{
-			echo "No tests present in catalog";
+			echo LangUtil::$generalTerms['TIP_NO_TEST_IN_CATALOG'];
 			return;
 		}
 		foreach($test_list as $key => $value)
@@ -931,7 +931,7 @@ $user=$_SESSION['user_id'];
 		$test_list = get_specimen_types_catalog();
 		if(count($test_list) == 0)
 		{
-			echo "No tests present in catalog";
+			echo LangUtil::$generalTerms['TIP_NO_TEST_IN_CATALOG'];
 			return;
 		}
 		foreach($test_list as $key => $value)
@@ -947,7 +947,7 @@ $user=$_SESSION['user_id'];
 		$test_type = get_test_type_by_name($test_name);
 		?>
 		<div class="portlet-title" style="width: 380px">
-        <h4></i>Test Type Information</h4>
+        <h4></i><?php echo LangUtil::$generalTerms['TEST_TYPE_INFO']; ?></h4>
         </div>
 		<table class='table table-bordered table-hover' style="width: 100%">
 			<tbody>
@@ -1026,7 +1026,7 @@ $user=$_SESSION['user_id'];
 				</tr>
 		
 				<tr valign='top'>
-					<td>Hide Patient Name in Report</td>
+					<td><?php echo LangUtil::$generalTerms['HIDE_PATIENT_NAME_IN_REPORT']; ?></td>
 					<td><?php
 						if(	$test_type->hidePatientName == 0) {
 							echo "No";
@@ -1038,17 +1038,17 @@ $user=$_SESSION['user_id'];
 					</td>
 				</tr>
 				<tr valign='top'>
-					<td>Prevalence Threshold</td>
+					<td><?php echo LangUtil::$generalTerms['PREVAL_THRESHOLD']; ?></td>
 					<td><?php echo $test_type->prevalenceThreshold; ?></td>
 				</tr>
 				
 				<tr valign='top'>
-					<td>Target TAT</td>
-					<td><?php echo $test_type->targetTat; ?></td>
+					<td><?php echo LangUtil::$generalTerms['GENDER']; ?></td>
+					<td><?php echo LangUtil::$pageTerms['MENU_TAT']; ?></td>
 				</tr>
 
                                 <tr valign='top' <?php is_billing_enabled($_SESSION['lab_config_id']) ? print("") : print("style='display:none;'") ?>>
-                                        <td>Cost To Patient</td>
+                                        <td><?php echo LangUtil::$generalTerms['COST_PATIENT']; ?></td>
                                         <td><?php print(format_number_to_money(get_latest_cost_of_test_type($test_type->testTypeId))); ?></td>
                                 </tr>
 			
@@ -1176,7 +1176,7 @@ $user=$_SESSION['user_id'];
 					</td>
 				</tr>
 				<tr valign='top'>
-					<td><?php echo "Rejection Phase"; ?></td>
+					<td><?php echo LangUtil::$generalTerms['REJECTION_PHASE']; ?></td>
 					<td><?php echo $phase_name = get_rejection_phase_name_by_reason_id($rejection_reason->reasonId); ?></td>
 				</tr>
 			</tbody>
@@ -1308,7 +1308,7 @@ $user=$_SESSION['user_id'];
 					<th>#</th>
 					<th><?php echo LangUtil::$generalTerms['TEST']; ?></th>
 					<th><?php echo LangUtil::$generalTerms['LAB_SECTION']; ?></th>
-					<th><?php echo "Action(s)"; ?></th>
+					<th><?php echo LangUtil::$generalTerms['ACTIONS']; ?></th>
 					<th></th>
 			</thead>
 		<tbody>
@@ -1368,7 +1368,7 @@ $user=$_SESSION['user_id'];
 		<thead>
 		<tr>
 		<th>
-		Specimen Type
+		<?php echo LangUtil::$generalTerms['SPECIMEN_TYPE']; ?>
 		</th>
 		<th>
 		</th>
@@ -1421,8 +1421,8 @@ $user=$_SESSION['user_id'];
 		<table id="sample_1" class='table table-striped table-condensed table-bordered table-hover' style="width: 100%;">
 		<thead>
 		<tr>
-		<th>Section Name</th>
-		<th>Action(s)</th>
+		<th><?php echo LangUtil::$generalTerms['SECTION_NAME'];?></th>
+		<th><?php echo LangUtil::$generalTerms['ACTIONS'];?></th>
 		</tr>
 		</thead>
 		<tbody>
@@ -1467,15 +1467,15 @@ $user=$_SESSION['user_id'];
 		$phases_list = get_rejection_phases_catalog($lab_config_id);
 		if(count($phases_list) == 0)
 		{
-			echo "<div class='sidetip_nopos'>"."No Specimen Rejection Phases Found."."</div>";
+			echo "<div class='sidetip_nopos'>".LangUtil::$pageTerms['NO_SPECIMEN_REJECTION_PHASE_FOUND'] . "</div>";
 			return;
 		}
 		?>
 		<table class='table table-striped table-condensed table-bordered table-hover' style="width: 100%;">
 		<thead>
 		<tr>
-		<th>Phase Name</th>
-        <th>Phase Description</th>
+		<th><?php echo LangUtil::$generalTerms['PHASE_NAME']; ?></th>
+        <th><?php echo LangUtil::$generalTerms['PHASE_DESCRIPTION']; ?></th>
 		<th></th>
 		</tr>
 		</thead>
@@ -1526,15 +1526,15 @@ $user=$_SESSION['user_id'];
 		$reasons_list = get_rejection_reasons_catalog($lab_config_id);
 		if(count($reasons_list) == 0)
 		{
-			echo "<div class='sidetip_nopos'>"."No Specimen Rejection Reasons Found."."</div>";
+			echo "<div class='sidetip_nopos'>".LangUtil::$pageTerms['NO_SPECIMEN_REJECTION_REASON_FOUND'] ."</div>";
 			return;
 		}
 		?>
 		<table class='table table-striped table-condensed table-bordered table-hover' style="width: 100%;">
 		<thead>
 		<tr>
-		<th>Specimen Rejection Reason</th>
-        <th>Specimen Rejection Phase</th>
+		<th><?php echo LangUtil::$pageTerms['SPECIMEN_REJECTION_REASON']; ?></th>
+        <th><?php echo LangUtil::$pageTerms['SPECIMEN_REJECTION_PHASE']; ?></th>
 		<th></th>
 		</tr>
 		</thead>
@@ -1618,17 +1618,11 @@ $user=$_SESSION['user_id'];
 		$html_code .=
 			"<div id='tech_access_help' style='display:none;'>".
 			"<table class='smaller_font'><tr><td>".
-			"<u>Technician Access Levels</u><br><br>".
-			"<b>Read-Write</b><br>".
-			"Technician can Add/update patient records, ".
-			"register samples (specimens) and schedule them for various tests, ".
-			"perform results entry for completed tests, ".
-			"search and export test-related data and ".
-			"view reports for the lab assigned to the account".
-			"<br><br>".
-			"<b>Read-Only</b><br>".
-			"Technician can search and export test-related data and ".
-			"view reports for the lab assigned to the account ".
+			"<u>" . LangUtil::$generalTerms['TECH_ACCESS_LEVELS'] . "</u><br><br>".
+			"<b>" . LangUtil::$generalTerms['READ_WRITE'] . "</b><br>".
+			LangUtil::$generalTerms['TIP_OPERATOR_FORM_2'] . "<br><br>".
+			"<b>" . LangUtil::$generalTerms['READ_ONLY'] . "</b><br>".
+			LangUtil::$generalTerms['TIP_OPERATOR_FORM_1'] .
 			"</td></tr></table>".
 			"</div>";
 		$html_code .=
@@ -1655,7 +1649,7 @@ $user=$_SESSION['user_id'];
 			$html_code .= $entry_row.$radio_row;
 		}
 		$html_code .= "</span>";
-		$html_code .= "<a href='javascript:add_row();'>Add another&raquo;</a>";
+		$html_code .= "<a href='javascript:add_row();'>". LangUtil::$generalTerms['ADD_ANOTHER'] . "&raquo;</a>";
 		$html_code .=
 			"<script type='text/javascript'>".
 			"var entry_count=".($num_entries)."; ".
@@ -1680,9 +1674,9 @@ $user=$_SESSION['user_id'];
 		<table cellspacing='4px'>
 			<tbody>
 				<tr>
-					<td><u>Existing</u></td>
-					<td><u>Change Access</u></td>
-					<td><u>Remove</u></td>
+					<td><u><?php echo LangUtil::$generalTerms['EXISTING']; ?></u></td>
+					<td><u><?php echo LangUtil::$generalTerms['CHANGE_ACCESS']; ?></u></td>
+					<td><u><?php echo LangUtil::$generalTerms['CMD_REMOVE']; ?></u></td>
 				</tr>
 				<?php
 				$technician_list = get_tech_users_by_site_map($lab_config_id);
@@ -1700,15 +1694,15 @@ $user=$_SESSION['user_id'];
 								<option value='<?php echo $LIS_TECH_RO; ?>'
 								<?php
 								if($user->level == $LIS_TECH_RO)
-									echo " selected ";
+									echo ' selected ';
 								?>
-								>Read-Only</option>
+								><?php echo LangUtil::$generalTerms['READ_ONLY']; ?></option>
 								<option value='<?php echo $LIS_TECH_RW; ?>'
 								<?php
 								if($user->level == $LIS_TECH_RW)
-									echo " selected ";
+									echo ' selected ';
 								?>
-								>Read-Write</option>
+								><?php echo LangUtil::$generalTerms['READ_WRITE']; ?></option>
 							</select>
 						</td>
 						<td>
@@ -1736,8 +1730,8 @@ $user=$_SESSION['user_id'];
 		$(document).ready(function() {
 			$("#<?php echo $id; ?>").tokenInput("<?php echo $json_url; ?>", {
 				hintText: "<?php echo $hint_text; ?>",
-				noResultsText: "No results",
-				searchingText: "Searching..."
+				noResultsText: "<?php echo LangUtil::$generalTerms['NO_RESULTS']; ?>",
+				searchingText: "<?php echo LangUtil::$generalTerms['CMD_SEARCHING']; ?>..."
 				/*
 				classes: {
 					tokenList: "token-input-list-facebook",
@@ -1777,8 +1771,8 @@ $user=$_SESSION['user_id'];
 		$(document).ready(function() {
 			$("#<?php echo $id; ?>").tokenInput("<?php echo $json_url; ?>", {
 				hintText: "<?php echo $hint_text; ?>",
-				noResultsText: "No results",
-				searchingText: "Searching..."
+				noResultsText: "<?php echo LangUtil::$generalTerms['NO_RESULTS']; ?>",
+				searchingText: "<?php echo LangUtil::$generalTerms['CMD_SEARCHING']; ?>..."
 				/*
 				classes: {
 					tokenList: "token-input-list-facebook",
@@ -1859,7 +1853,7 @@ $user=$_SESSION['user_id'];
 						<?php echo $count; ?>.
 					</td>
 					<td>
-						<a href='lab_config_home.php?id=<?php echo $lab_config->id; ?>' title='Click to Manage Lab Configuration'><?php echo $lab_config->name; ?></a>
+						<a href='lab_config_home.php?id=<?php echo $lab_config->id; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_MANAGE_LAB_CONFIG']; ?>'><?php echo $lab_config->name; ?></a>
 					</td>
 					<td>
 						<?php echo $lab_config->location; ?>
@@ -1868,7 +1862,7 @@ $user=$_SESSION['user_id'];
 						<?php echo get_username_by_id($lab_config->adminUserId); ?>
 					</td>
                                         <td>
- 						<a href='exportLabConfiguration.php?id=<?php echo $lab_config->id; ?>' title='Click to Export Lab Configuration'><?php echo "Export Lab Configuration"; ?></a>
+ 						<a href='exportLabConfiguration.php?id=<?php echo $lab_config->id; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_EXPORT_LAB_CONFIG']; ?>'><?php echo LangUtil::$generalTerms['EXPORT_LAB_CONFIG']; ?></a>
                                            
                                         </td>
 					<!--<td>
@@ -1960,7 +1954,7 @@ $user=$_SESSION['user_id'];
                                                <?php echo get_last_import_date($lab_config->id); ?>
                                         </td>
 					<td>
-						<a rel='facebox' href='lab_config_status.php?id=<?php echo $lab_config->id; ?>' title='Click to view pending tests at the lab'><?php echo LangUtil::$generalTerms['LAB_STATUS']; ?></a>
+						<a rel='facebox' href='lab_config_status.php?id=<?php echo $lab_config->id; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_VIEW_PENDING_TESTS_LAB']; ?>'><?php echo LangUtil::$generalTerms['LAB_STATUS']; ?></a>
 					</td>
                                         
 					<!--<td>
@@ -2064,13 +2058,13 @@ $user=$_SESSION['user_id'];
 						<?php
 						$url_edit = "lab_admin_edit.php?id=$lab_admin->userId";
 						?>
-						<a href="<?php echo $url_edit; ?>" title='Click to Edit Lab Admin Account'>Edit</a>
+						<a href="<?php echo $url_edit; ?>" title='<?php echo LangUtil::$generalTerms['CLICK_TO_EDIT_LAB_ADMIN_ACCOUNT']; ?>'><?php echo LangUtil::$generalTerms['CMD_EDIT']; ?></a>
 					</td>
 					<td>
 						<?php
 						$url = "javascript:show_dialog_box('$dialog_id');";
 						?>
-						<span id='<?php echo $del_link_div_id; ?>'><a href="<?php echo $url; ?>" title='Click to Delete Lab Admin Account'>Delete</a></span>
+						<span id='<?php echo $del_link_div_id; ?>'><a href="<?php echo $url; ?>" title='<?php echo LangUtil::$generalTerms['CLICK_TO_DELETE_LAB_ADMIN_ACCOUNT']; ?>'><?php echo LangUtil::$generalTerms['CMD_DELETE']; ?></a></span>
 						<span id='<?php echo $del_progress_div_id; ?>' style='display:none'>
 							<?php
 							$this->getProgressSpinner("Deleting");
@@ -2157,10 +2151,10 @@ $user=$_SESSION['user_id'];
 							<?php
 							$active_status=get_account_active_status($user->username);
 							if($active_status){
-							echo "Deactivate";
+							echo LangUtil::$generalTerms['CMD_DEACTIVATE'];
 							}
 							else{
-							echo "<span class='btn-danger'>Inactive a/c";
+							echo "<span class='btn-danger'>" . LangUtil::$generalTerms['INACTIVE_AC'];
 							}
 							?></a>
 							<br>
@@ -2215,7 +2209,7 @@ $user=$_SESSION['user_id'];
 		if($lab_config == null)
 		{
 			?>
-			<div class='sidetip_nopos'>Lab Configuration not found</div>
+			<div class='sidetip_nopos'><?php echo LangUtil::$generalTerms['LAB_CONFIG_NOT_FOUND']; ?></div>
 			<?php
 			return;
 		}
@@ -2223,19 +2217,19 @@ $user=$_SESSION['user_id'];
 		<table class='table table-bordered table-hover'>
 			<tbody>
 				<tr>
-					<td>Facility Name</td>
+					<td><?php echo LangUtil::$generalTerms['FACILITY_NAME'];?></td>
 					<td><?php echo $lab_config->name; ?></td>
 				</tr>
 				<tr>
-					<td>Location</td>
+					<td><?php echo LangUtil::$generalTerms['LOCATION'];?></td>
 					<td><?php echo $lab_config->location; ?></td>
 				</tr>
 				<tr>
-					<td>Lab Manager</td>
+					<td><?php echo LangUtil::$generalTerms['LAB_MGR'];?></td>
 					<td><?php echo get_username_by_id($lab_config->adminUserId); ?></td>
 				</tr>
 				<tr valign='top'>
-					<td>Specimen Types</td>
+					<td><?php echo LangUtil::$generalTerms['SPECIMEN_TYPES'];?></td>
 					<td>
 					<?php
 					$specimen_list = get_specimen_types_by_site($lab_config_id);
@@ -2247,7 +2241,7 @@ $user=$_SESSION['user_id'];
 					</td>
 				</tr>
 				<tr valign='top'>
-					<td>Test Types</td>
+					<td><?php echo LangUtil::$generalTerms['TEST_TYPES'];?></td>
 					<td>
 					<?php
 					$test_list = get_test_types_by_site($lab_config_id);
@@ -2259,7 +2253,7 @@ $user=$_SESSION['user_id'];
 					</td>
 				</tr>
 				<tr valign='top'>
-					<td>Technician Accounts</td>
+					<td><?php echo LangUtil::$generalTerms['TECH_ACCOUNTS'];?></td>
 					<td>
 					<?php
 					$user_list = get_tech_users_by_site_map($lab_config_id);
@@ -2292,7 +2286,7 @@ $user=$_SESSION['user_id'];
 		{
 			?>
 			<div class='sidetip_nopos'>
-				ERROR: Report type not found.
+				<?php echo LangUtil::$generalTerms['ERR_REPORT_TYPE_NOT_FOUND']; ?>
 			</div>
 			<?php
 			return;
@@ -2301,28 +2295,28 @@ $user=$_SESSION['user_id'];
 		<table class='hor-minimalist-b'>
 			<tbody>
 				<tr valign='top'>
-					<td>Report Name</td>
+					<td><?php echo LangUtil::$generalTerms['REPORT_NAME']; ?></td>
 					<td><?php echo $report->name; ?></td>
 				</tr>
 				<tr valign='top'>
-					<td>Group By Gender</td>
+					<td><?php echo LangUtil::$generalTerms['GROUP_BY_GENDER']; ?></td>
 					<td>
 					<?php
 					if($report->groupByGender == 1)
-						echo " Yes ";
+						echo LangUtil::$generalTerms['YES'];
 					else
-						echo " No ";
+						echo LangUtil::$generalTerms['NO'];
 					?>
 					</td>
 				</tr>
 				<tr valign='top'>
-					<td>Group By Age</td>
+					<td><?php echo LangUtil::$generalTerms['GROUP_BY_AGE']; ?></td>
 					<td>
 					<?php
 					if($report->groupByAge == 1)
-						echo " Yes ";
+						echo LangUtil::$generalTerms['YES'];
 					else
-						echo " No ";
+						echo LangUtil::$generalTerms['NO'];
 					?>
 					</td>
 				</tr>
@@ -2331,7 +2325,7 @@ $user=$_SESSION['user_id'];
 				{
 				?>
 				<tr valign='top'>
-					<td>Age Slots (years)</td>
+					<td><?php echo LangUtil::$generalTerms['AGE_SLOTS_YEARS']; ?></td>
 					<td>
 						<?php
 						$slot_count = 0;
@@ -2376,11 +2370,11 @@ $user=$_SESSION['user_id'];
 			</thead>
 			<tbody>
 				<tr>
-					<td>Total Patients</td>
+					<td><?php echo LangUtil::$generalTerms['TOTAL_PATIENTS']; ?> </td>
 					<td><?php echo get_lab_config_num_patients($lab_config_id); ?></td>
 				</tr>
 				<tr>
-					<td>Total Specimens</td>
+					<td><?php echo LangUtil::$generalTerms['TOTAL_SPECIMENS']; ?></td>
 					<td><?php echo get_lab_config_num_specimens($lab_config_id); ?></td>
 				</tr>
 				<tr>
@@ -2402,7 +2396,7 @@ $user=$_SESSION['user_id'];
 				?>
 				
 				<tr>
-					<td>Pending Tests -</td>
+					<td><?php echo LangUtil::$allTerms['MENU_PENDINGTESTS']; ?> -</td>
 					<td><?php echo get_lab_config_num_tests_pending($lab_config_id); ?></td>
 				</tr>
 				
@@ -2628,7 +2622,7 @@ $user=$_SESSION['user_id'];
 						<option value='M'
 						<?php
 						if($patient->sex == 'M')
-							echo " selected ";
+							echo ' selected ';
 						?>
 						>
 						<?php echo LangUtil::$generalTerms['MALE']; ?>
@@ -2636,7 +2630,7 @@ $user=$_SESSION['user_id'];
 						<option value='F'
 						<?php
 						if($patient->sex == 'F')
-							echo " selected ";
+							echo ' selected ';
 						?>
 						>
 						<?php echo LangUtil::$generalTerms['FEMALE']; ?>
@@ -2653,25 +2647,25 @@ $user=$_SESSION['user_id'];
 					</div>
                 </td>
                 <td>				  
-                  <a style="margin-top:5px" href="" class="btn-default btn " data-toggle="modal" data-target=".bs-example-modal-sm"><span class="add-on" id="span_calcdob"><i class="icon-calendar"></i> From Age</span></a>
+                  <a style="margin-top:5px" href="" class="btn-default btn " data-toggle="modal" data-target=".bs-example-modal-sm"><span class="add-on" id="span_calcdob"><i class="icon-calendar"></i> <?php echo LangUtil::$generalTerms['FROM_AGE']; ?></span></a>
 			 <!--pop up for dob calc begin-->
   <div class="modal fade bs-example-modal-sm" id="dobcal1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
      
       <div class="portlet box green">
                         <div class="portlet-title" >
-                            <h4><i class="icon-reorder"></i> <?php echo "Date-of-Birth Calculator"; ?> </h4>           
+                            <h4><i class="icon-reorder"></i> <?php echo LangUtil::$generalTerms['DOB_CALCULATOR']; ?> </h4>           
                         </div>
       </div>
       </div>
       <div class="modal-body">
        <div class="form-group">
-              <label class="col-md-2 control-label" for="body">Age in Years</label>  
+              <label class="col-md-2 control-label" for="body"><?php echo LangUtil::$generalTerms['AGE_IN_YEARS']; ?></label>  
               <input id="years" name="years" type="text" maxlength="3" class="form-control input-md">
               
             </div>
             <div class="form-group">
-              <label class="col-md-2 control-label" for="by_date">On Date</label>  
+              <label class="col-md-2 control-label" for="by_date"><?php echo LangUtil::$generalTerms['ON_DATE']; ?></label>  
               <style>
               .datepicker{
               z-index:1151 !important;
@@ -2685,8 +2679,8 @@ $user=$_SESSION['user_id'];
            
       </div>
       <div class="modal-footer">
-        <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" name="submit_iss" class="btn btn-primary" onclick="javascript:calc_dob();">Submit</button>
+        <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal"><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></button>
+        <button type="button" name="submit_iss" class="btn btn-primary" onclick="javascript:calc_dob();"><?php echo LangUtil::$generalTerms['CMD_SUBMIT']; ?></button>
       </div>
     
   </div>
@@ -2781,7 +2775,7 @@ $user=$_SESSION['user_id'];
                                 ?>
 			</td>
 			<td>
-				<a href='specimen_info.php?sid=<?php echo $specimen->specimenId; ?>' title='Click to View Details of this Specimen'><?php echo LangUtil::$generalTerms['DETAILS']; ?></a>
+				<a href='specimen_info.php?sid=<?php echo $specimen->specimenId; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_VIEW_DET_SPECIMEN']; ?>'><?php echo LangUtil::$generalTerms['DETAILS']; ?></a>
 			</td>
 			<?php
 			$sid=$specimen->specimenId;
@@ -2837,9 +2831,9 @@ $user=$_SESSION['user_id'];
 			</td>
 			<td>
 			 <?php if ($is_result_form){?>
-				<a href='javascript:specimen_info(<?php echo $specimen->specimenId; ?>);' title='Click to View Details of this Specimen'><?php echo LangUtil::$generalTerms['DETAILS']; ?></a>
+				<a href='javascript:specimen_info(<?php echo $specimen->specimenId; ?>);' title='<?php echo LangUtil::$generalTerms['CLICK_TO_VIEW_DET_SPECIMEN']; ?>'><?php echo LangUtil::$generalTerms['DETAILS']; ?></a>
 			<?php } else{?>
-				<a href='specimen_info.php?sid=<?php echo $specimen->specimenId; ?>' title='Click to View Details of this Specimen'><?php echo LangUtil::$generalTerms['DETAILS']; ?></a>
+				<a href='specimen_info.php?sid=<?php echo $specimen->specimenId; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_VIEW_DET_SPECIMEN']; ?>'><?php echo LangUtil::$generalTerms['DETAILS']; ?></a>
 			<?php }?>
 			</td>
 			<?php
@@ -2848,11 +2842,11 @@ $user=$_SESSION['user_id'];
 			
 			?>
 			<?php if(!$is_result_form){?>
-			<td><a href="javascript:get_report(<?php echo $pid;?>,<?php echo $sid;?> )">Report</a> </td>
+			<td><a href="javascript:get_report(<?php echo $pid;?>,<?php echo $sid;?> )"><?php echo LangUtil::$generalTerms['REPORT']; ?></a> </td>
             <?php
             	if($specimenBarcode)
 					{?>
-           <td><a href="javascript:print_specimen_barcode(<?php echo $pid;?>,<?php echo $sid;?> )">Print Barcode</a> </td>
+           <td><a href="javascript:print_specimen_barcode(<?php echo $pid;?>,<?php echo $sid;?> )"><?php echo LangUtil::$generalTerms['PRINT_BARCODE']; ?></a> </td>
              <?php }
 			}
              ?>
@@ -3041,7 +3035,7 @@ $user=$_SESSION['user_id'];
 		public function getPatientSelectReport($patient_id)
 	{
 	?><!--'reports_testhistory.php?location=<?php echo $_SESSION['lab_config_id']; ?>&patient_id=<?php echo $patient_id; ?>'-->
-				<a href='javascript:get_select_tests(<?php echo $patient_id;?>);' title='Click to Generate Test History Report for this Patient'>
+				<a href='javascript:get_select_tests(<?php echo $patient_id;?>);' title='<?php echo LangUtil::$generalTerms['CLICK_TO_GENERATE_TEST_HISTORY_REPORT_PATIENT']; ?>'>
 					<?php echo LangUtil::$pageTerms['MSG_PRINTHISTORY']; ?>
 				</a>
 	<?php		
@@ -3050,8 +3044,8 @@ $user=$_SESSION['user_id'];
         public function getDeleteOptions($patient_id)
 	{
 	?><!--'reports_testhistory.php?location=<?php echo $_SESSION['lab_config_id']; ?>&patient_id=<?php echo $patient_id; ?>'-->
-				<a href='javascript:get_select_tests_del(<?php echo $patient_id;?>);' title='Click here to Delete the selected Tests'>
-					<?php echo "Remove Selected Specimens"; ?>
+				<a href='javascript:get_select_tests_del(<?php echo $patient_id;?>);' title='<?php echo LangUtil::$generalTerms['CLICK_TO_DELETE_SEL_TESTS']; ?>'>
+					<?php echo LangUtil::$generalTerms['REMOVE_SEL_SPECIMENS']; ?>
 				</a>
 	<?php		
 	}
@@ -3059,8 +3053,8 @@ $user=$_SESSION['user_id'];
         public function getUnDeleteOptions($patient_id)
 	{
 	?><!--'reports_testhistory.php?location=<?php echo $_SESSION['lab_config_id']; ?>&patient_id=<?php echo $patient_id; ?>'-->
-				<a href='javascript:get_select_tests_undel(<?php echo $patient_id;?>);' title='Click here to Retrieve deleted Tests'>
-					<?php echo "Retrieve Deleted Specimens"; ?>
+				<a href='javascript:get_select_tests_undel(<?php echo $patient_id;?>);' title='<?php echo LangUtil::$generalTerms['CLICK_TO_GET_SELECTED_TESTS']; ?>'>
+					<?php echo LangUtil::$generalTerms['GET_DELETED_SPECIMENS']; ?>
 				</a>
 	<?php		
 	}
@@ -3070,8 +3064,8 @@ $user=$_SESSION['user_id'];
 		?>
 			<div class='sidetip_nopos'>
 				<p>
-					<a rel='facebox' href='bill_generator.php?location=<?php echo$_SESSION['lab_config_id']; ?>&patient_id=<?php echo $patient_id; ?>' title='Click to generate a billing statement for this Patient' target='_blank'>
-						<?php echo "Billing Report" ?>
+					<a rel='facebox' href='bill_generator.php?location=<?php echo$_SESSION['lab_config_id']; ?>&patient_id=<?php echo $patient_id; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_GENERATE_BILL_PATIENT']; ?>' target='_blank'>
+						<?php echo LangUtil::$generalTerms['BILL_REPORT'] ?>
 					</a>
 				</p>
 			</div>
@@ -3088,7 +3082,7 @@ $user=$_SESSION['user_id'];
 		?>
 			<div class='sidetip_nopos'>
 			<p>
-				<a href='new_specimen.php?pid=<?php echo $patient_id; ?>' title='Click to Register a New Specimen for this Patient'>
+				<a href='new_specimen.php?pid=<?php echo $patient_id; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_REG_NEW_SPECIMEN_PATIENT']; ?>'>
 					<?php echo LangUtil::$pageTerms['MSG_REGNEWSPECIMEN']; ?>
 				</a>
 			</p>
@@ -3097,7 +3091,7 @@ $user=$_SESSION['user_id'];
 			{
 				?>
 				<p>
-					<a href='javascript:toggle_profile_divs();' title='Click to Update Patient Profile'>
+					<a href='javascript:toggle_profile_divs();' title='<?php echo LangUtil::$generalTerms['CLICK_TO_UPDATE_PROFILE_PATIENT']; ?>'>
 						<?php echo LangUtil::$pageTerms['MSG_UPDATEPROFILE']; ?>
 					</a>
 					
@@ -3106,7 +3100,7 @@ $user=$_SESSION['user_id'];
 			}
 			?>
 			<p>
-				<a href='reports_testhistory.php?location=<?php echo $_SESSION['lab_config_id']; ?>&patient_id=<?php echo $patient_id; ?>' title='Click to Generate Test History Report for this Patient' target='_blank'>
+				<a href='reports_testhistory.php?location=<?php echo $_SESSION['lab_config_id']; ?>&patient_id=<?php echo $patient_id; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_GENERATE_TEST_HISTORY_REPORT_PATIENT']; ?>' target='_blank'>
 					<?php echo LangUtil::$pageTerms['MSG_PRINTHISTORY']; ?>
 				</a>
 			</p>
@@ -3115,8 +3109,8 @@ $user=$_SESSION['user_id'];
 			{
 				?>
 				<p>
-					<a href='javascript:print_patient_barcode();' title='Click to Print Patient Barcode'>
-						<?php echo "Print Patient Barcode" ?>
+					<a href='javascript:print_patient_barcode();' title='<?php echo LangUtil::$generalTerms['CLICK_TO_PRINT_PATIENT_BARCODE']; ?>'>
+						<?php echo LangUtil::$generalTerms['PRINT_PATIENT_BARCODE'] ?>
 					</a>
 					
 				</p>
@@ -3128,8 +3122,8 @@ $user=$_SESSION['user_id'];
 				if (is_billing_enabled($_SESSION['lab_config_id']))
 					{ ?>
 				<p>
-					<a rel='facebox' href='bill_generator.php?location=<?php echo$_SESSION['lab_config_id']; ?>&patient_id=<?php echo $patient_id; ?>' title='Click to generate a billing statement for this Patient' target='_blank'>
-						<?php echo "Billing Report" ?>
+					<a rel='facebox' href='bill_generator.php?location=<?php echo$_SESSION['lab_config_id']; ?>&patient_id=<?php echo $patient_id; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_GENERATE_BILL_PATIENT']; ?>' target='_blank'>
+						<?php echo LangUtil::$generalTerms['BILL_REPORT'] ?>
 					</a>
 				</p>
 				<?php } ?>
@@ -3162,11 +3156,11 @@ $user=$_SESSION['user_id'];
 						echo $patient->getName()." (".$patient->sex." ".$patient->getAge().")";
 						?>
 						&nbsp;&nbsp;
-						<a href='patient_profile.php?pid=<?php echo $specimen->patientId?>' title='Click to go to Patient Profile'>Profile</a>
+						<a href='patient_profile.php?pid=<?php echo $specimen->patientId?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_PRINT_PATIENT_PROFILE']; ?>'><?php echo LangUtil::$generalTerms['PROFILE']; ?></a>
 					</td>
 				</tr>
 				<tr valign='top'>
-					<td><u><?php echo "Visit No"; ?></u></td>
+					<td><u><?php echo LangUtil::$generalTerms['VISIT_NO'] ?></u></td>
 					<td><?php echo $specimen->sessionNum; ?></td>
 				</tr>
 				<?php
@@ -3174,7 +3168,7 @@ $user=$_SESSION['user_id'];
 				{
 				?>
 				<tr valign='top' style='display:none;'>
-					<td><u>DB Key</u></td>
+					<td><u><?php echo LangUtil::$generalTerms['DB_KEY']; ?></u></td>
 					<td><?php echo $specimen->specimenId; ?></td>
 				</tr>
 				<?php
@@ -3199,7 +3193,7 @@ $user=$_SESSION['user_id'];
 				}
 				?>
 				<tr>
-					<td><u><?php echo "Specimen ".LangUtil::$generalTerms['TYPE']; ?></u></td>
+					<td><u><?php echo LangUtil::$generalTerms['SPECIMEN_TYPE'] ?></u></td>
 					<td><?php echo get_specimen_name_by_id($specimen->specimenTypeId); ?></td>
 				</tr>
 				
@@ -3336,8 +3330,8 @@ $user=$_SESSION['user_id'];
 			$report_url = "reports_testhistory.php?location=".$_SESSION['lab_config_id']."&patient_id=".$specimen->patientId."&yf=$date_parts[0]&mf=$date_parts[1]&df=$date_parts[2]&yt=$date_parts[0]&mt=$date_parts[1]&dt=$date_parts[2]";
 			//$report_url = "reports_specimen.php?location=".$_SESSION['lab_config_id']."specimen_id=".$specimen_id;
 			?>
-			<p><a href='<?php echo $report_url; ?>' title='Click to Generate Specimen Report' target='_blank'><?php echo LangUtil::$generalTerms['CMD_GETREPORT']; ?></a></p>
-			<p><a href='reports_specimenlog.php?location=<?php echo $_SESSION['lab_config_id']; ?>&specimen_id=<?php echo $specimen_id; ?>' title='Click to View a Log of Actions Performed on this Specimen' target='_blank'><?php echo LangUtil::$generalTerms['CMD_TRACK']; ?></a></p>
+			<p><a href='<?php echo $report_url; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_GENERATE_SPECIMEN_REPORT']; ?>' target='_blank'><?php echo LangUtil::$generalTerms['CMD_GETREPORT']; ?></a></p>
+			<p><a href='reports_specimenlog.php?location=<?php echo $_SESSION['lab_config_id']; ?>&specimen_id=<?php echo $specimen_id; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_VIEW_ACTION_PERFORM_SPECIMEN']; ?>' target='_blank'><?php echo LangUtil::$generalTerms['CMD_TRACK']; ?></a></p>
 			<?php
 			if($_SESSION['user_level'] != $LIS_CLERK)
 			{
@@ -3376,8 +3370,8 @@ $user=$_SESSION['user_id'];
 			$report_url = "reports_testhistory.php?location=".$_SESSION['lab_config_id']."&patient_id=".$specimen->patientId."&yf=$date_parts[0]&mf=$date_parts[1]&df=$date_parts[2]&yt=$date_parts[0]&mt=$date_parts[1]&dt=$date_parts[2]";
 			//$report_url = "reports_specimen.php?location=".$_SESSION['lab_config_id']."specimen_id=".$specimen_id;
 			?>
-			<p><a href='<?php echo $report_url; ?>' title='Click to Generate Specimen Report' target='_blank'><?php echo LangUtil::$generalTerms['CMD_GETREPORT']; ?></a></p>
-			<p><a href='reports_specimenlog.php?location=<?php echo $_SESSION['lab_config_id']; ?>&specimen_id=<?php echo $specimen_id; ?>' title='Click to View a Log of Actions Performed on this Specimen' target='_blank'><?php echo LangUtil::$generalTerms['CMD_TRACK']; ?></a></p>
+			<p><a href='<?php echo $report_url; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_GENERATE_SPECIMEN_REPORT']; ?>' target='_blank'><?php echo LangUtil::$generalTerms['CMD_GETREPORT']; ?></a></p>
+			<p><a href='reports_specimenlog.php?location=<?php echo $_SESSION['lab_config_id']; ?>&specimen_id=<?php echo $specimen_id; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_VIEW_ACTION_PERFORM_SPECIMEN']; ?>' target='_blank'><?php echo LangUtil::$generalTerms['CMD_TRACK']; ?></a></p>
 			<div class="portlet box">
 			<div class="portlet-body">
 								<div class="row-fluid">
@@ -3385,7 +3379,7 @@ $user=$_SESSION['user_id'];
                             if($specimenBarcode)
                             {
                             ?>
-                            <a href="javascript:print_specimen_barcode(<?php echo $specimen->patientId;?>,<?php echo $specimen->specimenId;?> )" class="icon-btn span12"><i class="icon-barcode"></i><div>Print Barcode</div></a>
+                            <a href="javascript:print_specimen_barcode(<?php echo $specimen->patientId;?>,<?php echo $specimen->specimenId;?> )" class="icon-btn span12"><i class="icon-barcode"></i><div><?php echo LangUtil::$generalTerms['PRINT_BARCODE']; ?></div></a>
                             <?php 
                             }
                                 
@@ -3428,7 +3422,7 @@ $user=$_SESSION['user_id'];
 					<th style="font-size:12px"><?php echo "Test Turnaround time"; ?></th>
 					<th style="font-size:12px"><?php echo LangUtil::$generalTerms['VERIFIED_BY']; ?></th>
 					
-					<th style="font-size:12px" colspan="2">Status</th>
+					<th style="font-size:12px" colspan="2"><?php echo LangUtil::$generalTerms['SP_STATUS']; ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -3498,35 +3492,35 @@ $user=$_SESSION['user_id'];
 				
 				<br/>
 				<br/>
-				<a href="#" class="btn btn-danger" title="Reject" data-content="Result Rejection" data-toggle="modal" data-target=".bs-example-modal-lg">Reject</a>	
+				<a href="#" class="btn btn-danger" title="Reject" data-content="Result Rejection" data-toggle="modal" data-target=".bs-example-modal-lg"><?php echo LangUtil::$generalTerms['REJECT']; ?></a>	
   <!--pop up begin-->
   <div class="modal fade bs-example-modal-lg" id="issue_report" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" style="margin-left:10px">
      <form id="result_rejection_form" action="" method="post">
       <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" onclick="javascript:$('.bs-example-modal-lg').modal('hide');" aria-hidden="true"></button>
-        <h4 class="modal-title" id="myModalLabel"><i class="icon-pencil"></i>Reject a Result Entry</h4>
+        <h4 class="modal-title" id="myModalLabel"><i class="icon-pencil"></i><?php echo LangUtil::$generalTerms['REJECT_RESULT_ENTRY']; ?></h4>
         
       </div>
-      <label  for="spec">Specimen Id</label>  
+      <label  for="spec"><?php echo LangUtil::$generalTerms['SPECIMEN_ID']; ?></label>  
       <input id="spec" name="spec" type="hidden" class="form-control input-md" value="<?php echo $test->specimenId; ?>" />
       <input id="ttype" name="ttype" type="hidden" class="form-control input-md" value="<?php echo $test->testTypeId; ?>" />
              <input id="body" name="spec_id" type="text" class="form-control input-md" value="<?php echo $test->getLabSectionByTest(); ?>" />
-       <label  for="tname">Test :</label>  
+       <label  for="tname"><?php echo LangUtil::$generalTerms['TEST']; ?> :</label>  
              <input id="tname" name="tname" type="text" class="form-control input-md" value="<?php echo get_test_name_by_id($test->testTypeId); ?>" />
-		<label  for="message">Rejection Reason:</label>
+		<label  for="message"><?php echo LangUtil::$pageTerms['REJECTION_REASON']; ?>:</label>
 		<textarea id="rej_reason" name="rej_reason" ></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" onclick="javascript:$('.bs-example-modal-lg').modal('hide');">Close</button>
-        <button type="button" name="submit_iss" class="btn btn-primary" onclick="javascript:reject();">Submit</button>
+        <button type="button" class="btn btn-default" onclick="javascript:$('.bs-example-modal-lg').modal('hide');"><?php echo LangUtil::$generalTerms['CMD_CLOSE']; ?></button>
+        <button type="button" name="submit_iss" class="btn btn-primary" onclick="javascript:reject();"><?php echo LangUtil::$generalTerms['CMD_SUBMIT']; ?></button>
       </div>
     </form>
   </div>
   <!--pop up end-->
 				<?php }
 				} else {
-					echo $is_modal ? ($user->canverify!=1 ? 'You are not allowed to verify results.<br>Please contact your system administrator' : ($test->userId==$user->userId ? 'You cannot verify results that you have entered!' : '')) : '';
+					echo $is_modal ? ($user->canverify!=1 ? LangUtil::$generalTerms['TIPS_TEST_INFO_1'] : ($test->userId==$user->userId ? LangUtil::$generalTerms['TIPS_TEST_INFO_2'] : '')) : '';
 				}
 				?>
 			</td>
@@ -3556,9 +3550,9 @@ $user=$_SESSION['user_id'];
 		<table class='tablesorter' id='tat_table'>
 		<thead>
 			<tr>
-				<th>Test Type</th>
-				<th>Specimens Handled</th>
-				<th>Average Turnaround Time</th>
+				<th><?php echo LangUtil::$generalTerms['TEST_TYPE']; ?></th>
+				<th><?php echo LangUtil::$generalTerms['SPECIMEN_HANDLED']; ?></th>
+				<th><?php echo LangUtil::$generalTerms['AVERAGE_TURN_TIME']; ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -3576,12 +3570,12 @@ $user=$_SESSION['user_id'];
 					<?php
 					if($tat_value > 1)
 					{
-						echo $tat_value." days";
+						echo $tat_value.LangUtil::$generalTerms['DAYS'];
 					}
 					else
 					{
 						$hours_value = $tat_value*24;
-						echo $hours_value." hours";
+						echo $hours_value.LangUtil::$generalTerms['HOURS'];
 					}
 					?>
 				</td>
@@ -3605,12 +3599,12 @@ public function getStockOutDetails($retval)
 	<table class='tablesorter' id='current_inventory' style='width:500px'>
 		<thead>
 	<tr>
-	<th>Reagent Name</th>
-	<th>Lot Number</th>
-	<th>Quantity Checked Out</th>
-	<th>Date of Issue</th>
-	<th>User Name</th>
-	<th>Current Quantity</th>
+	<th><?php echo LangUtil::$generalTerms['REAGENT_NAME']; ?></th>
+	<th><?php echo LangUtil::$pageTerms['Lot_Number']; ?></th>
+	<th><?php echo LangUtil::$generalTerms['QUANTITY_CHECK_OUT']; ?></th>
+	<th><?php echo LangUtil::$generalTerms['DATE_ISSUE']; ?></th>
+	<th><?php echo LangUtil::$pageTerms['USER_NAME']; ?></th>
+	<th><?php echo LangUtil::$generalTerms['CURRENT_QUANTITY']; ?></th>
 </tr>
 <thead>
 <tbody>
@@ -3643,9 +3637,9 @@ public function getInventory($retval) {
 	<table class='tablesorter' id='current_inventory' style='width:500px'>
 		<thead>
 			<tr>
-				<th>Reagent Name</th>
-				<th>Lot Number</th>
-				<th>Current Stock</th>
+				<th><?php echo LangUtil::$generalTerms['REAGENT_NAME']; ?></th>
+				<th><?php echo LangUtil::$pageTerms['Lot_Number']; ?></th>
+				<th><?php echo LangUtil::$pageTerms['Current_Stock']; ?></th>
 			</tr>
 		<thead>
 		<tbody>
@@ -3679,8 +3673,8 @@ public function getTestsDoneStatsTable($stat_list)
 		<thead>
 			<tr>
 				<th><?php echo LangUtil::$generalTerms['TEST_TYPE']; ?></th>
-				<th> Completed Tests</th>
-				<th> Pending Tests</th>
+				<th><?php echo LangUtil::$generalTerms['COMPLETED_TESTS']; ?></th>
+				<th> <?php echo LangUtil::$allTerms['MENU_PENDINGTESTS']; ?></th>
 			</tr>
 		</thead>
 		<tbodys>
@@ -3723,11 +3717,11 @@ public function getTestsDoneStatsTable($stat_list)
 		<table class='table table-striped table-bordered table-advance' id='doctorstats_table' >
 		<thead>
 			<tr>
-				<th>Doctor name </th>
+				<th><?php echo LangUtil::$generalTerms['DOCTOR_NAME']; ?> </th>
 				<th><?php echo LangUtil::$pageTerms['TOTAL_PATIENTS']; ?></th>
 				<th><?php echo LangUtil::$pageTerms['TOTAL_SPECIMENS']; ?></th>
 				<th><?php echo LangUtil::$pageTerms['TOTAL_TESTS']; ?></th>
-				<th><?php echo "Edit Toggle"; ?></th>
+				<th><?php echo LangUtil::$generalTerms['EDIT_TOGGLE']; ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -3760,7 +3754,7 @@ public function getTestsDoneStatsTable($stat_list)
 				<td><?php echo $total_patients; ?></td>
 				<td><?php echo $total_specimens; ?></td>
 				<td><?php echo $total_tests; ?></td>
-				<td><a href='javascript:showEditBox(<?php echo $count; ?>);'><?php echo "Edit"; ?></td>
+				<td><a href='javascript:showEditBox(<?php echo $count; ?>);'><?php echo LangUtil::$generalTerms['CMD_EDIT']; ?></td>
 			</tr>
 			<?php
 			$count++;
@@ -3870,7 +3864,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 			<tr>
 				<?php
 				if ( $multipleIndividualLabs ) { ?>
-					<th>Lab Name</th>
+					<th><?php echo LangUtil::$generalTerms['LAB_NAME']; ?></th>
 				<?php
 				}
 				else {
@@ -3885,7 +3879,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				<th><?php echo LangUtil::$generalTerms['PREVALENCE_RATE']." (%)"; ?></th>
 				<?php
 					if ( $viewTrendsEnabled ) {
-						echo "<th>View Trends</th>";
+						echo "<th>" . LangUtil::$generalTerms['VIEW_TRENDS'] . " </th>";
 					}
 				?>
 			</tr>
@@ -3926,7 +3920,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				<?php
 					echo "<td style='color:$colorCode;'>$infection_rate</td>";
 					if ( $viewTrendsEnabled ) { ?>
-						<td><a href='javascript:viewTrendsIndividual(<?php echo json_encode($test_type_name);?>,<?php echo json_encode($lab_config_id);?>,<?php echo json_encode($date_from);?>,<?php echo json_encode($date_to);?>);'>View Trends</a></td>
+						<td><a href='javascript:viewTrendsIndividual(<?php echo json_encode($test_type_name);?>,<?php echo json_encode($lab_config_id);?>,<?php echo json_encode($date_from);?>,<?php echo json_encode($date_to);?>);'><?php echo LangUtil::$generalTerms['VIEW_TRENDS']; ?></a></td>
 				<?php
 					}
 				?>
@@ -4135,7 +4129,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				echo "<option value='$option'";
 				if($option == $field_value)
 				{
-					echo " selected ";
+					echo ' selected ';
 				}
 				echo " >$option</option>";
 			}
@@ -4157,7 +4151,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		$field_list = get_lab_config_specimen_custom_fields($lab_config_id);
 		if(count($field_list) == 0)
 		{
-			echo "None";
+			echo LangUtil::$generalTerms['NONE'];
 			return;
 		}
 		for($i = 0; $i < count($field_list); $i++)
@@ -4173,7 +4167,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		$field_list = get_lab_config_patient_custom_fields($lab_config_id);
 		if(count($field_list) == 0)
 		{
-			echo "None";
+			echo LangUtil::$generalTerms['NONE'];
 			return;
 		}
 		for($i = 0; $i < count($field_list); $i++)
@@ -4189,7 +4183,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		$field_list = get_lab_config_labtitle_custom_fields($lab_config_id);
 		if(count($field_list) == 0)
 		{
-			echo "None";
+			echo LangUtil::$generalTerms['NONE'];
 			return;
 		}
 		for($i = 0; $i < count($field_list); $i++)
@@ -4220,55 +4214,55 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 	<div class="pretty_box" style="width:400px"><table>
 			<tr>
 			<td>
-					Reagent
+					<?php echo LangUtil::$pageTerms['Reagent']; ?>
 				</td>
 				<td>
 					<input type="text" name='<?php echo $name_request; ?>' id='<?php echo $name_request; ?>'/>
 				</td>
 				</tr><tr>
 				<td>
-					Lot_Number
+					<?php echo LangUtil::$pageTerms['Lot_Number']; ?>
 				</td>
 				<td>
 					<input type="text" name='<?php echo $lot_number_request; ?>' id='<?php echo $lot_number_request; ?>'/>
 				</td>
 				</tr><tr>
 				<td>
-				Expiry_Date
+				<?php echo LangUtil::$pageTerms['Expiry_Date']; ?>
 				</td>
 				<td>
 					<input type="text" name='<?php echo $expiry_date_request; ?>' id='<?php echo $expiry_date_request; ?>'/>
 				</td>
 				</tr><tr>
 				<td>
-					Manufacturer
+					<?php echo LangUtil::$pageTerms['Manufacturer']; ?>
 				</td><td>
 					<input type="text" name='<?php echo $manufacture_request; ?>' id='<?php echo $manufacture_request; ?>'/>
 				</td>
 				</tr><tr>
 				<td>
-					Supplier
+					<?php echo LangUtil::$pageTerms['Supplier']; ?>
 				</td>
 				<td>
 					<input type="text" name='<?php echo $supplier_request; ?>' id='<?php echo $supplier_request; ?>'/>
 				</td>
 				</tr><tr>
 				<td>
-					Quantity_Supplied
+					<?php echo LangUtil::$pageTerms['Quantity_Supplied']; ?>
 				</td>
 
 				<td>
 					<input type="text" name='<?php echo $quantity_supplied_request; ?>' id='<?php echo $quantity_supplied_request; ?>'/>
 				</td>
 				</tr><tr>
-				<td>Units
+				<td><?php echo LangUtil::$pageTerms['Units']; ?>
 				</td>
 				<td>
 					<input type="text" name='<?php echo $unit_request; ?>' id='<?php echo $unit_request; ?>'/>
 				</td>
 			</tr>
 			<tr>
-				<td>Cost per Unit
+				<td><?php echo LangUtil::$pageTerms['Cost_per_Unit']; ?>
 				</td>
 				<td>
 					<input type="text" name='<?php echo $cost_request; ?>' id='<?php echo $cost_request; ?>'/>
@@ -4277,7 +4271,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 			<tr>
 			<td>
 	<label for='<?php echo $curr_form_id; ?>_date_1'>
-		Date of Entry
+		<?php echo LangUtil::$generalTerms['ENTRY_DATE']; ?>
 	</label></td><td>
 	<span id='<?php echo $curr_form_id; ?>_date_l'>
 	
@@ -4471,8 +4465,8 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 					# Enable the following line if this field is to be used:
 					echo " onchange=\"javascript:checkandtoggle(this, '$doc_row_id');\" ";
 					?>
-						<option value='1'>Patient</option>
-						<option value='2'>Doctor/Hospital</option>
+						<option value='1'><?php echo LangUtil::$generalTerms['PATIENT']; ?></option>
+						<option value='2'><?php echo LangUtil::$generalTerms['DOCTOR']; ?>/<?php echo LangUtil::$generalTerms['HOSPITAL']; ?></option>
 					</select>
 				</td>
 			</tr>
@@ -4492,24 +4486,24 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				echo " style='display:none;' ";
 			?>>
 				<td>
-					<label for='ref_out' valign='top'>Referral sample? <?php if($_SESSION['refout'] == 2) $this->getAsterisk(); ?></label>
+					<label for='ref_out' valign='top'><?php echo LangUtil::$generalTerms['REFERAL_SAMPLE']; ?>? <?php if($_SESSION['refout'] == 2) $this->getAsterisk(); ?></label>
 				</td>
 				
 				<td>
 				    <div class="controls" style="margin-left:50px;">
                                  <label class="radio">
-                                    <input id="rdb1_<?php echo $form_num; ?>" type="radio" name="toggler" value="1" onclick="javascript:ShowFacility(<?php echo $form_num;?>);" />No                                        
+                                    <input id="rdb1_<?php echo $form_num; ?>" type="radio" name="toggler" value="1" onclick="javascript:ShowFacility(<?php echo $form_num;?>);" /><?php echo LangUtil::$generalTerms['NO']; ?>                                        
                                  </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                  <label class="radio">  
-                                    <input id="rdb2_<?php echo $form_num; ?>" type="radio" name="toggler" value="2" onclick="javascript:ShowFacility(<?php echo $form_num;?>);" checked />Yes                                 
+                                    <input id="rdb2_<?php echo $form_num; ?>" type="radio" name="toggler" value="2" onclick="javascript:ShowFacility(<?php echo $form_num;?>);" checked /><?php echo LangUtil::$generalTerms['YES']; ?>                                 
                                  </label>  
                       </div>
 				</td>
 			</tr>
 			
-			<tr id="blk-<?php echo $form_num; ?>" class="toHide"><td>Referral Facility:<?php if($_SESSION['refout'] == 1) $this->getAsterisk(); ?></td><td>
-			<input type="text" list=MFL name="MFL" id="MFL_Codeid" class="tooltip-examples" data-toggle="tooltip" data-original-title="Input code or name & select from suggestions in dropdown">
-			<input type="hidden" name="MFL_Code" id="MFL_Code" class="tooltip-examples" data-toggle="tooltip" data-original-title="Input code or name & select from suggestions in dropdown">
+			<tr id="blk-<?php echo $form_num; ?>" class="toHide"><td><?php echo LangUtil::$generalTerms['REFERAL_FACILITY']; ?>:<?php if($_SESSION['refout'] == 1) $this->getAsterisk(); ?></td><td>
+			<input type="text" list=MFL name="MFL" id="MFL_Codeid" class="tooltip-examples" data-toggle="tooltip" data-original-title="<?php echo LangUtil::$generalTerms['TIPS_NEW_SPECIMEN_FORM_1']; ?>">
+			<input type="hidden" name="MFL_Code" id="MFL_Code" class="tooltip-examples" data-toggle="tooltip" data-original-title="<?php echo LangUtil::$generalTerms['TIPS_NEW_SPECIMEN_FORM_1']; ?>">
 			<datalist id=MFL >
 
 			<?php
@@ -4740,14 +4734,14 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 							<?php
 							//if($curr_tat_value != null && $curr_tat_value < 24)
 							if(true)
-								echo " selected ";
+								echo ' selected ';
 							?>
 							><?php echo LangUtil::$generalTerms['HOURS']; ?></option>
 							<option value='2'
 							<?php
 							//if($curr_tat_value != null && $curr_tat_value >= 24)
 							if(false)
-								echo " selected ";
+								echo ' selected ';
 							?>
 							><?php echo LangUtil::$generalTerms['DAYS']; ?></option>
 						</select>
@@ -5109,7 +5103,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 					Delete:
 					</td>
 					<td>
-					<input type="checkbox" name="Delete" id="Delete" value="Delete" >
+					<input type="checkbox" name="Delete" id="Delete" value="<?php echo LangUtil::$generalTerms['CMD_DELETE']; ?>" >
 					</td>
 				</tr>
 				<tr>
@@ -5153,7 +5147,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		{
 			?>
 			<div class='sidetip_nopos'>
-			ERROR: Lab configuration not found
+			<?php echo LangUtil::$pageTerms['ERROR_LAB_CONFIG_NOT_FOUND']; ?>
 			</div>
 			<?php
 			return;
@@ -5189,13 +5183,13 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				
 				<td><input type='checkbox' class='stype_entry' name='s_type_<?php echo $key; ?>' id='s_type_<?php echo $key; ?>' value='<?php echo $key; ?>'
 				<?php
-				if ($checked) echo "checked";
+				if ($checked) echo " checked ";
 				
 				if($allCompatibleCheckingOn==true) {
 					if(in_array($specimen_type_id, $current_specimen_list))
 					{
 						echo " checked ><span class='clean-ok'>$specimen_name</span>";
-
+				
 					}
 					else
 						echo ">$specimen_name";
@@ -5224,7 +5218,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		{
 			?>
 			<div class='sidetip_nopos'>
-			ERROR: Lab configuration not found
+			<?php echo LangUtil::$pageTerms['ERROR_LAB_CONFIG_NOT_FOUND']; ?>
 			</div>
 			<?php
 			return;
@@ -5295,7 +5289,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		{
 			?>
 			<div class='sidetip_nopos'>
-			ERROR: Lab configuration not found
+			<?php echo LangUtil::$pageTerms['ERROR_LAB_CONFIG_NOT_FOUND']; ?>
 			</div>
 			<?php
 			return;
@@ -5333,15 +5327,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				<td><input type='checkbox' class='ttype_entry' name='t_type_<?php echo $key; ?>' id='t_type_<?php echo $key; ?>'
 				<?php
 				if($allCompatibleCheckingOn==true) {
-					if(in_array($test_type_id, $current_test_list))
-					{
+					if(in_array($test_type_id, $current_test_list)){
 						echo " checked ><span class='clean-ok'>$test_name</span>";
-
-					}
-					else
+					}else
 						echo ">$test_name";
-				}
-				else
+				}else
 					echo ">$test_name";
 				?>
 				</input></td>
@@ -5366,7 +5356,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		{
 			?>
 			<div class='sidetip_nopos'>
-			ERROR: Lab configuration not found
+			<?php echo LangUtil::$pageTerms['ERROR_LAB_CONFIG_NOT_FOUND']; ?>
 			</div>
 			<?php
 			return;
@@ -5393,11 +5383,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				<?php
 					if($sfields['daily_num'] == 12 || $sfields['daily_num'] == 11 || $sfields['daily_num'] == 10)
 					{
-						echo " checked ><span class='clean-ok'>Patient Number</span>";
+						echo " checked ><span class='clean-ok'>" . LangUtil::$generalTerms['PATIENT_DAILYNUM'] . "</span>";
 					}
 					else
                                         {
-						echo ">Patient Number";
+						echo ">" . LangUtil::$generalTerms['PATIENT_DAILYNUM'];
                                         }
 				?>
 				</input></td>
@@ -5406,11 +5396,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				<?php
 					if($sfields['age'] == 12 || $sfields['age'] == 11 || $sfields['age'] == 10)
 					{
-						echo " checked ><span class='clean-ok'>Patient's Age</span>";
+						echo " checked ><span class='clean-ok'>" . LangUtil::$generalTerms['PATIENT_AGE'] . "</span>";
 					}
 					else
                                         {
-						echo ">Patient's Age";
+						echo ">" . LangUtil::$generalTerms['PATIENT_AGE'];
                                         }
 				?>
 				</input></td>
@@ -5447,7 +5437,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		{
 			?>
 			<div class='sidetip_nopos'>
-			ERROR: Lab configuration not found
+			<?php echo LangUtil::$pageTerms['ERROR_LAB_CONFIG_NOT_FOUND']; ?>
 			</div>
 			<?php
 			return;
@@ -5468,7 +5458,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		?>
                 <table>
                     <tr>
-                        <td>Encoding Format: </td>
+                        <td><?php echo LangUtil::$pageTerms['ENCODING_FORMAT']; ?>: </td>
                                  <td>
                                 <?php //$sfields['rpp']= '45';
                                 echo "<select id='brfields_type' name='brfields_type'>";
@@ -5483,7 +5473,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
                                 echo "</select>";?></td>
                     </tr>
                     <tr>
-                               <td> Barcode Width:
+                               <td> <?php echo LangUtil::$pageTerms['BARCODE_WIDTH']; ?>:
                                    </td>
                                    <td>
                                 <?php //$sfields['rpp']= '45';
@@ -5501,7 +5491,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
                                    </td>
                         </tr>
                         <tr>
-                                 <td>Barcode Height:</td>
+                                 <td><?php echo LangUtil::$pageTerms['BARCODE_HEIGHT']; ?>:</td>
                                  <td>
                                 <?php //$sfields['rpp']= '45';
                                 echo "<select id='brfields_height' name='brfields_height'>";
@@ -5518,7 +5508,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
                                 </td>
                            </tr>
                           <tr>
-                              <td>Text Size:</td>
+                              <td><?php echo LangUtil::$pageTerms['TEXT_SIZE']; ?>:</td>
                                  <td>
                                 <?php //$sfields['rpp']= '45';
                                 echo "<select id='brfields_textsize' name='brfields_textsize'>";
@@ -5545,7 +5535,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		{
 			?>
 			<div class='sidetip_nopos'>
-			ERROR: Lab configuration not found
+			<?php echo LangUtil::$pageTerms['ERROR_LAB_CONFIG_NOT_FOUND']; ?> 
 			</div>
 			<?php
 			return;
@@ -5657,11 +5647,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		<div class='pretty_box' style='width:800px;'>
 		<table cellspacing='5px' class="table table-bordered table-hover">
                     <th style="width: 200px"></th>
-                    <th>Test Count (Grouped) Report Settings:</th>
+                    <th><?php echo LangUtil::$allTerms['TEST_COUNT_GROUP_REPORT_SETTINGS']; ?>:</th>
                     </tr>
 			<tbody>
                             <tr valign='top'>
-					<td><?php echo "Group By Lab Section"; ?></td>
+					<td><?php echo LangUtil::$allTerms['GROUP_BY_LAB_SECTION']; ?></td>
 					<td>
 						<select id='rsection' name='rsection'>
 							<option value='y'<?php echo $bySection==1 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['YES']; ?></option>
@@ -5744,32 +5734,32 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 					</td>
 				</tr>
                                 <tr valign='top'>
-					<td><?php echo "Counts to Display"; ?></td>
+					<td><?php echo LangUtil::$allTerms['COUNTS_TO_DISPLAY']; ?></td>
 					<td>
 						<select id='rcombo' name='rcombo'>
-							<option value='1'<?php echo $combo==1 ? ' selected' : ''; ?>>All registered tests</option>
-							<option value='2'<?php echo $combo==2 ? ' selected' : ''; ?>>Only completed tests</option>
-							<option value='3'<?php echo $combo==1 ? ' selected' : ''; ?>>Both completed and pending tests (separated by a slash)</option>
+							<option value='1'<?php echo $combo==1 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['ALL_REGISTERED_TESTS'];?></option>
+							<option value='2'<?php echo $combo==2 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['ONLY_COMPLETED_TESTS'];?></option>
+							<option value='3'<?php echo $combo==1 ? ' selected' : ''; ?>><?php echo LangUtil::$generalTerms['COMPLRTED_PENDING_TESTS'];?></option>
 						</select>
 						<!--input type='radio' id='rcombo' name='rcombo' value='1'<?php
 						if($combo == 1)
 							echo " checked ";
-						?>><?php echo "All registered tests"; ?></input>
+						?>><?php echo LangUtil::$generalTerms['ALL_REGISTERED_TESTS'];?></input>
 						<br>
 						<input type='radio' id='rcombo' name='rcombo' value='2'<?php
 						if($combo == 2)
 							echo " checked ";
-						?>><?php echo "Only completed tests"; ?></input>
+						?>><?php echo LangUtil::$generalTerms['ONLY_COMPLETED_TESTS']; ?></input>
                                                 <br>
                                                 <input type='radio' id='rcombo' name='rcombo' value='3'<?php
 						if($combo == 3)
 							echo " checked ";
-						?>><?php echo "Both completed and pending tests (separated by a slash)"; ?></input-->
+						?>><?php echo LangUtil::$generalTerms['COMPLRTED_PENDING_TESTS']; ?></input-->
 					</td>
 				</tr>
                                 <tr>
                                 <th></th>
-                                 <th><br>Specimen Count (Grouped) Report Settings:</th>
+                                 <th><br><?php echo LangUtil::$allTerms['SPECIMEN_COUNT_GROUP_REPORT_SETTINGS']; ?>:</th>
                                  </tr>
                                 <tr valign='top'>
 					<td><?php echo LangUtil::$pageTerms['GROUP_BYGENDER']; ?></td>
@@ -5877,11 +5867,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		<table class='table table-bordered table-hover'>
                     <tr>
                     <th></th>
-                    <th><b>Test Count (Grouped) Report Settings:</b></th>
+                    <th><b><?php echo LangUtil::$allTerms['TEST_COUNT_GROUP_REPORT_SETTINGS']; ?>:</b></th>
                     </tr>
 			<tbody>
                             <tr valign='top'>
-					<td><?php echo "Group By Lab Section"; ?></td>
+					<td><?php echo LangUtil::$allTerms['GROUP_BY_LAB_SECTION']; ?></td>
 					<td>
 						<?php
 						if($bySection == 1)
@@ -5935,22 +5925,22 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 					</td>
 				</tr>
                                 <tr valign='top'>
-					<td><?php echo "Counts to Display"; ?></td>
+					<td><?php echo LangUtil::$allTerms['COUNTS_TO_DISPLAY']; ?></td>
 					<td>
 						<?php
 						if($combo == 1)
-							echo "All registered tests";
+							echo LangUtil::$generalTerms['ALL_REGISTERED_TESTS'];
 						else if($combo == 3)
-							echo "Both completed and pending tests (separated by a slash)";
+							echo LangUtil::$generalTerms['COMPLRTED_PENDING_TESTS'];
                                                 else
-                                                    echo "Only completed tests";
+                                                    echo LangUtil::$generalTerms['ONLY_COMPLETED_TESTS'];
 
 						?>
 					</td>
 				</tr>
                                 <tr>
                                 <th></th>
-                                 <th><b>Specimen Count (Grouped) Report Settings:</b></th>
+                                 <th><b><?php echo LangUtil::$allTerms['SPECIMEN_COUNT_GROUP_REPORT_SETTINGS']; ?>:</b></th>
                                  </tr>
 				<tr valign='top'>
 					<td><?php echo LangUtil::$pageTerms['GROUP_BYGENDER']; ?></td>
@@ -6663,7 +6653,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 							}
 							if($measure_to_set === false)
 							{
-								echo "<small>"."No range configuration required"./*LangUtil::$pageTerms['RANGE_NOTREQD'].*/"</small><br><br>";
+								echo "<small>".LangUtil::$pageTerms['RANGE_NOTREQD']./*LangUtil::$pageTerms['RANGE_NOTREQD'].*/"</small><br><br>";
 							}
 							?>
 						</td>
@@ -6697,24 +6687,24 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		</input>
 		<table cellspacing='5px' class='table table-bordered table-hover smaller_font'>
 			<tr valign='top'>
-			<td>Alignment</td>
+			<td><?php echo LangUtil::$generalTerms['ALIGNMENT']; ?></td>
 			<td>
-					<input type='radio' name='align' value='left' <?php echo " checked "; ?>>Left</input>
+					<input type='radio' name='align' value='left' <?php echo " checked "; ?>><?php echo LangUtil::$generalTerms['LEFT']; ?></input>
 					<input type='radio' name='align' value='center' <?php
-					if($report_config->alignment_header == 'center') echo " checked "; ?>>Center</input>
+					if($report_config->alignment_header == 'center') echo " checked "; ?>><?php echo LangUtil::$generalTerms['CENTER']; ?></input>
 					<input type='radio' name='align' value='right' <?php
-					if($report_config->alignment_header == 'right') echo " checked "; ?>>Right</input>
+					if($report_config->alignment_header == 'right') echo " checked "; ?>><?php echo LangUtil::$generalTerms['RIGHT']; ?></input>
 				</td>
 			
 			<tr valign='top'>
-				<td>Header</td>
+				<td><?php echo LangUtil::$generalTerms['HEADER']; ?></td>
 				<td>
 					<input type='text' name='header' id='header' value='<?php echo $report_config->headerText; ?>' class='uniform_width_more'>
 					</input>
 				</td>
 			</tr>
 			<tr valign='top'>
-				<td>Title</td>
+				<td><?php echo LangUtil::$generalTerms['TITLE']; ?></td>
 				<td>
 					<span id='title_lines'>
 					<?php
@@ -6732,14 +6722,14 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				</td>
 			</tr>
 			<tr valign='top'>
-				<td>Footer</td>
+				<td><?php echo LangUtil::$generalTerms['FOOTER']; ?></td>
 				<td>
 					<input type='text' name='footer' id='footer' value='<?php echo $report_config->footerText; ?>' class='uniform_width_more'>
 					</input>
 				</td>
 			</tr>
 			<tr valign='top'>
-				<td>Designation</td>
+				<td><?php echo LangUtil::$generalTerms['DESIGNATION']; ?></td>
 				<td>
 					<input type='text' name='designation' id='designation' value='<?php echo $report_config->designation; ?>' class='uniform_width_more'>
 					</input>
@@ -6776,7 +6766,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				
 			</tr>
 			<tr valign='top'>
-				<td>Clinical Data</td>
+				<td><?php echo LangUtil::$generalTerms['CLINICAL_DATA']; ?></td>
 				<td>
 					<input type='radio' name='Clinical_Data' value='Y' <?php
 					if($report_config->useClinicalData == 1) echo " checked "; ?>><?php echo LangUtil::$generalTerms['YES']; ?></input>
@@ -6788,12 +6778,12 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 			<tr><td><h4><?php $name="../logos/logo_".$lab_config_id.".jpg";
 			$logofilename = "logos/logo_".$report_config->labConfigId.".jpg";
 			if (file_exists(dirname(dirname(__FILE__)).'/'.$logofilename)==true)
-			echo "LOGO being Used</td><td><img src='".$logofilename."' width='100' height='100'>"; ?></h4></td></tr>
-	  		<tr><td><h3>File Upload:</h3></td><td><?php
+			echo LangUtil::$generalTerms['LOGO_USED'] . "</td><td><img src='".$logofilename."' width='100' height='100'>"; ?></h4></td></tr>
+	  		<tr><td><h3><?php echo LangUtil::$generalTerms['FILE_UPLOAD']; ?>:</h3></td><td><?php
 			
 	 if (file_exists("../logos/logo_".$report_config->labConfigId.".jpg")==false)
-	{echo "( Add a Logo)"; }else echo "(Change Logo)"; ?>
-	Choose a .jpg logo File to upload:
+	{echo "( " . LangUtil::$generalTerms['ADD_LOGO'] . " )"; }else echo "(" . LangUtil::$generalTerms['CHANGE_LOGO'] . ")"; ?>
+	<?php echo LangUtil::$generalTerms['CHOOSE_JPG_LOGO_FILRE_UPLOAD']; ?>:
 	<input type="file" name="file" >
 	<input/>
 	<br />
@@ -6891,7 +6881,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 							echo " checked ";
 						?>>
 					</input>
-					<?php echo "Registration Date"; ?>
+					<?php echo LangUtil::$generalTerms['REGISTRATION_DATE']; ?>
 				</td>
 			</tr>
 			<?php
@@ -7216,9 +7206,9 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 					&nbsp;&nbsp;&nbsp;
 					<span id='<?php
 					if($worksheet_config === false)
-						echo "submit_report_config_progress";
+						echo LangUtil::$generalTerms['SUBMIT_REPORT_CONFIG_PROGRESS'];
 					else
-						echo "submit_worksheet_config_progress";
+						echo LangUtil::$generalTerms['SUBMIT_WORKSHEET_CONFIG_PROGRESS'];
 					?>' style='display:none;'>
 						<?php $this->getProgressSpinner(LangUtil::$generalTerms['CMD_SUBMITTING']); ?>
 					</span>
@@ -7250,21 +7240,21 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		<table class='hor-minimalist-b'>
 			<tbody>
 			<tr valign='top'>
-				<td>Header</td>
+				<td><?php echo LangUtil::$generalTerms['HEADER'];?></td>
 				<td><?php echo $report_config->headerText; ?></td>
 			</tr>
 			<tr valign='top'>
-				<td>Title</td>
+				<td><?php echo LangUtil::$generalTerms['TITLE'];?></td>
 				<td><?php echo $report_config->titleText; ?></td>
 			</tr>
 			<tr valign='top'>
-				<td>Footer</td>
+				<td><?php echo LangUtil::$generalTerms['FOOTER'];?></td>
 				<td>
 					<?php echo $report_config->footerText; ?>
 				</td>
 			</tr>
 			<tr valign='top'>
-				<td>Designation</td>
+				<td><?php echo LangUtil::$generalTerms['DESIGNATION'];?></td>
 				<td>
 					<?php echo $report_config->designation ?>
 				</td>
@@ -7301,7 +7291,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				</td>
 			</tr>
 			<tr valign='top'>
-				<td>Clinical Data</td>
+				<td><?php echo LangUtil::$generalTerms['CLINICAL_DATA'];?></td>
 				<td>
 					<?php
 					if($report_config->useClinicalData == 1)
@@ -7674,7 +7664,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 			$formatted_date = date($format);
 			echo "<option value='$format'";
 			if($lab_config->dateFormat === $format)
-				echo " selected ";
+				echo ' selected ';
 			echo">".$DATE_FORMAT_PRETTY_LIST[$count]."</option>";
 			$count++;
 		}
@@ -7707,11 +7697,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 								<td>
 									<?php
 									if($lab_config->pid != 0)
-										echo " In use ";
+										echo LangUtil::$generalTerms['IN_USE'];
 									else
-										echo "Not in use";
+										echo LangUtil::$generalTerms['NOT_IN_USE'];
 									if($lab_config->pid == 2)
-										echo " (Mandatory field) ";
+										echo " ( " . LangUtil::$generalTerms['MANDOTARY_FIELD'] .  " ) ";
 									?>
 								</td>
 							</tr>
@@ -7720,11 +7710,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 								<td>
 								<?php
 									if($lab_config->patientAddl != 0)
-										echo " In use ";
+										echo LangUtil::$generalTerms['IN_USE'];
 									else
-										echo "Not in use";
+										echo LangUtil::$generalTerms['NOT_IN_USE'];
 									if($lab_config->patientAddl == 2)
-										echo " (Mandatory field) ";
+										echo " ( " . LangUtil::$generalTerms['MANDOTARY_FIELD'] .  " ) ";
 								?>
 								</td>
 							</tr>
@@ -7733,12 +7723,12 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 								<td>
 									<?php
 									if($lab_config->dailyNum == 1 || $lab_config->dailyNum == 11 || $lab_config->dailyNum == 2 || $lab_config->dailyNum == 12)
-										echo " In use ";
+										echo LangUtil::$generalTerms['IN_USE'];
 									else
-										echo "Not in use";
+										echo LangUtil::$generalTerms['NOT_IN_USE'];
 									if($lab_config->dailyNum == 2 || $lab_config->dailyNum == 12)
 									{
-										echo " (Mandatory field) ";
+										echo " ( " . LangUtil::$generalTerms['MANDOTARY_FIELD'] .  " ) ";
 										echo "&nbsp;&nbsp;";
 									}
 									if($lab_config->dailyNum == 1 || $lab_config->dailyNum == 11 || $lab_config->dailyNum == 2 || $lab_config->dailyNum == 12)
@@ -7768,11 +7758,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 								<td>
 									<?php
 									if($lab_config->pname != 0)
-										echo " In use ";
+										echo LangUtil::$generalTerms['IN_USE'];
 									else
-										echo "Not in use";
+										echo LangUtil::$generalTerms['NOT_IN_USE'];
 									if($lab_config->pname == 2)
-										echo " (Mandatory field) ";
+										echo " ( " . LangUtil::$generalTerms['MANDOTARY_FIELD'] .  " ) ";
 									?>
 								</td>
 							</tr>
@@ -7781,11 +7771,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 								<td>
 									<?php
 									if($lab_config->sex != 0)
-										echo " In use ";
+										echo LangUtil::$generalTerms['IN_USE'];
 									else
-										echo "Not in use";
+										echo LangUtil::$generalTerms['NOT_IN_USE'];
 									if($lab_config->sex == 2)
-										echo " (Mandatory field) ";
+										echo " ( " . LangUtil::$generalTerms['MANDOTARY_FIELD'] .  " ) ";
 									?>
 								</td>
 							</tr>
@@ -7794,11 +7784,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 								<td>
 									<?php
 									if($lab_config->dob != 0)
-										echo " In use ";
+										echo LangUtil::$generalTerms['IN_USE'];
 									else
-										echo "Not in use";
+										echo LangUtil::$generalTerms['NOT_IN_USE'];
 									if($lab_config->dob == 2)
-										echo " (Mandatory field) ";
+										echo " ( " . LangUtil::$generalTerms['MANDOTARY_FIELD'] .  " ) ";
 									?>
 								</td>
 							</tr>
@@ -7807,11 +7797,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 								<td>
 								<?php
 									if($lab_config->age == 1 || $lab_config->age == 2 || $lab_config->age == 11 || $lab_config->age == 12)
-										echo " In use ";
+										echo LangUtil::$generalTerms['IN_USE'];
 									else
-										echo "Not in use";
+										echo LangUtil::$generalTerms['NOT_IN_USE'];
 									if($lab_config->age == 2 || $lab_config->age == 12)
-										echo " (Mandatory field) ";
+										echo " ( " . LangUtil::$generalTerms['MANDOTARY_FIELD'] .  " ) ";
 								?>
 								</td>
 							</tr>
@@ -7837,11 +7827,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 								<td>
 									<?php
 									if($lab_config->sid != 0)
-										echo " In use ";
+										echo LangUtil::$generalTerms['IN_USE'];
 									else
-										echo "Not in use";
+										echo LangUtil::$generalTerms['NOT_IN_USE'];
 									if($lab_config->sid == 2)
-										echo " (Mandatory field) ";
+										echo " ( " . LangUtil::$generalTerms['MANDOTARY_FIELD'] .  " ) ";
 								?>
 								</td>
 							</tr>
@@ -7850,11 +7840,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 								<td>
 									<?php
 									if($lab_config->specimenAddl != 0)
-										echo " In use ";
+										echo LangUtil::$generalTerms['IN_USE'];
 									else
-										echo "Not in use";
+										echo LangUtil::$generalTerms['NOT_IN_USE'];
 									if($lab_config->specimenAddl == 2)
-										echo " (Mandatory field) ";
+										echo " ( " . LangUtil::$generalTerms['MANDOTARY_FIELD'] .  " ) ";
 								?>
 								</td>
 							</tr>
@@ -7863,11 +7853,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 								<td>
 								<?php
 									if($lab_config->comm != 0)
-										echo " In use ";
+										echo LangUtil::$generalTerms['IN_USE'];
 									else
-										echo "Not in use";
+										echo LangUtil::$generalTerms['NOT_IN_USE'];
 									if($lab_config->comm == 2)
-										echo " (Mandatory field) ";
+										echo " ( " . LangUtil::$generalTerms['MANDOTARY_FIELD'] .  " ) ";
 								?>
 								</td>
 							</tr>
@@ -7876,11 +7866,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 								<td>
 									<?php
 									if($lab_config->rdate != 0)
-										echo " In use ";
+										echo LangUtil::$generalTerms['IN_USE'];
 									else
-										echo "Not in use";
+										echo LangUtil::$generalTerms['NOT_IN_USE'];
 									if($lab_config->rdate == 2)
-										echo " (Mandatory field) ";
+										echo " ( " . LangUtil::$generalTerms['MANDOTARY_FIELD'] .  " ) ";
 								?>
 								</td>
 							</tr>
@@ -7889,11 +7879,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 								<td>
 									<?php
 									if($lab_config->refout != 0)
-										echo " In use ";
+										echo LangUtil::$generalTerms['IN_USE'];
 									else
-										echo "Not in use";
+										echo LangUtil::$generalTerms['NOT_IN_USE'];
 									if($lab_config->refout == 2)
-										echo " (Mandatory field) ";
+										echo " ( " . LangUtil::$generalTerms['MANDOTARY_FIELD'] .  " ) ";
 								?>
 								</td>
 							</tr>
@@ -7902,11 +7892,11 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 								<td>
 									<?php
 									if($lab_config->doctor != 0)
-										echo " In use ";
+										echo LangUtil::$generalTerms['IN_USE'];
 									else
-										echo "Not in use";
+										echo LangUtil::$generalTerms['NOT_IN_USE'];
 									if($lab_config->doctor == 2)
-										echo " (Mandatory field) ";
+										echo " ( " . LangUtil::$generalTerms['MANDOTARY_FIELD'] .  " ) ";
 								?>
 								</td>
 							</tr>
@@ -7963,7 +7953,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
                         if($patientBarcodeSearch != 0 && is_country_dir($userrr) != 1 && is_super_admin($userrr) != 1 )
 			{
 				?>
-				<option value='9'><?php echo 'Barcode Search'; ?></option>
+				<option value='9'><?php echo LangUtil::$generalTerms['BARCODE_SEARCH'];?></option>
 				<?php
 			}
 		}
@@ -8000,7 +7990,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
                         if($patientBarcodeSearch != 0 && is_country_dir($userrr) != 1 && is_super_admin($userrr) != 1 )
 			{
 				?>
-				<option value='9'><?php echo 'Barcode Search'; ?></option>
+				<option value='9'><?php echo LangUtil::$generalTerms['BARCODE_SEARCH']; ?></option>
 				<?php
 			}
 		}
@@ -8010,7 +8000,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 
 			# Show all options
 			?>
-			<option value='0'><?php echo "Patient Number"; ?></option>
+			<option value='0'><?php echo LangUtil::$generalTerms['PATIENT_DAILYNUM']; ?></option>
 			<option value='1'><?php echo LangUtil::$generalTerms['PATIENT_NAME']; ?></option>
 			<!--
 			<option value='3'><?php echo LangUtil::$generalTerms['PATIENT_DAILYNUM']; ?></option>
@@ -8019,7 +8009,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
             -->        
             <?php 
                          if($patientBarcodeSearch != 0 && is_country_dir($userrr) != 1 && is_super_admin($userrr) != 1 ){ ?>
-                        				<option value='9'><?php echo 'Barcode Search'; ?></option>
+                        				<option value='9'><?php echo LangUtil::$generalTerms['BARCODE_SEARCH']; ?></option>
                                                         <?php } ?>
 
 			<?php
@@ -8041,15 +8031,15 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				<td><input type='text' name='wname' id='wname' value='' class='uniform_width_more'></input></td>
 			</tr>
 			<tr valign='top'>
-				<td>Header</td>
+				<td><?php echo LangUtil::$generalTerms['HEADER']; ?></td>
 				<td><input type='text' name='header' id='header' value='' class='uniform_width_more'></td>
 			</tr>
 			<tr valign='top'>
-				<td>Title</td>
+				<td><?php echo LangUtil::$generalTerms['TITLE']; ?></td>
 				<td><input type='text' name='title' id='title' value='' class='uniform_width_more'></td>
 			</tr>
 			<tr valign='top'>
-				<td>Footer</td>
+				<td><?php echo LangUtil::$generalTerms['FOOTER']; ?></td>
 				<td><input type='text' name='footer' id='footer' value='' class='uniform_width_more'></td>
 			</tr>
 			<tr valign='top'>
@@ -8482,7 +8472,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 	
 	public function getCustomWorksheetTable($lab_config)
 	{
-		echo "Custom Worksheets";
+		echo LangUtil::$generalTerms['CUSTOM_WORKSHEETS'];
 		if($lab_config == null)
 		{
 			echo "<div class='sidetip_nopos'>".LangUtil::$generalTerms['MSG_NOTFOUND']."</div>";
@@ -8560,15 +8550,15 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				<td><input type='text' name='wname' id='wname' value='<?php echo $worksheet->name; ?>' class='uniform_width_more'></input></td>
 			</tr>
 			<tr valign='top'>
-				<td>Header</td>
+				<td><?php echo LangUtil::$generalTerms['HEADER']; ?></td>
 				<td><input type='text' name='header' id='header' value='<?php echo $worksheet->headerText; ?>' class='uniform_width_more'></td>
 			</tr>
 			<tr valign='top'>
-				<td>Title</td>
+				<td><?php echo LangUtil::$generalTerms['TITLE']; ?></td>
 				<td><input type='text' name='title' id='title' value='<?php echo $worksheet->titleText; ?>' class='uniform_width_more'></td>
 			</tr>
 			<tr valign='top'>
-				<td>Footer</td>
+				<td><?php echo LangUtil::$generalTerms['FOOTER']; ?></td>
 				<td><input type='text' name='footer' id='footer' value='<?php echo $worksheet->footerText; ?>' class='uniform_width_more'></td>
 			</tr>
 			<tr valign='top'>
@@ -8807,31 +8797,31 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		$qc_list = get_quality_controls($lab_config_id);
 		if(count($qc_list) == 0)
 		{
-			echo "<div class='sidetip_nopos'>"."No Quality Controls Found."."</div>";
+			echo "<div class='sidetip_nopos'>".LangUtil::$generalTerms['NO_QC_FOUND']."</div>";
 			return;
 		}
 		?>
 		<div class="portlet box green">
 							<div class="portlet-title">
-								<h4><i class="icon-reorder"></i><?php echo "Quality Controls" ?></h4>
+								<h4><i class="icon-reorder"></i><?php echo LangUtil::$generalTerms['QUALITY_CONTROLS']; ?></h4>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="javascript:;" class="reload"></a>
 								</div>
 							</div>
 							<div class="portlet-body">
-							<p style="text-align: right;"><a href='quality_control_category_new.php' title='Click to Add a New Quality Control Category'><?php echo LangUtil::$generalTerms['ADDNEW']; ?></a>
-		|<a rel='facebox' href='#QualityControlCategories_tc'>Page Help</a></p>
+							<p style="text-align: right;"><a href='quality_control_category_new.php' title=' <?php echo LangUtil::$generalTerms['CLICK_ADD_NEW_QUALITY_CONTROL_CATEGORY']; ?>'><?php echo LangUtil::$generalTerms['ADDNEW']; ?></a>
+		|<a rel='facebox' href='#QualityControlCategories_tc'><?php echo LangUtil::$generalTerms['PAGE_HELP'];?></a></p>
 							
 		<table class='table table-bordered table-hover'>
         <thead>
                 <tr>
-                    <td><?php echo "QC Number"; ?></td>
-                    <td><?php echo "QC Category"; ?></td>
-                    <td><?php echo "Reference"; ?></td>
-                    <td><?php echo "Description"; ?></td>
-                    <td><?php echo "Created By"; ?></td>
-                    <td><?php echo "Action(s)"; ?></td>
+                    <td><?php echo LangUtil::$generalTerms['QC_NUMBER'];?></td>
+                    <td><?php echo LangUtil::$generalTerms['QC_CATEGORY'];?></td>
+                    <td><?php echo LangUtil::$generalTerms['DESCRIPTION']; ?></td>
+                    <td><?php echo LangUtil::$generalTerms['REFERENCE']; ?></td>
+                    <td><?php echo LangUtil::$generalTerms['CREATED_BY']; ?></td>
+                    <td><?php echo LangUtil::$generalTerms['ACTIONS']; ?></td>
                 </tr>
 		</thead>
 		<tbody>
@@ -8848,7 +8838,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				<?php echo $value; ?>
 			</td>
 			<td>
-				<a href='quality_control_category_edit.php?qccid=<?php echo $key; ?>' title='Click to Edit Quality Control Category Info'><?php echo LangUtil::$generalTerms['CMD_EDIT']; ?></a>
+				<a href='quality_control_category_edit.php?qccid=<?php echo $key; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_EDIT_QC_CATEGORY_INFO']; ?>'><?php echo LangUtil::$generalTerms['CMD_EDIT']; ?></a>
 			</td>
 			<?php
 			$user = get_user_by_id($_SESSION['user_id']);
@@ -8878,28 +8868,28 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 		$qcc_list = get_quality_control_categories($lab_config_id);
 		if(count($qcc_list) == 0)
 		{
-			echo "<div class='sidetip_nopos'>"."No Quality Control Categories Found."."</div>";
+			echo "<div class='sidetip_nopos'>".LangUtil::$generalTerms['NO_QC_CATEGORY_FOUND']."</div>";
 			return;
 		}
 		?>
 		<div class="portlet box green">
 							<div class="portlet-title">
-								<h4><i class="icon-reorder"></i><?php echo "Quality Control Categories" ?></h4>
+								<h4><i class="icon-reorder"></i><?php echo LangUtil::$generalTerms['QC_CATEGORIES'] ?></h4>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="javascript:;" class="reload"></a>
 								</div>
 							</div>
 							<div class="portlet-body">
-							<p style="text-align: right;"><a href='quality_control_category_new.php' title='Click to Add a New Quality Control Category'><?php echo LangUtil::$generalTerms['ADDNEW']; ?></a>
-		|<a rel='facebox' href='#QualityControlCategories_tc'>Page Help</a></p>
+							<p style="text-align: right;"><a href='quality_control_category_new.php' title='<?php echo LangUtil::$generalTerms['CLICK_TO_ADD_NEW_QC_CATEGORY'] ?>'><?php echo LangUtil::$generalTerms['ADDNEW']; ?></a>
+		|<a rel='facebox' href='#QualityControlCategories_tc'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 							
 		<table class='table table-bordered table-hover'>
         <thead>
                 <tr>
-                    <td><?php echo "QC Category Number"; ?></td>
-                    <td><?php echo "Description"; ?></td>
-                    <td><?php echo "Action(s)"; ?></td>
+                    <td><?php echo LangUtil::$generalTerms['QC_CATEGORY_NUMBER']; ?></td>
+                    <td><?php echo LangUtil::$generalTerms['DESCRIPTION']; ?></td>
+                    <td><?php echo LangUtil::$generalTerms['ACTIONS']; ?></td>
                 </tr>
 		</thead>
 		<tbody>
@@ -8916,7 +8906,7 @@ public function getInfectionStatsTableAggregate($stat_list, $date_from, $date_to
 				<?php echo $value; ?>
 			</td>
 			<td>
-				<a href='quality_control_category_edit.php?qccid=<?php echo $key; ?>' title='Click to Edit Quality Control Category Info'><?php echo LangUtil::$generalTerms['CMD_EDIT']; ?></a>
+				<a href='quality_control_category_edit.php?qccid=<?php echo $key; ?>' title='<?php echo LangUtil::$generalTerms['CLICK_TO_EDIT_QC_CATEGORY_INFO']; ?>'><?php echo LangUtil::$generalTerms['CMD_EDIT']; ?></a>
 			</td>
 			<?php
 			$user = get_user_by_id($_SESSION['user_id']);

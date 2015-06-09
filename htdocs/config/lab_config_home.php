@@ -68,7 +68,7 @@ function hide_right_pane()
 
 <div id='Tests_config' class='right_pane' style='display:none;margin-left:10px;'>
 	<h2><u><?php echo LangUtil::$pageTerms['MENU_LABCONFIG']; ?></u></h2>
-	<h3><?php echo LangUtil::$pageTerms['MENU_TESTS']; ?></h3>
+	<h3><?php echo LangUtil::$pageTerms['MENU_TESTS']; ?>++</h3>
 	<p>This has the following options:</p>
 	<ul>
 		<?php
@@ -170,10 +170,10 @@ function hide_right_pane()
 		<?php
 		
 			echo "<li>";
-			echo " Toggle Patient Number or Patient's Age to be displayed as part of Search Results";
+			echo LangUtil::$pageTerms['SEARCH_CONFIG_1'];
 			echo "</li>";
                         echo "<li>";
-			echo " Choosing to display Patient Number and/or Patient's Age as part of Search results slows down the time taken to search ";
+			echo LangUtil::$pageTerms['SEARCH_CONFIG_2'];
 			echo "</li>";
                         
                         
@@ -187,13 +187,13 @@ function hide_right_pane()
 		<?php
 		
 			echo "<li>";
-			echo " Configure your settings for barcode formats";
+			echo LangUtil::$pageTerms['BARCODE_CONFIG_1'];
 			echo "</li>";
                         echo "<li>";
-			echo " Width and Height are the dimensions of the bars ";
+			echo LangUtil::$pageTerms['BARCODE_CONFIG_2'];
 			echo "</li>";
                         echo "<li>";
-			echo " Text size os the for the code printed underneath the barcodes";
+			echo LangUtil::$pageTerms['BARCODE_CONFIG_3'];
 			echo "</li>";
                        
                         
@@ -220,7 +220,7 @@ function hide_right_pane()
 
 <div id='new_help' style='display:none'>
 <small>
-<u>Add New</u> lets you add new registration fields as required for the lab.
+<u><?php echo LangUtil::$pageTerms['ADD_NEW']; ?></u> <?php echo LangUtil::$pageTerms['ADD_NEW_2']; ?> .
 </small>
 </div>
 
@@ -256,7 +256,7 @@ if($lab_config == null)
 <!-- BEGIN PAGE TITLE & BREADCRUMB-->       
                         <h3></h3>
                         <ul class="breadcrumb">
-                            <li><a href="#"><i class='icon-wrench'></i> Lab Configuration</a>
+                            <li><a href="#"><i class='icon-wrench'></i><?php echo LangUtil::$pageTerms['TITLE'];?></a>
                             <span class="icon-angle-right"></span></li>
                             <li><a href="#"></a></li>
                         </ul>
@@ -277,7 +277,7 @@ if($lab_config == null)
         <div class="portlet-body">
 
             <div  id='search' style='margin-left:10px;'>
-                    <p style="text-align: right;"><a rel='facebox' href='#search_config'>Page Help</a></p>
+                    <p style="text-align: right;"><a rel='facebox' href='#search_config'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
                         <div id='searchfield_msg' class='clean-orange' style='display:none;width:350px;'>
                         </div>
                         <form id='searchfields_form' name='searchfields_form' action='ajax/search_config_update.php' method='post'>
@@ -307,7 +307,7 @@ if($lab_config == null)
         </div>
         <div class="portlet-body">
             <div id='worksheet_config' style='margin-left:10px;'>
-                <p style="text-align: right;"><a rel='facebox' href='#WS_rc'>Page Help</a></p>
+                <p style="text-align: right;"><a rel='facebox' href='#WS_rc'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
                     <div id='worksheet_config_msg' class='clean-orange' style='display:none;width:350px;'>
                     </div>
                     <br>
@@ -365,7 +365,7 @@ if($lab_config == null)
         </div>
         <div class="portlet-body">
             <div  id='report_config' style='margin-left:10px;'>
-                <p style="text-align: right;"><a rel='facebox' href='#DRS_rc'>Page Help</a></p>
+                <p style="text-align: right;"><a rel='facebox' href='#DRS_rc'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
                     <br>
                     <div id='report_config_msg' class='clean-orange' style='display:none;width:350px;'>
                     </div>
@@ -409,7 +409,7 @@ if($lab_config == null)
 
 <div class="portlet box green right_pane" id="grouped_count_div" style="display: none">
         <div class="portlet-title" >
-                                <h4><i class="icon-reorder"></i>Test/Specimen Count/Grouped Reports</h4>
+                                <h4><i class="icon-reorder"></i><?php echo LangUtil::$pageTerms['TEST_SPECIMENT_COUNT_GROUP_REPORT'];?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                     <a data-toggle="modal" class="config"></a>
@@ -417,7 +417,7 @@ if($lab_config == null)
         </div>
         <div class="portlet-body">
             <div id='grouped_count' style='margin-left:10px;'>
-                <p style="text-align: right;"><a rel='facebox' href='#IR_rc'>Page Help</a></p>
+                <p style="text-align: right;"><a rel='facebox' href='#IR_rc'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
                      | <a href='javascript:toggle_grouped_count_report();' id='grouped_count_edit_link'><?php echo LangUtil::$generalTerms['CMD_EDIT']; ?></a>
                     <br>
                     <div id='grouped_count_msg' class='clean-orange' style='display:none;width:350px;'>
@@ -446,7 +446,7 @@ if($lab_config == null)
         </div>
         <div class="portlet-body">
             <div id='agg_report' style='margin-left:10px;'>
-                <p style="text-align: right;"><a rel='facebox' href='#IR_rc'>Page Help</a></p>
+                <p style="text-align: right;"><a rel='facebox' href='#IR_rc'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
                     <a href='javascript:toggle_disease_report();' id='agg_edit_link'><?php echo LangUtil::$generalTerms['CMD_EDIT']; ?></a>
                     <br />
                     <div id='agg_msg' class='clean-orange' style='display:none;width:350px;'>
@@ -470,7 +470,7 @@ if($lab_config == null)
 
 <div class="portlet box green right_pane" id="barcode_div" style="display: none">
         <div class="portlet-title" >
-                                <h4><i class="icon-reorder"></i>Configure Barcode Format Settings</h4>
+                                <h4><i class="icon-reorder"></i><?php echo LangUtil::$pageTerms['CONFIG_BARCODE_FORMAT_SETTINGS']; ?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                     <a data-toggle="modal" class="config"></a>
@@ -479,7 +479,7 @@ if($lab_config == null)
         
         <div class="portlet-body">
                 <div id='barcode' style='margin-left:10px;'>
-                <p style="text-align: right;"><a rel='facebox' href='#barcode_config'>Page Help</a></p>
+                <p style="text-align: right;"><a rel='facebox' href='#barcode_config'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
                  
                     <div id='barcodefield_msg' class='clean-orange' style='display:none;width:350px;'>
                     </div>
@@ -515,7 +515,7 @@ if($lab_config == null)
                     <?php
                     $reload_url = "lab_config_home.php?id=$lab_config_id";
                     ?>
-                    <p style="text-align: right;"><a rel='facebox' href='#UserAccounts_config'>Page Help</a></p>
+                    <p style="text-align: right;"><a rel='facebox' href='#UserAccounts_config'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
                    
                      <a rel='facebox' href='lab_user_new.php?ru=<?php echo $reload_url; ?>&lid=<?php echo $lab_config_id; ?>'><?php echo LangUtil::$generalTerms['CMD_ADDNEWACCOUNT']; ?></a>
                     <br><br>
@@ -542,7 +542,7 @@ if($lab_config == null)
         
         <div class="portlet-body">
             <div class='config_reg_details' style='margin-left:10px;'>
-                    <p style="text-align: right;"><a rel='facebox' href='#RegistrationFields_config'>Page Help</a></p>
+                    <p style="text-align: right;"><a rel='facebox' href='#RegistrationFields_config'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
                      <a href='javascript:toggle_ofield_div();' id='ofield_toggle_link'><?php echo LangUtil::$generalTerms['CMD_EDIT']; ?></a>
                     <br><br>
                     <div id='cfield_msg' class='clean-orange' style='display:none;width:350px;'>
@@ -938,7 +938,7 @@ if($lab_config == null)
 
 <div class="portlet box green right_pane" id="site_info_div" >
         <div class="portlet-title" >
-                                <h4><i class="icon-reorder"></i>Summary</h4>
+                                <h4><i class="icon-reorder"></i><?php echo LangUtil::$pageTerms['SUMMARY'];?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                     <a data-toggle="modal" class="config"></a>
@@ -947,7 +947,7 @@ if($lab_config == null)
         
         <div class="portlet-body" >
                 <div id='site_info' style='margin-left:10px;'>
-                    <p style="text-align: right;"><a rel='facebox' href='#Summary_config'>Page Help</a></p>
+                    <p style="text-align: right;"><a rel='facebox' href='#Summary_config'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
                         <div id='main_msg' class='clean-orange' style='display:none;width:350px;'>
                         </div>
                         
@@ -1106,13 +1106,13 @@ if($lab_config == null)
         <?php
         
             echo "<li>";
-            echo " Configure your settings for barcode formats";
+            echo LangUtil::$pageTerms['BARCODE_CONFIG_1'];
             echo "</li>";
                         echo "<li>";
-            echo " Width and Height are the dimensions of the bars ";
+            echo LangUtil::$pageTerms['BARCODE_CONFIG_2'];
             echo "</li>";
                         echo "<li>";
-            echo " Text size os the for the code printed underneath the barcodes";
+            echo LangUtil::$pageTerms['BARCODE_CONFIG_3'];
             echo "</li>";
                        
                         
@@ -1145,7 +1145,7 @@ if($lab_config == null)
   
 <div class="portlet box green right_pane" id="test_div" style="display: none">
         <div class="portlet-title" >
-                                <h4><i class="icon-reorder"></i>Tests</h4>
+                                <h4><i class="icon-reorder"></i><?php echo LangUtil::$pageTerms['MENU_TESTS'];?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                     <!--a href="#portlet-config" data-toggle="modal" class="config"></a-->
@@ -1156,14 +1156,14 @@ if($lab_config == null)
             <!--BEGIN TABS-->
                        <div class="tabbable tabbable-custom">
                            <ul class="nav nav-tabs">
-                                                <li class="active"><a href="#tab_1_1" data-toggle="tab">Specimen/Test Types </a></li>
-                                                <li><a href="#tab_1_2" data-toggle="tab">Turnaround Time </a></li>
-                                                <li><a href="#tab_1_3" data-toggle="tab">Results Interpretation </a></li>
+                                                <li class="active"><a href="#tab_1_1" data-toggle="tab"><?php echo LangUtil::$generalTerms['SPECIMENS']; ?>/<?php echo LangUtil::$generalTerms['TEST_TYPES']; ?> </a></li>
+                                                <li><a href="#tab_1_2" data-toggle="tab"><?php echo LangUtil::$generalTerms['TAT']; ?></a></li>
+                                                <li><a href="#tab_1_3" data-toggle="tab"><?php echo LangUtil::$generalTerms['RESULTS_INTERPRETATION']; ?> </a></li>
                                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_1_1">
                                                     <div class='st_pane' id='st_types_div' style='margin-left:10px;'>
-                                                        <p style="text-align: right;"><a rel='facebox' href='#Tests_config'>Page Help</a></p>
+                                                        <p style="text-align: right;"><a rel='facebox' href='#Tests_config'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
                                                             
                                                             <div id='sttypes_msg' class='clean-orange' style='display:none;width:350px;'>
                                                             </div>
@@ -1213,7 +1213,7 @@ if($lab_config == null)
                                                 </div>
                                 <div class="tab-pane" id="tab_1_2">
                                                     <div class='target_tat' id='target_tat_div' style='margin-left:10px;'>
-                                                        <p style="text-align: right;"><a rel='facebox' href='#Tests_config'>Page Help</a></p>
+                                                        <p style="text-align: right;"><a rel='facebox' href='#Tests_config'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
                                                             <b><?php echo LangUtil::$pageTerms['MENU_TAT']; ?></b>
                                                              | <a href="javascript:toggletatdivs();" id='toggletat_link'><?php echo LangUtil::$generalTerms['CMD_EDIT']; ?></a>
                                                             <br><br>
@@ -1235,7 +1235,7 @@ if($lab_config == null)
                                                         </div>
                                                 </div>
                                             <div class="tab-pane" id="tab_1_3">
-                                                 <p style="text-align: right;"><a rel='facebox' href='#Tests_config'>Page Help</a></p><br/>
+                                                 <p style="text-align: right;"><a rel='facebox' href='#Tests_config'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p><br/>
                                                      <?php echo LangUtil::$generalTerms['TEST_TYPE']; ?>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <select name='ttype' id='ttype'>
@@ -1270,7 +1270,7 @@ if($lab_config == null)
 		<tr valign='top'>
 			<td>
                                 <div class='right_pane' id='blis_update_div' style='display:none;margin-left:10px;'>
-				<p style="text-align: right;"><a rel='facebox' href='#Summary_config'>Page Help</a></p>
+				<p style="text-align: right;"><a rel='facebox' href='#Summary_config'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
 				<b><?php echo "BLIS Update"; ?></b>
 					<br><br>
                                         <input type="Button" id="update_button" name="update_button" value="Start Update" onclick="javascript:blis_update_t()"/>
@@ -1313,14 +1313,14 @@ if($lab_config == null)
 					<?php
 					$reload_url = "lab_config_home.php?id=$lab_config_id";
 					?>
-					<p style="text-align: right;"><a rel='facebox' href='#UserAccounts_config'>Page Help</a></p>
+					<p style="text-align: right;"><a rel='facebox' href='#UserAccounts_config'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
 					 <a rel='facebox' class="btn blue-stripe" href='lab_user_new.php?ru=<?php echo $reload_url; ?>&lid=<?php echo $lab_config_id; ?>'>
 					 <i class='icon-plus'></i> 
 					 <?php echo LangUtil::$generalTerms['CMD_ADDNEWACCOUNT']; ?>
 					 </a>
 					 <a class="btn blue-stripe" href='javascript:import_users();'>
 					 <i class='icon-download'></i> 
-					 <?php echo 'Import from HMIS/EMR' ?>
+					 <?php echo LangUtil::$generalTerms['IMPORT_FROM_HMIS'];?>
 					 </a>
 					<br><br>
 					<div id='user_acc_msg' class='clean-orange' style='display:none;width:100%;'>
@@ -1356,7 +1356,7 @@ if($lab_config == null)
                                 
                                 <div class='right_pane' id='billing_div' style='display:none;margin-left:10px;'>
                                          
-                                    <p style="text-align: right;"><a rel='facebox' href='#Billing_config'>Page Help</a></p>
+                                    <p style="text-align: right;"><a rel='facebox' href='#Billing_config'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
                                     <div id='billing_msg' class='clean-orange' style='display:none;width:350px;'>
                                     </div>
                                     <form id='billing_form' name='billing_form' action='ajax/billing_update.php' method='post'>
@@ -1391,7 +1391,7 @@ if($lab_config == null)
 				
 				
 				<div class='right_pane' id='network_setup_div' style='display:none;margin-left:10px;'>
-				<p style="text-align: right;"><a rel='facebox' href='#SetupNet'>Page Help</a></p>
+				<p style="text-align: right;"><a rel='facebox' href='#SetupNet'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
 				Setup can be accessed from BlisSetup.html in the main folder.
 				</div>
 				
@@ -1483,13 +1483,13 @@ if($lab_config == null)
 									</td>
 								</tr>
 								<tr valign='top' class='random_params' style='display:none;'>
-									<td>Total Patients</td>
+									<td><?php echo LangUtil::$generalTerms['TOTAL_PATIENTS']; ?></td>
 									<td>
 										<input type='text' class='uniform_width' name='num_p' value='<?php echo $MAX_NUM_PATIENTS/2; ?>'></input>
 									</td>
 								</tr>
 								<tr valign='top' class='random_params' style='display:none;'>
-									<td>Total Specimens</td>
+									<td><?php echo LangUtil::$generalTerms['TOTAL_SPECIMENS']; ?></td>
 									<td>
 										<input type='text' class='uniform_width' name='num_s' value='<?php echo "2000"; #$MAX_NUM_SPECIMENS/2; ?>'></input>
 									</td>
@@ -1528,7 +1528,7 @@ if($lab_config == null)
 				
 				
 				<div class='right_pane' id='backup_revert_div' style='display:none;margin-left:10px;'>
-					<p style="text-align: right;"><a rel='facebox' href='#Revert'>Page Help</a></p>
+					<p style="text-align: right;"><a rel='facebox' href='#Revert'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
 					<b><?php echo LangUtil::$pageTerms['MENU_REVERT']; ?></b>
 					<br><br>
 					<div id='backup_revert_msg' class='clean-orange' style='display:none;width:350px;'>
@@ -1579,7 +1579,7 @@ if($lab_config == null)
 				</div>
 				
 				<div class='right_pane' id='update_database_div' style='display:none;margin-left:10px;'>
-					<p style="text-align: right;"><a rel='facebox' href='#Revert'>Page Help</a></p>
+					<p style="text-align: right;"><a rel='facebox' href='#Revert'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
 					<b><?php echo "Update Data"; ?></b>
 					<br><br>
 					<form id='update_database_form' name='update_database_form' action='export/update_database.php' method='get'>
@@ -1622,7 +1622,7 @@ if($lab_config == null)
 				</div>
                                 
                                 <div class='right_pane' id='import_config_div' style='display:none;margin-left:10px;'>
-					<p style="text-align: right;"><a rel='facebox' href='#importconfig'>Page Help</a></p>
+					<p style="text-align: right;"><a rel='facebox' href='#importconfig'><?php echo LangUtil::$pageTerms['PAGE_HELP'];?></a></p>
 					<b><?php echo "Import Configuration"; ?></b>
 					<br><br>
 					<form id='import_config_form' name='import_config_form' action='ajax/import_config.php' method='get'>
@@ -1726,7 +1726,7 @@ if($lab_config == null)
 				<div class='right_pane' id='language_div' style='display:none;margin-left:10px;'>
 					<div id='language_contents'></div>
 					<?php
-						//include('lang/lang_edit.php'); 
+						include('lang/lang_edit.php'); //TA: was commented
 					?>
 				</div>
 			</td>
@@ -2221,11 +2221,11 @@ function stype_toggle()
 	$('#stype_box').toggle();
 	if($('#stype_link').html() == "Show")
 	{
-		$('#stype_link').html("Hide");		
+		$('#stype_link').html("<?php echo LangUtil::$generalTerms['CMD_HIDE']; ?>");		
 	}
 	else
 	{
-		$('#stype_link').html("Show");
+		$('#stype_link').html("<?php echo LangUtil::$generalTerms['CMD_SHOW']; ?>");
 	}
 }
 
@@ -2234,11 +2234,11 @@ function ttype_toggle()
 	$('#ttype_box').toggle();
 	if($('#ttype_link').html() == "Show")
 	{
-		$('#ttype_link').html("Hide");		
+		$('#ttype_link').html("<?php echo LangUtil::$generalTerms['CMD_HIDE']; ?>");		
 	}
 	else
 	{
-		$('#ttype_link').html("Show");
+		$('#ttype_link').html("<?php echo LangUtil::$generalTerms['CMD_SHOW']; ?>");
 	}
 }
 

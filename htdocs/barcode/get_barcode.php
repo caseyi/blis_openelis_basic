@@ -88,7 +88,7 @@ function hide_div(div)
 <?php
 
 ?>
-<p style="text-align: right;"><a rel='facebox' href='#generate_barcode_help'>Page Help</a></p>
+<p style="text-align: right;"><a rel='facebox' href='#generate_barcode_help'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 
 <div id="count" style="display: none;">0</div>
 

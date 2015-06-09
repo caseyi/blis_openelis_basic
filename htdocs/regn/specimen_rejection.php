@@ -26,7 +26,7 @@ function check_input()
 	var reasons = $('#reasons').attr("value");
 	if(reasons == "")
 	{
-		alert("<?php echo "Error: Missing reasons for rejection."; ?>");
+		alert("<?php echo LangUtil::$generalTerms['ERR_MISSING_REASONS_FORREJECTION']; ?>");
 		return;
 	}
 	// All OK
@@ -53,9 +53,9 @@ if ( substr($session_num,strpos($session_num, "-")+1 ) )
 */	
 $uiinfo = "sid=".$_REQUEST['sid']."&dnum=".$_REQUEST['dnum'];
 ?>
-<p style="text-align: right;"><a rel='facebox' href='#NEW_SPECIMEN'>Page Help</a></p>
-<span class='page_title'><?php echo "Specimen Rejection"; ?></span>
-<!-- | <?php echo "Visit Number"; ?> <?php echo $session_num; ?>-->
+<p style="text-align: right;"><a rel='facebox' href='#NEW_SPECIMEN'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
+<span class='page_title'><?php echo LangUtil::$generalTerms['MENU_SPECIMEN_REJECTION']; ?></span>
+<!-- | <?php echo LangUtil::$generalTerms['VISIT_NUMBER']; ?> <?php echo $session_num; ?>-->
  | <a href='javascript:history.go(-1);'><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></a>
 <br>
 <br>
@@ -89,19 +89,19 @@ $patient = get_patient_by_id($main_rs['patient_number']);
 <td><?php echo $patient->getAddlId(); ?></td>
   </tr>
   <tr>
-    <td class="highlight"><strong>Visit no.</strong></td>
+    <td class="highlight"><strong><?php echo LangUtil::$generalTerms['VISIT_NO']; ?></strong></td>
     <td><?php echo $main_rs['daily_number']; ?></td>
   </tr>
   <tr>
-    <td class="highlight"><strong>Patient Name</strong></td>
+    <td class="highlight"><strong><?php echo LangUtil::$generalTerms['PATIENT_NAME']; ?></strong></td>
     <td><?php echo $patient->getName()." (".$patient->sex." ".$patient->getAge().") "; ?></td>
   </tr>
   <tr>
-    <td class="highlight"><strong>Specimen Type</strong></td>
+    <td class="highlight"><strong><?php echo LangUtil::$generalTerms['SPECIMEN_TYPE']; ?></strong></td>
     <td><?php echo $main_rs['name']; ?></td>
   </tr>
   <tr>
-    <td class="highlight"><strong>Tests</strong></td>
+    <td class="highlight"><strong><?php echo LangUtil::$generalTerms['TESTS']; ?></strong></td>
     <?php $sql_query = mysql_query(stripslashes("SELECT t.test_type_id, tt.name as tests FROM test t, test_type tt WHERE t.test_type_id=tt.test_type_id AND t.specimen_id=".$main_rs['sid'])) or die(mysql_error());
 	 ?>
     <td><?php while($sql_rs = mysql_fetch_assoc($sql_query)){
@@ -109,7 +109,7 @@ $patient = get_patient_by_id($main_rs['patient_number']);
 	}?></td>
   </tr>
   <tr>
-    <td class="highlight"><strong>Reasons for Rejection</strong></td>
+    <td class="highlight"><strong><?php echo LangUtil::$generalTerms['REASON_FOR_REJECTION']; ?></strong></td>
     <input name="specimen" id="specimen" type="hidden" value="<?php echo $sid; ?>" />
     <td>
                                           <select class="large m-wrap" rows="3" id="reasons" name="reasons[]" multiple="multiple" >

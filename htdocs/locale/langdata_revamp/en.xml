@@ -126,6 +126,10 @@
 			<value>Export as PDF</value>
 		</term>
 		<term>
+			<key>CMD_EXPORTCSV</key>
+			<value>Export as CSV</value>
+		</term>
+		<term>
 			<key>CMD_SELECT</key>
 			<value>Select</value>
 		</term>
@@ -180,6 +184,10 @@
 		<term>
 			<key>FACILITY</key>
 			<value>Facility</value>
+		</term>
+		<term>
+			<key>FACILITY_NAME</key>
+			<value>Facility Name</value>
 		</term>
 		<term>
 			<key>LOCATION</key>
@@ -348,6 +356,10 @@
 		<term>
 			<key>TEST_TYPES</key>
 			<value>Test Types</value>
+		</term>
+		<term>
+			<key>TECH_ACCOUNTS</key>
+			<value>Technician Accounts</value>
 		</term>		
 		<term>
 			<key>CONTROL_TESTING_RESULTS</key>
@@ -693,6 +705,415 @@
 			<key>LANDSCAPE</key>
 			<value>Landscape mode</value>
 		</term>
+		<term>
+			<key>RESULTS_INTERPRETATION</key>
+			<value>Results Interpretation</value>
+		</term>
+		<term>
+			<key>ALL_REGISTERED_TESTS</key>
+			<value>All registered tests</value>
+		</term>
+		<term>
+			<key>ONLY_COMPLETED_TESTS</key>
+			<value>Only completed tests</value>
+		</term>
+		<term>
+			<key>COMPLRTED_PENDING_TESTS</key>
+			<value>Both completed and pending tests (separated by a slash)</value>
+		</term>
+		<term>
+			<key>ALIGNMENT</key>
+			<value>Alignment</value>
+		</term>
+		<term>
+			<key>LEFT</key>
+			<value>Left</value>
+		</term>
+		<term>
+			<key>RIGHT</key>
+			<value>Right</value>
+		</term>
+		<term>
+			<key>CENTER</key>
+			<value>Center</value>
+		</term>
+		<term>
+			<key>HEADER</key>
+			<value>Header</value>
+		</term>
+		<term>
+			<key>TITLE</key>
+			<value>Title</value>
+		</term>
+		<term>
+			<key>FOOTER</key>
+			<value>Footer</value>
+		</term>
+		<term>
+			<key>DESIGNATION</key>
+			<value>Designation</value>
+		</term>
+		<term>
+			<key>CLINICAL_DATA</key>
+			<value>Clinical Data</value>
+		</term>
+		<term>
+			<key>FILE_UPLOAD</key>
+			<value>File Upload</value>
+		</term>
+		<term>
+			<key>ADD_LOGO</key>
+			<value>Add a Logo</value>
+		</term>
+		<term>
+			<key>CHANGE_LOGO</key>
+			<value>Change a Logo</value>
+		</term>
+		<term>
+			<key>CHOOSE_JPG_LOGO_FILRE_UPLOAD</key>
+			<value>Choose a .jpg logo File to upload</value>
+		</term>
+		<term>
+			<key>REGISTRATION_DATE</key>
+			<value>Registration Date</value>
+		</term>
+		<term>
+			<key>SUBMIT_REPORT_CONFIG_PROGRESS</key>
+			<value>submit_report_config_progress</value>
+		</term>
+		<term>
+			<key>SUBMIT_WORKSHEET_CONFIG_PROGRESS</key>
+			<value>submit_worksheet_config_progress</value>
+		</term>	
+		<term>
+			<key>IN_USE</key>
+			<value>In use</value>
+		</term>
+		<term>
+			<key>NOT_IN_USE</key>
+			<value>Not in use</value>
+		</term>
+		<term>
+			<key>MANDOTARY_FIELD</key>
+			<value>Mandatory field</value>
+		</term>	
+		<term>
+			<key>BARCODE_SEARCH</key>
+			<value>Barcode Search</value>
+		</term>
+		<term>
+			<key>PAGE_HELP</key>
+			<value>Page Help</value>
+		</term>
+		<term>
+			<key>QUALITY_CONTROLS</key>
+			<value>Quality Controls</value>
+		</term>	
+		<term>
+			<key>MENU_QUALITY_CONTROL</key>
+			<value>Quality Control</value>
+		</term>	
+		<term>
+			<key>CLICK_ADD_NEW_QUALITY_CONTROL_CATEGORY</key>
+			<value>Click to Add a New Quality Control Category</value>
+		</term>
+		<term>
+			<key>QC_NUMBER</key>
+			<value>QC Number</value>
+		</term>
+		<term>
+			<key>QC_CATEGORY</key>
+			<value>QC Category</value>
+		</term>
+		<term>
+			<key>REFERENCE</key>
+			<value>Reference</value>
+		</term>
+		<term>
+			<key>CREATED_BY</key>
+			<value>Created By</value>
+		</term>
+		<term>
+			<key>ACTIONS</key>
+			<value>Action(s)</value>
+		</term>
+		<term>
+			<key>QC_CATEGORY_NUMBER</key>
+			<value>QC Category Number</value>
+		</term>
+		<term>
+			<key>LOGO_USED</key>
+			<value>LOGO being Used</value>
+		</term>
+		<term>
+			<key>CUSTOM_WORKSHEETS</key>
+			<value>Custom Worksheets</value>
+		</term>
+		<term>
+			<key>IMPORT_FROM_HMIS</key>
+			<value>Import from HMIS/EMR</value>
+		</term>
+		<term>
+			<key>SECTION_NAME</key>
+			<value>Section Name</value>
+		</term>
+		<term>
+			<key>MENU_SPECIMEN_REJECTION</key>
+			<value>Specimen Rejection</value>
+		</term>
+		<term>
+			<key>NO_QC_FOUND</key>
+			<value>No Quality Controls Found</value>
+		</term>
+		<term>
+			<key>CLICK_TO_EDIT_QC_CATEGORY_INFO</key>
+			<value>Click to Edit Quality Control Category Info</value>
+		</term>
+		<term>
+			<key>NO_QC_CATEGORY_FOUND</key>
+			<value>No Quality Control Categories Found</value>
+		</term>
+		<term>
+			<key>QC_CATEGORIES</key>
+			<value>Quality Control Categories</value>
+		</term>
+		<term>
+			<key>CLICK_TO_ADD_NEW_QC_CATEGORY</key>
+			<value>Click to Add a New Quality Control Category</value>
+		</term>
+		<term>
+			<key>USER_GUIDE</key>
+			<value>User Guide</value>
+		</term>
+		<term>
+			<key>COMMENTS</key>
+			<value>Comments</value>
+		</term>
+		<term>
+			<key>QC_CATEGORY_ADDED</key>
+			<value>Quality Control Category Added</value>
+		</term>
+		<term>
+			<key>QC_CATEGORY_UPDATED</key>
+			<value>Quality Control Category Updated</value>
+		</term>
+		<term>
+			<key>BACK_QC</key>
+			<value>Back to Quality Control</value>
+		</term>
+		<term>
+			<key>ERR_MIS_QC_CATEGORY_NAME</key>
+			<value>Error: Missing Quality Control Category Name.</value>
+		</term>
+		<term>
+			<key>EDIT_QC_CATEGORY</key>
+			<value>Edit Quality Control Category</value>
+		</term>
+		<term>
+			<key>NEW_CQ_CATEGORY</key>
+			<value>New Quality Control Category</value>
+		</term>
+		<term>
+			<key>USE_KEY_TO_SELECT</key>
+			<value>Use Ctrl+F to search easily through the list. Ctrl+F will prompt a box where you can enter the test category you are looking for.</value>
+		</term>
+		<term>
+			<key>ERR_MIS_QC_FIELD_GR_NAME</key>
+			<value>Error: Missing quality control field group name</value>
+		</term>
+		<term>
+			<key>NEW_QC</key>
+			<value>New Quality Control</value>
+		</term>
+		<term>
+			<key>USE_WIZ</key>
+			<value>Use the wizard to define a quality control form</value>
+		</term>
+		<term>
+			<key>QC_PROPERTIES</key>
+			<value>Quality Control Properties</value>
+		</term>
+		<term>
+			<key>QC_NAME</key>
+			<value>Quality Control Name</value>
+		</term>
+		<term>
+			<key>INS_REG_LOT</key>
+			<value>Instrument or Reagent or Lot</value>
+		</term>
+		<term>
+			<key>DB_FACS_FLOW</key>
+			<value>BD FacsFlow</value>
+		</term>
+		<term>
+			<key>UDICHEM</key>
+			<value>Udichem</value>
+		</term>
+		<term>
+			<key>CELTAC</key>
+			<value>Celtac</value>
+		</term>
+		<term>
+			<key>QC_DESCRIPTION</key>
+			<value>Quality Control Description</value>
+		</term>
+		<term>
+			<key>VIEW_SAMPLE_HTML</key>
+			<value>View sample rendered html</value>
+		</term>
+		<term>
+			<key>EW_QC_DEF_1</key>
+			<value>New Quality Control Definition. Fields marked</value>
+		</term>
+		<term>
+			<key>EW_QC_DEF_2</key>
+			<value>are mandatory</value>
+		</term>
+		<term>
+			<key>CLICK_TO_ADD_NEW_QC</key>
+			<value>Click to Add a New Quality Control</value>
+		</term>
+		<term>
+			<key>TRY_SEARCH_BY_PAT_NAME</key>
+			<value>Try searching by Patient Name</value>
+		</term>
+		
+		<term>
+			<key>PATIENT_GENDER</key>
+			<value>Patient Gender</value>
+		</term>
+		<term>
+			<key>PATIENT_AGE</key>
+			<value>Patient Age</value>
+		</term>
+				<term>
+			<key>DATE_REGISTRATION</key>
+			<value>Date of Registration</value>
+		</term>
+		<term>
+			<key>SPECIMEN_NAME</key>
+			<value>Specimen Name</value>
+		</term>
+				<term>
+			<key>SPECIMEN_ID</key>
+			<value>Specimen ID</value>
+		</term>
+		<term>
+			<key>TEST_NAME</key>
+			<value>Test Name</value>
+		</term>
+				<term>
+			<key>TEST_ID</key>
+			<value>Test ID</value>
+		</term>
+		<term>
+			<key>DATE_RESULT_ENTRY</key>
+			<value>Date of Result Entry</value>
+		</term>
+				<term>
+			<key>REAGENT</key>
+			<value>Reagent</value>
+		</term>
+		<term>
+			<key>LOT</key>
+			<value>Lot</value>
+		</term>
+		<term>
+			<key>EXPIRE_DATE</key>
+			<value>Expiry Date</value>
+		</term>
+		<term>
+			<key>MANUFACTURER</key>
+			<value>Manufacturer</value>
+		</term>
+				<term>
+			<key>QUANTITY_SUPPLIED</key>
+			<value>Quantity Supplied"</value>
+		</term>
+		<term>
+			<key>SUPPLIER</key>
+			<value>Supplier</value>
+		</term>
+				<term>
+			<key>COST_PER_UNIT</key>
+			<value>Cost Per Unit</value>
+		</term>
+		<term>
+			<key>DATE_SUPPLY</key>
+			<value>Date of Supply</value>
+		</term>
+				<term>
+			<key></key>
+			<value></value>
+		</term>
+		<term>
+			<key>REMARKS</key>
+			<value>Remarks</value>
+		</term>
+				<term>
+			<key>QUANTITY_USED</key>
+			<value>Quantity Used</value>
+		</term>
+		<term>
+			<key>DATE_USED</key>
+			<value>Date of Use</value>
+		</term>
+		<term>
+			<key>LANDSCAPE_TYPE</key>
+			<value>Landscape</value>
+		</term>
+		<term>
+			<key>ONLY_PENDING</key>
+			<value>Only Pending</value>
+		</term>
+		<term>
+			<key>DGAR_TABLE_COLUMNS</key>
+			<value>Drag a table column to arrange the columns as desired</value>
+		</term>
+		<term>
+			<key>QTY_CONSUMED</key>
+			<value>Qty. Consumed</value>
+		</term>
+		<term>
+			<key>COMPLETED_TESTS</key>
+			<value>Completed Tests</value>
+		</term>
+		<term>
+			<key>SECTION</key>
+			<value>Section Tests</value>
+		</term>
+		<term>
+			<key>TEST_STATUS</key>
+			<value>Test Status</value>
+		</term>
+		<term>
+			<key>HOME</key>
+			<value>Home</value>
+		</term>
+		<term>
+			<key>DOCTOR_STATISTICS</key>
+			<value>Doctor Statistics</value>
+		</term>
+		<term>
+			<key>INTERPRETATION</key>
+			<value>Interpretation</value>
+		</term>
+		<term>
+			<key>TOTAL_PATIENTS</key>
+			<value>Total Patients</value>
+		</term>
+		<term>
+			<key>TOTAL_SPECIMENS</key>
+			<value>Total Specimens</value>
+		</term>
+		<term>
+			<key>QUALITY_TIP_1</key>
+			<value>Clicking Add New enables you to add Quality control category upon which you can base quality standards</value>
+		</term>
+		<term>
+			<key>QUALITY_TIP_2</key>
+			<value>Hover around the tab of this section and click the grey tab that appears to hide this</value>
+		</term>
 	</page>
 	<page id="header" descr="Page Header">
 		<term>
@@ -784,6 +1205,10 @@
 		<term>
 			<key>WELCOME</key>
 			<value>Welcome</value>
+		</term>
+		<term>
+			<key>BASIC_TITLE</key>
+			<value>The Basic Laboratory Information System</value>
 		</term>
 		<term>
 			<key>TIPS_BLISINTRO</key>
@@ -1119,6 +1544,14 @@
 			<value>Lab Configurations</value>
 		</term>
 		<term>
+			<key>SUMMARY</key>
+			<value>Summary</value>
+		</term>
+		<term>
+			<key>PAGE_HELP</key>
+			<value>Page Help</value>
+		</term>
+		<term>
 			<key>CMD_ADDNEWLAB</key>
 			<value>Add New Lab</value>
 		</term>
@@ -1175,6 +1608,34 @@
 		<term>
 			<key>TITLE</key>
 			<value>Lab Configuration</value>
+		</term>
+		<term>
+			<key>MENU_TESTS</key>
+			<value>Tests</value>
+		</term>
+		<term>
+			<key>TEST_SPECIMENT_COUNT_GROUP_REPORT</key>
+			<value>Test/Specimen Count/Grouped Reports</value>
+		</term>
+		<term>
+			<key>TEST_SPECIMENT_GROUP_REPORT</key>
+			<value>Test/Specimen Grouped Reports</value>
+		</term>
+		<term>
+			<key>TEST_COUNT_GROUP_REPORT_SETTINGS</key>
+			<value>Test Count (Grouped) Report Settings</value>
+		</term>
+		<term>
+			<key>SPECIMEN_COUNT_GROUP_REPORT_SETTINGS</key>
+			<value>Specimen Count (Grouped) Report Settings</value>
+		</term>
+		<term>
+			<key>GROUP_BY_LAB_SECTION</key>
+			<value>Group By Lab Section</value>
+		</term>
+		<term>
+			<key>COUNTS_TO_DISPLAY</key>
+			<value>Counts to Display</value>
 		</term>
 		<term>
 			<key>MENU_SUMMARY</key>
@@ -1303,6 +1764,30 @@
 		<term>
 			<key>MENU_WORKSHEETCONFIG</key>
 			<value>Worksheet</value>
+		</term>
+		<term>
+			<key>MENU_BARCODE_SETTINGS</key>
+			<value>Barcode Settings</value>
+		</term>
+		<term>
+			<key>MENU_BILLING</key>
+			<value>Billing</value>
+		</term>
+		<term>
+			<key>MENU_SETUP_NETWORK</key>
+			<value>Setup Network</value>
+		</term>
+		<term>
+			<key>MENU_IMPORT_CONFIGURTION</key>
+			<value>Import Configuration</value>
+		</term>
+		<term>
+			<key>USER_STATISTICS</key>
+			<value>User Statistics</value>
+		</term>
+		<term>
+			<key>GENERATE_WORKSHEET_WITH_LIST</key>
+			<value>Generate worksheet with a list of pending specimens</value>
 		</term>
 		<term>
 			<key>TIPS_WORKSHEETS</key>
@@ -1496,6 +1981,30 @@
 			<key>TIPS_SETUPNETWORK_4</key>
 			<value>In case of a computer restart or network failure click on Setup Network option again.</value>
 		</term>
+		<term>
+			<key>CONFIG_BARCODE_FORMAT_SETTINGS</key>
+			<value>Configure Barcode Format Settings</value>
+		</term>
+		<term>
+			<key>ENCODING_FORMAT</key>
+			<value>Encoding Format</value>
+		</term>
+		<term>
+			<key>BARCODE_WIDTH</key>
+			<value>Barcode Width</value>
+		</term>
+		<term>
+			<key>BARCODE_HEIGHT</key>
+			<value>Barcode Height</value>
+		</term>
+		<term>
+			<key>TEXT_SIZE</key>
+			<value>Text Size</value>
+		</term>
+		<term>
+			<key>ERROR_LAB_CONFIG_NOT_FOUND</key>
+			<value>ERROR: Lab configuration not found</value>
+		</term>
 	</page>
 	<page id="lab_admins" descr="Lab Managers Page">
 		<term>
@@ -1526,6 +2035,10 @@
 	<page id="catalog" descr="Test Catalog Page">
 		<term>
 			<key>TITLE</key>
+			<value>Test Catalog</value>
+		</term>
+		<term>
+			<key>TEST_CATALOG</key>
 			<value>Test Catalog</value>
 		</term>
 		<term>
@@ -1640,11 +2153,51 @@
 			<key>TIPS_TC_SPECIMENTYPE_3</key>
 			<value>You can also add new Specimen types using the 'Add New' option located near the top of the Page.</value>
 		</term>
+		<term>
+			<key>LAB_SECTIONS</key>
+			<value>Lab Sections</value>
+		</term>
+		<term>
+			<key>SPECIMEN_REJECTION_PHASES</key>
+			<value>Specimen Rejection Phases</value>
+		</term>
+		<term>
+			<key>SPECIMEN_REJECTION_REASONS</key>
+			<value>Specimen Rejection Reasons</value>
+		</term>
+		<term>
+			<key>CLICK_TO_ADD_SPECIMEN_REJECTION_PHASE</key>
+			<value>Click to Add a New Specimen Rejection Phase</value>
+		</term>
+		<term>
+			<key>CLICK_TO_ADD_SPECIMEN_REJECTION_REASON</key>
+			<value>Click to Add a New Specimen Rejection Reason</value>
+		</term>
+		<term>
+			<key>NO_SPECIMEN_REJECTION_REASON_FOUND</key>
+			<value>No Specimen Rejection Reasons Found</value>
+		</term>
+		<term>
+			<key>NO_SPECIMEN_REJECTION_PHASE_FOUND</key>
+			<value>No Specimen Rejection Phases Found</value>
+		</term>
+		<term>
+			<key>SPECIMEN_REJECTION_PHASE</key>
+			<value>Specimen Phases and Rejection</value>
+		</term>
 	</page>
 	<page id="reports" descr="Main Reports Page">
 		<term>
 			<key>TITLE</key>
 			<value>Reports</value>
+		</term>
+		<term>
+			<key>REPORTS</key>
+			<value>Reports</value>
+		</term>
+		<term>
+			<key>MENU_CONSUMPTIONREPORT</key>
+			<value>Consumption Report</value>
 		</term>
 		<term>
 			<key>MENU_DAILY</key>
@@ -1885,6 +2438,190 @@
 		<term>
 			<key>MSG_ALLTESTSCOMPLETED</key>
 			<value>All tests completed</value>
+		</term>
+		<term>
+			<key>SELECT_PATIENT_BY</key>
+			<value>Select Patient Name, Number or ID to retrieve patient's lab reports</value>
+		</term>
+		<term>
+			<key>SELECT_DATE_RANGE</key>
+			<value>Select the date range to view the infection graph and prevalence rates</value>
+		</term>
+		<term>
+			<key>SELECT_DATE_RANGE_TYPE</key>
+			<value>Select date range and type of count required</value>
+		</term>
+		<term>
+			<key>DAILY_LOG</key>
+			<value>Daily Log</value>
+		</term>
+		<term>
+			<key>PREVALENCE_RATE</key>
+			<value>Prevalence rate</value>
+		</term>
+		<term>
+			<key>DOCTOR_STATISTICS</key>
+			<value>Doctor Statistics</value>
+		</term>
+		<term>
+			<key>SELECT_DATE_INTERVAL</key>
+			<value>Select the date interval to view the average test-wise turn-around times for the lab test reports.</value>
+		</term>
+		<term>
+			<key>SELECT_DATE_RANGE_LAB</key>
+			<value>Select Date range and lab section to view the Infection report</value>
+		</term>
+		<term>
+			<key>SELECT_DATE_RANGE_VIEW</key>
+			<value>Select the date range to view the consumption report</value>
+		</term>
+		<term>
+			<key>GROUPED</key>
+			<value>Grouped</value>
+		</term>
+		<term>
+			<key>UNGROUPED</key>
+			<value>Ungrouped</value>
+		</term>
+		<term>
+			<key>USER_STATISCTICS</key>
+			<value>User Statistics</value>
+		</term>
+		<term>
+			<key>DISPLAY_USER_STAT</key>
+			<value>Display user specific statistics and user activity logs</value>
+		</term>
+		<term>
+			<key>INDIVIDUAL_USER_LOGS</key>
+			<value>Individual User Logs</value>
+		</term>
+		<term>
+			<key>USER_LOGS</key>
+			<value>User Log</value>
+		</term>
+		<term>
+			<key>COLL_USER_STAT</key>
+			<value>Collective User Stats</value>
+		</term>
+		<term>
+			<key>STAT_TYPE</key>
+			<value>Stat Type</value>
+		</term>
+		<term>
+			<key>PATIENT_REGISTERED</key>
+			<value>Patients Registered</value>
+		</term>
+		<term>
+			<key>SPECIMEN_REGISTERED</key>
+			<value>Specimens Registered</value>
+		</term>
+		<term>
+			<key>TESTS_REGISTERED</key>
+			<value>Tests Registered</value>
+		</term>
+		<term>
+			<key>RESULTS_ENTERED</key>
+			<value>Results Entered</value>
+		</term>
+		<term>
+			<key>USER</key>
+			<value>User</value>
+		</term>
+		<term>
+			<key>LOG_TYPE</key>
+			<value>Log Type</value>
+		</term>
+		<term>
+			<key>PATIENT_REGISTRY</key>
+			<value>Patients Registry</value>
+		</term>
+		<term>
+			<key>SPECIMENS_REGISTRY</key>
+			<value>Specimens Registry</value>
+		</term>
+		<term>
+			<key>TESTS_REGISTRY</key>
+			<value>Tests Registry</value>
+		</term>
+		<term>
+			<key>RESULTS_ENTRY</key>
+			<value>Results Entry</value>
+		</term>
+		<term>
+			<key>INVENTORY_TRANSACTION</key>
+			<value>Inventory Transaction</value>
+		</term>
+		<term>
+			<key>NAME</key>
+			<value>Name</value>
+		</term>
+		<term>
+			<key>USER_NAME</key>
+			<value>User Name</value>
+		</term>
+		<term>
+			<key>DESIGNATION</key>
+			<value>Designation</value>
+		</term>
+		<term>
+			<key>PATIENT_REGISTRY_LOG</key>
+			<value>Patients Registry Log</value>
+		</term>
+		<term>
+			<key>SPECIMENS_REGISTRY_LOG</key>
+			<value>Specimens Registry Log</value>
+		</term>
+		<term>
+			<key>TESTS_REGISTRY_LOG</key>
+			<value>Tests Registry Log</value>
+		</term>
+		<term>
+			<key>RESULTS_ENTRY_LOG</key>
+			<value>Results Entry Log</value>
+		</term>
+		<term>
+			<key>INVENTORY_TRANSACTION_LOG</key>
+			<value>Inventory Transaction Log</value>
+		</term>
+		<term>
+			<key>USER_ID</key>
+			<value>User ID</value>
+		</term>
+		<term>
+			<key>TECHNICAN</key>
+			<value>Technician</value>
+		</term>
+		<term>
+			<key>ADMIN</key>
+			<value>Administrator</value>
+		</term>
+		<term>
+			<key>CLERK</key>
+			<value>Clerk</value>
+		</term>
+		<term>
+			<key>INVENTORY_IN_FLOW</key>
+			<value>Inventory In-Flow</value>
+		</term>
+		<term>
+			<key>INVENTORY_OUT_FLOW</key>
+			<value>Inventory Out-Flow</value>
+		</term>
+		<term>
+			<key>TEST_COUNT_REPORT</key>
+			<value>Test Count Report</value>
+		</term>
+		<term>
+			<key>SPECIMEN_COUNT_REPORT</key>
+			<value>Specimen Count Report</value>
+		</term>
+		<term>
+			<key>Daily Log - Tests</key>
+			<value>Daily Log - Tests</value>
+		</term>
+		<term>
+			<key>Daily Log - Patients</key>
+			<value>Daily Log - Patients</value>
 		</term>
 	</page>
 	<page id="edit_profile" descr="Edit Profile Page">

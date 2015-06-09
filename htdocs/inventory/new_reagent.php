@@ -66,12 +66,12 @@ function prefetch_pname()
 	$('#patient_prompt_div').load(url_string);
 }
 </script>
-<a href='lab_config_home.php?id=<?php echo $lab_config_id; ?>&show_i'>&laquo; <?php echo LangUtil::$generalTerms['CMD_BACK']; ?></a>&nbsp;|&nbsp;<b><?php echo "Add New Reagent"; ?></b>
+<a href='lab_config_home.php?id=<?php echo $lab_config_id; ?>&show_i'>&laquo; <?php echo LangUtil::$generalTerms['CMD_BACK']; ?></a>&nbsp;|&nbsp;<b><?php echo LangUtil::$generalTerms['ADD_NEW_REAGENT']; ?></b>
 <br><br>
 
 <?php
 $tips_string =LangUtil::$pageTerms['TIPS_ADD'];// "Add the details of the stock in the given form. To add more that one stock items you can select Add Another.";
-$page_elems->getSideTip("Tips", $tips_string);
+$page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], $tips_string);
 ?>
 
 <form name='new_test_form' id='new_test_form' action='inventory/add_reagent.php'  method='post'>
@@ -90,7 +90,7 @@ $page_elems->getSideTip("Tips", $tips_string);
 				</tr>
 				<tr>
 					<td>
-						&nbsp;<?php echo "Unit"; ?> 
+						&nbsp;<?php echo LangUtil::$generalTerms['UNIT']; ?> 
 					</td>
 					<td></td>
 					<td>
@@ -101,7 +101,7 @@ $page_elems->getSideTip("Tips", $tips_string);
 				</tr>
 				<tr>
 					<td>
-						&nbsp;<?php echo "Remarks"; ?> 
+						&nbsp;<?php echo LangUtil::$generalTerms['REMARKS']; ?> 
 						
 					</td>
 					<td></td>

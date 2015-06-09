@@ -48,17 +48,17 @@ $script_elems->enableTableSorter();
                         <th><?php echo "Unit"; ?></th>
                         <?php if($view_update == 1){ ?>
                         <th><?php 
-                            echo "Update";
+                            echo LangUtil::$generalTerms['CMD_UPDATE'];
                             ?></th>
                         <?php } ?>
                         <?php if($view_add == 1){ ?>
                         <th><?php 
-                            echo "Add";
+                           echo LangUtil::$generalTerms['CMD_ADD'];
                             ?></th>
                         <?php } ?>
                         <?php if($view_edit == 1){ ?>
                         <th><?php 
-                            echo "Edit";
+                            echo LangUtil::$generalTerms['CMD_EDIT'];
                             ?></th>
                         <?php } ?>
                        

@@ -37,7 +37,7 @@ header('Content-Type: text/html; charset=UTF-8');
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8" />
-  <title>BLIS <?php echo $VERSION; ?> - Kenya</title>
+  <title>Blis <?php echo $VERSION; ?> - Kenya</title>
   <meta content="" name="description" />
   <meta content="" name="author" />
   <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -63,7 +63,7 @@ header('Content-Type: text/html; charset=UTF-8');
    </center>
     <!-- BEGIN LOGIN FORM -->
     <form class="form-vertical login-form" method="POST" action="validate.php" />
-      <h3 class="form-title" style="display:none;">Login</h3>
+      <h3 class="form-title" style="display:none;"><?php echo LangUtil::$generalTerms['CMD_LOGIN']; ?></h3>
       <?php
 					
 					if(isset($_REQUEST['to']))
@@ -131,7 +131,7 @@ header('Content-Type: text/html; charset=UTF-8');
     	<?php
 		if($_SESSION['locale'] == "en")
 		{
-			echo "<a href='userguide/BLIS_User_Guide.pdf' target='_blank' > <i class='icon-info-sign'></i> User Guide </a>";
+			echo "<a href='userguide/BLIS_User_Guide.pdf' target='_blank' > <i class='icon-info-sign'></i> " . LangUtil::$generalTerms['USER_GUIDE'] . "</a>";
 		}
 		else if($_SESSION['locale'] == "fr")
 		{
@@ -139,11 +139,11 @@ header('Content-Type: text/html; charset=UTF-8');
 		}
 		else
 		{
-			echo "<a href='userguide/BLIS_User_Guide.pdf' target='_blank'> <i class='icon-info-sign'></i> User Guide </a>";
+			echo "<a href='userguide/BLIS_User_Guide.pdf' target='_blank'> <i class='icon-info-sign'></i> " . LangUtil::$generalTerms['USER_GUIDE'] . " </a>";
 		}
 		?>
 		&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-		<a rel='facebox' href='feedback/comments.php?src=<?php echo $_SERVER['PHP_SELF']; ?>'><i class='icon-comments-alt'></i> <?php echo "Comments" ?>?</a>
+		<a rel='facebox' href='feedback/comments.php?src=<?php echo $_SERVER['PHP_SELF']; ?>'><i class='icon-comments-alt'></i> <?php echo LangUtil::$generalTerms['COMMENTS'] ?></a>
 		<div class="copyright">
 		C4G BLIS v<?php echo $VERSION; ?> - <?php echo LangUtil::$allTerms["FOOTER_MSG"]; ?>
 		</div>
@@ -186,7 +186,7 @@ header('Content-Type: text/html; charset=UTF-8');
       </div>
       <div class="form-actions">
         <a href="javascript:;" id="back-btn" class="btn">
-        <i class="m-icon-swapleft"></i>  Back
+        <i class="m-icon-swapleft"></i>  <?php echo LangUtil::$generalTerms['BACK']; ?>
         </a>
         <a href="javascript:;" id="forget-btn" class="btn green pull-right">
         Submit <i class="m-icon-swapright m-icon-white"></i>
@@ -201,7 +201,7 @@ header('Content-Type: text/html; charset=UTF-8');
     	<?php
 		if($_SESSION['locale'] == "en")
 		{
-			echo "<a href='userguide/BLIS_User_Guide.pdf' target='_blank' >User Guide |</a>";
+			echo "<a href='userguide/BLIS_User_Guide.pdf' target='_blank' >" . LangUtil::$generalTerms['USER_GUIDE'] . " |</a>";
 		}
 		else if($_SESSION['locale'] == "fr")
 		{
@@ -209,11 +209,11 @@ header('Content-Type: text/html; charset=UTF-8');
 		}
 		else
 		{
-			echo "<a href='userguide/BLIS_User_Guide.pdf' target='_blank'>User Guide |</a>";
+			echo "<a href='userguide/BLIS_User_Guide.pdf' target='_blank'>" . LangUtil::$generalTerms['USER_GUIDE'] . " |</a>";
 		}
 		?>
 		
-		<a rel='facebox' href='feedback/comments.php?src=<?php echo $_SERVER['PHP_SELF']; ?>'><?php echo "Comments" ?>?</a> |
+		<a rel='facebox' href='feedback/comments.php?src=<?php echo $_SERVER['PHP_SELF']; ?>'><?php echo LangUtil::$generalTerms['COMMENTS'] ?>?</a> |
 		C4G BLIS v<?php echo $VERSION; ?> - <?php echo LangUtil::$allTerms["FOOTER_MSG"]; ?>
 		<?php
 		if($_SESSION['locale'] !== "en")

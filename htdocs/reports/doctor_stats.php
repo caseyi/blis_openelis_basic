@@ -26,10 +26,10 @@ $script_elems->enableLatencyRecord();
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-home"></i>
-                                <a href="index.html">Home</a> 
+                                <a href="index.html"><?php echo LangUtil::$generalTerms['HOME']; ?></a> 
                                 <span class="icon-angle-right"></span>
                             </li>
-                            <li><a href="#">Reports</a>
+                            <li><a href="#"><?php echo LangUtil::$pageTerms['REPORTS']; ?></a>
                             <span class="icon-angle-right"></span></li>
                             <li><a href="#"></a></li>
                         </ul>
@@ -43,7 +43,7 @@ $script_elems->enableLatencyRecord();
 
                     <div class="portlet box green" id="prevalence_div">
                         <div class="portlet-title" >
-                            <h4><i class="icon-reorder"></i> Doctor Statistics</h4>           
+                            <h4><i class="icon-reorder"></i> <?php echo LangUtil::$generalTerms['DOCTOR_STATISTICS']; ?></h4>           
                         </div>
                         
                           <div class="portlet-body" >

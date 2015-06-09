@@ -38,7 +38,7 @@ $test_categories = TestCategory::geAllTestCategories($lab_config_id);
 <div id="tests" class='results_subdiv' style='display:none;'>
 	<div class="portlet box blue">
 		<div class="portlet-title">
-			<h4><i class="icon-reorder"></i><?php echo "Test Queue - ";?><span class="section-name">All Sections</span></h4>
+			<h4><i class="icon-reorder"></i><?php echo LangUtil::$generalTerms['TEST_QUEUE']; ?> - <span class="section-name"><?php echo LangUtil::$generalTerms['ALL_SECTIONS']; ?></span></h4>
 			<div class="tools">
 				<a href="javascript:fetch_tests(<?php echo Specimen::$STATUS_ALL; ?>);" class="reload"></a>
 				<a href="javascript:;" class="collapse"></a>
@@ -65,11 +65,11 @@ $test_categories = TestCategory::geAllTestCategories($lab_config_id);
 
 <div id="worksheet_results" class='results_subdiv' style='display:none;'>
 	<form name="fetch_worksheet" id="fetch_worksheet">
-		<b>Worksheet Results</b>
+		<b><?php echo LangUtil::$generalTerms['WORKSHEET_RESULTS']; ?></b>
 		<br>
 		<br>
-		Worksheet# <input type="text" name="worksheet_num" id="worksheet_num" class='uniform_width' />
-		<input type="button" onclick="fetch_worksheets();" value="Fetch"/>
+		<?php echo LangUtil::$generalTerms['WORKSHEET']; ?># <input type="text" name="worksheet_num" id="worksheet_num" class='uniform_width' />
+		<input type="button" onclick="fetch_worksheets();" value="<?php echo LangUtil::$generalTerms['CMD_FETCH']; ?>"/>
 	</form>
 	<div id="worksheet">
 	</div>
@@ -115,22 +115,22 @@ $test_categories = TestCategory::geAllTestCategories($lab_config_id);
 </div>
 
 <div id="import_results" class='results_subdiv' style='display:none;'>
-	<b>Import Results</b>
+	<b><?php echo LangUtil::$generalTerms['IMPORT_RESULTS']; ?></b>
 	<br>
 	<br>
 	<form name='form_import' id='form_import' action='' method='POST' enctype='multipart/form-data'>
 		<table>
 			<tr>
-				<td>Machine Type</td>
+				<td><?php echo LangUtil::$generalTerms['MACHINE_TYPE']; ?></td>
 				<td><input type='text' name='mc_type'></td>
 			</tr>
 			<tr>
-				<td>File</td>
+				<td><?php echo LangUtil::$generalTerms['FILE']; ?></td>
 				<td><input type='file' name='file_path'></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td><br><input type='button' name='submit_import' value='Import Results'/></td>
+				<td><br><input type='button' name='submit_import' value='<?php echo LangUtil::$generalTerms['IMPORT_RESULTS']; ?>'/></td>
 			</tr>
 		</table>
 	</form>
@@ -265,7 +265,7 @@ $test_categories = TestCategory::geAllTestCategories($lab_config_id);
 
 	<div class="portlet box blue">
 		<div class="portlet-title">
-			<h4><i class="icon-reorder"></i><?php echo "Worksheet";?></h4>
+			<h4><i class="icon-reorder"></i><?php echo LangUtil::$generalTerms['WORKSHEET']; ?></h4>
 			<div class="tools">
 				<a href="javascript:;" class="reload"></a>
 				<a href="javascript:;" class="collapse"></a>
@@ -385,7 +385,7 @@ if($SHOW_REPORT_RESULTS === true)
 	   
 	  </div>
 	  <div class="modal-footer">
-	    <button type="button" data-dismiss="modal" class="btn" onclick='javascript:cancel_hide()'>No</button>
+	    <button type="button" data-dismiss="modal" class="btn" onclick='javascript:cancel_hide()'><?php echo LangUtil::$generalTerms['NO']; ?></button>
 	  
 	  </div>
 </div>
@@ -553,7 +553,7 @@ function hide_test_result_form_confirmed(test_id)
 
 function cancel_show(test_id){
 	$('#yes').html('');
-	$('#yes').append( "<button type='button' class='btn btn-primary' onclick='javascript:hide_test_result_form_confirmed("+test_id+")'>Yes</button>");
+	$('#yes').append( "<button type='button' class='btn btn-primary' onclick='javascript:hide_test_result_form_confirmed("+test_id+")'><?php echo LangUtil::$generalTerms['YES']; ?></button>");
 	$('#cancel').modal('show');
 }
 
@@ -581,7 +581,7 @@ function fetch_specimen()
 	var first_char =specimen_id.charAt(0);
 	if(attrib==1 && isNaN(first_char)==false)
 	{
-		alert("Please enter a valid name.");
+		alert("<?php echo LangUtil::$generalTerms['ENTER_VALID_NAME']; ?>");
 		return;
 	}
 	var url = 'ajax/result_entry_patient_dyn.php';
@@ -661,16 +661,16 @@ function accept_specimen(specimen_id,test_id)
 		function(result) 
 		{
 			$('#span'+test_id).addClass('label-important');
-			$('#span'+test_id).html('Accepted');
+			$('#span'+test_id).html('<?php echo LangUtil::$generalTerms['ACCEPTED']; ?>');
 			actions = result.split('%');
 			$('#actionA'+test_id).html('<td id=actionA'+test_id+' style="width:100px;">'+
 					'<a href="javascript:start_test('+test_id+');"'+ 
 					'title="Click to begin testing this Specimen" class="btn red mini">'+
-					'<i class="icon-ok"></i> Start Test</a></td>');
+					'<i class="icon-ok"></i> <?php echo LangUtil::$generalTerms['START_TEST']; ?>?</a></td>');
 			$('#actionB'+test_id).html('<td id=actionB'+test_id+' style="width:100px;">'+
 					'<a href="javascript:specimen_info('+specimen_id+');"'+
 					'title="View Specimen Details" class="btn blue mini">'+
-					'<i class="icon-search"></i>View Details</a></td>');
+					'<i class="icon-search"></i><?php echo LangUtil::$generalTerms['VIEW_DETAILS']; ?></a></td>');
 					/*'<a href="javascript:refer_specimen('+test_id+');"'+ 
 					'title="Click to begin testing this Specimen" class="btn inverse mini">'+
 					'<i class="icon-ok"></i>Refer</a></td>');*/
@@ -682,7 +682,7 @@ function accept_specimen(specimen_id,test_id)
 }
 function start_test(test_id)
 {
-	var r=confirm("Start test?");
+	var r=confirm("<?php echo LangUtil::$generalTerms['START_TEST']; ?>?");
 	if (r==true)
    	{
 		var el = jQuery('.portlet .tools a.reload').parents(".portlet");
@@ -847,7 +847,7 @@ function submit_forms(test_id)
 	var target_div_id = "result_form_pane_"+test_id;
 	var result= $("input[name='result[]']").val();
 	if (result==""){
-	alert("Result cannot be empty");
+	alert("<?php echo LangUtil::$generalTerms['RESULT_NO_EMPTY']; ?>");
 	return;
 	}
 	for(var i = 0; i < form_id_list.length; i++)

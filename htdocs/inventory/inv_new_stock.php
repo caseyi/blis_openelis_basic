@@ -156,7 +156,7 @@ function display_unit()
 <div class="span4" style="position: absolute;top: 100px;right: 30px;">
 <?php
 $tips_string = "Add new stocks (lots) for existing reagents by completing this form. Lot number, Expiry Date, Quantity and Date Received are compulsory fields.";
-$page_elems->getSideTip("Tips", $tips_string);
+$page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], $tips_string);
 ?>
 </div>
 

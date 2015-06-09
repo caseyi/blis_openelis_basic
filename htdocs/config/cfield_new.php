@@ -22,7 +22,7 @@ $lab_config_id = $_REQUEST['lid'];
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-download-alt"></i>
-                                <a href="index.php">Home</a> 
+                                <a href="index.php"><?php echo LangUtil::$generalTerms['HOME']; ?></a> 
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -39,7 +39,7 @@ $lab_config_id = $_REQUEST['lid'];
                         
                           <div class="portlet-body" >
                                 <br>
-                                 <a href='lab_config_home.php?id=<?php echo $lab_config_id; ?>&show_f=1'>Back</a>
+                                 <a href='lab_config_home.php?id=<?php echo $lab_config_id; ?>&show_f=1'><?php echo LangUtil::$generalTerms['BACK']; ?></a>
                                 <br><br>
                                 <form name='cfield_new_form' id='cfield_new_form' action='ajax/cfield_add.php' method='post'>
                                 <?php

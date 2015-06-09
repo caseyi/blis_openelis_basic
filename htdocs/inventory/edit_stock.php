@@ -97,8 +97,7 @@ function prefetch_pname()
 
 <div class="span4" style="position: absolute;top: 100px;right: 30px;">
 <?php
-$tips_string = " Edit reagent details by completing this form. If you wish to edit lot details for the selected reagent then click on 'Edit' link next to the specific lot.";
-$page_elems->getSideTip("Tips", $tips_string);
+$page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], LangUtil::$generalTerms['TIPS_EDIT_STOCK_1']);
 $reag = Inventory::getReagentById($lid, $r_id);
 ?>
 </div>
@@ -123,7 +122,7 @@ $reag = Inventory::getReagentById($lid, $r_id);
 				</tr>
 				<tr>
 					<td>
-						&nbsp;<?php echo "Unit"; ?> 
+						&nbsp;<?php echo LangUtil::$generalTerms['UNIT']; ?> 
 					</td>
 					<td></td>
 					<td>
@@ -133,7 +132,7 @@ $reag = Inventory::getReagentById($lid, $r_id);
 				</tr>
 				<tr>
 					<td>
-						&nbsp;<?php echo "Remarks"; ?> 
+						&nbsp;<?php echo LangUtil::$generalTerms['REMARKS']; ?> 
 						
 					</td>
 					<td></td>
@@ -159,13 +158,13 @@ $reag = Inventory::getReagentById($lid, $r_id);
 		<tr align='center'>
 			<th> <?php echo LangUtil::$pageTerms['Lot_Number']."&nbsp;&nbsp;&nbsp;&nbsp;"; ?></th>
 			<th> <?php echo LangUtil::$pageTerms['Quantity']."&nbsp;&nbsp;&nbsp;&nbsp;"; ?></th>
-                        <th><?php echo "Unit"."&nbsp;&nbsp;&nbsp;&nbsp;"; ?></th>
+                        <th><?php echo LangUtil::$generalTerms['UNIT']."&nbsp;&nbsp;&nbsp;&nbsp;"; ?></th>
                         <th> <?php echo LangUtil::$pageTerms['Expiry_Date']."&nbsp;&nbsp;&nbsp;&nbsp;"; ?></th>
 			<th> <?php echo LangUtil::$pageTerms['Manufacturer']."&nbsp;&nbsp;&nbsp;&nbsp;"; ?></th>
 			<th> <?php echo LangUtil::$pageTerms['Supplier']."&nbsp;&nbsp;&nbsp;&nbsp;"; ?></th>
-                        <th> <?php echo "Date of Reception"."&nbsp;&nbsp;&nbsp;&nbsp;"; ?></th>
+                        <th> <?php echo LangUtil::$pageTerms['DATE_RECEPTION']."&nbsp;&nbsp;&nbsp;&nbsp;"; ?></th>
                         <th> <?php echo LangUtil::$pageTerms['Remarks']."&nbsp;&nbsp;&nbsp;&nbsp;" ?></th>
-                        <th><?php echo "Edit"."&nbsp;&nbsp;&nbsp;&nbsp;"; ?></th>
+                        <th><?php echo LangUtil::$generalTerms['CMD_EDIT']."&nbsp;&nbsp;&nbsp;&nbsp;"; ?></th>
                        
 		</tr>
 	</thead>
@@ -198,7 +197,7 @@ $reag = Inventory::getReagentById($lid, $r_id);
                         <td><?php echo $stock['remarks']; ?></td>
                         <?php if($view_use == 1){ ?>
                         <td><?php 
-                            echo "<a href='edit_lot.php?id=".$reag['id']."&lot=".$stock['lot']."'> Edit</a>";
+                            echo "<a href='edit_lot.php?id=".$reag['id']."&lot=".$stock['lot']."'> " . LangUtil::$generalTerms['CMD_EDIT'] . "</a>";
                            
                             ?></td>
                         <?php } ?>

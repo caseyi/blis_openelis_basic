@@ -133,7 +133,7 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 			//if($lab_config->dailyNum >= 11)
 			//{
 				?>
-				<th><?php echo "Visit Number"; ?></th>
+				<th><?php echo LangUtil::$generalTerms['VISIT_NUMBER']; ?></th>
 				<?php
 			//}
 			if($lab_config->patientAddl != 0)
@@ -152,7 +152,7 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 			if($lab_config->age >= 11)
 			{
 				?>
-				<th><?php echo LangUtil::$generalTerms['AGE']."(Years)"; ?></th>
+				<th><?php echo LangUtil::$generalTerms['AGE']."(" . LangUtil::$generalTerms['YEARS'] . ")"; ?></th>
 				<?php
 			}?>
 			
@@ -278,14 +278,14 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
        					$billing_url_string = "reports_billing.php?patient_id=".$patient->patientId."&location=".$_REQUEST['l']."&yf=".$today_parts[0]."&mf=".$today_parts[1]."&df=".$today_parts[2]."&yt=".$today_parts[0]."&mt=".$today_parts[1]."&dt=".$today_parts[2]."&ip=0";
 
 					?>
-					<a href='<?php echo $url_string; ?>' title='Click to View Report for this Patient' target='_blank'><?php echo LangUtil::$generalTerms['CMD_VIEW']; ?> Report</a>
+					<a href='<?php echo $url_string; ?>' title='Click to View Report for this Patient' target='_blank'><?php echo LangUtil::$generalTerms['CMD_VIEW']; ?> <?php echo LangUtil::$allTerms['REPORT']; ?></a>
 					</td>
 					<td>
-					<a href='select_test_profile.php?pid=<?php echo $patient->patientId; ?>' title='Click to View Patient Profile'>Select Tests</a>
+					<a href='select_test_profile.php?pid=<?php echo $patient->patientId; ?>' title='Click to View Patient Profile'><?php echo LangUtil::$generalTerms['SELECT_TESTS']; ?></a>
 										</td>
                                         <td <?php (is_billing_enabled($_SESSION['lab_config_id']) ? print("") : print("style='display:none'")) ?> >
                                        
-                                            <a href=<?php echo $billing_url_string; ?>' title='Click to generate a bill for this patient'>Generate Bill</a>
+                                            <a href=<?php echo $billing_url_string; ?>' title='Click to generate a bill for this patient'><?php echo LangUtil::$generalTerms['GENERATE_BILL']; ?></a>
                                         </td>
 					<td>					
 					<?php

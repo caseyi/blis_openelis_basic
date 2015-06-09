@@ -7,7 +7,7 @@ include("includes/header.php");
 LangUtil::setPageId("quality");
 ?>
 <br>
-<b><?php echo "New Quality Control Category"; ?></b>
+<b><?php echo LangUtil::$generalTerms['NEW_CQ_CATEGORY'] ?></b>
 | <a href='quality.php?show_qcc=1'><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></a>
 <br><br>
 <div class='pretty_box'>
@@ -26,7 +26,7 @@ LangUtil::setPageId("quality");
 </div>
 <div id='quality_control_category_help' style='display:none'>
 <small>
-Use Ctrl+F to search easily through the list. Ctrl+F will prompt a box where you can enter the test category you are looking for.
+<?php echo LangUtil::$generalTerms['USE_KEY_TO_SELECT'] ?>
 </small>
 </div>
 <?php include("includes/scripts.php");
@@ -41,7 +41,7 @@ function check_input()
 	var category_name = $('#category_name').val();
 	if(category_name == "")
 	{
-		alert("<?php echo "Error: Missing quality control category name"; ?>");
+		alert("<?php echo LangUtil::$generalTerms['ERR_MIS_QC_CATEGORY_NAME'] ?>");
 		return;
 	}
 	// All OK

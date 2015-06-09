@@ -329,7 +329,7 @@ function check_specialchar(elem)
 	return false;
 }
 </script>
-<p style="text-align: right;"><a rel='facebox' href='#ModLang'>Page Help</a></p><br/>
+<p style="text-align: right;"><a rel='facebox' href='#ModLang'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p><br/>
 <?php
 /*<a href='lab_config_home.php?id=<?php echo $lab_config_id; ?>'>&laquo; <?php echo LangUtil::$generalTerms['CMD_BACK']; ?></a>|*/
 ?>

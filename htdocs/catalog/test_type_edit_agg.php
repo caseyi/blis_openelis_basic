@@ -711,7 +711,7 @@ function isInputNumber(evt) {
 											<input type='text' class='age_field' name='age_u_<?php echo $i; ?>[]' value='100'/>
 											<br>
 											
-										</span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo LangUtil::$generalTerms['RANGE']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gender &nbsp;&nbsp;Age_Range
+										</span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo LangUtil::$generalTerms['RANGE']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo LangUtil::$generalTerms['GENDER']; ?> &nbsp;&nbsp;Age_Range
 							<br>
 									<?php
 									}
@@ -735,7 +735,7 @@ function isInputNumber(evt) {
 												
 										}
 										?>
-										</span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo LangUtil::$generalTerms['RANGE']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gender &nbsp;&nbsp;Age_Range
+										</span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo LangUtil::$generalTerms['RANGE']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo LangUtil::$generalTerms['GENDER']; ?> &nbsp;&nbsp;Age_Range
 							<br>
 										<?php
 									}
@@ -827,7 +827,7 @@ function isInputNumber(evt) {
 											<input type='text' class='range_field agerange_u_<?php echo $i; ?>' name='new_agerange_u_<?php echo $i; ?>[]' id='new_agerange_u_<?php echo $i; ?>[]' value='100' />
 																
 											<br>
-								</span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo LangUtil::$generalTerms['RANGE']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gender &nbsp;&nbsp;Age_Range
+								</span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo LangUtil::$generalTerms['RANGE']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo LangUtil::$generalTerms['GENDER']; ?> &nbsp;&nbsp;Age_Range
 								<br>
 											<small><a href="javascript:add_new_range_field('<?php echo $i; ?>', 0);"><?php echo LangUtil::$generalTerms['ADDANOTHER']; ?> &raquo;</a></small>
 									<br><br>
@@ -898,7 +898,7 @@ For e.g., if test results can be either one from 'P','N' or 'D', please enter 'P
 </div>
 <div id='clinical_help' style='display:none'>
 <small>
-<u>Clinical Data </u> can be entered either in the table or text on both forms. If it is not requried please leave it blank.
+<u><?php echo LangUtil::$generalTerms['CLINICAL_DATA']; ?> </u> can be entered either in the table or text on both forms. If it is not requried please leave it blank.
 </small>
 </div>
 <div id='specimen_help' style='display:none'>

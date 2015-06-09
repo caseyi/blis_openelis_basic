@@ -172,7 +172,7 @@ p.main {text-align:justify;}
 	<td>
 		<input type='radio' name='do_landscape' value='Y' <?php
 			//if($report_config->landscape == true) echo " checked ";
-			?>>Landscape</input>
+			?>><?php echo LangUtil::$generalTerms['LANDSCAPE_TYPE']; ?></input>
 	</td>
 	</tr>
 	</table>
@@ -385,7 +385,7 @@ else
 					<td><?php echo get_test_name_by_id($test->testTypeId); ?></td>
 				</tr>
 			<tr valign='top'>	
-				<td><?php echo "Visit Number"; ?></td>
+				<td><?php echo LangUtil::$generalTerms['VISIT_NUMBER']; ?></td>
 				<td><?php echo $previous_daily_num; ?></td>
 			</tr>
 			<tr valign='top'>	
@@ -663,7 +663,7 @@ else
 			if(count($data_list)==1 && count(record_list)==1) {
 			?>
 			<b>
-				Clinical Data:
+				<?php echo LangUtil::$generalTerms['CLINICAL_DATA']; ?>:
 				</b>
 				<?php  
 
@@ -723,7 +723,7 @@ else
 						echo $bullet++ ?>). <b>Test Name:</b>
 						<?php echo get_test_name_by_id ($key); ?>
 						<br><b>
-						Clinical Data:
+						<?php echo LangUtil::$generalTerms['CLINICAL_DATA']; ?>:
 						</b>
 						<?php
 						if(stripos($value,"!#!")===0) {

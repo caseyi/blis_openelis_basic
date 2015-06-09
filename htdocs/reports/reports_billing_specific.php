@@ -208,7 +208,7 @@ for($i = 0; $i < count($margin_list); $i++) {
 									<input type='radio' name='do_landscape' value='N'<?php echo " checked "; ?>>Portrait</input>
 								</td>
 								<td>
-									<input type='radio' name='do_landscape' value='Y'>Landscape</input>
+									<input type='radio' name='do_landscape' value='Y'><?php echo LangUtil::$generalTerms['LANDSCAPE_TYPE']; ?></input>
 								</td>
 							</tr>
 						</table>

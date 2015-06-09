@@ -1702,7 +1702,7 @@ class PageElems
 					</td>
 				</tr>
 				<tr valign='top'>
-					<td>Test Types</td>
+					<td><?php echo LangUtil::$generalTerms['TEST_TYPES']; ?></td>
 					<td>
 					<?php
 					$test_list = get_test_types_by_site($lab_config_id);
@@ -2305,7 +2305,7 @@ class PageElems
 			$pid=$specimen->patientId;
 			
 			?>
-			<td><a href="javascript:get_report(<?php echo $pid;?>,<?php echo $sid;?> )">Report</a> </td>
+			<td><a href="javascript:get_report(<?php echo $pid;?>,<?php echo $sid;?> )"><?php echo LangUtil::$generalTerms['REPORT']; ?></a> </td>
                         <?php
                             if($specimenBarcode)
                             {
@@ -7728,7 +7728,7 @@ $name_list = array("yyyy_to".$count, "mm_to".$count, "dd_to".$count);
 	
 	public function getCustomWorksheetTable($lab_config)
 	{
-		echo "Custom Worksheets";
+		echo LangUtil::$generalTerms['CUSTOM_WORKSHEETS'];
 		if($lab_config == null)
 		{
 			echo "<div class='sidetip_nopos'>".LangUtil::$generalTerms['MSG_NOTFOUND']."</div>";

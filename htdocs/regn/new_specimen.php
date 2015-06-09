@@ -204,7 +204,7 @@ function add_specimens()
 		var pt_regdate = new Date(spec_reg_date.slice(0, 4), parseInt(spec_reg_date.slice(5, 7))-1, spec_reg_date.slice(-2));
 		if (curr_date<pt_regdate){
 
-			alert("Error: The registration date cannot be after today");
+			alert("<?php echo LangUtil::$generalTerms['ERR_REGISTRATION_CANNOT_BE_AFTER_TODAY']; ?>");
 			return;
 		}
 	}
@@ -419,9 +419,9 @@ function checkandtoggle_ref(ref_check_id, ref_row_id)
 // ]]> -->
 </script>
 
-<p style="text-align: right;"><a rel='facebox' href='#NEW_SPECIMEN'>Page Help</a></p>
+<p style="text-align: right;"><a rel='facebox' href='#NEW_SPECIMEN'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 <span class='page_title'><?php echo LangUtil::getTitle(); ?></span>
- | <?php echo "Visit Number:"; ?> <?php echo $session_num; ?>
+ | <?php echo LangUtil::$generalTerms['VISIT_NUMBER']:"; ?> <?php echo $session_num; ?>
  | <a href='javascript:history.go(-1);'><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></a>
 <br>
 <br>

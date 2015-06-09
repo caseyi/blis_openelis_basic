@@ -152,7 +152,7 @@ function add_lab_user()
                                             <?php $page_elems->getTestCategorySelectOption(); ?>
                                         </select>
                                         <td>
-                                        <input type="checkbox" id="mrk_all" onclick="javascript:selectDeselect();">Mark All</input>
+                                        <input type="checkbox" id="mrk_all" onclick="javascript:selectDeselect();"><?php echo LangUtil::$generalTerms['MARK_ALL']; ?></input>
                                         </td>
                                     </td>
                                 </tr>

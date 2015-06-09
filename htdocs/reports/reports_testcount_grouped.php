@@ -195,7 +195,7 @@ display:none;
 &nbsp;&nbsp;
 <input type='radio' name='do_landscape' value='Y' <?php
 	//if($report_config->landscape == true) echo " checked ";
-?>>Landscape</input>&nbsp;&nbsp;
+?>><?php echo LangUtil::$generalTerms['LANDSCAPE_TYPE']; ?></input>&nbsp;&nbsp;
 
 <input type='button' onclick="javascript:print_content('export_content');" value='<?php echo LangUtil::$generalTerms['CMD_PRINT']; ?>'></input>
 &nbsp;&nbsp;
@@ -310,9 +310,14 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 <?php
 	if ($result){
 		echo '<thead><tr>';
-		for ($counter=0; $counter<mysql_num_fields($result); $counter++){
+		echo '<th>'.LangUtil::$generalTerms['SECTION'].'</th>';
+		echo '<th>'.LangUtil::$generalTerms['TEST'].'</th>';
+		echo '<th>'.LangUtil::$generalTerms['GENDER'].'</th>';
+		echo '<th>'.LangUtil::$generalTerms['TEST_STATUS'].'</th>';
+		for ($counter=4; $counter<mysql_num_fields($result)-1; $counter++){
 			echo '<th>'.mysql_field_name($result, $counter).'</th>';
 		}
+		echo '<th>'.LangUtil::$pageTerms['TOTAL_TESTS'].'</th>';
 		echo '</tr></thead><tbody>';
 		while($row = mysql_fetch_assoc($result)){
 			echo '<tr><td>'.implode($row, '</td><td>').'</tr>';

@@ -26,7 +26,7 @@ echo '<input type="hidden" id="redir_page" value="'.$menu_vals[1].'" />';
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a href="index.php">Home<?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?></a> 
+								<a href="index.php"><?php echo LangUtil::$generalTerms['HOME']; ?><?php echo $facilityname!='' ? ' - '.$facilityname : ''; ?></a> 
 							</li>
 							<!--li><a href="#">Home</a></li-->
 							<li class="pull-right no-text-shadow">
@@ -40,7 +40,7 @@ echo '<input type="hidden" id="redir_page" value="'.$menu_vals[1].'" />';
 				
                 <div class="portlet box blue">
                     <div class="portlet-title">
-                        <h4><i class="icon-reorder"></i>Basic Laboratory Information System</h4>
+                        <h4><i class="icon-reorder"></i><?php echo LangUtil::$pageTerms['BASIC_TITLE']; ?></h4>
                         <div class="tools">
                         <a href="javascript:;" class="collapse"></a>
                         <a href="javascript:;" class="reload"></a>						

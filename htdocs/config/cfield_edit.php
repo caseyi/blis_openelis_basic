@@ -23,7 +23,7 @@ $type = $_REQUEST['t'];
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-download-alt"></i>
-                                <a href="index.php">Home</a> 
+                                <a href="index.php"><?php echo LangUtil::$generalTerms['HOME']; ?></a> 
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -41,7 +41,7 @@ $type = $_REQUEST['t'];
                           <div class="portlet-body" >
                               
                                 <br>
-                                &nbsp; <a href='lab_config_home.php?id=<?php echo $lab_config_id; ?>&show_f=1'>Back </a>
+                                &nbsp; <a href='lab_config_home.php?id=<?php echo $lab_config_id; ?>&show_f=1'><?php echo LangUtil::$generalTerms['BACK']; ?> </a>
                                 <br><br />
                                 <form name='cfield_edit_form' id='cfield_edit_form' action='ajax/cfield_update.php' method='post'>
                                 <?php

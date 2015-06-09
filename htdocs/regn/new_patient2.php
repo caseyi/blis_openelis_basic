@@ -31,7 +31,7 @@ $script_elems->enableAutocomplete();
 				echo " style='display:none;' ";
 			?>>	
 				<td><?php echo LangUtil::$generalTerms['PATIENT_NAME']; ?><?php $page_elems->getAsterisk(); ?> </td>
-				<td><input type="text" name="name" id="name" value="" size="20" class='uniform_width m-wrap tooltips' data-trigger="hover" data-original-title="Please enter patient's full name." /></td>
+				<td><input type="text" name="name" id="name" value="" size="20" class='uniform_width m-wrap tooltips' data-trigger="hover" data-original-title="<?php echo LangUtil::$generalTerms['ENTER_PATIENT_NAME']; ?>" /></td>
 			</tr>
 
 			<tr <?php
@@ -47,7 +47,7 @@ $script_elems->enableAutocomplete();
 				<td><input type="text" name="addl_id" id="addl_id" value="" size="20" class='uniform_width' /></td>
 			</tr>
 			<tr>
-				<td>  Date of Registration </td>
+				<td>  <?php echo LangUtil::$generalTerms['DATE_REGISTRATION']; ?> </td>
 				<td>
 					<div class="input-append date date-picker" data-date="<?php echo date("Y-m-d"); ?>" data-date-format="yyyy-mm-dd"> 
 					<input class="m-wrap m-ctrl-medium" size="16" name="patient_reg_date" id="patient_regist_date" type="text" value="<?php echo date("Y-m-d"); ?>" ><span class="add-on"><i class="icon-calendar"></i></span>
@@ -119,23 +119,23 @@ $script_elems->enableAutocomplete();
 					</div>
                 </td>
                 <td>				  
-                  <a href="" class="btn-default btn " data-toggle="modal" data-target=".bs-example-modal-sm"><span class="add-on" id="span_calcdob"><i class="icon-calendar"></i> From Age</span></a>
+                  <a href="" class="btn-default btn " data-toggle="modal" data-target=".bs-example-modal-sm"><span class="add-on" id="span_calcdob"><i class="icon-calendar"></i> <?php echo LangUtil::$generalTerms['FROM_AGE']; ?></span></a>
 			 <!--pop up for dob calc begin-->
   <div class="modal fade bs-example-modal-sm" id="dobcal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
      
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title" id="myModalLabel">Calculate Date of Birth</h4>
+        <h4 class="modal-title" id="myModalLabel"><?php echo LangUtil::$generalTerms['CALCULATE_DOB']; ?></h4>
       </div>
       <div class="modal-body">
        <div class="form-group">
-              <label class="col-md-2 control-label" for="body">Age in Years</label>  
+              <label class="col-md-2 control-label" for="body"><?php echo LangUtil::$generalTerms['AGE_IN_YEARS']; ?></label>  
               <input id="age" name="age" type="text" maxlength="3" class="form-control input-md">
               
             </div>
             <div class="form-group">
-              <label class="col-md-2 control-label" for="by_date">On Date</label>  
+              <label class="col-md-2 control-label" for="by_date"><?php echo LangUtil::$generalTerms['ON_DATE']; ?></label>  
               <style>
               .datepicker{
               z-index:1151 !important;
@@ -149,8 +149,8 @@ $script_elems->enableAutocomplete();
            
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" name="submit_iss" class="btn btn-primary" onclick="javascript:calc_dob();">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></button>
+        <button type="button" name="submit_iss" class="btn btn-primary" onclick="javascript:calc_dob();"><?php echo LangUtil::$generalTerms['CMD_SUBMIT']; ?></button>
       </div>
     
   </div>
@@ -332,9 +332,9 @@ function add_patient()
             /* execute if the date is ok echiteri*/
 		var pt_regdate = new Date(pat_reg_date.slice(0, 4), parseInt(pat_reg_date.slice(5, 7))-1, pat_reg_date.slice(-2));
 		if (curr_date<pt_regdate){
-			error_message += "The registration date cannot be after today\n";
+			error_message += "<?php echo LangUtil::$generalTerms['ERR_REGISTRATION_CANNOT_BE_AFTER_TODAY']; ?>\n";
 			error_flag = 1;
-			alert("Error: The registration date cannot be after today");
+			alert("<?php echo LangUtil::$generalTerms['ERR_REGISTRATION_CANNOT_BE_AFTER_TODAY']; ?>");
 			return;
 		}
 	}

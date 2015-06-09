@@ -23,7 +23,7 @@ function get_result_form($test_type, $test_id, $num_tests, $patient, $parent_tes
 	<input type='hidden' name='test_id' value='<?php echo $test_id; ?>'></input>
 	<input type='hidden' name='specimen_id' value='<?php echo $specimen_id; ?>'></input>
 	<input type='hidden' name='parent_test_id' value='<?php echo $parent_test_id; ?>'></input>
-	<div><strong><?php echo $patient->getName().' (Patient ID '.$patient->patientId.')'; echo $test_type->getName();?></strong><br></div>
+	<div><strong><?php echo $patient->getName().' (' . LangUtil::$generalTerms['PATIENT_ID'] . ': ' .$patient->patientId.')'; echo $test_type->getName();?></strong><br></div>
 	
 	<?php
 	# Fetch all measures for this test
@@ -151,7 +151,7 @@ function get_result_form($test_type, $test_id, $num_tests, $patient, $parent_tes
 			# Autocomplete values
 			# Use jquery.token-input plugin
 			$url_string = "ajax/measure_autocomplete.php?id=".$measure->measureId;
-			$hint_text = "Type to enter results";
+			$hint_text = LangUtil::$generalTerms['TYPE_TO_ENTER_RESULT'];
 			echo "<div>";
 			$page_elems->getTokenList($count, $input_id, "result[]", $url_string, $hint_text,"");
 			echo "</div>";
@@ -192,7 +192,7 @@ function get_result_form($test_type, $test_id, $num_tests, $patient, $parent_tes
 	<tr>
 		<td>
 			<label for='<?php echo $curr_form_id; ?>_comments'>
-				Result Interpretation
+				<?php echo LangUtil::$generalTerms['RESULT_INTERPRETATION']; ?>
 			</label>
 		
 			<span id='<?php echo $curr_form_id; ?>_comments_span'>
@@ -276,13 +276,13 @@ $test_type = get_test_type_by_id($test_type_id);
 ?>	
 <div class="modal-header">
 	<a href="javascript:remove('<?php echo $test_id; ?>');" class="close"></a>
-	<h4><i class="icon-pencil"></i> Results form - <?php echo $test_type->getName(); ?></h4>
+	<h4><i class="icon-pencil"></i> <?php echo LangUtil::$generalTerms['RESULT_FORM']; ?> - <?php echo $test_type->getName(); ?></h4>
 </div>
 <div class="modal-body">
 	<div class="row-fluid">
 	<div class="span6 sortable">
     <div id="ctbutton" style="display: none"> 
-        <input type="button" value="Read results" class="btn" onclick="insertCelltacResults()"/>    
+        <input type="button" value="<?php echo LangUtil::$generalTerms['READ_RESULT']; ?>" class="btn" onclick="insertCelltacResults()"/>    
         </div>
         <div id="celltacerror" style="display: none">
             
@@ -370,7 +370,7 @@ foreach ($tests as $test) {
 	
 	<div class="portlet box grey">
 		<div class="portlet-title">
-			<h4>Patient Test history</h4>
+			<h4><?php echo LangUtil::$generalTerms['PATIENT_TEST_HISTORY']; ?></h4>
 		</div>		
 	<div class="portlet-body">
 	<div class="scroller" data-height="300px" data-always-visible="1">

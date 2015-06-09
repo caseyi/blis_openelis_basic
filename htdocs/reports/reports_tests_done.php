@@ -195,7 +195,7 @@ display:none;
 &nbsp;&nbsp;
 <input type='radio' name='do_landscape' value='Y' <?php
 	//if($report_config->landscape == true) echo " checked ";
-?>>Landscape</input>&nbsp;&nbsp;
+?>><?php echo LangUtil::$generalTerms['LANDSCAPE_TYPE']; ?></input>&nbsp;&nbsp;
 
 <input type='button' onclick="javascript:print_content('export_content');" value='<?php echo LangUtil::$generalTerms['CMD_PRINT']; ?>'></input>
 &nbsp;&nbsp;
@@ -214,7 +214,7 @@ display:none;
 <div id='export_content'>
 <link rel='stylesheet' type='text/css' href='css/table_print.css' />
 <div id='report_config_content'>
-<b><?php echo "Test Count Report"; ?></b>
+<b><?php echo LangUtil::$pageTerms['TEST_COUNT_REPORT']; ?></b>
 <br><br>
 
 <?php
@@ -283,9 +283,12 @@ $table_css = "style='padding: .3em; border: 1px black solid; font-size:14px;'";
 <?php
 	if ($result){
 		echo '<thead><tr>';
-		for ($counter=0; $counter<mysql_num_fields($result); $counter++){
-			echo '<th>'.mysql_field_name($result, $counter).'</th>';
-		}
+// 		for ($counter=0; $counter<mysql_num_fields($result); $counter++){
+// 			echo '<th>'.mysql_field_name($result, $counter).'</th>';
+// 		}
+		echo '<th>'.LangUtil::$generalTerms['TEST_TYPE'].'</th>';
+		echo '<th>'.LangUtil::$generalTerms['COMPLETED_TESTS'].'</th>';
+		echo '<th>'.LangUtil::$pageTerms['MENU_PENDINGTESTS'].'</th>';
 		echo '</tr></thead><tbody>';
 		while($row = mysql_fetch_assoc($result)){
 			echo '<tr><td>'.implode($row, '</td><td>').'</tr>';

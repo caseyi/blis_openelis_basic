@@ -74,7 +74,7 @@ function patient_search()
 	);
 }
 </script>
-<p style="text-align: right;"><a rel='facebox' href='#Search'>Page Help</a></p>
+<p style="text-align: right;"><a rel='facebox' href='#Search'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 <b><?php echo LangUtil::getTitle(); ?></b>
 <br><br>
 <table>

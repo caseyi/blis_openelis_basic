@@ -11,53 +11,53 @@ LangUtil::setPageId("quality");
 <br>
 <div class="portlet box green">
 							<div class="portlet-title">
-								<h4><i class="icon-reorder"></i><?php echo "New Quality Control"; ?></h4>
+								<h4><i class="icon-reorder"></i><?php echo LangUtil::$generalTerms['NEW_QC']; ?></h4>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="javascript:;" class="reload"></a>
 								</div>
 							</div>
 							<div class="portlet-body">
-							<p style="text-align: right;"><a href='#' title='Tips'><?php echo "Use the wizard to define a quality control form"; ?></a>
+							<p style="text-align: right;"><a href='#' title='<?php echo LangUtil::$generalTerms['TIPS']?>'><?php echo LangUtil::$generalTerms['USE_WIZ']; ?></a>
 		|<a href='quality.php?show_qc=1'><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></a></p>
 <div class='pretty_box'>
 <!-- BEGIN FORM-->
                         <form action="#" class="form-horizontal" />
                         <fieldset>
-    					<legend>Quality Control Properties</legend>
+    					<legend><?php echo LangUtil::$generalTerms['QC_PROPERTIES']; ?></legend>
                            <div class="control-group">
-                              <label class="control-label"><?php echo "Quality Control Name"; ?></label>
+                              <label class="control-label"><?php echo LangUtil::$generalTerms['QC_NAME']; ?></label>
                               <div class="controls">
                                  <input type="text" name="qc_name" id="qc_name" class="span6 m-wrap" />
                               </div>
                            </div>
                            <div class="control-group">
-                              <label class="control-label"><?php echo "Instrument or Reagent or Lot"; ?></label>
+                              <label class="control-label"><?php echo LangUtil::$generalTerms['INS_REG_LOT']; ?></label>
                               <div class="controls">
                                  <select name="qc_inst" id="qc_inst" data-placeholder="Instrument/Reagent/Lot" class="chosen span6" tabindex="-1"> <!-- id="selS0V"-->
                                     <option value="" />
                                     <optgroup label="CYTOMETRY">
-                                       <option />BD FacsFlow
+                                       <option /><?php echo LangUtil::$generalTerms['DB_FACS_FLOW']; ?>
                                     </optgroup>
                                     <optgroup label="BIOCHEMISTRY">
-                                       <option />Udichem
+                                       <option /><?php echo LangUtil::$generalTerms['UDICHEM']; ?>
                                     </optgroup>
                                     <optgroup label="HAEMATOLOGY">
-                                       <option />Celtac
+                                       <option /><?php echo LangUtil::$generalTerms['CELTAC']; ?>
                                     </optgroup>
                                  </select>
                               </div>
                            </div>
                            
                            <div class="control-group">
-                              <label class="control-label"><?php echo "Quality Control Description"; ?></label>
+                              <label class="control-label"><?php echo LangUtil::$generalTerms['QC_DESCRIPTION']; ?></label>
                               <div class="controls">
                                  <textarea name="qc_desc" id="qc_desc" class="span6 m-wrap" rows="3"></textarea>
                               </div>
                            </div>
                            <div class="form-actions">
-                              <button type="submit" onclick="check_input()" class="btn blue">Submit</button>
-                              <button type="button" class="btn">Cancel</button>
+                              <button type="submit" onclick="check_input()" class="btn blue"><?php echo LangUtil::$generalTerms['CMD_SUBMIT']; ?></button>
+                              <button type="button" class="btn"><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></button>
                            </div>
                            </fieldset>
                         </form>

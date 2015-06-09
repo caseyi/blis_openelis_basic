@@ -23,7 +23,7 @@ $saved_session = SessionUtil::save();
 $lab_config_id = $_REQUEST['id'];
 $lab_config = LabConfig::getById($lab_config_id);
 ?>
-<p style="text-align: right;"><a rel='facebox' href='#Tests_config'>Page Help</a></p><br/>
+<p style="text-align: right;"><a rel='facebox' href='#Tests_config'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p><br/>
 <a href='lab_config_home.php?id=<?php echo $lab_config_id; ?>'>&laquo; <?php echo LangUtil::$generalTerms['CMD_BACK']; ?></a>|<b>Results Interpretation</b> 
  <br><br>
  

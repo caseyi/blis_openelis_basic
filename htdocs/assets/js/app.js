@@ -1807,16 +1807,27 @@ var App = function () {
         if (!jQuery().dataTable) {
             return;
         }
+        
+      //TA: add french translation
+        var locale = getCookie('locale');
+    	var records_per_page_string= "records per page";
+    	var prev_string= "Prev";
+    	var next_string= "Next";
+    	if(locale === 'fr'){
+    		records_per_page_string= "r&eacute;sultats par page";
+    		prev_string= "Pr&eacute;c&eacute;dent";
+    		next_string= "Suivant";
+    	}
 
         // begin first table
         $('#sample_1').dataTable({
             "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
             "sPaginationType": "bootstrap",
             "oLanguage": {
-                "sLengthMenu": "_MENU_ records per page",
+                "sLengthMenu": "_MENU_ " + records_per_page_string, //TA: records per page
                 "oPaginate": {
-                    "sPrevious": "Prev",
-                    "sNext": "Next"
+                    "sPrevious": prev_string, //TA: "Prev",
+                    "sNext": next_string, //TA: "Next"
                 }
             },
             "aoColumnDefs": [{
@@ -2309,6 +2320,7 @@ var App = function () {
 
         //main function to initiate template pages
         init: function () {
+        	
             handleResponsive(); // set and handle responsive
 
             if (App.isPage("index")) {
@@ -2397,8 +2409,15 @@ var App = function () {
         // wrapper function to  block element(indicate loading)
         blockUI: function (el, loaderOnTop) {	
             lastBlockedUI = el;
+            //TA: add french translation
+            var locale = getCookie('locale');
+        	var loading_string= "Loading...";
+        	if(locale === 'fr'){
+        		loading_string= "Chargement...";
+        	}
+        	
             jQuery(el).block({
-                message: '<img src="./assets/img/loading.gif" align="absmiddle"><br>Loading....',
+                message: '<img src="./assets/img/loading.gif" align="absmiddle"><br>' + loading_string, //TA: "Loading..."
                 css: {
                     border: 'none',
                     padding: '2px',
@@ -2442,3 +2461,15 @@ var App = function () {
     };
 
 }();
+
+//TA: get cookie by name
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+} 

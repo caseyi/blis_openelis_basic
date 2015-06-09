@@ -7,7 +7,7 @@ include("includes/header.php");
 LangUtil::setPageId("catalog");
 ?>
 <br>
-<b><?php echo "Test Category Updated"; ?></b>
+<b><?php echo LangUtil::$generalTerms['TEST_CATEGORY_UPDATED']; ?></b>
  | <a href='catalog.php?show_tc=1'>&laquo; <?php echo LangUtil::$pageTerms['CMD_BACK_TOCATALOG']; ?></a>
 <br><br>
 <?php 

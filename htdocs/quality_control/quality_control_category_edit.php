@@ -14,7 +14,7 @@ function update_quality_control_category()
 {
 	if($('#name').attr("value").trim() == "")
 	{
-		alert("<?php echo "Error: Missing Quality Control Category Name."; ?>");
+		alert("<?php echo LangUtil::$generalTerms['ERR_MIS_QC_CATEGORY_NAME']; ?>");
 		return;
 	}
 	$('#update_qcc_progress').show();
@@ -27,7 +27,7 @@ function update_quality_control_category()
 }
 </script>
 <br>
-<b><?php echo "Edit Quality Control Category"; ?></b>
+<b><?php echo LangUtil::$generalTerms['EDIT_QC_CATEGORY']; ?></b>
 | <a href="quality.php?show_qcc=1"><?php echo LangUtil::$generalTerms['CMD_CANCEL']; ?></a>
 <br><br>
 <?php

@@ -16,7 +16,7 @@ $pid = $_REQUEST['pid'];
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-download-alt"></i>
-                                <a href="index.php">Home</a> 
+                                <a href="index.php"><?php echo LangUtil::$generalTerms['HOME']; ?></a> 
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -28,7 +28,7 @@ $pid = $_REQUEST['pid'];
                 <div class="span12 sortable">
         <div class="portlet box green">
         		<div class="portlet-title">
-        			<h4><i class="icon-reorder"></i>Specimen Accepted</h4>
+        			<h4><i class="icon-reorder"></i><?php echo LangUtil::$generalTerms['SPECIMEN_ACCPTED']; ?></h4>
         
         			<div class="tools">
         				<a href="javascript:;" class="collapse"></a>

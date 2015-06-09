@@ -116,7 +116,7 @@ function delete_quality_data()
 									<div id="quality_controls_div" class="tab-pane active" id="tabs1-pane1">
 										
 		<h5><?php echo LangUtil::$generalTerms['QUALITY_CONTROLS']; ?>
-		| <a href='quality_control_new.php' title='Click to Add a New Quality Control'><?php echo LangUtil::$generalTerms['ADDNEW']; ?></h5></a>
+		| <a href='quality_control_new.php' title='<?php echo LangUtil::$generalTerms['CLICK_TO_ADD_NEW_QC']; ?>'><?php echo LangUtil::$generalTerms['ADDNEW']; ?></h5></a>
 		<div id='tdel_msg' class='clean-orange' style='display:none;'>
 			<?php echo LangUtil::$generalTerms['MSG_DELETED']; ?>&nbsp;&nbsp;<a href="javascript:toggle('qcdel_msg');"><?php echo LangUtil::$generalTerms['CMD_HIDE']; ?></a>
 		</div>
@@ -140,9 +140,9 @@ function delete_quality_data()
 						<!-- END TAB PORTLET-->
 
     <div id='quality_control_categories_div' class='content_div'>
-		<p style="text-align: right;"><a rel='facebox' href='#QualityControlCategories_tc'>Page Help</a></p>
+		<p style="text-align: right;"><a rel='facebox' href='#QualityControlCategories_tc'><?php echo LangUtil::$generalTerms['PAGE_HELP']; ?></a></p>
 		<b><?php echo LangUtil::$generalTerms['QUALITY_CONTROL_CATEGORIES']; ?></b>
-		| <a href='quality_control_category_new.php' title='Click to Add a New Quality Control Category'><?php echo LangUtil::$generalTerms['ADDNEW']; ?></a>
+		| <a href='quality_control_category_new.php' title='<?php echo LangUtil::$generalTerms['CLICK_ADD_NEW_QUALITY_CONTROL_CATEGORY']; ?>'><?php echo LangUtil::$generalTerms['ADDNEW']; ?></a>
 		<br><br>
 		<div id='tdel_msg' class='clean-orange' style='display:none;'>
 			<?php echo LangUtil::$generalTerms['MSG_DELETED']; ?>&nbsp;&nbsp;<a href="javascript:toggle('qccdel_msg');"><?php echo LangUtil::$generalTerms['CMD_HIDE']; ?></a>
@@ -156,10 +156,10 @@ function delete_quality_data()
 		 <?php
         
             echo "<li>";
-            echo " Clicking Add New enables you to add Quality control category upon which you can base quality standards";
+            echo LangUtil::$generalTerms['QUALITY_TIP_1'];
             echo "</li>";
             echo "<li>";
-            echo " Hover around the tab of this section and click the grey tab that appears to hide this";
+            echo LangUtil::$generalTerms['QUALITY_TIP_2'];
             echo "</li>"           
             
         ?>

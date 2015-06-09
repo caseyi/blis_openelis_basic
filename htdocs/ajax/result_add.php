@@ -221,5 +221,5 @@ else
 </div>
 <div class="modal-footer">
 <!-- a href='' class='btn danger'>Edit</a-->
-<a href='javascript:hide_test_result_form_confirmed(<?php echo $parent_test_id ?>);' class='btn success'>Close</a>
+<a href='javascript:hide_test_result_form_confirmed(<?php echo $parent_test_id ?>);' class='btn success'><?php echo LangUtil::$generalTerms['CMD_CLOSE']; ?></a>
 </div>

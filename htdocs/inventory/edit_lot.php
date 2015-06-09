@@ -148,8 +148,8 @@ function prefetch_pname()
 <br><br>
 
 <?php
-$tips_string = "Edit stock (lot) details by completeting this form.";
-$page_elems->getSideTip("Tips", $tips_string);
+
+$page_elems->getSideTip(LangUtil::$generalTerms['TIPS'], LangUtil::$generalTerms['TIPS_EDIT_LOT_1']);
 $reag = Inventory::getReagentById($lid, $r_id);
 $lott = Inventory::getLot($lid, $r_id, $lot);
 
